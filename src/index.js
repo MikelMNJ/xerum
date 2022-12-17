@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './scenes/App';
 import '@fortawesome/fontawesome-free/css/all.css';
+import './index.css';
 
 const MyApp = (
   <StrictMode>

@@ -1,8 +1,8 @@
-import { Heartbeat } from 'package';
+import { Banner } from 'package';
 
 const App = () => {
   return (
-    <div id='App'>
+    <div id='app'>
       App
     </div>
   );
