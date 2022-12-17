@@ -1,6 +1,6 @@
 {
   "name": "xerum",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "React component library.",
   "author": "Mikel Jagan",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "build:linux": "rm -rf dist && mkdir dist && babel src/package -d dist --copy-files",
     "push": "npm run build && npm publish"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
     "formik": "^2.2.9",
     "gsap": "^3.11.3",
