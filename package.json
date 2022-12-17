@@ -1,6 +1,6 @@
 {
   "name": "xerum",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "React component library.",
   "author": "Mikel Jagan",
   "license": "MIT",
@@ -24,11 +24,13 @@
     "@fortawesome/fontawesome-free": "^6.2.1",
     "formik": "^2.2.9",
     "gsap": "^3.11.3",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.5",
     "styled-components": "^5.3.6",
     "yup": "^0.32.11"
   },

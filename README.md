@@ -4,7 +4,7 @@ Xerum is a component library, mean for use in React 16.8+ applications.
 **Note**: This library is undergoing a major rewrite using styled-components.  Components are missing as a result and will be added back, as they are refactored.  It is not recommended to install until v1.0 has been published.
 
 ### Installation
-`npm i xerum --save` or `yarn add xerum`
+`npm i xerum` or `yarn add xerum`
 
 ### Using components
 import with: `import { Button } from 'xerum;'` and in your current component,

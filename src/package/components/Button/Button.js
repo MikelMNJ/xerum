@@ -1,5 +1,5 @@
 import React from 'react';
-import { iconValid, urlValid } from '../../helpers/validatorHelpers';
+import { iconValid, urlValid } from '../../helpers';
 import { StyledButton } from './styles';
 
 const Button = props => {
