@@ -8,7 +8,7 @@ Xerum is a component library, mean for use in React 16.8+ applications.
 
 ### Using components
 import with: `import { Button } from 'xerum;'` and in your current component,
-use the imported component with props from the [documentation](xerum.netlify.app):
+use the imported component with props from the documentation (https://xerum.netlify.app):
 
 ```jsx
 import React from 'react';
