@@ -1,42 +1,43 @@
 
 import styled, { css } from 'styled-components';
+import { colors } from '../../theme';
 
 const setButtonStyle = type => {
   if (type === 'ghost') {
     return css`
-      color: #0d97ff;
-      background-color: transparent;
-      border: 0.125rem solid #0d97ff;
+      color: ${colors.blue};
+      background-color: ${colors.transparent};
+      border: 0.125rem solid ${colors.blue};
 
       @media (hover: hover) {
         &:hover {
-          background-color: #0d97ff;
-          color: white;
+          background-color: ${colors.blue};
+          color: ${colors.white};
         }
       }
 
       &:disabled {
         border: 0.125rem solid #ccc;
-        background-color: transparent;
+        background-color: ${colors.transparent};
         color: #aaa;
       }
     `;
   }
 
-  if (type === 'transparent') {
+  if (type === '${colors.transparent}') {
     return css`
-      color: #0d97ff;
-      background-color: transparent;
+      color: ${colors.blue};
+      background-color: ${colors.transparent};
       border: none;
 
       @media (hover: hover) {
         &:hover {
-          background-color: #00000010;
+          background-color: ${colors.black + 10};
         }
       }
 
       &:disabled {
-        background-color: transparent;
+        background-color: ${colors.transparent};
         color: #aaa;
       }
     `;
@@ -47,18 +48,21 @@ export const StyledButton = styled('button')`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   border: none;
   border-radius: 0.35rem;
-  width: 7rem;
+  min-width: 7rem;
   height: 3rem;
-  background-color: #0d97ff;
-  color: white;
+  padding: 0.5rem 2rem;
+  background-color: ${colors.blue};
+  color: ${colors.white};
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   @media (hover: hover) {
     &:hover {
-      background-color: #005fa6;
+      background-color: ${colors.darkBlue};
     }
   }
 

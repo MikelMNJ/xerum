@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../theme';
 
 export const Flatline = styled('div')`
   display: flex;
@@ -9,7 +10,7 @@ export const Flatline = styled('div')`
   height: 100vh;
 
   i {
-    color: #c93434;
+    color: ${colors.red};
     font-size: 2rem;
   }
 `;
