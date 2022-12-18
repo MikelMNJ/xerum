@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyledSpacer } from './styles';
 
 const Spacer = props => {
