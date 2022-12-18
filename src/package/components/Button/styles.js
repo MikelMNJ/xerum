@@ -1,44 +1,48 @@
 
 import styled, { css } from 'styled-components';
-import { colors } from '../../theme';
+import { getColor } from '../../helpers';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 const setButtonStyle = type => {
   if (type === 'ghost') {
     return css`
-      color: ${colors.blue};
+      color: ${props => getColor(props, 'accent', colors.black)};
       background-color: ${colors.transparent};
-      border: 0.125rem solid ${colors.blue};
+      border: 0.125rem solid ${props => getColor(props, 'accent', colors.black)};
 
       @media (hover: hover) {
         &:hover {
-          background-color: ${colors.blue};
-          color: ${colors.white};
+          background-color: ${props => getColor(props, 'accent', colors.black)};
+          color: ${props => getColor(props, 'onAccent', colors.white)};
         }
       }
 
       &:disabled {
         border: 0.125rem solid #ccc;
         background-color: ${colors.transparent};
-        color: #aaa;
+        color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
       }
     `;
   }
 
-  if (type === '${colors.transparent}') {
+  if (type === 'transparent') {
     return css`
-      color: ${colors.blue};
+      color: ${props => getColor(props, 'accent', colors.black)};
       background-color: ${colors.transparent};
       border: none;
 
       @media (hover: hover) {
         &:hover {
-          background-color: ${colors.black + 10};
+          background-color: ${props => getColor(props, 'transparent', colors.black)};
+          color: ${props => getColor(props, 'accentHover', colors.white)};
         }
       }
 
       &:disabled {
         background-color: ${colors.transparent};
-        color: #aaa;
+        color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
       }
     `;
   }
@@ -51,25 +55,26 @@ export const StyledButton = styled('button')`
   position: relative;
   border: none;
   border-radius: 0.35rem;
-  min-width: 7rem;
-  height: 3rem;
-  padding: 0.5rem 2rem;
-  background-color: ${colors.blue};
-  color: ${colors.white};
+  min-width: 3rem;
+  min-height: 3rem;
+  padding: 0.5rem ${props => props.noText ? 1 : 2}rem;
+  background-color: ${props => getColor(props, 'accent', colors.black)};
+  color: ${props => getColor(props, 'onAccent', colors.white)};
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   @media (hover: hover) {
     &:hover {
-      background-color: ${colors.darkBlue};
+      background-color: ${props => getColor(props, 'accentHover', colors.grey)};
+      color: ${props => getColor(props, 'onAccentHover', colors.white)};
     }
   }
 
   &:disabled {
     border: none;
-    background-color: #cccccc80;
-    color: #666;
+    background-color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
+    color: ${props => getColor(props, 'grey', colors.grey)};
     cursor: not-allowed;
   }
 

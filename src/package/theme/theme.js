@@ -10,6 +10,7 @@ const colors = {
 
   white: '#fafafa',
   grey: '#757575',
+  lightGrey: '#c5c5c5',
   black: '#1d1d1d',
   transparent: 'transparent',
 
@@ -32,6 +33,7 @@ const modes = {
 
     white: colors.white,
     grey: colors.grey,
+    lightGrey: colors.lightGrey,
     black: colors.black,
     transparent: colors.transparent,
 
@@ -53,6 +55,7 @@ const modes = {
 
     white: colors.white,
     grey: colors.grey,
+    lightGrey: colors.lightGrey,
     black: colors.black,
     transparent: colors.transparent,
 

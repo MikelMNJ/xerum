@@ -6,6 +6,7 @@ import { StyledButton } from './styles';
 const Button = props => {
   const {
     text,
+    noText,
     btnType,
     icon,
     iconRight,
@@ -33,16 +34,16 @@ const Button = props => {
     return (
       <>
         {validLeft && <i className={icon} />}
-        {validLeft && <Spacer size={0.5} across={true} />}
-        {text || children || (rest.type === 'submit' && 'Submit') || 'Button'}
-        {validRight && <Spacer size={0.5} across={true} />}
+        {!noText && validLeft && <Spacer size={0.5} across={true} />}
+        {!noText && (text || children || (rest.type === 'submit' && 'Submit') || 'Button')}
+        {!noText && validRight && <Spacer size={0.5} across={true} />}
         {validRight && <i className={icon} />}
       </>
     );
   };
 
   return (
-    <StyledButton btnType={btnType} onClick={handleClick} {...rest}>
+    <StyledButton btnType={btnType} noText={noText} onClick={handleClick} {...rest}>
       {buildContent()}
     </StyledButton>
   );

@@ -25,9 +25,11 @@ const App = () => {
       <Spacer />
 
       <Button
+        theme={theme}
+        selectedTheme={selectedTheme}
         text={selectedTheme}
-        btnType='transparent'
-        icon='fa-solid fa-sun'
+        btnType='ghost'
+        icon={selectedTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'}
         disabled={false}
         callback={handleThemeChange}
       />
