@@ -1,5 +1,6 @@
 import React from 'react';
 import { iconValid, urlValid } from '../../helpers';
+import { Spacer } from '../Spacer/Spacer';
 import { StyledButton } from './styles';
 
 const Button = props => {
@@ -7,6 +8,7 @@ const Button = props => {
     text,
     btnType,
     icon,
+    iconRight,
     url,
     passthrough,
     callback,
@@ -24,15 +26,24 @@ const Button = props => {
     callback?.();
   };
 
+  const buildContent = () => {
+    const validLeft = icon && !iconRight && iconValid(icon);
+    const validRight = icon && iconRight && iconValid(icon);
+
+    return (
+      <>
+        {validLeft && <i className={icon} />}
+        {validLeft && <Spacer size={0.5} across={true} />}
+        {text || children || (rest.type === 'submit' && 'Submit') || 'Button'}
+        {validRight && <Spacer size={0.5} across={true} />}
+        {validRight && <i className={icon} />}
+      </>
+    );
+  };
+
   return (
     <StyledButton btnType={btnType} onClick={handleClick} {...rest}>
-      {iconValid(icon) && (
-        <>
-          <i className={icon} />&nbsp;
-        </>
-      )}
-
-      {text || children || (rest.type === 'submit' && 'Submit') || 'Button'}
+      {buildContent()}
     </StyledButton>
   );
 };
