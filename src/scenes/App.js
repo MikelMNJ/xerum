@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GlobalStyle } from './styles';
 import { theme } from 'package/theme';
-import { Banner, Button, Spacer } from 'package';
+import { Button } from 'package';
 
 const App = () => {
   const [ selectedTheme, setSelectedTheme ] = useState('light');
@@ -12,14 +12,6 @@ const App = () => {
 
   return (
     <div>
-      <Banner theme={theme} selectedTheme={selectedTheme}>
-        <i className='fa-solid fa-heartbeat' />
-        <Spacer across />
-        <span>Server is down</span>
-      </Banner>
-
-      <Spacer />
-
       <Button
         theme={theme}
         selectedTheme={selectedTheme}
