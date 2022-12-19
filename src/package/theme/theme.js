@@ -2,9 +2,7 @@
 const colors = {
   greyWeb: '#7a7d7d',
   lightGrey: '#d0cfcf',
-  eerieBlack: '#1f1e1f',
-  bittersweet: '#f96c62',
-  congoPink: '#fb9089',
+  raisinBlack: '#2a2829',
   pacificBlue: '#45a7ba',
   darkSkyBlue: '#8bbbc5',
 
@@ -24,11 +22,11 @@ const modes = {
   light: {
     primary: colors.white,
     onPrimary: colors.greyWeb,
-    secondary: colors.eerieBlack,
+    secondary: colors.raisinBlack,
     onSecondary: colors.lightGrey,
-    accent: colors.bittersweet,
+    accent: colors.pacificBlue,
     onAccent: colors.black,
-    accentHover: colors.congoPink,
+    accentHover: colors.darkSkyBlue,
     onAccentHover: colors.black,
 
     white: colors.white,
@@ -44,13 +42,13 @@ const modes = {
   },
 
   dark: {
-    primary: colors.eerieBlack,
+    primary: colors.raisinBlack,
     onPrimary: colors.white,
     secondary: colors.lightGrey,
     onSecondary: colors.greyWeb,
-    accent: colors.bittersweet,
+    accent: colors.pacificBlue,
     onAccent: colors.black,
-    accentHover: colors.congoPink,
+    accentHover: colors.darkSkyBlue,
     onAccentHover: colors.black,
 
     white: colors.white,
