@@ -4,11 +4,12 @@ import { theme } from 'package/theme';
 import {
   Banner,
   Button,
+  Heartbeat,
   Spacer,
 } from 'package';
 
 const App = () => {
-  const [ selectedTheme, setSelectedTheme ] = useState('dark');
+  const [ selectedTheme, setSelectedTheme ] = useState('light');
 
   const handleThemeChange = () => {
     setSelectedTheme(selectedTheme === 'light' ? 'dark' : 'light');
@@ -16,7 +17,7 @@ const App = () => {
 
   return (
     <div>
-      <Banner>
+      <Banner theme={theme} selectedTheme={selectedTheme}>
         <i className='fa-solid fa-heartbeat' />
         <Spacer across />
         <span>Server is down</span>
@@ -37,6 +38,6 @@ const App = () => {
       <GlobalStyle theme={theme} selectedTheme={selectedTheme} />
     </div>
   );
-}
+};
 
 export default App;

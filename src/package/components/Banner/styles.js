@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { colors } from '../../theme';
+import { getColor } from '../../helpers';
 
 export const StyledBanner = styled('div')`
   display: grid;
@@ -12,12 +13,12 @@ export const StyledBanner = styled('div')`
 
   width: 100%;
   min-height: 2rem;
-  color: ${colors.white};
-  background-color: ${colors.slate};
+  color: ${props => getColor(props, 'onAccent', colors.white)};
+  background-color: ${props => getColor(props, 'accent', colors.black)};
   padding: 1rem;
 
   i {
-    color: ${colors.white};
+    color: ${props => getColor(props, 'white', colors.white)};
   }
 `;
 
@@ -35,7 +36,7 @@ export const Close = styled('div')`
 
   i {
     font-size: 1.25rem;
-    color: ${colors.white};
+    color: ${props => getColor(props, 'white', colors.white)};
     cursor: pointer;
   }
 `;

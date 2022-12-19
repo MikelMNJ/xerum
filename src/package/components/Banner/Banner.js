@@ -4,6 +4,8 @@ import { StyledBanner, Message, Close } from './styles';
 
 const Banner = props => {
   const {
+    theme,
+    selectedTheme,
     text,
     noClose,
     closeIcon,
@@ -15,7 +17,13 @@ const Banner = props => {
   } = props;
 
   return (
-    <StyledBanner noClose={noClose} sharp={sharp} {...rest}>
+    <StyledBanner
+      theme={theme}
+      selectedTheme={selectedTheme}
+      noClose={noClose}
+      sharp={sharp}
+      {...rest}
+    >
       <Message center={center}>
         {text || children}
       </Message>
