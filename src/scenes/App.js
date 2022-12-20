@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GlobalStyle } from './styles';
 import { theme } from 'package/theme';
-import { Button } from 'package';
+import { Button, Banner, Spacer } from 'package';
 
 const App = () => {
   const [ selectedTheme, setSelectedTheme ] = useState('light');
@@ -12,6 +12,14 @@ const App = () => {
 
   return (
     <div>
+      <Banner
+        theme={theme}
+        selectedTheme={selectedTheme}
+        text='This is a banner'
+      />
+
+      <Spacer />
+
       <Button
         theme={theme}
         selectedTheme={selectedTheme}

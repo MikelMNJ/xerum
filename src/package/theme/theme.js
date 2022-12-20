@@ -1,21 +1,20 @@
 
 const colors = {
   greyWeb: '#7a7d7d',
-  lightGrey: '#d0cfcf',
   raisinBlack: '#2a2829',
-  pacificBlue: '#45a7ba',
-  darkSkyBlue: '#8bbbc5',
+  brightNavyBlue: '#0c77d4',
+  carolinaBlue: '#479eeb',
 
   white: '#fafafa',
-  grey: '#757575',
-  lightGrey: '#c5c5c5',
-  black: '#1d1d1d',
+  lightGrey: '#d0cfcf',
+  grey: '#868383',
+  darkGrey: '#343232',
+  black: '#1e1e1e',
   transparent: 'transparent',
 
   success: '#50b990',
   warning: '#f0b800',
   error: '#c93434',
-  info: '#0d97ff',
 };
 
 const modes = {
@@ -24,14 +23,15 @@ const modes = {
     onPrimary: colors.greyWeb,
     secondary: colors.raisinBlack,
     onSecondary: colors.lightGrey,
-    accent: colors.pacificBlue,
-    onAccent: colors.black,
-    accentHover: colors.darkSkyBlue,
-    onAccentHover: colors.black,
+    accent: colors.brightNavyBlue,
+    onAccent: colors.white,
+    accentHover: colors.carolinaBlue,
+    onAccentHover: colors.white,
 
     white: colors.white,
     grey: colors.grey,
     lightGrey: colors.lightGrey,
+    darkGrey: colors.darkGrey,
     black: colors.black,
     transparent: colors.transparent,
 
@@ -44,16 +44,17 @@ const modes = {
   dark: {
     primary: colors.raisinBlack,
     onPrimary: colors.white,
-    secondary: colors.lightGrey,
-    onSecondary: colors.greyWeb,
-    accent: colors.pacificBlue,
-    onAccent: colors.black,
-    accentHover: colors.darkSkyBlue,
-    onAccentHover: colors.black,
+    secondary: colors.black,
+    onSecondary: colors.lightGrey,
+    accent: colors.brightNavyBlue,
+    onAccent: colors.darkGrey,
+    accentHover: colors.carolinaBlue,
+    onAccentHover: colors.darkGrey,
 
     white: colors.white,
     grey: colors.grey,
     lightGrey: colors.lightGrey,
+    darkGrey: colors.darkGrey,
     black: colors.black,
     transparent: colors.transparent,
 

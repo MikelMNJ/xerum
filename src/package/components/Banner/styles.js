@@ -18,7 +18,7 @@ export const StyledBanner = styled('div')`
   padding: 1rem;
 
   i {
-    color: ${props => getColor(props, 'white', colors.white)};
+    color: ${props => getColor(props, 'onAccent', colors.white)};
   }
 `;
 
@@ -36,7 +36,6 @@ export const Close = styled('div')`
 
   i {
     font-size: 1.25rem;
-    color: ${props => getColor(props, 'white', colors.white)};
     cursor: pointer;
   }
 `;
