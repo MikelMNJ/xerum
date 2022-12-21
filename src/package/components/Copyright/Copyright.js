@@ -10,7 +10,7 @@ const Copyright = props => {
 
   return (
     <StyledCopyright {...rest}>
-      {trade && <span>&reg; &amp;</span>}&copy;{year}
+      {trade && <span>&reg; &amp; </span>}&copy;{year}
       {name && ` ${name}`}
       {rights && `, ${defaultRights}`}
       {hasMessage && ` — ${message}`}
