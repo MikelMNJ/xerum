@@ -38,7 +38,6 @@ const modes = {
     success: colors.success,
     warning: colors.warning,
     error: colors.error,
-    info: colors.info,
   },
 
   dark: {
@@ -61,7 +60,6 @@ const modes = {
     success: colors.success,
     warning: colors.warning,
     error: colors.error,
-    info: colors.info,
   },
 };
 
