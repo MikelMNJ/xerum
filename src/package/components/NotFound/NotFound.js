@@ -1,11 +1,13 @@
 import React from 'react';
 import { iconValid } from '../../helpers';
-import { StyledNotFound, Icon, H2, P } from './styles';
+import { StyledNotFound, Icon, P } from './styles';
+import { Spacer } from '../Spacer/Spacer';
 
 const NotFound = props => {
   const {
     theme,
     selectedTheme,
+    color,
     title,
     noTitle,
     icon,
@@ -19,7 +21,7 @@ const NotFound = props => {
   const renderIcon = () => {
     if (!noIcon) {
       return (
-        <Icon className='icon'>
+        <Icon theme={theme} selectedTheme={selectedTheme} color={color}>
           <i className={`${icon ? iconValid(icon) : 'fa-solid fa-bug'}`} />
         </Icon>
       );
@@ -28,11 +30,7 @@ const NotFound = props => {
 
   const renderTitle = () => {
     if (!noTitle) {
-      return (
-        <H2>
-          {title || '404: Hrmm...'}
-        </H2>
-      );
+      return title || '404: Hrmm...';
     }
   };
 
@@ -47,8 +45,11 @@ const NotFound = props => {
   };
 
   return (
-    <StyledNotFound theme={theme} selectedTheme={selectedTheme} {...rest}>
+    <StyledNotFound {...rest}>
       {renderIcon()}
+
+      <Spacer />
+
       {renderTitle()}
       {renderMessage()}
     </StyledNotFound>
