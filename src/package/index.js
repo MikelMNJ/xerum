@@ -6,3 +6,4 @@ export * from './components/Spacer/Spacer';
 export * from './components/Status/Status';
 export * from './components/Copyright/Copyright';
 export * from './components/NotFound/NotFound';
+export * from './components/FieldError/FieldError';
