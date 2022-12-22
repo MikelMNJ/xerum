@@ -1,6 +1,6 @@
 
 import styled, { css } from 'styled-components';
-import { getColor } from '../../helpers';
+import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
 
 const colors = theme.colors;
@@ -8,14 +8,22 @@ const colors = theme.colors;
 const setButtonStyle = type => {
   if (type === 'ghost') {
     return css`
-      color: ${props => getColor(props, 'accent', colors.black)};
+      color: ${props => (
+        hexValid(props.color) || getColor(props, 'accent', colors.black)
+      )};
       background-color: ${colors.transparent};
-      border: 0.125rem solid ${props => getColor(props, 'accent', colors.black)};
+      border: 0.125rem solid ${props => (
+        hexValid(props.color) || getColor(props, 'accent', colors.black)
+      )};
 
       @media (hover: hover) {
         &:hover {
-          background-color: ${props => getColor(props, 'accent', colors.black)};
-          color: ${props => getColor(props, 'onAccent', colors.white)};
+          background-color: ${props => (
+            hexValid(props.color) || getColor(props, 'accent', colors.black)
+          )};
+          color: ${props => (
+            hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+          )};
         }
       }
 
@@ -29,14 +37,18 @@ const setButtonStyle = type => {
 
   if (type === 'transparent') {
     return css`
-      color: ${props => getColor(props, 'accent', colors.black)};
+      color: ${props => (
+        hexValid(props.color) || getColor(props, 'accent', colors.black)
+      )};
       background-color: ${colors.transparent};
       border: none;
 
       @media (hover: hover) {
         &:hover {
           background-color: ${props => getColor(props, 'transparent', colors.transparent)};
-          color: ${props => getColor(props, 'accentHover', colors.grey)};
+          color: ${props => (
+            hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.grey)
+          )};
         }
       }
 
@@ -58,16 +70,24 @@ export const StyledButton = styled('button')`
   min-width: 3rem;
   min-height: 3rem;
   padding: 0.5rem ${props => props.noText ? 1 : 2}rem;
-  background-color: ${props => getColor(props, 'accent', colors.black)};
-  color: ${props => getColor(props, 'onAccent', colors.white)};
+  background-color: ${props => (
+    hexValid(props.color) || getColor(props, 'accent', colors.black)
+  )};
+  color: ${props => (
+    hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+  )};
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   @media (hover: hover) {
     &:hover {
-      background-color: ${props => getColor(props, 'accentHover', colors.grey)};
-      color: ${props => getColor(props, 'onAccentHover', colors.white)};
+      background-color: ${props => (
+        hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.grey)
+      )};
+      color: ${props => (
+        hexValid(props.textColor) || getColor(props, 'onAccentHover', colors.white)
+      )};
     }
   }
 

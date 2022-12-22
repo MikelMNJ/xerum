@@ -7,6 +7,9 @@ const Button = props => {
   const {
     text,
     noText,
+    color,
+    hoverColor,
+    textColor,
     btnType,
     icon,
     iconRight,
@@ -43,7 +46,15 @@ const Button = props => {
   };
 
   return (
-    <StyledButton btnType={btnType} noText={noText} onClick={handleClick} {...rest}>
+    <StyledButton
+      btnType={btnType}
+      noText={noText}
+      onClick={handleClick}
+      color={color}
+      hoverColor={hoverColor}
+      textColor={textColor}
+      {...rest}
+    >
       {buildContent()}
     </StyledButton>
   );
