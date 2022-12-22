@@ -35,8 +35,8 @@ const setButtonStyle = type => {
 
       @media (hover: hover) {
         &:hover {
-          background-color: ${props => getColor(props, 'transparent', colors.black)};
-          color: ${props => getColor(props, 'accentHover', colors.white)};
+          background-color: ${props => getColor(props, 'transparent', colors.transparent)};
+          color: ${props => getColor(props, 'accentHover', colors.grey)};
         }
       }
 
