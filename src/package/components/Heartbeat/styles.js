@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { colors } from '../../theme';
+import { theme } from '../../theme';
 import { getColor } from '../../helpers';
+
+const colors = theme.colors;
 
 export const Flatline = styled('div')`
   display: flex;
@@ -11,7 +13,7 @@ export const Flatline = styled('div')`
   height: 100vh;
 
   i {
-    color: ${props => getColor(props, 'error', colors.red)};
+    color: ${props => getColor(props, 'error', colors.error)};
     font-size: 2rem;
   }
 `;

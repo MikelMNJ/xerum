@@ -2,7 +2,7 @@ import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
 import styled from 'styled-components';
 
-const { colors } = theme;
+const colors = theme.colors;
 
 export const Reqs = styled('ul')`
   display: inline-flex;

@@ -1,6 +1,8 @@
 import { getColor, hexValid } from '../../helpers';
-import { colors } from '../../theme';
+import { theme } from '../../theme';
 import styled from 'styled-components';
+
+const colors = theme.colors;
 
 export const ModalBG = styled('div')`
   position: fixed;

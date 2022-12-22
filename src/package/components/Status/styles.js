@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { hexValid } from '../../helpers';
-import { colors } from '../../theme';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export const StyledStatus = styled('div')`
   display: inline-flex;

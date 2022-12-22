@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
-import { colors } from '../../theme';
+import { theme } from '../../theme';
 import { getColor } from '../../helpers';
+
+const colors = theme.colors;
 
 export const StyledBanner = styled('div')`
   display: grid;

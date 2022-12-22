@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GlobalStyle } from './styles';
 import { theme } from 'package/theme';
-import { Button, Banner, Spacer } from 'package';
+import { Button } from 'package';
 
 const App = () => {
   const [ selectedTheme, setSelectedTheme ] = useState('light');
@@ -12,19 +12,11 @@ const App = () => {
 
   return (
     <div>
-      <Banner
-        theme={theme}
-        selectedTheme={selectedTheme}
-        text='This is a banner'
-      />
-
-      <Spacer />
-
       <Button
         theme={theme}
         selectedTheme={selectedTheme}
-        text={selectedTheme}
-        btnType='ghost'
+        noText={true}
+        btnType='transparent'
         icon={selectedTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'}
         disabled={false}
         callback={handleThemeChange}
