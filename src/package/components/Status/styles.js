@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { hexValid } from "../../helpers";
+import styled from 'styled-components';
+import { hexValid } from '../../helpers';
 import { colors } from '../../theme';
 
 export const StyledStatus = styled('div')`
