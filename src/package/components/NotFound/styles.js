@@ -20,7 +20,7 @@ export const Icon = styled('div')`
   margin: 0;
 
   color: ${props => (
-    props.color ? hexValid(props.color) : getColor(props, 'accent', colors.black)
+    hexValid(props.color) || getColor(props, 'accent', colors.black)
   )};
 `;
 

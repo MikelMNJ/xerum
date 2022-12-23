@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
-import { getColor } from '../../helpers';
+import { getColor, hexValid } from '../../helpers';
 
 const colors = theme.colors;
 
@@ -15,13 +15,13 @@ export const StyledBanner = styled('div')`
 
   width: 100%;
   min-height: 2rem;
-  color: ${props => getColor(props, 'onAccent', colors.white)};
-  background-color: ${props => getColor(props, 'accent', colors.black)};
+  color: ${props => (
+    hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+  )};
+  background-color: ${props => (
+    hexValid(props.bgColor) || getColor(props, 'accent', colors.black)
+  )};
   padding: 1rem;
-
-  i {
-    color: ${props => getColor(props, 'onAccent', colors.white)};
-  }
 `;
 
 export const Message = styled('div')`

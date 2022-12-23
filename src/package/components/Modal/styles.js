@@ -30,7 +30,9 @@ export const StyledModal = styled('div')`
   height: max-content;
   padding: 0.5rem 1.25rem;
   border-radius: 0.35rem;
-  background-color: ${props => getColor(props, 'primary', colors.white)};
+  background-color: ${props => (
+    hexValid(props.bgColor) || getColor(props, 'primary', colors.white)
+  )};
   overflow-y: auto;
 
   @media only screen and (max-width: 414px) {
