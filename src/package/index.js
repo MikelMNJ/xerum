@@ -10,3 +10,4 @@ export * from './components/FieldError/FieldError';
 export * from './components/Modal/Modal';
 export * from './components/FieldReqs/FieldReqs';
 export * from './components/Notification/Notifications';
+export * from './components/Checkbox/Checkbox';
