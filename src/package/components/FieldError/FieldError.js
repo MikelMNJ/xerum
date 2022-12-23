@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, getIn } from 'formik';
+import { Spacer } from '../Spacer/Spacer';
 import { StyledError } from './styles';
 import _ from 'lodash';
 
@@ -20,6 +21,7 @@ const FieldError = props => {
               return (
                 <StyledError {...rest}>
                   {msg}
+                  <Spacer size={1.5} />
                 </StyledError>
               );
             }
