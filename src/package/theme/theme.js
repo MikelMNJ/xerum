@@ -59,8 +59,8 @@ const modes = {
     transparent: colors.transparent,
 
     success: colors.success,
-    warning: colors.congoPink,
-    error: colors.error,
+    warning: colors.warning,
+    error: colors.congoPink,
   },
 };
 

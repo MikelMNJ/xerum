@@ -6,4 +6,5 @@ const colors = theme.colors;
 
 export const StyledError = styled('div')`
   color: ${props => getColor(props, 'error', colors.error)};
+  font-size: 0.9rem;
 `;

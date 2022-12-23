@@ -20,8 +20,8 @@ const FieldError = props => {
             if (showError) {
               return (
                 <StyledError {...rest}>
+                  <Spacer size={0.5} />
                   {msg}
-                  <Spacer size={1.5} />
                 </StyledError>
               );
             }

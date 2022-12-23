@@ -8,27 +8,27 @@ export const Reqs = styled('ul')`
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 1rem 0;
-
-  `;
+  margin: 0;
+  padding: 0;
+`;
 
 export const ReqsLi = styled('li')`
-    display: inline-flex;
-    margin: 0.2rem;
+  display: inline-flex;
+  margin: 0.2rem;
 
-    &:first-of-type {
-      margin-left: 0;
-    }
+  &:first-of-type {
+    margin-left: 0;
+  }
 
-    &:last-of-type {
-      margin-right: 0;
-    }
+  &:last-of-type {
+    margin-right: 0;
+  }
 
-    i {
-      position: relative;
-      top: 0.1rem;
-      margin-right: 0.5rem;
-    }
+  i {
+    position: relative;
+    top: 0.1rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 export const Icon = styled('i')`
