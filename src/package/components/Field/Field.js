@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Field as FormikField } from 'formik';
 import { iconValid } from '../../helpers';
-import { StyledLabel, FieldLabels } from './styles';
+import { StyledLabel, FieldLabels, FieldGroup, Icon } from './styles';
 import { Spacer } from '../Spacer/Spacer';
 
 const Field = props => {
@@ -13,11 +13,13 @@ const Field = props => {
     label,
     optional,
     icon,
+    iconCallback,
     boxColor,
     textColor,
     disabled,
     solidFill,
     form,
+    height,
     ...rest
   } = props;
 
@@ -41,7 +43,10 @@ const Field = props => {
       boxColor={boxColor}
       textColor={textColor}
       disabled={disabled}
+      icon={icon}
+      height={height}
     >
+
       <FieldLabels>
         {label}
         {optional && <span>(Optional)</span>}
@@ -49,14 +54,29 @@ const Field = props => {
 
       {label && <Spacer size={0.5} />}
 
-      <FormikField
-        type={type}
-        name={name}
-        value={fieldValue}
-        disabled={disabled}
-        onChange={handleFieldStateUpdate}
-        {...rest}
-      />
+      <FieldGroup>
+        {iconValid(icon) && (
+          <Icon
+            theme={theme}
+            selectedTheme={selectedTheme}
+            className={icon}
+            disabled={disabled}
+            solidFill={solidFill}
+            textColor={textColor}
+            onClick={iconCallback}
+            height={height}
+          />
+        )}
+
+        <FormikField
+          type={type}
+          name={name}
+          value={fieldValue}
+          disabled={disabled}
+          onChange={handleFieldStateUpdate}
+          {...rest}
+        />
+      </FieldGroup>
     </StyledLabel>
   );
 };

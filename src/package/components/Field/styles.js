@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 const colors = theme.colors;
 const light = 'light';
+const heightFallback = 3;
 
 export const FieldLabels = styled('div')`
   display: flex;
@@ -12,11 +13,44 @@ export const FieldLabels = styled('div')`
   font-size: 0.9rem;
 `;
 
+export const FieldGroup = styled('div')`
+  position: relative;
+`;
+
+export const Icon = styled('i')`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.125rem;
+  height: ${props => props.height || heightFallback}rem;
+  width: ${props => props.height || heightFallback}rem;
+  color: ${props => {
+    const themeColor = props.solidFill ? 'onAccent' : 'accent';
+    const fallback = props.solidFill ? colors.white : colors.black;
+    const color = hexValid(props.textColor) || getColor(props, themeColor, fallback);
+
+    if (props.disabled) return colors.grey;
+    return color;
+  }};
+
+  ${props => props.onClick && css`
+    cursor: pointer;
+  `}
+`;
+
 export const StyledLabel = styled('label')`
+  position: relative;
+
   input {
     width: 100%;
-    min-height: 3rem;
-    padding: 0.5rem 1rem;
+    min-height: ${props => props.height || heightFallback}rem;
+    padding: ${props => props.icon
+      ? `0.5rem 1rem 0.5rem ${(props.height || heightFallback) - 0.05}rem`
+      : '0.5rem 1rem'
+    };
     border-radius: 0.25rem;
     background-color: ${props => {
       const themeColor = props.selectedTheme === light ? 'white' : 'darkGrey';
