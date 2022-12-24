@@ -69,5 +69,18 @@ export const StyledLabel = styled('label')`
         return color;
       }};
     }
+
+    &::placeholder {
+      color: ${props => {
+        const lightTheme = props.selectedTheme === light;
+        const themeColor = props.solidFill ? 'onAccent' : 'lightGrey';
+        const fallback = lightTheme || props.solidFill ? colors.lightGrey: colors.darkGrey;
+        const color = getColor(props, themeColor, fallback);
+        const hasTheme = props.selectedTheme && props.theme;
+
+        if (props.disabled) return colors.grey + 90;
+        return lightTheme && !props.solidFill && hasTheme ? color : color + 80;
+      }}
+    }
   }
 `;
