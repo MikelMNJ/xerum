@@ -1,5 +1,5 @@
 # Xerum
-Xerum is a component library, mean for use in React 16.8+ applications.
+Xerum is a component library, meant for use in React 16.8+ applications.
 
 **Note**: This library is undergoing a major rewrite using styled-components.  Components are missing as a result and will be added back, as they are refactored.  It is not recommended to install until v1.0 has been published.
 
