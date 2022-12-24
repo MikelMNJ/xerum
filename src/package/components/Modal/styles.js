@@ -16,14 +16,14 @@ export const ModalBG = styled('div')`
 
 export const StyledModal = styled('div')`
   position: fixed;
-  top: -23rem;
+  top: 0;
   right: 0;
   left: 0;
   bottom: 0;
   margin: auto;
   z-index: 200;
-  max-height: calc(100% - 2rem);
-  max-width: calc(100% - 2rem);
+  max-height: calc(100% - 6rem);
+  max-width: calc(100% - 6rem);
   min-width: 23rem;
   min-height: 23rem;
   width: max-content;
@@ -54,7 +54,7 @@ export const ModalHeader = styled('div')`
 
 export const Title = styled('div')`
   color: ${props => (
-    hexValid(props.titleColor) || getColor(props, 'accent', colors.black)
+    hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.black)
   )};
 `;
 
@@ -65,7 +65,7 @@ export const CloseButton = styled('div')`
   i {
     font-size: 1.35rem;
     color: ${props => (
-      hexValid(props.titleColor) || 'inherit'
+      hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.black)
     )}
   }
 `;

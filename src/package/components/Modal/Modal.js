@@ -40,7 +40,7 @@ const Modal = props => {
             {title}
           </Title>
 
-          <CloseButton titleColor={titleColor}>
+          <CloseButton theme={theme} selectedTheme={selectedTheme} titleColor={titleColor}>
             <Button
               theme={theme}
               selectedTheme={selectedTheme}
@@ -51,8 +51,6 @@ const Modal = props => {
             />
           </CloseButton>
         </ModalHeader>
-
-        <Spacer />
 
         {children}
       </StyledModal>
