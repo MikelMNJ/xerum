@@ -12,3 +12,4 @@ export * from './components/FieldReqs/FieldReqs';
 export * from './components/Notification/Notifications';
 export * from './components/Checkbox/Checkbox';
 export * from './components/Field/Field';
+export * from './components/Loading/Loading';
