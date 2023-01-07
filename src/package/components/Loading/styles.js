@@ -4,7 +4,14 @@ import styled from 'styled-components';
 
 const colors = theme.colors;
 
-export const StyledLoading = styled('div')`
+export const Icon = styled('i')`
+  color: ${props => (
+    hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.black)
+  )};
+  font-size: ${props => props.iconSize || 1.5}rem;
+`;
+
+export const Text = styled('div')`
   display: flex;
   flex-direction: ${props => (props.column ? 'column' : 'row')};
   gap: 0.5rem 0;
@@ -16,11 +23,4 @@ export const StyledLoading = styled('div')`
   color: ${props => (
     hexValid(props.textColor) || getColor(props, 'onPrimary', colors.black)
   )};
-`;
-
-export const Icon = styled('i')`
-  color: ${props => (
-    hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.black)
-  )};
-  font-size: ${props => props.iconSize || 1.5}rem;
 `;

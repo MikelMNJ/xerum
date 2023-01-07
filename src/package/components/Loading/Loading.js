@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { iconValid } from '../../helpers';
 import { Spacer } from '../Spacer/Spacer';
-import { StyledLoading, Icon } from './styles';
+import { Icon, Text } from './styles';
 
 const Loading = props => {
   const {
@@ -29,7 +29,7 @@ const Loading = props => {
   const buildContent = () => {
     if (isLoading) {
       return (
-        <Fragment>
+        <Text theme={theme} selectedTheme={selectedTheme} textColor={textColor}>
           {!noIcon && (
             <Fragment>
               <Icon
@@ -44,7 +44,7 @@ const Loading = props => {
           )}
 
           {!noText && (text || 'Loading...')}
-        </Fragment>
+        </Text>
       );
     }
 
@@ -53,7 +53,7 @@ const Loading = props => {
 
       if (!renderOnFail) {
         return (
-          <Fragment>
+          <Text theme={theme} selectedTheme={selectedTheme} textColor={textColor}>
             {!noIcon && (
               <Fragment>
                 <Icon
@@ -68,7 +68,7 @@ const Loading = props => {
             )}
 
             {!noText && (failText || 'Load failed.')}
-          </Fragment>
+          </Text>
         );
       }
     }
@@ -77,15 +77,9 @@ const Loading = props => {
   };
 
   return (
-    <StyledLoading
-      theme={theme}
-      selectedTheme={selectedTheme}
-      textColor={textColor}
-      column={column}
-      {...rest}
-    >
+    <Fragment>
       {buildContent()}
-    </StyledLoading>
+    </Fragment>
   );
 };
 
