@@ -11,7 +11,6 @@ const colors = {
   grey: '#868383',
   darkGrey: '#343232',
   black: '#1e1e1e',
-  transparent: 'transparent',
 
   success: '#50b990',
   warning: '#f0b800',
@@ -30,11 +29,10 @@ const modes = {
     onAccentHover: colors.white,
 
     white: colors.white,
-    grey: colors.grey,
     lightGrey: colors.lightGrey,
+    grey: colors.grey,
     darkGrey: colors.darkGrey,
     black: colors.black,
-    transparent: colors.transparent,
 
     success: colors.success,
     warning: colors.warning,
@@ -52,11 +50,10 @@ const modes = {
     onAccentHover: colors.darkGrey,
 
     white: colors.white,
-    grey: colors.grey,
     lightGrey: colors.lightGrey,
+    grey: colors.grey,
     darkGrey: colors.darkGrey,
     black: colors.black,
-    transparent: colors.transparent,
 
     success: colors.success,
     warning: colors.warning,

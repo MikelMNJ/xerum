@@ -11,7 +11,7 @@ const setButtonStyle = type => {
       color: ${props => (
         hexValid(props.color) || getColor(props, 'accent', colors.black)
       )};
-      background-color: ${colors.transparent};
+      background-color: transparent;
       border: 0.125rem solid ${props => (
         hexValid(props.color) || getColor(props, 'accent', colors.black)
       )};
@@ -29,7 +29,7 @@ const setButtonStyle = type => {
 
       &:disabled {
         border: 0.125rem solid #ccc;
-        background-color: ${colors.transparent};
+        background-color: transparent;
         color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
       }
     `;
@@ -40,12 +40,12 @@ const setButtonStyle = type => {
       color: ${props => (
         hexValid(props.color) || getColor(props, 'accent', colors.black)
       )};
-      background-color: ${colors.transparent};
+      background-color: transparent;
       border: none;
 
       @media (hover: hover) {
         &:hover {
-          background-color: ${props => getColor(props, 'transparent', colors.transparent)};
+          background-color: transparent;
           color: ${props => (
             hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.grey)
           )};
@@ -53,7 +53,7 @@ const setButtonStyle = type => {
       }
 
       &:disabled {
-        background-color: ${colors.transparent};
+        background-color: transparent;
         color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
       }
     `;

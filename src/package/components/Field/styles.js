@@ -88,7 +88,7 @@ export const StyledLabel = styled('label')`
   `};
 
     &:focus {
-      border-color: ${colors.transparent};
+      border-color: transparent;
       box-shadow: 0 0 0.5rem ${props => {
         const color = hexValid(props.boxColor) || getColor(props, 'accent', colors.darkGrey);
 
