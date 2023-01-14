@@ -3,14 +3,14 @@ import { iconValid } from '../../helpers';
 import { Flatline } from './styles';
 
 const Heartbeat = props => {
-  const { time, icon, text, disabled, children, ...rest } = props;
+  const { time, icon, text, disabled, children, endpoint, ...rest } = props;
   const [ offline, setOffline ] = useState(false);
 
   useEffect(() => {
     const heartbeat = setInterval(async () => {
       if (!disabled) {
         try {
-          const res = await fetch('https://icanhazip.com');
+          const res = await fetch(endpoint || 'https://icanhazip.com');
           const data = await res.data;
 
           if (offline) setOffline(false);
