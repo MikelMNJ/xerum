@@ -36,10 +36,12 @@ const Progress = props => {
   };
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(pctBarPos);
-    const elements = [ widthRef.current, pctRef.current ];
+    if (widthRef.current && pctRef.current) {
+      const resizeObserver = new ResizeObserver(pctBarPos);
+      const elements = [ widthRef.current, pctRef.current ];
 
-    elements.forEach(element => resizeObserver.observe(element));
+      elements.forEach(element => resizeObserver.observe(element));
+    }
   }, [ widthRef, pctRef ]);
 
   return (
