@@ -8,11 +8,10 @@ export const tokenValid = token => {
   try {
     const expires = moment(jwt_decode(token).exp * 1000);
     expired = moment() > expires;
+    return !expired;
   } catch (error) {
-    console.error(error.message);
-  } finally {
-    const isValid = !expired;
-    return isValid;
+    console.log(error.message);
+    return !expired;
   }
 };
 
