@@ -15,3 +15,4 @@ export * from './components/Field/Field';
 export * from './components/Loading/Loading';
 export * from './components/ToTop/ToTop';
 export * from './components/Price/Price';
+export * from './components/Percent/Percent';
