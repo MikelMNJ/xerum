@@ -27,8 +27,16 @@ export const truncate = (num, limit) => {
   return (+(num)).toLocaleString('en-US');
 };
 
-export const resetPage = pathname => {
-  window.location.href = pathname || '/';
+export const resetPage = (e, clearHash) => {
+  e.preventDefault();
+
+  if (clearHash) {
+    const title = document.title;
+    const pathname = window.location.pathname;
+    const search = window.location.search;
+    history.pushState('', title, `${pathname}${search}`);
+  }
+
   window.scrollTo(0, 0);
 };
 

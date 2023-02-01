@@ -37,7 +37,7 @@ const ToTop = props => {
       selectedTheme={selectedTheme}
       iconColor={iconColor}
       bgColor={bgColor}
-      onClick={() => resetPage(window.location.pathname)}
+      onClick={e => resetPage(e, true)}
       {...rest}
     >
       <i className={iconValid(icon) || 'fa-solid fa-angle-up'} />
