@@ -60,6 +60,7 @@ export const PageNum = styled('div')`
   user-select: none;
   font-weight: ${props => props.active && props.boldActive ? '600' : 'normal'};
   font-size: ${props => props.numberSize || 1}rem;
+  cursor: ${props => props.isSpread ? 'default' : 'pointer'};
 
   &:first-of-type {
     margin-left: 0.5rem;
@@ -75,7 +76,7 @@ export const PageNum = styled('div')`
     }
 
     &:hover ${Marker} {
-      background-color: ${props => stateColor(props, 'accentHover', 'accent', colors.grey, colors.grey)};
+      background-color: ${props => !props.isSpread  && stateColor(props, 'accentHover', 'accent', colors.grey, colors.grey)};
     }
   };
 `;

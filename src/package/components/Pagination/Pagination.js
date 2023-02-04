@@ -56,7 +56,8 @@ const Pagination = props => {
         boldActive={boldActive}
         activeColor={activeColor}
         inactiveColor={inactiveColor}
-        onClick={() => i && changePage(i)}
+        isSpread={_.isString(i)}
+        onClick={() => _.isNumber(i) && changePage(i)}
       >
         {workingPage}
 
