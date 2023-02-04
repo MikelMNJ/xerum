@@ -18,3 +18,4 @@ export * from './components/Price/Price';
 export * from './components/Percent/Percent';
 export * from './components/Progress/Progress';
 export * from './components/Tooltip/Tooltip';
+export * from './components/Pagination/Pagination';
