@@ -1,4 +1,4 @@
-import { getColor, hexValid } from "package/helpers";
+import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
 import styled from 'styled-components';
 
