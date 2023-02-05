@@ -29,8 +29,10 @@ export const EndButton = styled('div')`
   justify-content: center;
   color: ${props => hexValid(props.inactiveColor) || getColor(props, 'onPrimary', colors.darkGrey)};
 
-  &:hover {
-    color: ${props => hexValid(props.inactiveColor) || getColor(props, 'accent', colors.grey)};
+  @media (hover: hover) {
+    &:hover {
+      color: ${props => hexValid(props.inactiveColor) || getColor(props, 'accent', colors.grey)};
+    }
   }
 `;
 
