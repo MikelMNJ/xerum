@@ -42,7 +42,7 @@ const Percent = props => {
       color={getColor()}
       {...rest}
     >
-      {buildPercent()} %
+      {buildPercent()}%
     </StyledPercent>
   );
 };
