@@ -2,6 +2,7 @@ import React from 'react';
 import { iconValid } from '../../helpers';
 import { Spacer } from '../Spacer/Spacer';
 import { StyledPagination, PageNum, Marker, EndButton } from './styles';
+import _ from 'lodash';
 
 const Pagination = props => {
   const {
@@ -96,7 +97,7 @@ const Pagination = props => {
       }
 
       if (page > truncateLimit && page <= total - truncateLimit) {
-        renderContent.splice(0, page - truncateLimit);
+        renderContent.splice(0, page - truncateLimit + 2);
         renderContent.splice(truncateLimit, total - page);
         return [ first, pageElement('startSpread', '...'), ...renderContent, pageElement('endSpread', '...'), last ];
       }
