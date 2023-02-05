@@ -20,3 +20,4 @@ export * from './components/Progress/Progress';
 export * from './components/Tooltip/Tooltip';
 export * from './components/Pagination/Pagination';
 export * from './components/Social/Social';
+export * from './components/SlideOver/SlideOver';
