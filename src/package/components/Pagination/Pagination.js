@@ -78,22 +78,33 @@ const Pagination = props => {
   };
 
   const pageNum = () => {
+    const first = pageElement(1, pageIcon ? <i className={icon(pageIcon, 'circle')} /> : 1);
+    const last = pageElement(total, pageIcon ? <i className={icon(pageIcon, 'circle')} /> : total);
     const renderContent = [];
 
     for (let i = 1; i <= total; i++) {
       let workingPage = i;
 
-      if (truncateLimit && i > truncateLimit) {
-        renderContent.push(pageElement(0, '...'));
-        renderContent.push(pageElement(total, pageIcon ? <i className={icon(pageIcon, 'circle')} /> : total));
-        break;
-      }
-
-      if (pageIcon) {
-        workingPage = <i className={icon(pageIcon, 'circle')} />
-      }
-
+      if (pageIcon) workingPage = <i className={icon(pageIcon, 'circle')} />;
       renderContent.push(pageElement(i, workingPage));
+    }
+
+    if (truncateLimit < total - 1) {
+      if (page <= truncateLimit) {
+        renderContent.splice(truncateLimit, total - truncateLimit);
+        return [ ...renderContent, pageElement('endSpread', '...'), last ];
+      }
+
+      if (page > truncateLimit && page <= total - truncateLimit) {
+        renderContent.splice(0, page - truncateLimit);
+        renderContent.splice(truncateLimit, total - page);
+        return [ first, pageElement('startSpread', '...'), ...renderContent, pageElement('endSpread', '...'), last ];
+      }
+
+      if (page > total - truncateLimit) {
+        renderContent.splice(0, total - truncateLimit);
+        return [ first, pageElement('startSpread', '...'), ...renderContent ];
+      }
     }
 
     return renderContent;
