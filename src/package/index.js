@@ -22,3 +22,4 @@ export * from './components/Pagination/Pagination';
 export * from './components/Social/Social';
 export * from './components/SlideOver/SlideOver';
 export * from './components/Toggle/Toggle';
+export * from './components/Tabs/Tabs';
