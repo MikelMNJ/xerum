@@ -23,3 +23,4 @@ export * from './components/Social/Social';
 export * from './components/SlideOver/SlideOver';
 export * from './components/Toggle/Toggle';
 export * from './components/Tabs/Tabs';
+export * from './components/Badge/Badge';

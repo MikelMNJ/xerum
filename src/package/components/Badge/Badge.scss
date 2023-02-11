@@ -1,0 +1,56 @@
+@use 'theme/colors' as *;
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  color: $offWhite;
+  border-radius: 50%;
+  padding: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 1.15rem;
+  width: fit-content;
+  min-width: 1.15rem;
+  background-color: $red;
+
+  &.square {
+    border-radius: 0.35rem;
+  }
+}
+
+.pos {
+  top: -2.55rem;
+  right: -1.55rem;
+}
+
+.badgeBtn {
+  all: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  margin: 0 0.5rem !important;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $blue;
+    }
+  }
+
+  i {
+    font-size: 1.75rem;
+    width: 1.5rem;
+  }
+}
+
+/* ========== Media Queries ========== */
+@media only screen and (max-width: 414px) {
+
+}
