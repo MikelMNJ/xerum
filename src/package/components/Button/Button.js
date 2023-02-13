@@ -37,9 +37,9 @@ const Button = props => {
     return (
       <>
         {validLeft && <i className={icon} />}
-        {!noText && validLeft && <Spacer size={0.5} across={true} />}
+        {!noText && validLeft && <Spacer size={1} across={true} />}
         {!noText && (text || children || (rest.type === 'submit' && 'Submit') || 'Button')}
-        {!noText && validRight && <Spacer size={0.5} across={true} />}
+        {!noText && validRight && <Spacer size={1} across={true} />}
         {validRight && <i className={icon} />}
       </>
     );

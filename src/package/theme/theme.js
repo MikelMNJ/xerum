@@ -20,7 +20,7 @@ const colors = {
 const modes = {
   light: {
     primary: colors.white,
-    onPrimary: colors.greyWeb,
+    onPrimary: colors.black,
     secondary: colors.raisinBlack,
     onSecondary: colors.lightGrey,
     accent: colors.brightNavyBlue,

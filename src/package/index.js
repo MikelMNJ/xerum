@@ -28,3 +28,4 @@ export * from './components/Badge/Badge';
 export * from './components/Table/Table';
 export * from './components/Table/TData';
 export * from './components/Table/TRow';
+export * from './components/Search/Search';
