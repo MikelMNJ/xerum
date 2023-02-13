@@ -15,12 +15,15 @@ const Search = props => {
     buttonText,
     noButton,
     strokeWidth,
+    placeholderTextColor,
+    inputTextColor,
     inputBGColor,
     borderColor,
     buttonIcon,
     buttonColor,
     buttonTextColor,
     buttonHoverColor,
+    focusColor,
     ...rest
   } = props;
 
@@ -32,7 +35,6 @@ const Search = props => {
 
     if (callback && inputVal !== '') {
       callback(inputVal);
-      inputRef.current.value = '';
     }
   };
 
@@ -59,8 +61,11 @@ const Search = props => {
           rounded={rounded}
           strokeWidth={strokeWidth}
           borderColor={borderColor}
+          inputTextColor={inputTextColor}
+          placeholderTextColor={placeholderTextColor}
           inputBGColor={inputBGColor}
           placeholder={placeholder}
+          focusColor={focusColor}
           defaultValue={inputRef.current?.value || ''}
           onChange={updateRef}
           onKeyUp={e => e.key === 'Enter' && noButton && e.target.blur(e)}

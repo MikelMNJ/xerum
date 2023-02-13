@@ -36,7 +36,7 @@ export const Input = styled('input')`
     return '0.25rem';
   }};
   font-size: 1rem;
-  color: ${props => getColor(props, 'onPrimary', colors.black)};
+  color: ${props => hexValid(props.inputTextColor) || getColor(props, 'onPrimary', colors.black)};
   border: ${props => props.strokeWidth || 0.0625}rem solid ${props => {
     const lightTheme = props.selectedTheme === 'light';
     return hexValid(props.borderColor) || getColor(props, lightTheme ? 'grey' : 'black', colors.black);
@@ -46,13 +46,16 @@ export const Input = styled('input')`
     return hexValid(props.inputBGColor) || getColor(props, lightTheme ? 'white' : 'darkGrey', colors.white);
   }};
 
-  &:placeholder {
-    color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
+  &::placeholder {
+    color: ${props => {
+      const lightTheme = props.selectedTheme === 'light';
+      hexValid(props.placeholderTextColor) || getColor(props, lightTheme ? 'lightGrey' : 'grey', colors.lightGrey);
+    }};
   }
 
   &:focus {
     outline: none;
-    border-color: ${props => getColor(props, 'accentHover', colors.lightGrey)};
+    border-color: ${props => hexValid(props.focusColor) || getColor(props, 'accentHover', colors.lightGrey)};
     box-shadow: 0 0 0.125rem 0.0625rem ${props => hexValid(props.focusColor) || getColor(props, 'accent', colors.lightGrey)};
   }
 `;
