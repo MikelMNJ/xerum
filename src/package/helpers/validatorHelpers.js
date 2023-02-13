@@ -31,7 +31,7 @@ export const iconValid = val => {
   if (isValid) return val;
 };
 
-export const btnValid = val => {
+export const buttonValid = val => {
   const types = [ 'solid', 'ghost', 'transparent' ];
   const isValid = val && types.find(type => val === type);
 

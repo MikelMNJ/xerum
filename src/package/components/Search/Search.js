@@ -12,11 +12,15 @@ const Search = props => {
     noIcon,
     pill,
     rounded,
-    btnText,
+    buttonText,
     noButton,
+    strokeWidth,
     inputBGColor,
     borderColor,
-    btnIcon,
+    buttonIcon,
+    buttonColor,
+    buttonTextColor,
+    buttonHoverColor,
     ...rest
   } = props;
 
@@ -53,9 +57,10 @@ const Search = props => {
           noIcon={noIcon}
           pill={pill}
           rounded={rounded}
+          strokeWidth={strokeWidth}
           borderColor={borderColor}
           inputBGColor={inputBGColor}
-          placeholder={placeholder || 'Search'}
+          placeholder={placeholder}
           defaultValue={inputRef.current?.value || ''}
           onChange={updateRef}
           onKeyUp={e => e.key === 'Enter' && noButton && e.target.blur(e)}
@@ -66,10 +71,14 @@ const Search = props => {
           <SubmitButton
             theme={theme}
             selectedTheme={selectedTheme}
-            text={btnText || 'Search'}
+            text={buttonText}
+            noText={!buttonText}
             pill={pill}
             rounded={rounded}
-            icon={btnIcon}
+            icon={buttonIcon}
+            color={buttonColor}
+            textColor={buttonTextColor}
+            hoverColor={buttonHoverColor}
             onClick={handleSubmit}
           />
         )}

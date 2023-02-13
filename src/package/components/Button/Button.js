@@ -10,7 +10,7 @@ const Button = props => {
     color,
     hoverColor,
     textColor,
-    btnType,
+    buttonType,
     icon,
     iconRight,
     url,
@@ -38,7 +38,7 @@ const Button = props => {
       <>
         {validLeft && <i className={icon} />}
         {!noText && validLeft && <Spacer size={1} across={true} />}
-        {!noText && (text || children || (rest.type === 'submit' && 'Submit') || 'Button')}
+        {!noText && (text || children || (rest.type === 'submit' && 'Submit'))}
         {!noText && validRight && <Spacer size={1} across={true} />}
         {validRight && <i className={icon} />}
       </>
@@ -47,7 +47,7 @@ const Button = props => {
 
   return (
     <StyledButton
-      btnType={btnType}
+      buttonType={buttonType}
       noText={noText}
       onClick={handleClick}
       color={color}

@@ -50,7 +50,7 @@ const SlideOver = props => {
             theme={theme}
             selectedTheme={selectedTheme}
             icon={iconValid(closeIcon) || 'fa-solid fa-arrow-right-long'}
-            btnType='transparent'
+            buttonType='transparent'
             noText={true}
             closeColor={closeColor}
             closeHoverColor={closeHoverColor}

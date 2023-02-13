@@ -98,5 +98,5 @@ export const StyledButton = styled('button')`
     cursor: not-allowed;
   }
 
-  ${props => setButtonStyle(props.btnType)}
+  ${props => setButtonStyle(props.buttonType)}
 `;

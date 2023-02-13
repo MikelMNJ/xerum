@@ -23,7 +23,7 @@ const MyComponent = () => {
     <div>
       <Button
         text='Click me!' // Overrides children
-        btnType='ghost' // 'transparent' or default's to 'solid'
+        buttonType='ghost' // 'transparent' or default's to 'solid'
         icon='fa-solid fa-pencil' // Fontawesome integration
         callback={handleRouteChange} // For internal functions after click listener executes.
         // url='google.com' // External navigation only.

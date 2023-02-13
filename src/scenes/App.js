@@ -16,7 +16,7 @@ const App = () => {
         theme={theme}
         selectedTheme={selectedTheme}
         noText={true}
-        btnType='transparent'
+        buttonType='transparent'
         icon={selectedTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'}
         disabled={false}
         callback={handleThemeChange}

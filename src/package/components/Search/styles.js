@@ -37,7 +37,7 @@ export const Input = styled('input')`
   }};
   font-size: 1rem;
   color: ${props => getColor(props, 'onPrimary', colors.black)};
-  border: 0.0625rem solid ${props => {
+  border: ${props => props.strokeWidth || 0.0625}rem solid ${props => {
     const lightTheme = props.selectedTheme === 'light';
     return hexValid(props.borderColor) || getColor(props, lightTheme ? 'grey' : 'black', colors.black);
   }};
@@ -52,8 +52,8 @@ export const Input = styled('input')`
 
   &:focus {
     outline: none;
-    border-color: transparent;
-    box-shadow: 0 0 0.125rem 0.125rem ${props => hexValid(props.focusColor) || getColor(props, 'accent', colors.lightGrey)};
+    border-color: ${props => getColor(props, 'accentHover', colors.lightGrey)};
+    box-shadow: 0 0 0.125rem 0.0625rem ${props => hexValid(props.focusColor) || getColor(props, 'accent', colors.lightGrey)};
   }
 `;
 
@@ -67,7 +67,7 @@ export const SubmitButton = styled(Button)`
   border-radius: ${props => {
     if (props.pill) return '0 3rem 3rem 0';
     if (props.rounded) return '0 0.5rem 0.5rem 0';
-    return '0 0.25rem 0.25rem 0';
+    return'0 0.25rem 0.25rem 0';
   }};
 
   i {

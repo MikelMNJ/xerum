@@ -46,7 +46,7 @@ const Modal = props => {
               selectedTheme={selectedTheme}
               noText={true}
               icon={closeIcon || iconValid('fa-solid fa-xmark')}
-              btnType='transparent'
+              buttonType='transparent'
               callback={() => onClose?.()}
             />
           </CloseButton>
