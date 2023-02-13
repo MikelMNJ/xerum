@@ -25,3 +25,6 @@ export * from './components/Toggle/Toggle';
 export * from './components/Tabs/Tabs';
 export * from './components/Tag/Tag';
 export * from './components/Badge/Badge';
+export * from './components/Table/Table';
+export * from './components/Table/TData';
+export * from './components/Table/TRow';
