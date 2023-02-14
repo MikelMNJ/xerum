@@ -1,4 +1,4 @@
-import React, { cloneElement, useRef } from 'react';
+import React, { cloneElement, useRef, useEffect, useState } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledSearch, Label, Input, SubmitButton } from './styles';
 
@@ -11,7 +11,7 @@ const Search = props => {
     inputIcon,
     noIcon,
     pill,
-    rounded,
+    round,
     buttonText,
     noButton,
     strokeWidth,
@@ -27,7 +27,15 @@ const Search = props => {
     ...rest
   } = props;
 
+  const [ buttonWidth, setButtonWidth ] = useState(3);
   const inputRef = useRef('');
+  const buttonRef = useRef();
+
+  useEffect(() => {
+    if (buttonRef.current && buttonRef.current !== buttonWidth) {
+      setButtonWidth(buttonRef.current.offsetWidth / 16);
+    }
+  }, [ buttonRef ]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -58,7 +66,7 @@ const Search = props => {
           type='text'
           noIcon={noIcon}
           pill={pill}
-          rounded={rounded}
+          round={round}
           strokeWidth={strokeWidth}
           borderColor={borderColor}
           inputTextColor={inputTextColor}
@@ -66,9 +74,10 @@ const Search = props => {
           inputBGColor={inputBGColor}
           placeholder={placeholder}
           focusColor={focusColor}
+          buttonWidth={buttonWidth}
           defaultValue={inputRef.current?.value || ''}
           onChange={updateRef}
-          onKeyUp={e => e.key === 'Enter' && noButton && e.target.blur(e)}
+          onKeyUp={e => e.key === 'Enter' && e.target.blur(e)}
           onBlur={e => noButton && handleSubmit(e)}
         />
 
@@ -76,10 +85,11 @@ const Search = props => {
           <SubmitButton
             theme={theme}
             selectedTheme={selectedTheme}
+            ref={buttonRef}
             text={buttonText}
             noText={!buttonText}
             pill={pill}
-            rounded={rounded}
+            round={round}
             icon={buttonIcon}
             color={buttonColor}
             textColor={buttonTextColor}
