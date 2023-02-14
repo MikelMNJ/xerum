@@ -14,7 +14,7 @@ const Field = props => {
     optional,
     icon,
     iconCallback,
-    boxColor,
+    focusColor,
     textColor,
     disabled,
     solidFill,
@@ -40,7 +40,7 @@ const Field = props => {
       theme={theme}
       selectedTheme={selectedTheme}
       solidFill={solidFill}
-      boxColor={boxColor}
+      focusColor={focusColor}
       textColor={textColor}
       disabled={disabled}
       icon={icon}

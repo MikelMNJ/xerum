@@ -91,14 +91,14 @@ export const StyledLabel = styled('label')`
     &:focus {
       border-color: transparent;
       box-shadow: 0 0 0.5rem ${props => {
-        const color = hexValid(props.boxColor) || getColor(props, 'accent', colors.darkGrey);
+        const color = hexValid(props.focusColor) || getColor(props, 'accent', colors.darkGrey);
 
         if (props.disabled) return colors.lightGrey;
         return color;
       }};
 
       outline: 0.125rem solid ${props => {
-        const color = hexValid(props.boxColor) || getColor(props, 'accentHover', colors.grey);
+        const color = hexValid(props.focusColor) || getColor(props, 'accentHover', colors.grey);
 
         if (props.disabled) return colors.lightGrey;
         return color;
