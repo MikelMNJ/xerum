@@ -57,9 +57,20 @@ export const Input = styled('input')`
   }
 
   &:focus {
-    outline: none;
-    border-color: ${props => hexValid(props.focusColor) || getColor(props, 'accentHover', colors.lightGrey)};
-    box-shadow: 0 0 0.125rem 0.0625rem ${props => hexValid(props.focusColor) || getColor(props, 'accent', colors.lightGrey)};
+    border-color: transparent;
+    box-shadow: 0 0 0.5rem ${props => {
+      const color = hexValid(props.focusColor) || getColor(props, 'accent', colors.darkGrey);
+
+      if (props.disabled) return colors.lightGrey;
+      return color;
+    }};
+
+    outline: 0.125rem solid ${props => {
+      const color = hexValid(props.focusColor) || getColor(props, 'accentHover', colors.grey);
+
+      if (props.disabled) return colors.lightGrey;
+      return color;
+    }};
   }
 `;
 

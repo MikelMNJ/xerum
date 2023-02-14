@@ -77,7 +77,7 @@ const Search = props => {
           buttonWidth={buttonWidth}
           defaultValue={inputRef.current?.value || ''}
           onChange={updateRef}
-          onKeyUp={e => e.key === 'Enter' && e.target.blur(e)}
+          onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
           onBlur={e => noButton && handleSubmit(e)}
         />
 
