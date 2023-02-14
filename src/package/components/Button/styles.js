@@ -74,9 +74,9 @@ export const StyledButton = styled('button')`
   transition: all 0.2s ease;
 
   border-radius: ${props => {
-    if (props.pill) return '0 3rem 3rem 0';
-    if (props.round) return '0 0.5rem 0.5rem 0';
-    return'0 0.25rem 0.25rem 0';
+    if (props.pill) return '3rem';
+    if (props.round) return '0.5rem';
+    return '0.25rem';
   }};
 
   background-color: ${props => (
