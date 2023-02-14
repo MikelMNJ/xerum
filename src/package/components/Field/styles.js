@@ -45,6 +45,7 @@ export const StyledLabel = styled('label')`
   position: relative;
 
   input {
+    font-size: 1rem;
     width: 100%;
     min-height: ${props => props.height || heightFallback}rem;
     padding: ${props => props.icon
