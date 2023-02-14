@@ -66,19 +66,26 @@ export const StyledButton = styled('button')`
   justify-content: center;
   position: relative;
   border: none;
-  border-radius: 0.35rem;
   min-width: 3rem;
   min-height: 3rem;
   padding: 0.5rem ${props => props.noText ? 1 : 2}rem;
-  background-color: ${props => (
-    hexValid(props.color) || getColor(props, 'accent', colors.black)
-  )};
-  color: ${props => (
-    hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
-  )};
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  border-radius: ${props => {
+    if (props.pill) return '0 3rem 3rem 0';
+    if (props.round) return '0 0.5rem 0.5rem 0';
+    return'0 0.25rem 0.25rem 0';
+  }};
+
+  background-color: ${props => (
+    hexValid(props.color) || getColor(props, 'accent', colors.black)
+  )};
+
+  color: ${props => (
+    hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+  )};
 
   @media (hover: hover) {
     &:hover {

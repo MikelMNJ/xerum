@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { iconValid, urlValid } from '../../helpers';
 import { Spacer } from '../Spacer/Spacer';
 import { StyledButton } from './styles';
 
-const Button = props => {
+const Button = forwardRef((props, ref) => {
   const {
     text,
     noText,
@@ -17,6 +17,8 @@ const Button = props => {
     passthrough,
     callback,
     children,
+    round,
+    pill,
     ...rest
   } = props;
 
@@ -47,17 +49,20 @@ const Button = props => {
 
   return (
     <StyledButton
+      ref={ref}
       buttonType={buttonType}
       noText={noText}
       onClick={handleClick}
       color={color}
       hoverColor={hoverColor}
       textColor={textColor}
+      round={round}
+      pill={pill}
       {...rest}
     >
       {buildContent()}
     </StyledButton>
   );
-};
+});
 
 export { Button };
