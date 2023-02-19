@@ -18,9 +18,14 @@ const setButtonStyle = type => {
 
       @media (hover: hover) {
         &:hover {
-          background-color: ${props => (
-            hexValid(props.color) || getColor(props, 'accent', colors.black)
+          border-color: ${props => (
+            hexValid(props.hoverColor) || hexValid(props.color) || getColor(props, 'accentHover', colors.grey)
           )};
+
+          background-color: ${props => (
+            hexValid(props.hoverColor) || hexValid(props.color)
+          )};
+
           color: ${props => (
             hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
           )};
