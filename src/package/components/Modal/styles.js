@@ -1,6 +1,6 @@
 import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const colors = theme.colors;
 
@@ -15,6 +15,11 @@ export const ModalBG = styled('div')`
 `;
 
 export const StyledModal = styled('div')`
+  ${props => props.confirm && css`
+    display: flex;
+    flex-direction: column;
+  `}
+
   position: fixed;
   top: 0;
   right: 0;
@@ -25,15 +30,16 @@ export const StyledModal = styled('div')`
   max-height: calc(100% - 6rem);
   max-width: calc(100% - 6rem);
   min-width: 23rem;
-  min-height: 23rem;
+  min-height: ${props => props.confirm ? 'fit-content' : '15rem'};
   width: max-content;
   height: max-content;
   padding: 0.5rem 1.25rem;
   border-radius: 0.35rem;
+  overflow-y: auto;
+  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', colors.black)};
   background-color: ${props => (
     hexValid(props.bgColor) || getColor(props, 'primary', colors.white)
   )};
-  overflow-y: auto;
 
   @media only screen and (max-width: 414px) {
     min-width: 21rem;
@@ -45,7 +51,7 @@ export const StyledModal = styled('div')`
 `;
 
 export const ModalHeader = styled('div')`
-  display: inline-flex;
+  display: ${props => props.confirm ? 'none' : 'inline-flex'};
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -68,4 +74,22 @@ export const CloseButton = styled('div')`
       hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.black)
     )}
   }
+`;
+
+export const ConfirmButtons = styled('div')`
+  display: ${props => props.visible ? 'inline-flex' : 'none'};
+  ${props => props.visible && css`gap: 0.5rem;`}
+  width: 100%;
+`;
+
+export const ConfirmText = styled('div')`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const ButtonWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
