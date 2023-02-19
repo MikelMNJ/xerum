@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 const colors = theme.colors;
 
 export const StyledNotifications = styled('div')`
-  display: flex;
+  display: ${props => props.visible ? 'flex' : 'none'};
   flex-direction: column;
   position: fixed;
   top: 0;

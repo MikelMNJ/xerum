@@ -3,7 +3,7 @@ import { StyledNotifications } from './styles';
 import { Message } from './Message';
 
 const Notifications = props => {
-  const { noIcons, noTime, time, notifications, removeNotification, ...rest } = props;
+  const { noIcons, noTime, time, notifications, removeNotification, visible, ...rest } = props;
   const targets = useRef([]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Notifications = props => {
   };
 
   return (
-    <StyledNotifications className="notifications">
+    <StyledNotifications visible={visible}>
       {buildNotifications()}
     </StyledNotifications>
   );
