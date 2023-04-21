@@ -16,10 +16,10 @@ export const StyledBanner = styled('div')`
   width: 100%;
   min-height: 2rem;
   color: ${props => (
-    hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+    hexValid(props.textColor) || getColor(props, 'onAccent', colors.shades.white)
   )};
   background-color: ${props => (
-    hexValid(props.bgColor) || getColor(props, 'accent', colors.black)
+    hexValid(props.bgColor) || getColor(props, 'accent', colors.shades.black)
   )};
   padding: 1rem;
 `;

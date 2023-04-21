@@ -19,6 +19,9 @@ const Search = props => {
     inputTextColor,
     inputBGColor,
     borderColor,
+    borderRadius,
+    borderSize,
+    bottomBorder,
     buttonIcon,
     buttonColor,
     buttonTextColor,
@@ -69,6 +72,9 @@ const Search = props => {
           round={round}
           strokeWidth={strokeWidth}
           borderColor={borderColor}
+          borderRadius={borderRadius}
+          borderSize={borderSize}
+          bottomBorder={bottomBorder}
           inputTextColor={inputTextColor}
           placeholderTextColor={placeholderTextColor}
           inputBGColor={inputBGColor}

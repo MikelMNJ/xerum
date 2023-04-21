@@ -9,17 +9,18 @@ const setButtonStyle = type => {
   if (type === 'ghost') {
     return css`
       color: ${props => (
-        hexValid(props.color) || getColor(props, 'accent', colors.black)
+        hexValid(props.color) || getColor(props, 'accent', colors.shades.black)
       )};
       background-color: transparent;
       border: 0.0625rem solid ${props => (
-        hexValid(props.color) || getColor(props, 'accent', colors.black)
+        hexValid(props.color) || getColor(props, 'accent', colors.shades.black)
       )};
 
       @media (hover: hover) {
         &:hover {
           border-color: ${props => (
-            hexValid(props.hoverColor) || hexValid(props.color) || getColor(props, 'accentHover', colors.grey)
+            hexValid(props.hoverColor)
+              || hexValid(props.color) || getColor(props, 'accentHover', colors.neutral.greyWeb)
           )};
 
           background-color: ${props => (
@@ -27,7 +28,7 @@ const setButtonStyle = type => {
           )};
 
           color: ${props => (
-            hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+            hexValid(props.textColor) || getColor(props, 'onAccent', colors.shades.white)
           )};
         }
       }
@@ -35,7 +36,7 @@ const setButtonStyle = type => {
       &:disabled {
         border: 0.125rem solid #ccc;
         background-color: transparent;
-        color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
+        color: ${props => getColor(props, 'lightGrey', colors.neutral.lightGrey)};
       }
     `;
   }
@@ -43,7 +44,7 @@ const setButtonStyle = type => {
   if (type === 'transparent') {
     return css`
       color: ${props => (
-        hexValid(props.color) || getColor(props, 'accent', colors.black)
+        hexValid(props.color) || getColor(props, 'accent', colors.shades.black)
       )};
       background-color: transparent;
       border: none;
@@ -52,14 +53,14 @@ const setButtonStyle = type => {
         &:hover {
           background-color: transparent;
           color: ${props => (
-            hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.grey)
+            hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.neutral.greyWeb)
           )};
         }
       }
 
       &:disabled {
         background-color: transparent;
-        color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
+        color: ${props => getColor(props, 'lightGrey', colors.neutral.lightGrey)};
       }
     `;
   }
@@ -85,28 +86,28 @@ export const StyledButton = styled('button')`
   }};
 
   background-color: ${props => (
-    hexValid(props.color) || getColor(props, 'accent', colors.black)
+    hexValid(props.color) || getColor(props, 'accent', colors.shades.black)
   )};
 
   color: ${props => (
-    hexValid(props.textColor) || getColor(props, 'onAccent', colors.white)
+    hexValid(props.textColor) || getColor(props, 'onAccent', colors.shades.white)
   )};
 
   @media (hover: hover) {
     &:hover {
       background-color: ${props => (
-        hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.grey)
+        hexValid(props.hoverColor) || getColor(props, 'accentHover', colors.neutral.greyWeb)
       )};
       color: ${props => (
-        hexValid(props.textColor) || getColor(props, 'onAccentHover', colors.white)
+        hexValid(props.textColor) || getColor(props, 'onAccentHover', colors.shades.white)
       )};
     }
   }
 
   &:disabled {
     border: none;
-    background-color: ${props => getColor(props, 'lightGrey', colors.lightGrey)};
-    color: ${props => getColor(props, 'grey', colors.grey)};
+    background-color: ${props => getColor(props, 'lightGrey', colors.neutral.lightGrey)};
+    color: ${props => getColor(props, 'grey', colors.neutral.greyWeb)};
     cursor: not-allowed;
   }
 

@@ -31,10 +31,10 @@ export const StyledNotification = styled('div')`
   border-radius: 0.35rem;
   ${props => hexValid(props.textColor) && css`color: ${props.textColor};`}
   border-left: 0.5rem solid ${props => (
-    hexValid(props.borderColor) || getColor(props, 'accent', colors.black)
+    hexValid(props.borderColor) || getColor(props, 'accent', colors.shades.black)
   )};
   background-color: ${props => (
-    hexValid(props.bgColor) || getColor(props, 'primary', colors.white)
+    hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)
   )};
   box-shadow: 0 0.1rem 0.15rem #00000080;
 
@@ -42,19 +42,19 @@ export const StyledNotification = styled('div')`
 
   ${props => props.type === 'success' && css`
     border-left: 0.5rem solid ${
-      hexValid(props.borderColor) || getColor(props, 'success', colors.success)
+      hexValid(props.borderColor) || getColor(props, 'success', colors.success.oceanGreen)
     };
   `}
 
   ${props => props.type === 'warning' && css`
     border-left: 0.5rem solid ${
-      hexValid(props.borderColor) || getColor(props, 'warning', colors.warning)
+      hexValid(props.borderColor) || getColor(props, 'warning', colors.warning.orangeYellow)
     };
   `}
 
   ${props => props.type === 'error' && css`
     border-left: 0.5rem solid ${
-      hexValid(props.borderColor) || getColor(props, 'error', colors.error)
+      hexValid(props.borderColor) || getColor(props, 'error', colors.error.persianRed)
     };
   `}
 `;

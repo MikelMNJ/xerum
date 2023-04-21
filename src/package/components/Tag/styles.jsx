@@ -7,8 +7,8 @@ const colors = theme.colors;
 export const StyledTag = styled('div')`
   display: inline-flex;
   align-items: center;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'accent', colors.black)};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'white', colors.white)};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'accent', colors.shades.black)};
+  color: ${props => hexValid(props.textColor) || getColor(props, 'white', colors.shades.white)};
   font-size: ${props => props.textSize || 0.875}rem;
   user-select: none;
   width: auto;
@@ -29,7 +29,7 @@ export const StyledTag = styled('div')`
 
   border: ${props => {
     if (!props.borderSize) return 'none';
-    return `${props.borderSize}rem solid ${props.borderColor || getColor(props, 'onPrimary', colors.black)}`;
+    return `${props.borderSize}rem solid ${props.borderColor || getColor(props, 'onPrimary', colors.shades.black)}`;
   }};
 
   border-radius: ${props => {
@@ -53,7 +53,7 @@ export const Close = styled('div')`
     height: 100%;
     margin-top: -0.0625rem;
     font-size: ${props => props.closeSize || 1}rem;
-    color: ${props => hexValid(props.closeColor) || getColor(props, 'white', colors.white)};
+    color: ${props => hexValid(props.closeColor) || getColor(props, 'white', colors.shades.white)};
     cursor: pointer;
   }
 `;

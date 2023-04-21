@@ -1,8 +1,9 @@
 import { StyledMain, ContentArea } from './styles';
 import { appConstants } from 'modules';
 import { Formik, Form } from 'formik';
-import { Button, Field, FieldError, Font, Spacer } from 'components';
+import { Button, Field, FieldError, Font, Search, Spacer } from 'components';
 import * as yup from 'yup';
+import { getColor } from 'helpers';
 
 const { themes } = appConstants;
 const { light, dark } = themes;
@@ -51,13 +52,28 @@ const Main = props => {
           }}>
             {form => (
               <Form>
+                <Search
+                  placeholder='Search...'
+                  noButton={true}
+                  borderRadius={0.5}
+                  bottomBorder={true}
+                  borderSize={0.125}
+                  inputBGColor={getColor(props, 'primary')}
+                  {...rest}
+                />
+
+                <Spacer />
+
                 <Field
                   form={form}
                   label={<Font size={0.875} weight='semibold'>Email</Font>}
                   name='email'
                   type='text'
                   placeholder='Your input here...'
-                  borderRadius={0}
+                  borderRadius={0.5}
+                  bottomBorder={true}
+                  borderSize={0.125}
+                  inputBGColor={getColor(props, 'primary')}
                   {...rest}
                 />
 

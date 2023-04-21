@@ -6,7 +6,7 @@ const colors = theme.colors;
 
 export const Icon = styled('i')`
   color: ${props => (
-    hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.black)
+    hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.shades.black)
   )};
   font-size: ${props => props.iconSize || 1.5}rem;
 `;
@@ -21,6 +21,6 @@ export const Text = styled('div')`
   height: 100%;
   margin: 0 auto;
   color: ${props => (
-    hexValid(props.textColor) || getColor(props, 'onPrimary', colors.black)
+    hexValid(props.textColor) || getColor(props, 'onPrimary', colors.shades.black)
   )};
 `;

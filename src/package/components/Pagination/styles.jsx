@@ -6,10 +6,11 @@ const colors = theme.colors;
 
 const stateColor = (props, themeActive, themeInactive, themeActiveFallback, themeInactiveFallback) => {
   if (props.active) {
-    return hexValid(props.activeColor) || getColor(props, themeActive, themeActiveFallback || colors.black);
+    return hexValid(props.activeColor) || getColor(props, themeActive, themeActiveFallback || colors.shades.black);
   }
 
-  return hexValid(props.inactiveColor) || getColor(props, themeInactive, themeInactiveFallback || colors.darkGrey);
+  return hexValid(props.inactiveColor)
+    || getColor(props, themeInactive, themeInactiveFallback || colors.neutral.davysGrey);
 };
 
 export const StyledPagination = styled('div')`
@@ -19,7 +20,7 @@ export const StyledPagination = styled('div')`
   width: fit-content;
   margin: 0 auto;
   cursor: pointer;
-  color: ${props => hexValid(props.inactiveColor) || getColor(props, 'onPrimary', colors.darkGrey)};
+  color: ${props => hexValid(props.inactiveColor) || getColor(props, 'onPrimary', colors.neutral.davysGrey)};
   user-select: none;
 `;
 
@@ -27,11 +28,11 @@ export const EndButton = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => hexValid(props.inactiveColor) || getColor(props, 'onPrimary', colors.darkGrey)};
+  color: ${props => hexValid(props.inactiveColor) || getColor(props, 'onPrimary', colors.neutral.davysGrey)};
 
   @media (hover: hover) {
     &:hover {
-      color: ${props => hexValid(props.inactiveColor) || getColor(props, 'accent', colors.grey)};
+      color: ${props => hexValid(props.inactiveColor) || getColor(props, 'accent', colors.neutral.greyWeb)};
     }
   }
 `;
@@ -48,7 +49,7 @@ export const Marker = styled('div')`
   user-select: none;
 
   ${props => props.active && css`
-    background-color: ${stateColor(props, 'accent', 'onPrimary', colors.black, colors.darkGrey)};
+    background-color: ${stateColor(props, 'accent', 'onPrimary', colors.shades.black, colors.neutral.davysGrey)};
   `}
 `;
 
@@ -58,7 +59,7 @@ export const PageNum = styled('div')`
   position: relative;
   justify-content: center;
   padding: 0.5rem;
-  color: ${props => stateColor(props, 'accent', 'onPrimary', colors.black, colors.darkGrey)};
+  color: ${props => stateColor(props, 'accent', 'onPrimary', colors.shades.black, colors.neutral.davysGrey)};
   user-select: none;
   font-weight: ${props => props.active && props.boldActive ? '600' : 'normal'};
   font-size: ${props => props.numberSize || 1}rem;
@@ -74,13 +75,13 @@ export const PageNum = styled('div')`
 
   @media (hover: hover) {
     &:hover {
-      color: ${props => stateColor(props, 'accentHover', 'accent', colors.grey, colors.grey)};
+      color: ${props => stateColor(props, 'accentHover', 'accent', colors.neutral.greyWeb, colors.neutral.greyWeb)};
     }
 
     &:hover ${Marker} {
       background-color: ${props => {
         if (!props.isSpread)
-          return stateColor(props, 'accentHover', 'accent', colors.grey, colors.grey);
+          return stateColor(props, 'accentHover', 'accent', colors.neutral.greyWeb, colors.neutral.greyWeb);
         }
       };
     }

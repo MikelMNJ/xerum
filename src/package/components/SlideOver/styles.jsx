@@ -15,10 +15,10 @@ export const StyledSlideOver = styled('div')`
   min-width: 23rem;
   max-width: 23rem;
   padding: 1rem 2rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', colors.white)};
-  box-shadow: 0 0.25rem 0.25rem ${props => getColor(props, 'black', colors.black) + 80};
-  border-left: 0.0625rem solid ${props => getColor(props, 'lightGrey', colors.lightGrey) + 80};
-  color: ${props => getColor(props, 'onPrimary', colors.black)};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)};
+  box-shadow: 0 0.25rem 0.25rem ${props => getColor(props, 'black', colors.shades.black) + 80};
+  border-left: 0.0625rem solid ${props => getColor(props, 'lightGrey', colors.neutral.lightGrey) + 80};
+  color: ${props => getColor(props, 'onPrimary', colors.shades.black)};
   overflow-y: auto;
 
   &.slideIn {
@@ -60,7 +60,7 @@ export const Header = styled('div')`
 
 export const H3 = styled('h3')`
   margin: 0;
-  color: ${props => hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.black)};
+  color: ${props => hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.shades.black)};
   font-weight: bold;
   user-select: none;
 
@@ -75,7 +75,7 @@ export const CloseButton = styled(Button)`
   height: auto;
   width: fit-content;
   border: inherit;
-  color: ${props => hexValid(props.closeColor) || getColor(props, 'onPrimary', colors.black)};
+  color: ${props => hexValid(props.closeColor) || getColor(props, 'onPrimary', colors.shades.black)};
   font-size: 1.5rem;
   background-color: inherit;
   margin: 0;
@@ -84,7 +84,7 @@ export const CloseButton = styled(Button)`
 
   @media (hover: hover) {
     &:hover {
-      color: ${props => hexValid(props.closeHoverColor) || getColor(props, 'accent', colors.grey)};
+      color: ${props => hexValid(props.closeHoverColor) || getColor(props, 'accent', colors.neutral.greyWeb)};
     }
   }
 `;

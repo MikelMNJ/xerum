@@ -24,13 +24,13 @@ export const Track = styled('span')`
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
   background-color: ${props => {
-    if (props.disabled) return getColor(props, 'lightGrey', colors.lightGrey);
+    if (props.disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
 
     if (props.checked) {
-      return hexValid(props.activeColor) || getColor(props, 'accent', colors.black);
+      return hexValid(props.activeColor) || getColor(props, 'accent', colors.shades.black);
     }
 
-    return hexValid(props.inactiveColor) || getColor(props, 'grey', colors.grey);
+    return hexValid(props.inactiveColor) || getColor(props, 'grey', colors.neutral.greyWeb);
   }};
 
   i {
@@ -39,8 +39,8 @@ export const Track = styled('span')`
     font-size: 1.5rem;
     transition: transform 0.1s linear;
     color: ${props => {
-      if (props.disabled) return getColor(props, 'grey', colors.grey);
-      return hexValid(props.iconColor) || getColor(props, 'white', colors.white);
+      if (props.disabled) return getColor(props, 'grey', colors.neutral.greyWeb);
+      return hexValid(props.iconColor) || getColor(props, 'white', colors.shades.white);
     }};
 
     ${props => props.checked && css`transform: translateX(1.2rem);`}
@@ -54,6 +54,6 @@ export const ToggleInput = styled('input')`
   height: 0;
 
   &:focus ${Track} {
-    box-shadow: 0 0 0.0625rem ${props => getColor(props, 'accent', colors.grey)};
+    box-shadow: 0 0 0.0625rem ${props => getColor(props, 'accent', colors.neutral.greyWeb)};
   }
 `;

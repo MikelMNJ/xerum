@@ -17,7 +17,7 @@ export const TabSlider = styled('div')`
   border-radius: 0.25rem;
   transition: transform 0.2s ease, opacity 0.2s ease;
   background-color: ${props => {
-    return hexValid(props.activeColor) || getColor(props, 'accent', colors.black, true);
+    return hexValid(props.activeColor) || getColor(props, 'accent', colors.shades.black, true);
   }};
 
   ${props => {
@@ -55,7 +55,7 @@ export const TabNames = styled('div')`
   width: 100%;
   min-height: 3rem;
   text-align: center;
-  background-color: ${props => hexValid(props.inactiveColor) || getColor(props, 'darkGrey', colors.grey)};
+  background-color: ${props => hexValid(props.inactiveColor) || getColor(props, 'darkGrey', colors.neutral.greyWeb)};
   border-radius: 0.35rem;
 `;
 
@@ -74,10 +74,10 @@ export const Name = styled('div')`
   user-select: none;
   color: ${props => {
     if (props.activeTab) {
-      return hexValid(props.activeTextColor) || getColor(props, 'white', colors.white);
+      return hexValid(props.activeTextColor) || getColor(props, 'white', colors.shades.white);
     }
 
-    return hexValid(props.inactiveTextColor) || getColor(props, 'white', colors.white);
+    return hexValid(props.inactiveTextColor) || getColor(props, 'white', colors.shades.white);
   }};
 `;
 
@@ -88,5 +88,5 @@ export const TabContent = styled('div')`
 
 export const Content = styled('div')`
   padding: 1rem;
-  color: ${props => getColor(props, 'onPrimary', colors.black)};
+  color: ${props => getColor(props, 'onPrimary', colors.shades.black)};
 `;

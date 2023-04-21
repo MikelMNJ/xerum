@@ -24,16 +24,16 @@ export const Title = styled('div')`
   user-select: none;
   border-bottom: 0.0625rem solid ${props => {
     const lightTheme = props.selectedTheme === 'light';
-    const color = getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', colors.lightGrey);
+    const color = getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', colors.neutral.lightGrey);
     return hexValid(props.borderColor) || color;
   }};
 
   @media (hover: hover) {
     &:hover {
-      color: ${props => hexValid(props.hoverTextColor) || getColor(props, 'onPrimary', colors.black)};
+      color: ${props => hexValid(props.hoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
       background-color: ${props => {
         const lightTheme = props.selectedTheme === 'light';
-        const color = getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', colors.lightGrey);
+        const color = getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', colors.neutral.lightGrey);
 
         if (hexValid(props.hoverColor)) return props.hoverColor;
         if (_.isEmpty(props.theme)) return color + 50;
@@ -43,16 +43,16 @@ export const Title = styled('div')`
   }
 
   ${props => props.active && css`
-    color: ${props => hexValid(props.activeTextColor) || getColor(props, 'onAccent', colors.white)};
-    background-color: ${props => hexValid(props.activeBGColor) || getColor(props, 'accent', colors.black)};
+    color: ${props => hexValid(props.activeTextColor) || getColor(props, 'onAccent', colors.shades.white)};
+    background-color: ${props => hexValid(props.activeBGColor) || getColor(props, 'accent', colors.shades.black)};
     border: none;
 
     @media (hover: hover) {
       &:hover {
-        color: ${props => hexValid(props.activeHoverTextColor) || getColor(props, 'primary', colors.white)};
+        color: ${props => hexValid(props.activeHoverTextColor) || getColor(props, 'primary', colors.shades.white)};
         background-color: ${props => {
           if (hexValid(props.activeHoverBGColor)) return props.activeHoverBGColor;
-          return getColor(props, 'accentHover', colors.darkGrey);
+          return getColor(props, 'accentHover', colors.neutral.davysGrey);
         }};
       }
     }

@@ -36,12 +36,12 @@ export const Icon = styled('i')`
     const valid = props.valid;
     const isExclusion = props.exclusion;
     const normalColor = valid
-      ? hexValid(props.color) || getColor(props, 'accent', colors.success)
-      : hexValid(props.bgColor) || getColor(props, 'lightGrey', colors.lightGrey);
+      ? hexValid(props.color) || getColor(props, 'accent', colors.success.oceanGreen)
+      : hexValid(props.bgColor) || getColor(props, 'lightGrey', colors.neutral.lightGrey);
 
     const exclusionColor = valid
-      ? hexValid(props.bgColor) || getColor(props, 'lightGrey', colors.lightGrey)
-      : hexValid(props.exColor) || getColor(props, 'error', colors.error);
+      ? hexValid(props.bgColor) || getColor(props, 'lightGrey', colors.neutral.lightGrey)
+      : hexValid(props.exColor) || getColor(props, 'error', colors.error.persianRed);
 
     return isExclusion ? exclusionColor : normalColor;
   }};

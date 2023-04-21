@@ -5,6 +5,6 @@ import styled from 'styled-components';
 const colors = theme.colors;
 
 export const StyledError = styled('div')`
-  color: ${props => getColor(props, 'error', colors.error)};
+  color: ${props => getColor(props, 'error', colors.error.persianRed)};
   font-size: 0.9rem;
 `;

@@ -18,11 +18,11 @@ export const SocialLink = styled('a')`
   margin: 0 0.5rem;
   font-size: ${props => props.textSize || 0.9}rem;
   text-decoration: none;
-  color: ${props => hexValid(props.color) || getColor(props, 'grey', colors.black)} !important;
+  color: ${props => hexValid(props.color) || getColor(props, 'grey', colors.shades.black)} !important;
 
   @media (hover: hover) {
     &:hover {
-      color: ${props => hexValid(props.hoverColor) || getColor(props, 'lightGrey', colors.grey)} !important;
+      color: ${props => hexValid(props.hoverColor) || getColor(props, 'lightGrey', colors.neutral.greyWeb)} !important;
     }
   }
 

@@ -9,7 +9,7 @@ const minHeight = 0.5;
 export const StyledProgressBar = styled('div')`
   display: flex;
   align-items: center;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'onPrimary', colors.black)};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'onPrimary', colors.shades.black)};
   height: ${props => {
     if (props.height) return `${props.height}rem`;
     return props.noPct ? `${minHeight}rem` : 'auto';
@@ -27,7 +27,7 @@ export const StyledProgress = styled('div')`
   height: 100%;
   min-height: ${minHeight}rem;
   transition: all 0.75s cubic-bezier(.75,-0.5,0,1.75);
-  background-color: ${props => hexValid(props.color) || getColor(props, 'accent', colors.grey)};
+  background-color: ${props => hexValid(props.color) || getColor(props, 'accent', colors.neutral.greyWeb)};
   `;
 
 export const ProgressPercent = styled(Percent)`
@@ -37,7 +37,7 @@ export const ProgressPercent = styled(Percent)`
   padding: 0.25rem 0.5rem;
   user-select: none;
   animation: pctIn ease 0.5s;
-  color: ${props => hexValid(props.color) || getColor(props, 'onAccent', colors.white)};
+  color: ${props => hexValid(props.color) || getColor(props, 'onAccent', colors.shades.white)};
   transform: ${props => props.transform ? `translateX(${props.transform / 16}rem)` : 0};
 
   @keyframes pctIn {

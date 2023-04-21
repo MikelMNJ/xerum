@@ -13,7 +13,7 @@ export const Flatline = styled('div')`
   height: 100vh;
 
   i {
-    color: ${props => getColor(props, 'error', colors.error)};
+    color: ${props => getColor(props, 'error', colors.error.persianRed)};
     font-size: 2rem;
   }
 `;

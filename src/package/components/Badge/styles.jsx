@@ -36,14 +36,14 @@ export const CountWrapper = styled('div')`
   width: fit-content;
   min-width: 1.5rem;
   min-height: 1.5rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'accent', colors.black)};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'white', colors.white)};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'accent', colors.shades.black)};
+  color: ${props => hexValid(props.textColor) || getColor(props, 'white', colors.shades.white)};
   font-size: ${props => props.textSize || 0.75}rem;
   border-radius: 3rem;
   user-select: none;
   border: ${props =>
     props.strokeWidth || 0.125}rem solid ${props => (
-      hexValid(props.strokeColor) || getColor(props, 'primary', colors.white)
+      hexValid(props.strokeColor) || getColor(props, 'primary', colors.shades.white)
     )
   };
 `;
@@ -60,11 +60,11 @@ export const Counter = styled('div')`
 
 export const IconWrapper = styled('div')`
   i {
-    color: ${props => hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.black)};
+    color: ${props => hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.shades.black)};
     font-size: ${props => props.iconSize || 1.5}rem;
 
     &:hover {
-      color: ${props => hexValid(props.iconHoverColor) || getColor(props, 'accentHover', colors.grey)};
+      color: ${props => hexValid(props.iconHoverColor) || getColor(props, 'accentHover', colors.neutral.greyWeb)};
     }
   }
 `;

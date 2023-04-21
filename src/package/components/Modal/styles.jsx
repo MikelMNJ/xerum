@@ -36,9 +36,9 @@ export const StyledModal = styled('div')`
   padding: 0.5rem 1.25rem;
   border-radius: 0.35rem;
   overflow-y: auto;
-  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', colors.black)};
+  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', colors.shades.black)};
   background-color: ${props => (
-    hexValid(props.bgColor) || getColor(props, 'primary', colors.white)
+    hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)
   )};
 
   @media only screen and (max-width: 414px) {
@@ -60,7 +60,7 @@ export const ModalHeader = styled('div')`
 
 export const Title = styled('div')`
   color: ${props => (
-    hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.black)
+    hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.shades.black)
   )};
 `;
 
@@ -71,7 +71,7 @@ export const CloseButton = styled('div')`
   i {
     font-size: 1.35rem;
     color: ${props => (
-      hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.black)
+      hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.shades.black)
     )}
   }
 `;

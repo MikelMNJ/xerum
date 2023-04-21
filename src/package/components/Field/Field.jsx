@@ -21,6 +21,9 @@ const Field = props => {
     form,
     height,
     borderRadius,
+    borderSize,
+    bottomBorder,
+    inputBGColor,
     ...rest
   } = props;
 
@@ -47,6 +50,9 @@ const Field = props => {
       icon={icon}
       height={height}
       borderRadius={borderRadius}
+      borderSize={borderSize}
+      bottomBorder={bottomBorder}
+      inputBGColor={inputBGColor}
     >
 
       <FieldLabels>

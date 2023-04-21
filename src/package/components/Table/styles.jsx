@@ -35,14 +35,15 @@ export const LI = styled('li')`
   min-height: 4rem;
   font-size: 0.875rem;
   cursor: ${props => props.callback ? 'pointer' : 'default'};
-  color: ${props => hexValid(props.headerTextColor) || getColor(props, 'white', colors.white)};
+  color: ${props => hexValid(props.headerTextColor) || getColor(props, 'white', colors.shades.white)};
   background-color: ${props => {
     const lightTheme = props.selectedTheme === 'light';
-    return hexValid(props.headerBGColor) || getColor(props, lightTheme ? 'darkGrey' : 'black', colors.darkGrey);
+    const fallback = colors.neutral.davysGrey;
+    return hexValid(props.headerBGColor) || getColor(props, lightTheme ? 'darkGrey' : 'black', fallback);
   }};
 
   ${props => props.hasLabel && css`
-    border-left: 1.5rem solid ${hexValid(props.labelBGColor) || getColor(props, 'black', colors.black)};
+    border-left: 1.5rem solid ${hexValid(props.labelBGColor) || getColor(props, 'black', colors.shades.black)};
   `}
 
   ${props => props.header && css`
@@ -60,15 +61,16 @@ export const LI = styled('li')`
 
   ${props => !props.header && css`
     &:nth-child(even) {
-      color: ${props => hexValid(props.evenTextColor) || getColor(props, 'onPrimary', colors.black)};
-      background-color: ${props => hexValid(props.evenBGColor) || getColor(props, 'primary', colors.white) + 50};
+      color: ${props => hexValid(props.evenTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+      background-color: ${props => hexValid(props.evenBGColor) || getColor(props, 'primary', colors.shades.white) + 50};
 
       @media (hover: hover) {
         &:hover {
-          color: ${props => hexValid(props.evenHoverTextColor) || getColor(props, 'onPrimary', colors.black)};
+          color: ${props => hexValid(props.evenHoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
           background-color: ${props => {
             const lightTheme = props.selectedTheme === 'light';
-            return hexValid(props.evenHoverBGColor) || getColor(props, 'black', colors.black) + (lightTheme ? 20 : 75);
+            return hexValid(props.evenHoverBGColor)
+              || getColor(props, 'black', colors.shades.black) + (lightTheme ? 20 : 75);
           }};
       }}
     `}
@@ -76,7 +78,7 @@ export const LI = styled('li')`
 
   ${props => !props.header && css`
     &:nth-child(odd) {
-      color: ${props => hexValid(props.oddTextColor) || getColor(props, 'onPrimary', colors.black)};
+      color: ${props => hexValid(props.oddTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
       background-color: ${props => {
         const lightTheme = props.selectedTheme === 'light';
         const color = lightTheme ? 'lightGrey' : 'darkGrey';
@@ -89,17 +91,18 @@ export const LI = styled('li')`
 
     @media (hover: hover) {
       &:hover {
-        color: ${props => hexValid(props.oddHoverTextColor) || getColor(props, 'onPrimary', colors.black)};
+        color: ${props => hexValid(props.oddHoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
         background-color: ${props => {
           const lightTheme = props.selectedTheme === 'light';
-          return hexValid(props.oddHoverBGColor) || getColor(props, 'black', colors.grey) + (lightTheme ? 20 : 75);
+          return hexValid(props.oddHoverBGColor)
+            || getColor(props, 'black', colors.neutral.greyWeb) + (lightTheme ? 20 : 75);
         }};
       }
     }
   `}
 
   ${props => props.isDragging && css`
-    box-shadow: 0 0.1rem 0.2rem ${getColor(props, 'black', colors.black)};
+    box-shadow: 0 0.1rem 0.2rem ${getColor(props, 'black', colors.shades.black)};
     backdrop-filter: blur(0.25rem);
   `}
 
@@ -124,8 +127,8 @@ export const Label = styled('div')`
   left: -1.75rem;
   width: 0;
   font-size: 0.8rem;
-  color: ${props => hexValid(props.labelTextColor) || getColor(props, 'white', colors.white)};
-  background-color: ${props => hexValid(props.labelBGColor) || getColor(props, 'black', colors.black)};
+  color: ${props => hexValid(props.labelTextColor) || getColor(props, 'white', colors.shades.white)};
+  background-color: ${props => hexValid(props.labelBGColor) || getColor(props, 'black', colors.shades.black)};
   padding: 0;
   transform: rotate(-90deg);
 `;
