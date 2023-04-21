@@ -29,7 +29,7 @@ export const StyledModal = styled('div')`
   z-index: 200;
   max-height: calc(100% - 6rem);
   max-width: calc(100% - 6rem);
-  min-width: 23rem;
+  min-width: 29rem;
   min-height: ${props => props.confirm ? 'fit-content' : '15rem'};
   width: max-content;
   height: max-content;
@@ -78,7 +78,7 @@ export const CloseButton = styled('div')`
 
 export const ConfirmButtons = styled('div')`
   display: ${props => props.visible ? 'inline-flex' : 'none'};
-  ${props => props.visible && css`gap: 0.5rem;`}
+  ${props => props.visible && css`gap: 1rem;`}
   width: 100%;
 `;
 

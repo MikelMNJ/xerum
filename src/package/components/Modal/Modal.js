@@ -90,7 +90,7 @@ const Modal = props => {
 
         <ConfirmButtons visible={confirm}>
           <ButtonWrapper>
-            <Spacer size={1.5} />
+            <Spacer />
 
             <Button
               theme={theme}
@@ -109,7 +109,7 @@ const Modal = props => {
           </ButtonWrapper>
 
           <ButtonWrapper>
-            <Spacer size={1.5} />
+            <Spacer />
 
             <Button
               theme={theme}

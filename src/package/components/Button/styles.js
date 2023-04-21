@@ -12,7 +12,7 @@ const setButtonStyle = type => {
         hexValid(props.color) || getColor(props, 'accent', colors.black)
       )};
       background-color: transparent;
-      border: 0.125rem solid ${props => (
+      border: 0.0625rem solid ${props => (
         hexValid(props.color) || getColor(props, 'accent', colors.black)
       )};
 

@@ -10,14 +10,21 @@ const Tag = props => {
     text,
     textSize,
     textColor,
+    verticalPadding,
+    horizontalPadding,
     bgColor,
+    borderSize,
+    borderColor,
+    borderRadius,
     removable,
+    iconLeft,
     closeIcon,
     closeSize,
     closeColor,
     callback,
     pill,
     round,
+    allClick,
     children,
     ...rest
   } = props;
@@ -30,29 +37,57 @@ const Tag = props => {
       bgColor={bgColor}
       pill={pill}
       round={round}
+      verticalPadding={verticalPadding}
+      horizontalPadding={horizontalPadding}
       removable={removable}
       textSize={textSize}
+      borderSize={borderSize}
+      borderColor={borderColor}
+      borderRadius={borderRadius}
+      iconLeft={iconLeft}
+      allClick={allClick}
+      onClick={() => allClick && callback?.()}
       {...rest}
     >
-      <ChildWrapper>
-        {text || children}
-      </ChildWrapper>
-
-      {removable && (
+      {removable && iconLeft && (
         <Close
           theme={theme}
           selectedTheme={selectedTheme}
           closeSize={closeSize}
           closeColor={closeColor}
+          onClick={() => !allClick && callback?.()}
         >
-          <Spacer size={1.0625} across={true} />
+          {!iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}
 
-          <i
-            className={`${iconValid(closeIcon) || 'fa-solid fa-circle-xmark'}`}
-            onClick={() => callback?.()}
-          />
+          {iconValid(closeIcon)
+            ? <i className={`${iconValid(closeIcon)}`} />
+            : closeIcon || <i className='fa-solid fa-circle-xmark' />
+          }
 
-          <Spacer size={0.8125} across={true} />
+          {iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}
+        </Close>
+      )}
+
+      <ChildWrapper>
+        {text || children}
+      </ChildWrapper>
+
+      {removable && !iconLeft && (
+        <Close
+          theme={theme}
+          selectedTheme={selectedTheme}
+          closeSize={closeSize}
+          closeColor={closeColor}
+          onClick={() => !allClick && callback?.()}
+        >
+          {!iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}
+
+          {iconValid(closeIcon)
+            ? <i className={`${iconValid(closeIcon)}`} />
+            : closeIcon || <i className='fa-solid fa-circle-xmark' />
+          }
+
+          {iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}
         </Close>
       )}
     </StyledTag>

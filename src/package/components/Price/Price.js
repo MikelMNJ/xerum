@@ -27,7 +27,7 @@ const Price = props => {
     const val = isNaN(value) ? truncate(0, limit) : truncate(value, limit);
     const price = (
       <Fragment>
-        {symbol || "$"} {val} {currency}
+        {symbol || '$'}{val} {currency}
       </Fragment>
     );
 
