@@ -19,6 +19,7 @@
 # production
 /build
 /dist
+/public
 
 # database settings
 /config/default.json
@@ -37,3 +38,4 @@ yarn-error.log*
 
 # Netlify
 .netlify
+/lambda*

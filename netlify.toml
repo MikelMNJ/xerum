@@ -1,0 +1,10 @@
+[build]
+publish = "dist"
+command = "npm run build"
+functionsSource = "functions"
+functions = ".netlify/functions"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
