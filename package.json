@@ -34,6 +34,7 @@
     "eslint-plugin-testing-library": "^5.10.2",
     "eslint-plugin-vitest": "^0.0.54",
     "formik": "^2.2.9",
+    "jsdom": "^21.1.1",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "react-redux": "^8.0.5",
