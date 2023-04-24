@@ -14,6 +14,10 @@ export const FieldLabels = styled('div')`
   padding: 0 0.25rem;
 `;
 
+export const Optional = styled('span')`
+  color: ${props => hexValid(props.optionalColor) || getColor(props, 'lightGrey', colors.shades.black)}
+`;
+
 export const FieldGroup = styled('div')`
   position: relative;
 `;
@@ -24,8 +28,8 @@ export const Icon = styled('i')`
   justify-content: center;
   position: absolute;
   top: 0;
-  left: 0;
-  font-size: 1.125rem;
+  right: 0;
+  font-size: 0.9rem;
   height: ${props => props.height || heightFallback}rem;
   width: ${props => props.height || heightFallback}rem;
   color: ${props => {
@@ -50,7 +54,7 @@ export const StyledLabel = styled('label')`
     width: 100%;
     min-height: ${props => props.height || heightFallback}rem;
     padding: ${props => props.icon
-      ? `0.5rem 1rem 0.5rem ${(props.height || heightFallback) - 0.05}rem`
+      ? `0.5rem ${(props.height || heightFallback) - 0.05}rem 0.5rem 1rem`
       : '0.5rem 1rem'
     };
     border-radius: ${props => props.borderRadius ?? 0.25}rem;
@@ -75,7 +79,7 @@ export const StyledLabel = styled('label')`
       border: none;
       border-radius: 0;
       border-bottom: ${props => props.borderSize || 0.0625}rem solid ${props => {
-        const color = hexValid(props.borderColor) || getColor(props, 'grey', 'black');
+        const color = hexValid(props.boxColor) || getColor(props, 'grey', 'black');
 
         if (props.disabled) return colors.neutral.lightGrey;
         return color + 60;
@@ -104,16 +108,9 @@ export const StyledLabel = styled('label')`
 
     &:focus {
       ${props => !props.bottomBorder && css`
-        border-color: transparent;
-        box-shadow: 0 0 0.5rem ${props => {
-          const color = hexValid(props.focusColor) || getColor(props, 'accent', colors.neutral.davysGrey);
-
-          if (props.disabled) return colors.neutral.lightGrey;
-          return color;
-        }};
-
-        outline: 0.125rem solid ${props => {
-          const color = hexValid(props.focusColor) || getColor(props, 'accentHover', colors.neutral.greyWeb);
+        outline: none;
+        border-color: ${props => {
+          const color = hexValid(props.focusColor) || getColor(props, 'accent', colors.neutral.greyWeb);
 
           if (props.disabled) return colors.neutral.lightGrey;
           return color;
