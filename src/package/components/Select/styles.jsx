@@ -202,14 +202,16 @@ export const Option = styled('div')`
     return hexValid(props.optionTextColor) || getColor(props, 'onPrimary');
   }};
 
-  &:hover {
-    background-color: ${props => {
-      if (props.active) {
-        return hexValid(props.activeOptionBgHoverColor) || getColor(props, 'accentHover');
-      }
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${props => {
+        if (props.active) {
+          return hexValid(props.activeOptionBgHoverColor) || getColor(props, 'accentHover');
+        }
 
-      return hexValid(props.optionBgHoverColor) || getColor(props, 'lightGrey') + 50;
-    }};
+        return hexValid(props.optionBgHoverColor) || getColor(props, 'lightGrey') + 50;
+      }};
+    }
   }
 `;
 

@@ -39,7 +39,7 @@ const Modal = props => {
     cancelButtonColor,
     cancelButtonTextColor,
     cancelButtonHoverColor,
-    overflow,
+    useOverflow,
     pill,
     round,
     ...rest
@@ -66,7 +66,7 @@ const Modal = props => {
         bgColor={bgColor}
         confirm={confirm}
         textColor={textColor}
-        overflow={overflow}
+        useOverflow={useOverflow}
         {...rest}
       >
         <ModalHeader confirm={confirm}>

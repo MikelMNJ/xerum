@@ -35,7 +35,7 @@ export const StyledModal = styled('div')`
   height: max-content;
   padding: 0.5rem 1.25rem;
   border-radius: 0.35rem;
-  overflow-y: ${props => props.overflow === false ? 'unset' : 'auto'};
+  overflow-y: ${props => props.useOverflow === false ? 'unset' : 'auto'};
   color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', colors.shades.black)};
   background-color: ${props => (
     hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)

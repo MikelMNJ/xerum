@@ -63,8 +63,10 @@ export const IconWrapper = styled('div')`
     color: ${props => hexValid(props.iconColor) || getColor(props, 'onPrimary', colors.shades.black)};
     font-size: ${props => props.iconSize || 1.5}rem;
 
-    &:hover {
-      color: ${props => hexValid(props.iconHoverColor) || getColor(props, 'accentHover', colors.neutral.greyWeb)};
+    @media (hover: hover) {
+      &:hover {
+        color: ${props => hexValid(props.iconHoverColor) || getColor(props, 'accentHover', colors.neutral.greyWeb)};
+      }
     }
   }
 `;
