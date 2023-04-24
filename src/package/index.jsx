@@ -30,3 +30,4 @@ export * from './components/Table/TData';
 export * from './components/Table/TRow';
 export * from './components/Search/Search';
 export * from './components/Accordion/Accordion';
+export * from './components/Select/Select';

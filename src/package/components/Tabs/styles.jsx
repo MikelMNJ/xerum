@@ -65,7 +65,7 @@ export const Name = styled('div')`
   z-index: 1;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   background-color: transparent;
   width: 100%;
   font-weight: ${props => props.boldHeaders ? 600 : 'normal'};
@@ -87,6 +87,5 @@ export const TabContent = styled('div')`
 `;
 
 export const Content = styled('div')`
-  padding: 1rem;
   color: ${props => getColor(props, 'onPrimary', colors.shades.black)};
 `;

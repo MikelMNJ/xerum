@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Field as FormikField } from 'formik';
 import { iconValid } from '../../helpers';
-import { StyledLabel, FieldLabels, FieldGroup, Icon } from './styles';
+import { StyledLabel, FieldLabels, FieldGroup, Icon, Optional } from './styles';
 import { Spacer } from '../Spacer/Spacer';
 
 const Field = props => {
@@ -12,6 +12,7 @@ const Field = props => {
     name,
     label,
     optional,
+    optionText,
     icon,
     iconCallback,
     focusColor,
@@ -24,6 +25,7 @@ const Field = props => {
     borderSize,
     bottomBorder,
     inputBGColor,
+    boxColor,
     ...rest
   } = props;
 
@@ -53,11 +55,16 @@ const Field = props => {
       borderSize={borderSize}
       bottomBorder={bottomBorder}
       inputBGColor={inputBGColor}
+      boxColor={boxColor}
     >
 
       <FieldLabels>
         {label}
-        {optional && <span>(Optional)</span>}
+        {optional && (
+          <Optional theme={theme} selectedTheme={selectedTheme}>
+            {optionText || 'Optional'}
+          </Optional>
+        )}
       </FieldLabels>
 
       {label && <Spacer size={0.5} />}
