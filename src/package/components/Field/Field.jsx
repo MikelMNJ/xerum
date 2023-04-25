@@ -1,98 +1,121 @@
-import React, { useState } from 'react';
-import { Field as FormikField } from 'formik';
+import React, { useState, useRef } from 'react';
 import { iconValid } from '../../helpers';
-import { StyledLabel, FieldLabels, FieldGroup, Icon, Optional } from './styles';
+import {
+  StyledField,
+  Icon,
+  Optional,
+  Input,
+  Label,
+  LabelArea,
+  LabelText,
+} from './styles';
 import { Spacer } from '../Spacer/Spacer';
 
 const Field = props => {
   const {
     theme,
     selectedTheme,
-    type,
-    name,
-    label,
-    optional,
-    optionText,
-    icon,
-    iconCallback,
-    focusColor,
-    textColor,
-    disabled,
-    solidFill,
     form,
-    height,
+    name,
+    placeholder,
+    icon,
+    iconColor,
+    iconSize,
     borderRadius,
+    label,
+    fontFamily,
+    fontSize,
+    height,
+    bgColor,
     borderSize,
+    borderColor,
     bottomBorder,
-    inputBGColor,
-    boxColor,
+    activeBorderColor,
+    activeBorderSize,
+    textColor,
+    labelSize,
+    labelColor,
+    labelSpacing,
+    optional,
+    optionalText,
+    optionalTextSize,
+    optionalTextColor,
     ...rest
   } = props;
 
   const defaultValue = (name && form?.values[name] || '');
-
-  const [ fieldValue, setFieldValue ] = useState(defaultValue);
-
-  const handleFieldStateUpdate = e => {
-    setFieldValue(e.target.value);
-
-    if (form && name) {
-      form.setFieldValue(name, e.target.value);
-    }
-  };
+  const [ inputValue, setInputValue ] = useState(defaultValue);
+  const labelAreaRef = useRef();
 
   return (
-    <StyledLabel
-      theme={theme}
-      selectedTheme={selectedTheme}
-      solidFill={solidFill}
-      focusColor={focusColor}
-      textColor={textColor}
-      disabled={disabled}
-      icon={icon}
-      height={height}
-      borderRadius={borderRadius}
-      borderSize={borderSize}
-      bottomBorder={bottomBorder}
-      inputBGColor={inputBGColor}
-      boxColor={boxColor}
-    >
+    <StyledField height={height} labelHeight={labelAreaRef.current?.offsetHeight || 0}>
+      <Label
+        theme={theme}
+        selectedTheme={selectedTheme}
+        htmlFor={name || ''}
+        labelSize={labelSize}
+        labelColor={labelColor}
+        labelSpacing={labelSpacing}
+      >
+        {(label || optional) && (
+          <LabelArea ref={labelAreaRef}>
+            <LabelText label={label}>
+              {label}
 
-      <FieldLabels>
-        {label}
-        {optional && (
-          <Optional theme={theme} selectedTheme={selectedTheme}>
-            {optionText || 'Optional'}
-          </Optional>
-        )}
-      </FieldLabels>
+              <Optional
+                theme={theme}
+                selectedTheme={selectedTheme}
+                visible={optional}
+                optionalTextSize={optionalTextSize}
+                optionalTextColor={optionalTextColor}
+              >
+                {optionalText || 'optional'}
+              </Optional>
+            </LabelText>
 
-      {label && <Spacer size={0.5} />}
-
-      <FieldGroup>
-        {iconValid(icon) && (
-          <Icon
-            theme={theme}
-            selectedTheme={selectedTheme}
-            className={icon}
-            disabled={disabled}
-            solidFill={solidFill}
-            textColor={textColor}
-            onClick={iconCallback}
-            height={height}
-          />
+            <Spacer size={labelSpacing || 0.5} />
+          </LabelArea>
         )}
 
-        <FormikField
-          type={type}
+        <Input
+          theme={theme}
+          selectedTheme={selectedTheme}
           name={name}
-          value={fieldValue}
-          disabled={disabled}
-          onChange={handleFieldStateUpdate}
+          placeholder={placeholder || ''}
+          value={inputValue || ''}
+          height={height}
+          fontFamily={fontFamily}
+          fontSize={fontSize}
+          bgColor={bgColor}
+          textColor={textColor}
+          borderRadius={borderRadius}
+          borderSize={borderSize}
+          borderColor={borderColor}
+          activeBorderColor={activeBorderColor}
+          activeBorderSize={activeBorderSize}
+          bottomBorder={bottomBorder}
+          icon={icon}
+          onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
+          onChange={e => {
+            const newValue = e.target.value;
+
+            if (form && name) form.setFieldValue(name, newValue);
+            setInputValue(newValue);
+          }}
           {...rest}
         />
-      </FieldGroup>
-    </StyledLabel>
+
+        <Icon
+          theme={theme}
+          selectedTheme={selectedTheme}
+          height={height}
+          iconColor={iconColor || textColor}
+          iconSize={iconSize}
+        >
+          {iconValid(icon) ? <i className={icon} /> : icon }
+        </Icon>
+      </Label>
+    </StyledField>
   );
 };
 

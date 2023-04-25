@@ -23,6 +23,7 @@ const Modal = props => {
     textColor,
     bgClose,
     bgColor,
+    buttonType,
     closeIcon,
     onClose,
     children,
@@ -97,6 +98,7 @@ const Modal = props => {
             <Button
               theme={theme}
               selectedTheme={selectedTheme}
+              type={buttonType || 'button'}
               text={confirmText || 'Confirm'}
               icon={iconValid(confirmButtonIcon)}
               color={confirmButtonColor}

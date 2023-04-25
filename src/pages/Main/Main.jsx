@@ -8,15 +8,15 @@ import _ from 'lodash';
 
 const { themes } = appConstants;
 const { light, dark } = themes;
-const defaults = { email: 'test@test.com', categories: '', sortOrder: '' };
+const defaults = { email: '', categories: '', sortOrder: '' };
 const schema = yup.object().shape({
   email: yup
   .string()
   .email('Invalid email.')
-  .required('Field is required.')
+  .required('Email is required.')
   .trim(),
-  categories: yup.string().required('Categories is required.'),
-  sortOrder: yup.string().required('Sort order is required.'),
+  categories: yup.string().required('Categories is required.').notOneOf([ 'business clothing' ], 'Value is default.'),
+  sortOrder: yup.string().required('Sort order is required.').notOneOf([ 'by due date' ], 'Value is default.'),
 });
 
 const categories = [ 'Business Clothing', 'Business Services', 'Business Supplies', 'Baby Supplies', 'Kids Clothing' ];
@@ -64,7 +64,6 @@ const Main = props => {
                   noButton={true}
                   borderRadius={0.5}
                   bottomBorder={true}
-                  borderSize={0.125}
                   inputBGColor={getColor(props, 'primary')}
                   {...rest}
                 />
@@ -77,13 +76,13 @@ const Main = props => {
                   data={categories}
                   iconSize={0.75}
                   borderRadius={0.25}
-                  fontFamily='Inter-SemiBold'
+                  fontFamily='Inter-Medium'
                   loadingText='Loading categories...'
                   callback={_.noop}
                   {...props}
                 />
 
-                <FieldError name='categories' {...rest} />
+                <FieldError indent={0.25} name='categories' {...rest} />
 
                 <Spacer size={1.5} />
 
@@ -93,12 +92,12 @@ const Main = props => {
                   data={sortOrder}
                   iconSize={0.75}
                   borderRadius={0.25}
-                  fontFamily='Inter-SemiBold'
+                  fontFamily='Inter-Medium'
                   callback={_.noop}
                   {...props}
                 />
 
-                <FieldError borderRadius={0.25} name='sortOrder' {...rest} />
+                <FieldError indent={0.25} name='sortOrder' {...rest} />
 
                 <Spacer size={1.5} />
 
@@ -106,20 +105,22 @@ const Main = props => {
                   form={form}
                   label={<Font size={0.875} weight='semibold'>Email</Font>}
                   name='email'
-                  type='text'
+                  type='email'
                   placeholder='Your input here...'
                   borderRadius={0.25}
                   bottomBorder={true}
-                  borderSize={0.125}
+                  fontFamily='Inter-Medium'
                   inputBGColor={getColor(props, 'primary')}
                   {...rest}
                 />
 
-                <FieldError name='email' {...rest} />
+                <FieldError indent={0.25} name='email' {...rest} />
 
-                <Spacer />
+                <Spacer size={3} />
+
                 <Button
-                  type='submit'
+                  type='Submit'
+                  text={<Font weight='medium'>Submit</Font>}
                   disabled={form.isSubmitting}
                   callback={form.handleSubmit}
                   {...rest}

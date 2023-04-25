@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
@@ -12,7 +11,14 @@ import {
   LabelArea,
   LabelText,
 } from './styles';
-import { updateFormState, buildPlaceholder, updateField, handleChange, getOverflowState, buildOptions } from './functions';
+import {
+  updateFormState,
+  buildPlaceholder,
+  updateField,
+  handleChange,
+  getOverflowState,
+  buildOptions,
+} from './functions';
 import { Spacer } from '../Spacer/Spacer';
 import _ from 'lodash';
 
@@ -31,16 +37,10 @@ const Select = props => {
     label,
     fontFamily,
     fontSize,
-    noResultsText,
     loadingText,
     height,
     maxHeight,
-    optionTextColor,
-    activeOptionTextColor,
     bgColor,
-    optionBgHoverColor,
-    activeOptionBgColor,
-    activeOptionBgHoverColor,
     borderSize,
     borderColor,
     activeBorderColor,
@@ -78,9 +78,9 @@ const Select = props => {
 
   useEffect(() => {
     const updateFormStateArgs = { form, name, selectedOption, newValue: selectedOption?.value };
-    getOverflowState({ optionsRef, setHasOverflow });
     updateFormState(updateFormStateArgs);
-  }, [ optionsMenuVisible, searchValue, selectedOption ]);
+    getOverflowState({ optionsRef, setHasOverflow });
+  }, [ optionsMenuVisible, searchValue, selectedOption, name ]);
 
   const options = useMemo(() => {
     const allOptions = data?.map?.(item => ({ value: _.toLower(item), label: item }));
@@ -99,11 +99,11 @@ const Select = props => {
     setFilteredData,
     setSearchValue,
     inputRef,
-    options
+    options,
   };
 
   return (
-    <StyledSelect height={height}>
+    <StyledSelect height={height} labelHeight={labelAreaRef.current?.offsetHeight || 0}>
       <Label
         theme={theme}
         selectedTheme={selectedTheme}
@@ -153,7 +153,10 @@ const Select = props => {
           icon={icon}
           readonly={!optionsMenuVisible}
           onFocus={() => updateField(true, updateFieldArgs)}
-          onBlur={() => updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0])}
+          onBlur={() => {
+            if (name && form) form.setTouched({ ...form.touched, [name]: true });
+            updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
+          }}
           onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
           onClick={() => updateField(true, updateFieldArgs)}
           onChange={e => handleChange(e, changeArgs)}

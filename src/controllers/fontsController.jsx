@@ -4,7 +4,7 @@ const fonts = {
     extraLight: null,
     light: null,
     normal: 'Inter-Regular',
-    medium: 'Inter-Mdeium',
+    medium: 'Inter-Medium',
     semiBold: 'Inter-SemiBold',
     bold: 'Inter-Bold',
     extraBold: null,

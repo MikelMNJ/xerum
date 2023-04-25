@@ -1,141 +1,127 @@
 import { getColor, hexValid } from '../../helpers';
-import { theme } from '../../theme';
+import { appConstants } from '../../theme/appConstants';
 import styled, { css } from 'styled-components';
 
-const colors = theme.colors;
-const light = 'light';
-const heightFallback = 3;
+const { themes } = appConstants;
+const height = 3;
+const borderSize = 0.0625;
+const borderRadius = 0.5;
+const fontSize = 0.875;
+const light = themes.light;
 
-export const FieldLabels = styled('div')`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.9rem;
+export const StyledField = styled('div')`
+  position: relative;
+  height: ${props => props.height || height + (props.labelHeight / 16)}rem;
+  width: 100%;
+`;
+
+export const Label = styled('label')`
+  position: relative;
+  font-size: ${props => props.labelSize || fontSize}rem;
+  color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary')};
+`;
+
+export const LabelArea = styled('div')`
+  width: 100%;
+`;
+
+export const LabelText = styled('div')`
+  display: inline-flex;
+  justify-content: ${props => props.label ? 'space-between' : 'flex-end'};
+  width: 100%;
   padding: 0 0.25rem;
 `;
 
 export const Optional = styled('span')`
-  color: ${props => hexValid(props.optionalColor) || getColor(props, 'lightGrey', colors.shades.black)}
+  display: ${props => (props.visible ? 'inline-flex' : 'none')};
+  font-size: ${props => props.optionalTextSize || fontSize}rem;
+  color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey')};
 `;
 
-export const FieldGroup = styled('div')`
+export const Input = styled('input')`
   position: relative;
+  display: flex;
+  align-items: center;
+  appearance: none;
+  height: ${props => props.height || height}rem;
+  width: 100%;
+  font-size: ${props => props.fontSize || 1}rem;
+  border-radius: ${props => props.borderRadius || borderRadius}rem;
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary')};
+  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary')};
+
+  ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
+
+  ${props => !props.bottomBorder && css`
+    border: ${props => props.borderSize || borderSize}rem solid ${props => {
+      const lightTheme = props.selectedTheme === light;
+      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey');
+
+      return lightTheme ? defaultColor : defaultColor + 50;
+    }};
+  `}
+
+  ${props => props.bottomBorder && css`
+    border: none;
+    border-radius: 0;
+    border-bottom: ${props => props.borderSize || borderSize}rem solid ${props => {
+      const lightTheme = props.selectedTheme === light;
+      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey');
+
+      return lightTheme ? defaultColor : defaultColor + 50;
+    }};
+  `}
+
+  padding: ${props => {
+    if (props.icon) return `0.5rem ${(props.height || height) - 0.05}rem 0.5rem 1rem`;
+    return '0.5rem 1rem';
+  }};
+
+  &:disabled {
+    cursor: not-allowed;
+    color: ${props => getColor(props, 'grey')};
+    border: none;
+    background-color: ${props => {
+      const lightTheme = props.selectedTheme === light;
+      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey');
+    }};
+  }
+
+  &::placeholder {
+    color: ${props => {
+      const lightTheme = props.selectedTheme === light;
+      return getColor(props, lightTheme ? 'lightGrey' : 'grey');
+    }};
+  }
+
+  &:focus {
+    inherits: all;
+    outline: none;
+    cursor: default;
+    border-width: ${props => props.activeBorderSize || borderSize}rem;
+    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent')};
+
+  }
 `;
 
-export const Icon = styled('i')`
+export const Icon = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
+  bottom: ${borderSize}rem;
   right: 0;
-  font-size: 0.9rem;
-  height: ${props => props.height || heightFallback}rem;
-  width: ${props => props.height || heightFallback}rem;
+  pointer-events: none;
+  height: ${props => props.height || height}rem;
+  width: ${props => props.height || height}rem;
   color: ${props => {
-    const themeColor = props.solidFill ? 'onAccent' : 'accent';
-    const fallback = props.solidFill ? colors.shades.white : colors.shades.black;
-    const color = hexValid(props.textColor) || getColor(props, themeColor, fallback);
+    const color = hexValid(props.iconColor) || getColor(props, 'onPrimary');
 
-    if (props.disabled) return colors.neutral.greyWeb;
+    if (props.disabled) return getColor(props, 'lightGrey');
     return color;
   }};
 
-  ${props => props.onClick && css`
-    cursor: pointer;
-  `}
-`;
-
-export const StyledLabel = styled('label')`
-  position: relative;
-
-  input {
-    font-size: 1rem;
-    width: 100%;
-    min-height: ${props => props.height || heightFallback}rem;
-    padding: ${props => props.icon
-      ? `0.5rem ${(props.height || heightFallback) - 0.05}rem 0.5rem 1rem`
-      : '0.5rem 1rem'
-    };
-    border-radius: ${props => props.borderRadius ?? 0.25}rem;
-    background-color: ${props => {
-      const themeColor = props.selectedTheme === light ? 'white' : 'darkGrey';
-      const color = hexValid(props.inputBGColor) || getColor(props, themeColor, colors.shades.white);
-
-      if (props.disabled) return colors.neutral.lightGrey;
-      return color;
-    }};
-
-    color: ${props => {
-      const themeColor = props.solidFill ? 'onAccent' : 'onPrimary';
-      const fallback = props.solidFill ? colors.shades.white : colors.shades.black;
-      const color = hexValid(props.textColor) || getColor(props, themeColor, fallback);
-
-      if (props.disabled) return colors.neutral.greyWeb;
-      return color;
-    }};
-
-    ${props => props.bottomBorder && css`
-      border: none;
-      border-radius: 0;
-      border-bottom: ${props => props.borderSize || 0.0625}rem solid ${props => {
-        const color = hexValid(props.boxColor) || getColor(props, 'grey', 'black');
-
-        if (props.disabled) return colors.neutral.lightGrey;
-        return color + 60;
-      }};
-    `}
-
-    ${props => !props.bottomBorder && css`
-      border: ${props => props.borderSize || 0.0625}rem solid ${props => {
-        const themeColor = props.solidFill ? 'accent' : 'grey';
-        const fallback = props.selectedTheme === light ? colors.shades.white : colors.shades.black;
-        const color = hexValid(props.boxColor) || getColor(props, themeColor, fallback);
-
-        if (props.disabled) return colors.neutral.lightGrey;
-        return color + 60;
-      }};
-    `}
-
-    ${props => props.solidFill && css`
-    background-color: ${props => {
-      const color = hexValid(props.boxColor) || getColor(props, 'accent', colors.shades.black);
-
-      if (props.disabled) return colors.neutral.lightGrey;
-      return color;
-    }};
-  `};
-
-    &:focus {
-      ${props => !props.bottomBorder && css`
-        outline: none;
-        border-color: ${props => {
-          const color = hexValid(props.focusColor) || getColor(props, 'accent', colors.neutral.greyWeb);
-
-          if (props.disabled) return colors.neutral.lightGrey;
-          return color;
-        }};
-      `}
-
-      ${props => props.bottomBorder && css`
-        outline: none;
-        border-bottom: ${props => props.borderSize || 0.0625}rem solid ${props => {
-          return getColor(props, 'accent', colors.accent.brightNavyBlue);
-        }};
-      `}
-    }
-
-    &::placeholder {
-      color: ${props => {
-        const lightTheme = props.selectedTheme === light;
-        const themeColor = props.solidFill ? 'onAccent' : 'lightGrey';
-        const fallback = lightTheme || props.solidFill ? colors.neutral.lightGrey : colors.neutral.davysGrey;
-        const color = getColor(props, themeColor, fallback);
-        const hasTheme = props.selectedTheme && props.theme;
-
-        if (props.disabled) return colors.neutral.greyWeb + 90;
-        return lightTheme && !props.solidFill && hasTheme ? color : color + 80;
-      }}
-    }
+  i {
+    font-size: ${props => props.iconSize || fontSize}rem;
   }
 `;
