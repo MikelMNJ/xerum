@@ -1,6 +1,5 @@
 import { getColor, hexValid } from '../../helpers';
-import { appConstants } from '../../theme/appConstants';
-import { theme } from 'theme';
+import { theme, appConstants } from '../../theme';
 import styled, { css } from 'styled-components';
 
 const { themes } = appConstants;
