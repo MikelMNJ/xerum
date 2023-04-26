@@ -67,14 +67,16 @@ const Main = props => {
           }}>
             {form => (
               <Form>
-                <Search
-                  placeholder='Search...'
-                  noButton={true}
-                  borderRadius={0.5}
-                  bottomBorder={true}
-                  inputBGColor={getColor(props, 'primary')}
-                  {...rest}
-                />
+                <Font weight='semibold'>
+                  <Search
+                    placeholder='Expense, auto-spend merchant or category...'
+                    noButton={true}
+                    borderRadius={0.5}
+                    inputBGColor={getColor(props, 'primary')}
+                    callback={_.noop}
+                    {...props}
+                  />
+                </Font>
 
                 <Spacer size={1.5} />
 
@@ -88,6 +90,7 @@ const Main = props => {
                   label='Categories'
                   loadingText='Loading categories...'
                   callback={_.noop}
+                  {...rest}
                 />
 
                 <FieldError indent={0.25} name='categories' {...rest} />
@@ -103,6 +106,7 @@ const Main = props => {
                   label='Sort order'
                   fontFamily='Inter-Medium'
                   callback={_.noop}
+                  {...rest}
                 />
 
                 <FieldError indent={0.25} name='sortOrder' {...rest} />
@@ -121,6 +125,7 @@ const Main = props => {
                   icon={`fa-solid fa-envelope`}
                   iconCallback={() => console.log('Clicked icon!')}
                   inputBGColor={getColor(props, 'primary')}
+                  {...rest}
                 />
 
                 <FieldError indent={0.25} name='email' {...rest} />

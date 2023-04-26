@@ -41,6 +41,7 @@ const Field = props => {
     optionalText,
     optionalTextSize,
     optionalTextColor,
+    placeholderColor,
     ...rest
   } = props;
 
@@ -83,6 +84,7 @@ const Field = props => {
           selectedTheme={selectedTheme}
           name={name}
           placeholder={placeholder || ''}
+          placeholderColor={placeholderColor}
           value={inputValue || ''}
           height={height}
           fontFamily={fontFamily}

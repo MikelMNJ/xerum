@@ -92,7 +92,7 @@ export const Input = styled('input')`
   &::placeholder {
     color: ${props => {
       const lightTheme = props.selectedTheme === light;
-      return getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
+      return hexValid(props.placeholderColor) || getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
     }};
   }
 

@@ -15,9 +15,11 @@ const Search = props => {
     buttonText,
     noButton,
     strokeWidth,
-    placeholderTextColor,
+    placeholderColor,
     inputTextColor,
     inputBGColor,
+    inputIconColor,
+    fontFamily,
     borderColor,
     borderRadius,
     borderSize,
@@ -57,7 +59,7 @@ const Search = props => {
 
   return (
     <StyledSearch {...rest}>
-      <Label theme={theme} selectedTheme={selectedTheme} noButton={noButton}>
+      <Label theme={theme} selectedTheme={selectedTheme} noButton={noButton} inputIconColor={inputIconColor}>
         {!noIcon && (
           <i className={iconValid(inputIcon) || 'fa-solid fa-magnifying-glass'} />
         )}
@@ -76,11 +78,12 @@ const Search = props => {
           borderSize={borderSize}
           bottomBorder={bottomBorder}
           inputTextColor={inputTextColor}
-          placeholderTextColor={placeholderTextColor}
+          placeholderColor={placeholderColor}
           inputBGColor={inputBGColor}
           placeholder={placeholder}
           focusColor={focusColor}
           buttonWidth={buttonWidth}
+          fontFamily={fontFamily}
           defaultValue={inputRef.current?.value || ''}
           onChange={updateRef}
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
@@ -97,6 +100,7 @@ const Search = props => {
             pill={pill}
             round={round}
             icon={buttonIcon}
+            fontFamily={fontFamily}
             color={buttonColor}
             textColor={buttonTextColor}
             hoverColor={buttonHoverColor}

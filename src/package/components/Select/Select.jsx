@@ -54,6 +54,7 @@ const Select = props => {
     optionalTextSize,
     optionalTextColor,
     top,
+    placeholderColor,
     callback,
     ...rest
   } = props;
@@ -81,6 +82,7 @@ const Select = props => {
     const updateFormStateArgs = { form, name, selectedOption, newValue: selectedOption?.value };
     updateFormState(updateFormStateArgs);
     getOverflowState({ optionsRef, setHasOverflow });
+    // eslint-disable-next-line
   }, [ optionsMenuVisible, searchValue, selectedOption, name ]);
 
   const options = useMemo(() => {
@@ -152,6 +154,7 @@ const Select = props => {
           activeBorderColor={activeBorderColor}
           activeBorderSize={activeBorderSize}
           icon={icon}
+          placeholderColor={placeholderColor}
           readonly={!optionsMenuVisible}
           onFocus={() => updateField(true, updateFieldArgs)}
           onBlur={() => {

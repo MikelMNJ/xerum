@@ -22,7 +22,7 @@ export const Label = styled('label')`
     top: 0.9375rem;
     left: 1rem;
     font-size: 1rem;
-    color: ${props => getColor(props, 'grey', colors.neutral.greyWeb)};
+    color: ${props => hexValid(props.inputIconColor) || getColor(props, 'grey', colors.neutral.greyWeb)};
   }
 `;
 
@@ -33,6 +33,8 @@ export const Input = styled('input')`
   padding: 0.5rem ${props => props.buttonWidth + 1}rem 0.5rem ${props => props.noIcon ? 1 : 3}rem;
   font-size: 1rem;
   color: ${props => hexValid(props.inputTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+
+  ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
 
   border-radius: ${props => {
     if (props.pill) return '3rem';
@@ -71,7 +73,7 @@ export const Input = styled('input')`
     color: ${props => {
       const lightTheme = props.selectedTheme === light;
       const fallback = colors.neutral.lightGrey;
-      return hexValid(props.placeholderTextColor) || getColor(props, lightTheme ? 'lightGrey' : 'grey', fallback);
+      return hexValid(props.placeholderColor) || getColor(props, lightTheme ? 'lightGrey' : 'grey', fallback);
     }};
   }
 
@@ -108,6 +110,8 @@ export const SubmitButton = styled(Button)`
   right: 0;
   margin: 0;
   min-width: 3rem;
+
+  ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
 
   border-radius: ${props => {
     if (props.pill) return '0 3rem 3rem 0';
