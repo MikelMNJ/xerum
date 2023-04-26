@@ -88,7 +88,6 @@ const Main = props => {
                   label='Categories'
                   loadingText='Loading categories...'
                   callback={_.noop}
-                  {...props}
                 />
 
                 <FieldError indent={0.25} name='categories' {...rest} />
@@ -104,7 +103,6 @@ const Main = props => {
                   label='Sort order'
                   fontFamily='Inter-Medium'
                   callback={_.noop}
-                  {...props}
                 />
 
                 <FieldError indent={0.25} name='sortOrder' {...rest} />
@@ -123,7 +121,6 @@ const Main = props => {
                   icon={`fa-solid fa-envelope`}
                   iconCallback={() => console.log('Clicked icon!')}
                   inputBGColor={getColor(props, 'primary')}
-                  {...rest}
                 />
 
                 <FieldError indent={0.25} name='email' {...rest} />

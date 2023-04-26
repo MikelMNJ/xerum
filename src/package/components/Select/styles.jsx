@@ -1,8 +1,10 @@
 import { getColor, hexValid } from '../../helpers';
 import { appConstants } from '../../theme/appConstants';
+import { theme } from 'theme';
 import styled, { css } from 'styled-components';
 
 const { themes } = appConstants;
+const { neutral, shades, accent } = theme.colors;
 const height = 3;
 const borderSize = 0.0625;
 const borderRadius = 0.5;
@@ -18,7 +20,7 @@ export const StyledSelect = styled('div')`
 export const Label = styled('label')`
   position: relative;
   font-size: ${props => props.labelSize || fontSize}rem;
-  color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary')};
+  color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 `;
 
 export const LabelArea = styled('div')`
@@ -35,7 +37,7 @@ export const LabelText = styled('div')`
 export const Optional = styled('span')`
   display: ${props => (props.visible ? 'inline-flex' : 'none')};
   font-size: ${props => props.optionalTextSize || fontSize}rem;
-  color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey')};
+  color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey', neutral.lightGrey)};
 `;
 
 export const Input = styled('input')`
@@ -48,14 +50,15 @@ export const Input = styled('input')`
   font-size: ${props => props.fontSize || 1}rem;
   cursor: pointer;
   border-radius: ${props => props.borderRadius || borderRadius}rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary')};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary')};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
+  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 
   ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
 
   border: ${props => props.borderSize || borderSize}rem solid ${props => {
     const lightTheme = props.selectedTheme === light;
-    const defaultColor = hexValid(props.borderColor) || getColor(props, props.menuVisible ? 'accent' : 'lightGrey');
+    const defaultColor = hexValid(props.borderColor)
+      || getColor(props, props.menuVisible ? 'accent' : 'lightGrey', neutral.lightGrey);
 
     return lightTheme ? defaultColor : defaultColor + 50;
   }};
@@ -67,11 +70,11 @@ export const Input = styled('input')`
 
   &:disabled {
     cursor: not-allowed;
-    color: ${props => getColor(props, 'grey')};
+    color: ${props => getColor(props, 'grey', neutral.grey)};
     border: none;
     background-color: ${props => {
       const lightTheme = props.selectedTheme === light;
-      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey');
+      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', neutral.lightGrey);
     }};
   }
 
@@ -80,12 +83,12 @@ export const Input = styled('input')`
     outline: none;
     cursor: default;
     border-width: ${props => props.activeBorderSize || borderSize}rem;
-    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent')};
+    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent', accent.brightNavyBlue)};
 
     &::placeholder {
       color: ${props => {
         const lightTheme = props.selectedTheme === light;
-        return getColor(props, lightTheme ? 'lightGrey' : 'grey');
+        return getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
       }};
     }
   }
@@ -103,9 +106,9 @@ export const Icon = styled('div')`
   width: ${props => props.height || height}rem;
   transform: ${props => props.menuVisible ? 'rotate(180deg)' : 'rotate(0deg)'};
   color: ${props => {
-    const color = hexValid(props.iconColor) || getColor(props, 'onPrimary');
+    const color = hexValid(props.iconColor) || getColor(props, 'onPrimary', neutral.raisinBlack);
 
-    if (props.disabled) return getColor(props, 'lightGrey');
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
     return color;
   }};
 
@@ -121,7 +124,7 @@ export const OptionsArea = styled('div')`
   z-index: 1;
   padding: 0.5rem;
   width: 100%;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary')};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
   border-radius: ${props => props.borderRadius || borderRadius}rem;
   cursor: pointer;
 
@@ -153,7 +156,7 @@ export const OptionsArea = styled('div')`
 
   border: ${props => props.borderSize || 0.0625}rem solid ${props => {
     const lightTheme = props.selectedTheme === light;
-    const defaultColor = getColor(props, 'lightGrey');
+    const defaultColor = getColor(props, 'lightGrey', neutral.lightGrey);
 
     if (hexValid(props.borderColor)) return props.borderColor;
     return lightTheme ? defaultColor : defaultColor + 50;
@@ -188,28 +191,28 @@ export const Option = styled('div')`
 
   background-color: ${props => {
     if (props.active) {
-      return hexValid(props.activeOptionBgColor) || getColor(props, 'accent');
+      return hexValid(props.activeOptionBgColor) || getColor(props, 'accent', accent.brightNavyBlue);
     }
 
-    return hexValid(props.bgColor) || getColor(props, 'primary');
+    return hexValid(props.bgColor) || getColor(props, 'primary', shades.white);
   }};
 
   color: ${props => {
     if (props.active) {
-      return hexValid(props.activeOptionTextColor) || getColor(props, 'onAccent');
+      return hexValid(props.activeOptionTextColor) || getColor(props, 'onAccent', shades.white);
     }
 
-    return hexValid(props.optionTextColor) || getColor(props, 'onPrimary');
+    return hexValid(props.optionTextColor) || getColor(props, 'onPrimary', neutral.raisinBlack);
   }};
 
   @media (hover: hover) {
     &:hover {
       background-color: ${props => {
         if (props.active) {
-          return hexValid(props.activeOptionBgHoverColor) || getColor(props, 'accentHover');
+          return hexValid(props.activeOptionBgHoverColor) || getColor(props, 'accentHover', accent.carolinaBlue);
         }
 
-        return hexValid(props.optionBgHoverColor) || getColor(props, 'lightGrey') + 50;
+        return hexValid(props.optionBgHoverColor) || getColor(props, 'lightGrey', neutral.lightGrey) + 50;
       }};
     }
   }

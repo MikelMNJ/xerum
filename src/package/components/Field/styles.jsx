@@ -1,8 +1,10 @@
 import { getColor, hexValid } from '../../helpers';
 import { appConstants } from '../../theme/appConstants';
+import { theme } from 'theme';
 import styled, { css } from 'styled-components';
 
 const { themes } = appConstants;
+const { neutral, shades, accent } = theme.colors;
 const height = 3;
 const borderSize = 0.0625;
 const borderRadius = 0.5;
@@ -18,7 +20,7 @@ export const StyledField = styled('div')`
 export const Label = styled('label')`
   position: relative;
   font-size: ${props => props.labelSize || fontSize}rem;
-  color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary')};
+  color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 `;
 
 export const LabelArea = styled('div')`
@@ -35,7 +37,7 @@ export const LabelText = styled('div')`
 export const Optional = styled('span')`
   display: ${props => (props.visible ? 'inline-flex' : 'none')};
   font-size: ${props => props.optionalTextSize || fontSize}rem;
-  color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey')};
+  color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey', neutral.lightGrey)};
 `;
 
 export const Input = styled('input')`
@@ -47,15 +49,15 @@ export const Input = styled('input')`
   width: 100%;
   font-size: ${props => props.fontSize || 1}rem;
   border-radius: ${props => props.borderRadius || borderRadius}rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary')};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary')};
+  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
+  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 
   ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
 
   ${props => !props.bottomBorder && css`
     border: ${props => props.borderSize || borderSize}rem solid ${props => {
       const lightTheme = props.selectedTheme === light;
-      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey');
+      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);
 
       return lightTheme ? defaultColor : defaultColor + 50;
     }};
@@ -66,7 +68,7 @@ export const Input = styled('input')`
     border-radius: 0;
     border-bottom: ${props => props.borderSize || borderSize}rem solid ${props => {
       const lightTheme = props.selectedTheme === light;
-      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey');
+      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);
 
       return lightTheme ? defaultColor : defaultColor + 50;
     }};
@@ -83,14 +85,14 @@ export const Input = styled('input')`
     border: none;
     background-color: ${props => {
       const lightTheme = props.selectedTheme === light;
-      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey');
+      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', neutral.lightGrey);
     }};
   }
 
   &::placeholder {
     color: ${props => {
       const lightTheme = props.selectedTheme === light;
-      return getColor(props, lightTheme ? 'lightGrey' : 'grey');
+      return getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
     }};
   }
 
@@ -98,7 +100,7 @@ export const Input = styled('input')`
     inherits: all;
     outline: none;
     border-width: ${props => props.activeBorderSize || borderSize}rem;
-    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent')};
+    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent', accent.carolinaBlue)};
 
   }
 `;
@@ -114,9 +116,9 @@ export const Icon = styled('div')`
   width: ${props => props.height || height}rem;
   cursor: pointer;
   color: ${props => {
-    const color = hexValid(props.iconColor) || getColor(props, 'onPrimary');
+    const color = hexValid(props.iconColor) || getColor(props, 'onPrimary', shades.black);
 
-    if (props.disabled) return getColor(props, 'lightGrey');
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
     return color;
   }};
 
