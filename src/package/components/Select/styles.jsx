@@ -11,7 +11,7 @@ const light = themes.light;
 
 export const StyledSelect = styled('div')`
   position: relative;
-  height: ${props => props.height || height + (props.labelHeight / 16)}rem;
+  height: ${props => props.height ? `${props.height}rem` : 'fit-content'};
   width: 100%;
 `;
 

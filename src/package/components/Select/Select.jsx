@@ -58,7 +58,8 @@ const Select = props => {
     ...rest
   } = props;
 
-  const [ selectedOption, setSelectedOption ] = useState(null);
+  const defaultValue = form?.values[name] && { value: _.toLower(form.values[name]), label: form.values[name] };
+  const [ selectedOption, setSelectedOption ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
   const [ searchValue, setSearchValue ] = useState('');
   const [ filteredData, setFilteredData ] = useState(data);

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { iconValid } from '../../helpers';
-import { StyledToggle, Track, ToggleInput } from './styles';
+import { StyledToggle, Track, ToggleInput, FormikInput } from './styles';
 
 const Toggle = props => {
   const {
     theme,
     selectedTheme,
+    form,
+    name,
     icon,
     iconColor,
     inactiveColor,
@@ -14,24 +16,45 @@ const Toggle = props => {
     ...rest
   } = props;
 
-  const [ isChecked, setIsChecked ] = useState(rest.checked || false);
+  const defaultState = (name && form?.values[name]) || false;
+  const [ isChecked, setIsChecked ] = useState(defaultState);
 
   const handleChange = e => {
     const newVal = e.currentTarget.checked;
     callback?.(newVal);
     setIsChecked(!isChecked);
+
+    if (form && name) {
+      form.setFieldValue(name, newVal);
+    }
   };
 
   return (
     <StyledToggle>
-      <ToggleInput
-        theme={theme}
-        selectedTheme={selectedTheme}
-        type='checkbox'
-        checked={isChecked}
-        onChange={handleChange}
-        {...rest}
-      />
+      {form && (
+        <FormikInput
+          theme={theme}
+          $selectedTheme={selectedTheme}
+          form={form}
+          name={name}
+          type='checkbox'
+          checked={isChecked}
+          onChange={handleChange}
+          {...rest}
+        />
+      )}
+
+      {!form && (
+        <ToggleInput
+          theme={theme}
+          selectedTheme={selectedTheme}
+          name={name}
+          type='checkbox'
+          checked={isChecked}
+          onChange={handleChange}
+          {...rest}
+        />
+      )}
 
       <Track
         theme={theme}

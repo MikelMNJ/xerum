@@ -43,7 +43,7 @@ const Field = props => {
     ...rest
   } = props;
 
-  const defaultValue = (name && form?.values[name] || '');
+  const defaultValue = form?.values[name] || '';
   const [ inputValue, setInputValue ] = useState(defaultValue);
   const labelAreaRef = useRef();
 

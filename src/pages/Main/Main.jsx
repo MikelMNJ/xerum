@@ -1,22 +1,30 @@
 import { StyledMain, ContentArea } from './styles';
 import { appConstants } from 'modules';
 import { Formik, Form } from 'formik';
-import { Button, Field, FieldError, Font, Search, Select, Spacer } from 'components';
+import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle, Price } from 'components';
 import { getColor } from 'helpers';
 import * as yup from 'yup';
 import _ from 'lodash';
 
 const { themes } = appConstants;
 const { light, dark } = themes;
-const defaults = { email: '', categories: '', sortOrder: '' };
+const defaults = {
+  email: '',
+  categories: '',
+  sortOrder: '',
+  checkbox: false,
+  toggle: false,
+};
 const schema = yup.object().shape({
   email: yup
   .string()
   .email('Invalid email.')
   .required('Email is required.')
   .trim(),
-  categories: yup.string().required('Categories is required.').notOneOf([ 'business clothing' ], 'Value is default.'),
-  sortOrder: yup.string().required('Sort order is required.').notOneOf([ 'by due date' ], 'Value is default.'),
+  categories: yup.string().required('Categories is required.'),
+  sortOrder: yup.string().required('Sort order is required.'),
+  checkbox: yup.boolean().oneOf([ true ], 'Checkbox is required.'),
+  toggle: yup.boolean().oneOf([ true ], 'Toggle is required.'),
 });
 
 const categories = [ 'Business Clothing', 'Business Services', 'Business Supplies', 'Baby Supplies', 'Kids Clothing' ];
@@ -77,6 +85,7 @@ const Main = props => {
                   iconSize={0.75}
                   borderRadius={0.25}
                   fontFamily='Inter-Medium'
+                  label='Categories'
                   loadingText='Loading categories...'
                   callback={_.noop}
                   {...props}
@@ -92,6 +101,7 @@ const Main = props => {
                   data={sortOrder}
                   iconSize={0.75}
                   borderRadius={0.25}
+                  label='Sort order'
                   fontFamily='Inter-Medium'
                   callback={_.noop}
                   {...props}
@@ -116,6 +126,16 @@ const Main = props => {
 
                 <FieldError indent={0.25} name='email' {...rest} />
 
+                <Spacer />
+
+                <Checkbox form={form} name='checkbox' label='Select me' {...rest} />
+                <FieldError indent={0.25} name='checkbox' {...rest} />
+
+                <Spacer />
+
+                <Toggle form={form} name='toggle' {...rest} />
+                <FieldError indent={0.25} name='toggle' {...rest} />
+
                 <Spacer size={3} />
 
                 <Button
@@ -128,6 +148,8 @@ const Main = props => {
               </Form>
             )}
         </Formik>
+
+        <Price value={123.7} {...rest} />
       </ContentArea>
     </StyledMain>
   );
