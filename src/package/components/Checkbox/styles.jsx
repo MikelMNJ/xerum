@@ -10,7 +10,7 @@ export const StyledLabel = styled('label')`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: auto;
+  width: fit-content;
   min-width: 3rem;
   cursor: pointer;
   user-select: none;

@@ -1,11 +1,12 @@
 import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
+import { Field } from 'formik';
 import styled, { css } from 'styled-components';
 
 const colors = theme.colors;
 
 export const StyledToggle = styled('label')`
-  display: inline-block;
+  display: inline-flex;
   position: relative;
   width: 3rem;
   height: 1.75rem;
@@ -56,4 +57,15 @@ export const ToggleInput = styled('input')`
   &:focus ${Track} {
     box-shadow: 0 0 0.0625rem ${props => getColor(props, 'accent', colors.neutral.greyWeb)};
   }
+`;
+
+export const FormikInput = styled(Field)`
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:focus ${Track} {
+      box-shadow: 0 0 0.0625rem ${props => getColor(props, 'accent', colors.neutral.greyWeb)};
+    }
 `;

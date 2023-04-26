@@ -1,22 +1,30 @@
 import { StyledMain, ContentArea } from './styles';
 import { appConstants } from 'modules';
 import { Formik, Form } from 'formik';
-import { Button, Field, FieldError, Font, Search, Select, Spacer } from 'components';
+import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle } from 'components';
 import { getColor } from 'helpers';
 import * as yup from 'yup';
 import _ from 'lodash';
 
 const { themes } = appConstants;
 const { light, dark } = themes;
-const defaults = { email: 'test@test.com', categories: '', sortOrder: '' };
+const defaults = {
+  email: '',
+  categories: '',
+  sortOrder: '',
+  checkbox: false,
+  toggle: false,
+};
 const schema = yup.object().shape({
   email: yup
   .string()
   .email('Invalid email.')
-  .required('Field is required.')
+  .required('Email is required.')
   .trim(),
   categories: yup.string().required('Categories is required.'),
   sortOrder: yup.string().required('Sort order is required.'),
+  checkbox: yup.boolean().oneOf([ true ], 'Checkbox is required.'),
+  toggle: yup.boolean().oneOf([ true ], 'Toggle is required.'),
 });
 
 const categories = [ 'Business Clothing', 'Business Services', 'Business Supplies', 'Baby Supplies', 'Kids Clothing' ];
@@ -64,7 +72,6 @@ const Main = props => {
                   noButton={true}
                   borderRadius={0.5}
                   bottomBorder={true}
-                  borderSize={0.125}
                   inputBGColor={getColor(props, 'primary')}
                   {...rest}
                 />
@@ -77,13 +84,13 @@ const Main = props => {
                   data={categories}
                   iconSize={0.75}
                   borderRadius={0.25}
-                  fontFamily='Inter-SemiBold'
+                  fontFamily='Inter-Medium'
+                  label='Categories'
                   loadingText='Loading categories...'
                   callback={_.noop}
-                  {...props}
                 />
 
-                <FieldError name='categories' {...rest} />
+                <FieldError indent={0.25} name='categories' {...rest} />
 
                 <Spacer size={1.5} />
 
@@ -93,12 +100,12 @@ const Main = props => {
                   data={sortOrder}
                   iconSize={0.75}
                   borderRadius={0.25}
-                  fontFamily='Inter-SemiBold'
+                  label='Sort order'
+                  fontFamily='Inter-Medium'
                   callback={_.noop}
-                  {...props}
                 />
 
-                <FieldError borderRadius={0.25} name='sortOrder' {...rest} />
+                <FieldError indent={0.25} name='sortOrder' {...rest} />
 
                 <Spacer size={1.5} />
 
@@ -106,20 +113,33 @@ const Main = props => {
                   form={form}
                   label={<Font size={0.875} weight='semibold'>Email</Font>}
                   name='email'
-                  type='text'
+                  type='email'
                   placeholder='Your input here...'
                   borderRadius={0.25}
                   bottomBorder={true}
-                  borderSize={0.125}
+                  fontFamily='Inter-Medium'
+                  icon={`fa-solid fa-envelope`}
+                  iconCallback={() => console.log('Clicked icon!')}
                   inputBGColor={getColor(props, 'primary')}
-                  {...rest}
                 />
 
-                <FieldError name='email' {...rest} />
+                <FieldError indent={0.25} name='email' {...rest} />
 
                 <Spacer />
+
+                <Checkbox form={form} name='checkbox' label='Select me' {...rest} />
+                <FieldError indent={0.25} name='checkbox' {...rest} />
+
+                <Spacer />
+
+                <Toggle form={form} name='toggle' {...rest} />
+                <FieldError indent={0.25} name='toggle' {...rest} />
+
+                <Spacer size={3} />
+
                 <Button
-                  type='submit'
+                  type='Submit'
+                  text={<Font weight='medium'>Submit</Font>}
                   disabled={form.isSubmitting}
                   callback={form.handleSubmit}
                   {...rest}

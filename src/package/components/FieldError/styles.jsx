@@ -7,5 +7,5 @@ const colors = theme.colors;
 export const StyledError = styled('div')`
   color: ${props => getColor(props, 'error', colors.error.persianRed)};
   font-size: 0.9rem;
-  padding: 0 ${props => props.borderRadius || 0.5}rem;
+  padding: 0 ${props => props.indent || 0.5}rem;
 `;

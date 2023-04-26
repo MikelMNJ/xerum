@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Field } from 'formik';
 import { iconValid } from '../../helpers';
 import { StyledLabel, Box, Check } from './styles';
+import { Field } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 
 const Checkbox = props => {
@@ -51,13 +51,25 @@ const Checkbox = props => {
         />
       </Box>
 
-      <Field
-        type='checkbox'
-        name={name}
-        checked={checked}
-        disabled={disabled}
-        onChange={handleFieldStateUpdate}
-      />
+      {!form && (
+        <input
+          type='checkbox'
+          name={name}
+          checked={checked}
+          disabled={disabled}
+          onChange={handleFieldStateUpdate}
+        />
+      )}
+
+      {form && (
+        <Field
+          type='checkbox'
+          name={name}
+          checked={checked}
+          disabled={disabled}
+          onChange={handleFieldStateUpdate}
+        />
+      )}
 
       {label && <Spacer size={0.5} across={true} />}
       {label}
