@@ -10,15 +10,22 @@ export const getColor = (props, key, fallback) => {
   return fallback;
 };
 
-export const truncate = (num, limit) => {
+export const truncate = (num, limit = 2) => {
   num = num === 0 || !num ? '0.00000000' : num.toString();
   const hasFloatVal = num?.includes('.');
 
   if (hasFloatVal) {
     const split = num.split('.');
     const int = (+(split[0])).toLocaleString('en-US');
-    const float = split[1].slice(0, limit ?? 2);
+    let float = split[1].slice(0, limit ?? 2);
+
+    if (float.length < (limit)) {
+      float = +float * 10 ** (limit - float.length);
+    }
+
     const truncatedVal = `${int}${limit === 0 ? '' : '.'}${float}`;
+
+    console.log({ split, int, float, truncatedVal });
 
     return truncatedVal;
   }
