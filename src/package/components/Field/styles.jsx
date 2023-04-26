@@ -97,7 +97,6 @@ export const Input = styled('input')`
   &:focus {
     inherits: all;
     outline: none;
-    cursor: default;
     border-width: ${props => props.activeBorderSize || borderSize}rem;
     border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent')};
 
@@ -111,15 +110,17 @@ export const Icon = styled('div')`
   position: absolute;
   bottom: ${borderSize}rem;
   right: 0;
-  pointer-events: none;
   height: ${props => props.height || height}rem;
   width: ${props => props.height || height}rem;
+  cursor: pointer;
   color: ${props => {
     const color = hexValid(props.iconColor) || getColor(props, 'onPrimary');
 
     if (props.disabled) return getColor(props, 'lightGrey');
     return color;
   }};
+
+  ${props => !props.iconCallback && css`pointer-events: none;`}
 
   i {
     font-size: ${props => props.iconSize || fontSize}rem;

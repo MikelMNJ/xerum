@@ -25,8 +25,6 @@ export const truncate = (num, limit = 2) => {
 
     const truncatedVal = `${int}${limit === 0 ? '' : '.'}${float}`;
 
-    console.log({ split, int, float, truncatedVal });
-
     return truncatedVal;
   }
 

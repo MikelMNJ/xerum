@@ -129,7 +129,7 @@ const Select = props => {
               </Optional>
             </LabelText>
 
-            <Spacer size={labelSpacing || 0.5} />
+            <Spacer size={labelSpacing ?? 0.5} />
           </LabelArea>
         )}
 

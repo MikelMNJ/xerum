@@ -21,6 +21,7 @@ const Field = props => {
     icon,
     iconColor,
     iconSize,
+    iconCallback,
     borderRadius,
     label,
     fontFamily,
@@ -73,7 +74,7 @@ const Field = props => {
               </Optional>
             </LabelText>
 
-            <Spacer size={labelSpacing || 0.5} />
+            <Spacer size={labelSpacing ?? 0.5} />
           </LabelArea>
         )}
 
@@ -111,6 +112,10 @@ const Field = props => {
           height={height}
           iconColor={iconColor || textColor}
           iconSize={iconSize}
+          iconCallback={iconCallback}
+          onClick={() => {
+            iconCallback?.();
+          }}
         >
           {iconValid(icon) ? <i className={icon} /> : icon }
         </Icon>

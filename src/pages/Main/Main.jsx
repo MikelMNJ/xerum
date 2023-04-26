@@ -1,7 +1,7 @@
 import { StyledMain, ContentArea } from './styles';
 import { appConstants } from 'modules';
 import { Formik, Form } from 'formik';
-import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle, Price } from 'components';
+import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle } from 'components';
 import { getColor } from 'helpers';
 import * as yup from 'yup';
 import _ from 'lodash';
@@ -120,6 +120,8 @@ const Main = props => {
                   borderRadius={0.25}
                   bottomBorder={true}
                   fontFamily='Inter-Medium'
+                  icon={`fa-solid fa-envelope`}
+                  iconCallback={() => console.log('Clicked icon!')}
                   inputBGColor={getColor(props, 'primary')}
                   {...rest}
                 />
@@ -148,8 +150,6 @@ const Main = props => {
               </Form>
             )}
         </Formik>
-
-        <Price value={123.7} {...rest} />
       </ContentArea>
     </StyledMain>
   );
