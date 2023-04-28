@@ -35,6 +35,7 @@ const Modal = props => {
     confirmButtonColor,
     confirmButtonTextColor,
     confirmButtonHoverColor,
+    confirmDisabled,
     cancelText,
     cancelButtonIcon,
     cancelButtonColor,
@@ -104,6 +105,7 @@ const Modal = props => {
               color={confirmButtonColor}
               hoverColor={confirmButtonHoverColor}
               textColor={confirmButtonTextColor}
+              disabled={confirmDisabled}
               pill={pill}
               round={round}
               callback={() => onConfirm?.()}
