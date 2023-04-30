@@ -17,7 +17,6 @@ export const StyledField = styled('div')`
 `;
 
 export const Label = styled('label')`
-  position: relative;
   font-size: ${props => props.labelSize || fontSize}rem;
   color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 `;

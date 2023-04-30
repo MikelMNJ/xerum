@@ -1,6 +1,6 @@
 {
   "name": "xerum",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "React component library.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -66,6 +66,7 @@
     "build:linux": "rm -rf dist && mkdir dist && babel src/package -d dist --copy-files",
     "push": "npm run build && npm publish",
     "preview": "vite preview",
+    "host": "vite --host",
     "lint": "eslint -c .eslintrc.cjs --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
     "test": "vitest",

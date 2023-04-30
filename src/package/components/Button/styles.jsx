@@ -79,6 +79,8 @@ export const StyledButton = styled('button')`
   cursor: pointer;
   transition: all 0.2s ease;
 
+  ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
+
   border-radius: ${props => {
     if (props.pill) return '3rem';
     if (props.round) return '0.5rem';

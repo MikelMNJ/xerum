@@ -13,6 +13,7 @@ const Button = forwardRef((props, ref) => {
     buttonType,
     icon,
     iconRight,
+    fontFamily,
     url,
     passthrough,
     callback,
@@ -56,6 +57,7 @@ const Button = forwardRef((props, ref) => {
       color={color}
       hoverColor={hoverColor}
       textColor={textColor}
+      fontFamily={fontFamily}
       round={round}
       pill={pill}
       {...rest}

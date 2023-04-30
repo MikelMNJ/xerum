@@ -17,7 +17,6 @@ export const StyledSelect = styled('div')`
 `;
 
 export const Label = styled('label')`
-  position: relative;
   font-size: ${props => props.labelSize || fontSize}rem;
   color: ${props => hexValid(props.labelColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 `;
@@ -96,7 +95,7 @@ export const Input = styled('input')`
 `;
 
 export const Icon = styled('div')`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: absolute;
