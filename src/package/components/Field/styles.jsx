@@ -29,6 +29,7 @@ export const LabelArea = styled('div')`
 export const LabelText = styled('div')`
   display: inline-flex;
   justify-content: ${props => props.label ? 'space-between' : 'flex-end'};
+  align-items: center;
   width: 100%;
   padding: 0 0.25rem;
 `;
