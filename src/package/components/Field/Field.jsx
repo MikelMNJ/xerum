@@ -42,6 +42,8 @@ const Field = props => {
     optionalTextSize,
     optionalTextColor,
     placeholderColor,
+    hideField,
+    privacy,
     ...rest
   } = props;
 
@@ -79,48 +81,52 @@ const Field = props => {
           </LabelArea>
         )}
 
-        <Input
-          theme={theme}
-          selectedTheme={selectedTheme}
-          name={name}
-          placeholder={placeholder || ''}
-          placeholderColor={placeholderColor}
-          value={inputValue || ''}
-          height={height}
-          fontFamily={fontFamily}
-          fontSize={fontSize}
-          bgColor={bgColor}
-          textColor={textColor}
-          borderRadius={borderRadius}
-          borderSize={borderSize}
-          borderColor={borderColor}
-          activeBorderColor={activeBorderColor}
-          activeBorderSize={activeBorderSize}
-          bottomBorder={bottomBorder}
-          icon={icon}
-          onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
-          onChange={e => {
-            const newValue = e.target.value;
+        {!hideField && (
+          <>
+            <Input
+              theme={theme}
+              selectedTheme={selectedTheme}
+              name={name}
+              placeholder={placeholder || ''}
+              placeholderColor={placeholderColor}
+              value={privacy ? 'Private' : inputValue || ''}
+              height={height}
+              fontFamily={fontFamily}
+              fontSize={fontSize}
+              bgColor={bgColor}
+              textColor={textColor}
+              borderRadius={borderRadius}
+              borderSize={borderSize}
+              borderColor={borderColor}
+              activeBorderColor={activeBorderColor}
+              activeBorderSize={activeBorderSize}
+              bottomBorder={bottomBorder}
+              icon={icon}
+              onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
+              onChange={e => {
+                const newValue = e.target.value;
 
-            if (form && name) form.setFieldValue(name, newValue);
-            setInputValue(newValue);
-          }}
-          {...rest}
-        />
+                if (form && name) form.setFieldValue(name, newValue);
+                setInputValue(newValue);
+              }}
+              {...rest}
+            />
 
-        <Icon
-          theme={theme}
-          selectedTheme={selectedTheme}
-          height={height}
-          iconColor={iconColor || textColor}
-          iconSize={iconSize}
-          iconCallback={iconCallback}
-          onClick={() => {
-            iconCallback?.();
-          }}
-        >
-          {iconValid(icon) ? <i className={icon} /> : icon }
-        </Icon>
+            <Icon
+              theme={theme}
+              selectedTheme={selectedTheme}
+              height={height}
+              iconColor={iconColor || textColor}
+              iconSize={iconSize}
+              iconCallback={iconCallback}
+              onClick={() => {
+                iconCallback?.();
+              }}
+            >
+              {iconValid(icon) ? <i className={icon} /> : icon }
+            </Icon>
+          </>
+        )}
       </Label>
     </StyledField>
   );

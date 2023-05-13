@@ -33,6 +33,6 @@ export const getLocalStorageSetting = key => {
 
 export const notificationExists = (state, payload, selector) => {
   const notifications = state.get(selector);
-  const exists = notifications?.find(notification => _.isEqual(notification, payload));
+  const exists = notifications?.find?.(notification => _.isEqual(notification, payload));
   return exists;
 };

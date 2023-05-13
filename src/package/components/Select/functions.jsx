@@ -24,10 +24,10 @@ const handleOptionChange = (e, args) => {
 };
 
 export const buildPlaceholder = args => {
-  const { loading, data, selectedOption, loadingText } = args;
+  const { loading, data, selectedOption, loadingText, noDataText } = args;
 
   if (loading && _.isEmpty(data)) return loadingText || 'Loading...';
-  if (!loading && _.isEmpty(data)) return 'No options available';
+  if (!loading && _.isEmpty(data)) return noDataText || 'No options available';
   return selectedOption?.label || 'Select an option...';
 };
 

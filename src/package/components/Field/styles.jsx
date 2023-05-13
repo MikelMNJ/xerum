@@ -64,7 +64,7 @@ export const Input = styled('input')`
 
   ${props => props.bottomBorder && css`
     border: none;
-    border-radius: 0;
+    border-radius: ${props => props.disabled ? props.borderRadius || '0.25rem' : 0};
     border-bottom: ${props => props.borderSize || borderSize}rem solid ${props => {
       const lightTheme = props.selectedTheme === light;
       const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);

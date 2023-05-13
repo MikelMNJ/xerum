@@ -1,25 +1,43 @@
 import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
-import { Button } from '../Button/Button';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const colors = theme.colors;
 const restPosition = 0;
+const fontSize = 1;
+const minWidth = 23;
 
 export const StyledSlideOver = styled('div')`
   position: fixed;
   top: 0;
   right: ${restPosition};
   z-index: 100;
-  height: 100%;
-  min-width: 23rem;
-  max-width: 23rem;
-  padding: 1rem 2rem;
+  height: ${props => props.height ? `${props.height}rem` : '100dvh'};
+  width: ${props => props.width ? `${props.width}rem` : '23rem'};
+  min-width: ${minWidth}rem;
+  max-width: ${props => props.width > minWidth ? props.width : minWidth}rem;
+  padding: 1rem 2rem 2rem;
   background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)};
   box-shadow: 0 0.25rem 0.25rem ${props => getColor(props, 'black', colors.shades.black) + 80};
   border-left: 0.0625rem solid ${props => getColor(props, 'lightGrey', colors.neutral.lightGrey) + 80};
   color: ${props => getColor(props, 'onPrimary', colors.shades.black)};
   overflow-y: auto;
+
+  ${props => props.topOffset && css`
+    margin-top: ${props.topOffset}rem;
+    height: calc(100dvh - ${props.topOffset}rem);
+  `}
+
+  ${props => props.bottomOffset && css`
+    margin-bottom: ${props.bottomOffset}rem;
+    height: calc(100dvh - ${props.bottomOffset}rem);
+  `}
+
+  ${props => props.topOffset && props.bottomOffset && css`
+    margin-top: ${props.topOffset}rem;
+    margin-bottom: ${props.bottomOffset}rem;
+    height: calc(100dvh - ${props.topOffset + props.bottomOffset}rem);
+  `}
 
   &.slideIn {
     animation: slideOverIn ease 0.35s;
@@ -51,7 +69,9 @@ export const StyledSlideOver = styled('div')`
 `;
 
 export const Header = styled('div')`
+  position: relative;
   display: inline-flex;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -69,22 +89,26 @@ export const H3 = styled('h3')`
   }
 `;
 
-export const CloseButton = styled(Button)`
+export const CloseIcon = styled('div')`
   display: flex;
   align-items: center;
-  height: auto;
-  width: fit-content;
-  border: inherit;
-  color: ${props => hexValid(props.closeColor) || getColor(props, 'onPrimary', colors.shades.black)};
-  font-size: 1.5rem;
-  background-color: inherit;
-  margin: 0;
-  padding: 0;
+  justify-content: center;
+  width: ${props => props.width || 3}rem;
+  height: ${props => props.height || 3}rem;
+  cursor: pointer;
   margin-right: -1rem;
+  color: ${props => {
+    const color = hexValid(props.closeColor) || getColor(props, 'onPrimary', colors.shades.black);
 
-  @media (hover: hover) {
-    &:hover {
-      color: ${props => hexValid(props.closeHoverColor) || getColor(props, 'accent', colors.neutral.greyWeb)};
-    }
+    if (props.disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
+    return color;
+  }};
+
+  &:hover {
+    color: ${props => hexValid(props.closeHoverColor) || getColor(props, 'accent', colors.neutral.greyWeb)};
+  }
+
+  i {
+    font-size: ${props => props.closeIconSize || fontSize}rem;
   }
 `;

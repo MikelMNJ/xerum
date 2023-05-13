@@ -38,6 +38,7 @@ const Select = props => {
     fontFamily,
     fontSize,
     loadingText,
+    noDataText,
     height,
     maxHeight,
     bgColor,
@@ -55,6 +56,7 @@ const Select = props => {
     optionalTextColor,
     top,
     placeholderColor,
+    privacy,
     callback,
     ...rest
   } = props;
@@ -94,7 +96,7 @@ const Select = props => {
 
   const optionArgs = { selectedOption, setSelectedOption, setOptionsMenuVisible, filteredData };
   const changeArgs = { options, setSearchValue, setFilteredData };
-  const placeholderArgs = { loading, data, loadingText, selectedOption };
+  const placeholderArgs = { loading, data, loadingText, selectedOption, noDataText };
   const updateFieldArgs = {
     setSelectedOption,
     callback,
@@ -141,7 +143,7 @@ const Select = props => {
           selectedTheme={selectedTheme}
           name={name}
           placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder(placeholderArgs)}
-          value={optionsMenuVisible ? searchValue : selectedOption?.label || ''}
+          value={privacy ? 'Private' : (optionsMenuVisible ? searchValue : selectedOption?.label || '')}
           height={height}
           fontFamily={fontFamily}
           fontSize={fontSize}

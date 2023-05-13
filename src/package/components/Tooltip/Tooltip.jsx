@@ -11,6 +11,8 @@ const Tooltip = props => {
     iconColor,
     textColor,
     bgColor,
+    borderSize,
+    borderColor,
     icon,
     text,
     position,
@@ -84,7 +86,9 @@ const Tooltip = props => {
           selectedTheme={selectedTheme}
           tipPosition={tipPosition}
           bgColor={bgColor}
-          color={textColor}
+          textColor={textColor}
+          borderSize={borderSize}
+          borderColor={borderColor}
         >
           {text || children || 'Missing tip text.'}
         </Tip>
@@ -96,7 +100,7 @@ const Tooltip = props => {
     <StyledTooltip
       theme={theme}
       selectedTheme={selectedTheme}
-      color={iconColor}
+      iconColor={iconColor}
       onMouseOut={() => setShowTip(false)}
       onMouseMove={updatePos}
       onMouseOver={e => {

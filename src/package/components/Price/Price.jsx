@@ -12,13 +12,15 @@ const Price = props => {
     limit,
     positiveColor,
     negativeColor,
+    privacy,
+    color,
     ...rest
   } = props;
 
   const getColor = () => {
     const positive = value >= 0;
-    const color = hexValid(negativeColor) && !positive && negativeColor;
 
+    if (hexValid(negativeColor) && !positive) return negativeColor;
     if (hexValid(positiveColor) && positive) return positiveColor;
     return color;
   };
@@ -27,7 +29,7 @@ const Price = props => {
     const val = isNaN(value) ? truncate(0, limit) : truncate(value, limit);
     const price = (
       <Fragment>
-        {symbol || '$'}{val} {currency}
+        {privacy ? '' : symbol || '$'}{privacy ? '***' : val} {currency}
       </Fragment>
     );
 

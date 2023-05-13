@@ -1,7 +1,7 @@
 import { StyledMain, ContentArea } from './styles';
 import { appConstants } from 'modules';
 import { Formik, Form } from 'formik';
-import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle } from 'components';
+import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle, Tooltip } from 'components';
 import { getColor } from 'helpers';
 import * as yup from 'yup';
 import _ from 'lodash';
@@ -152,6 +152,17 @@ const Main = props => {
               </Form>
             )}
         </Formik>
+
+        <Tooltip
+          position='right'
+          color={getColor(props, 'error')}
+          icon='fa-solid fa-circle-exclamation'
+          {...props}
+        >
+          <Font size={0.9}>
+            Test tooltip message.
+          </Font>
+        </Tooltip>
       </ContentArea>
     </StyledMain>
   );

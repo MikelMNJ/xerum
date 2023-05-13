@@ -36,6 +36,7 @@ const Modal = props => {
     confirmButtonTextColor,
     confirmButtonHoverColor,
     confirmDisabled,
+    blank,
     cancelText,
     cancelButtonIcon,
     cancelButtonColor,
@@ -92,7 +93,7 @@ const Modal = props => {
 
         {text ? <ConfirmText>{text}</ConfirmText> : children}
 
-        <ConfirmButtons visible={confirm}>
+        <ConfirmButtons visible={confirm && !blank}>
           <ButtonWrapper>
             <Spacer />
 
@@ -134,6 +135,8 @@ const Modal = props => {
             <Spacer />
           </ButtonWrapper>
         </ConfirmButtons>
+
+        {blank && <Spacer />}
       </StyledModal>
     </Fragment>
   );

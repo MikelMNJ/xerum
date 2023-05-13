@@ -1,6 +1,6 @@
 import React, { cloneElement, useRef, useEffect, useState } from 'react';
 import { iconValid } from '../../helpers';
-import { StyledSearch, Label, Input, SubmitButton } from './styles';
+import { StyledSearch, Label, Input, SubmitButton, Icon } from './styles';
 
 const Search = props => {
   const {
@@ -8,7 +8,6 @@ const Search = props => {
     selectedTheme,
     callback,
     placeholder,
-    inputIcon,
     noIcon,
     pill,
     round,
@@ -16,6 +15,9 @@ const Search = props => {
     noButton,
     strokeWidth,
     placeholderColor,
+    inputIcon,
+    inputIconHeight,
+    inputIconSize,
     inputTextColor,
     inputBGColor,
     inputIconColor,
@@ -61,7 +63,18 @@ const Search = props => {
     <StyledSearch {...rest}>
       <Label theme={theme} selectedTheme={selectedTheme} noButton={noButton} inputIconColor={inputIconColor}>
         {!noIcon && (
-          <i className={iconValid(inputIcon) || 'fa-solid fa-magnifying-glass'} />
+          <Icon
+            theme={theme}
+            selectedTheme={selectedTheme}
+            height={inputIconHeight}
+            inputIconColor={inputIconColor || inputTextColor}
+            inputIconSize={inputIconSize}
+          >
+            {iconValid(inputIcon)
+              ? <i className={inputIcon} />
+              : inputIcon || <i className='fa-solid fa-magnifying-glass' />
+            }
+          </Icon>
         )}
 
         <Input

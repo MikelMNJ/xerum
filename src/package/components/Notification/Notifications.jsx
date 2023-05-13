@@ -15,20 +15,20 @@ const Notifications = props => {
       const timer = setTimeout(() => {
         removeMessage(0);
         clearTimeout(timer);
-      }, time || 4000);
+      }, time || 5000);
 
       return () => clearTimeout(timer);
     }
   }, [ notifications, removeMessage, time, noTime ]);
 
   const buildNotifications = () => {
-    const refs = notifications?.map((msg, i) => (
+    const refs = notifications?.map?.((msg, i) => (
       targets.current[i] ?? createRef()
     ));
 
     targets.current = [ ...refs || [] ];
 
-    return notifications?.map((msg, i) => {
+    return notifications?.map?.((msg, i) => {
       return (
         <Message
           key={i}

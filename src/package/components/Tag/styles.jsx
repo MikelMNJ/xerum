@@ -61,5 +61,5 @@ export const Close = styled('div')`
 export const ChildWrapper = styled('div')`
   display: inline-flex;
   position: relative;
-  top: 0;
+  top: -0.05rem;
 `;
