@@ -45,6 +45,7 @@ const Modal = props => {
     useOverflow,
     pill,
     round,
+    privacy,
     ...rest
   } = props;
 
@@ -106,7 +107,7 @@ const Modal = props => {
               color={confirmButtonColor}
               hoverColor={confirmButtonHoverColor}
               textColor={confirmButtonTextColor}
-              disabled={confirmDisabled}
+              disabled={privacy || confirmDisabled}
               pill={pill}
               round={round}
               callback={() => onConfirm?.()}
