@@ -33,7 +33,7 @@ export const StyledModal = styled('div')`
   min-height: ${props => props.confirm ? 'fit-content' : '15rem'};
   width: max-content;
   height: max-content;
-  padding: 0.5rem 1.25rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.35rem;
   overflow-y: ${props => props.useOverflow === false ? 'unset' : 'auto'};
   color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', colors.shades.black)};
