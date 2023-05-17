@@ -61,7 +61,7 @@ const Select = props => {
     ...rest
   } = props;
 
-  const defaultValue = form?.values[name] && { value: _.toLower(form.values[name]), label: form.values[name] };
+  const defaultValue = form?.values[name] && data?.find(item => _.toLower(item.label) === _.toLower(form.values[name]));
   const [ selectedOption, setSelectedOption ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
   const [ searchValue, setSearchValue ] = useState('');
@@ -88,10 +88,8 @@ const Select = props => {
   }, [ optionsMenuVisible, searchValue, selectedOption, name ]);
 
   const options = useMemo(() => {
-    const allOptions = data?.map?.(item => ({ value: _.toLower(item), label: item }));
-
-    if (!selectedOption) setSelectedOption(allOptions?.[0]);
-    return allOptions;
+    if (!selectedOption) setSelectedOption(data?.[0]);
+    return data;
   }, [ data, selectedOption ]);
 
   const optionArgs = { selectedOption, setSelectedOption, setOptionsMenuVisible, filteredData };

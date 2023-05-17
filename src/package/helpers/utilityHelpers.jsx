@@ -51,3 +51,17 @@ export const addEvent = (name, func) => {
 export const removeEvent = (name, func) => {
   window.removeEventListener(name, e => func(e));
 };
+
+export const stringToArray = string => {
+  const prep = string.replace(/[\\W_,]/g, '');
+  const words = prep.split(' ');
+
+  return words;
+};
+
+export const lowercaseArray = arr => {
+  return arr.map(item => {
+    if (typeof item === 'string') return item.toLowerCase();
+    return item;
+  });
+};

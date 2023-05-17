@@ -13,7 +13,6 @@ const Search = props => {
     round,
     buttonText,
     noButton,
-    strokeWidth,
     placeholderColor,
     inputIcon,
     inputIconHeight,
@@ -85,7 +84,6 @@ const Search = props => {
           noIcon={noIcon}
           pill={pill}
           round={round}
-          strokeWidth={strokeWidth}
           borderColor={borderColor}
           borderRadius={borderRadius}
           borderSize={borderSize}
