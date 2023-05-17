@@ -68,9 +68,8 @@ export const Name = styled('div')`
   padding: 0.5rem 0;
   background-color: transparent;
   width: 100%;
-  font-weight: ${props => props.boldHeaders ? 600 : 'normal'};
   cursor: pointer;
-  transition: filter ease 0.2s;
+  transition: filter ease 0.5s;
   user-select: none;
   color: ${props => {
     if (props.activeTab) {
@@ -79,6 +78,10 @@ export const Name = styled('div')`
 
     return hexValid(props.inactiveTextColor) || getColor(props, 'white', colors.shades.white);
   }};
+
+  ${props => props.fontFamily && css`
+    font-family: ${props.fontFamily};
+  `};
 `;
 
 export const TabContent = styled('div')`

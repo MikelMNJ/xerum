@@ -10,7 +10,7 @@ const Tabs = props => {
     activeTextColor,
     inactiveColor,
     inactiveTextColor,
-    boldHeaders,
+    fontFamily,
     ...rest
   } = props;
 
@@ -58,7 +58,7 @@ const Tabs = props => {
               key={index}
               theme={theme}
               selectedTheme={selectedTheme}
-              boldHeaders={boldHeaders}
+              fontFamily={fontFamily}
               activeTab={activeTab === tab.name}
               inactiveTextColor={inactiveTextColor}
               activeTextColor={activeTextColor}
