@@ -1,34 +1,38 @@
 import { StyledMain, ContentArea } from './styles';
 import { appConstants } from 'modules';
 import { Formik, Form } from 'formik';
-import { Button, Checkbox, Field, FieldError, Font, Search, Select, Spacer, Toggle, Tooltip } from 'components';
+import { Button, Checkbox, Field, FieldError, Font, Select, Spacer, Toggle } from 'components';
 import { getColor } from 'helpers';
 import * as yup from 'yup';
 import _ from 'lodash';
 
 const { themes } = appConstants;
 const { light, dark } = themes;
+
 const defaults = {
-  email: '',
+  amount: '',
   categories: '',
-  sortOrder: '',
   checkbox: false,
   toggle: false,
 };
+
 const schema = yup.object().shape({
-  email: yup
+  amount: yup
   .string()
-  .email('Invalid email.')
   .required('Email is required.')
   .trim(),
   categories: yup.string().required('Categories is required.'),
-  sortOrder: yup.string().required('Sort order is required.'),
   checkbox: yup.boolean().oneOf([ true ], 'Checkbox is required.'),
   toggle: yup.boolean().oneOf([ true ], 'Toggle is required.'),
 });
 
-const categories = [ 'Business Clothing', 'Business Services', 'Business Supplies', 'Baby Supplies', 'Kids Clothing' ];
-const sortOrder = [ 'By due date', 'By fund progress', 'By name (ascending)', 'By name (descending)' ];
+const categories = [
+  { value: 1, label: 'Business Clothing' },
+  { value: 2, label: 'Business Services' },
+  { value: 3, label: 'Business Supplies' },
+  { value: 4, label: 'Baby Supplies' },
+  { value: 5, label: 'Kids Clothing' },
+];
 
 const Main = props => {
   const { setTheme, ...rest } = props;
@@ -67,19 +71,6 @@ const Main = props => {
           }}>
             {form => (
               <Form>
-                <Font weight='semibold'>
-                  <Search
-                    placeholder='Expense, auto-spend merchant or category...'
-                    noButton={true}
-                    borderRadius={0.5}
-                    inputBGColor={getColor(props, 'primary')}
-                    callback={_.noop}
-                    {...props}
-                  />
-                </Font>
-
-                <Spacer size={1.5} />
-
                 <Select
                   form={form}
                   name='categories'
@@ -97,38 +88,20 @@ const Main = props => {
 
                 <Spacer size={1.5} />
 
-                <Select
-                  form={form}
-                  name='sortOrder'
-                  data={sortOrder}
-                  iconSize={0.75}
-                  borderRadius={0.25}
-                  label='Sort order'
-                  fontFamily='Inter-Medium'
-                  callback={_.noop}
-                  {...rest}
-                />
-
-                <FieldError indent={0.25} name='sortOrder' {...rest} />
-
-                <Spacer size={1.5} />
-
                 <Field
                   form={form}
-                  label={<Font size={0.875} weight='semibold'>Email</Font>}
-                  name='email'
-                  type='email'
-                  placeholder='Your input here...'
+                  label={<Font size={0.875} weight='semibold'>Amount</Font>}
+                  name='amount'
+                  type='text'
+                  placeholder='Dollar signs and commas are okay'
                   borderRadius={0.25}
                   bottomBorder={true}
                   fontFamily='Inter-Medium'
-                  icon={`fa-solid fa-envelope`}
-                  iconCallback={() => console.log('Clicked icon!')}
                   inputBGColor={getColor(props, 'primary')}
                   {...rest}
                 />
 
-                <FieldError indent={0.25} name='email' {...rest} />
+                <FieldError indent={0.25} name='amount' {...rest} />
 
                 <Spacer />
 
@@ -152,17 +125,6 @@ const Main = props => {
               </Form>
             )}
         </Formik>
-
-        <Tooltip
-          position='right'
-          color={getColor(props, 'error')}
-          icon='fa-solid fa-circle-exclamation'
-          {...props}
-        >
-          <Font size={0.9}>
-            Test tooltip message.
-          </Font>
-        </Tooltip>
       </ContentArea>
     </StyledMain>
   );
