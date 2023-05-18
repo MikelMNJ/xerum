@@ -8,6 +8,7 @@ const appSelectors = {
   notifications: state => state.app[selectors.STATE_KEY_NOTIFICATIONS],
   modalContent: state => state.app[selectors.STATE_KEY_MODAL_CONTENT],
   confirmContent: state => state.app[selectors.STATE_KEY_CONFIRM_CONTENT],
+  expense: state => state.app[selectors.STATE_KEY_EXPENSE],
 };
 
 export { appSelectors };

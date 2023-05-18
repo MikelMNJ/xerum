@@ -11,6 +11,7 @@ const appConstants = {
     CLEAR_NOTIFICATIONS: 'modules/app/CLEAR_NOTIFICATIONS',
     SET_MODAL_CONTENT: 'modules/app/SET_MODAL_CONTENT',
     SET_CONFIRM_CONTENT: 'modules/app/SET_CONFIRM_CONTENT',
+    SET_EXPENSE: 'modules/app/SET_EXPENSE',
   },
 
   selectors: {
@@ -19,6 +20,7 @@ const appConstants = {
     STATE_KEY_NOTIFICATIONS: 'notifications',
     STATE_KEY_MODAL_CONTENT: 'modalContent',
     STATE_KEY_CONFIRM_CONTENT: 'confirmContent',
+    STATE_KEY_EXPENSE: 'expense',
   },
 
   themes: {
