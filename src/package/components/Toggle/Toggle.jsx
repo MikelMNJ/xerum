@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledToggle, Track, ToggleInput, FormikInput } from './styles';
+import _ from 'lodash';
 
 const Toggle = props => {
   const {
@@ -16,42 +17,46 @@ const Toggle = props => {
     ...rest
   } = props;
 
-  const defaultState = (name && form?.values[name]) || false;
-  const [ isChecked, setIsChecked ] = useState(defaultState);
+  const defaultValue = (name && form?.values[name]) || false;
+  const [ checked, setChecked ] = useState(defaultValue);
 
-  const handleChange = e => {
-    const newVal = e.currentTarget.checked;
-    callback?.(newVal);
-    setIsChecked(!isChecked);
-
-    if (form && name) {
-      form.setFieldValue(name, newVal);
+  useEffect(() => {
+    if (!_.isEqual(defaultValue, checked)) {
+      setChecked(defaultValue);
     }
+  }, [ defaultValue, checked ]);
+
+  const handleFieldStateUpdate = e => {
+    const newValue = e.currentTarget.checked;
+
+    if (form && name) form.setFieldValue(name, newValue);
+    callback?.(newValue);
+    setChecked(!checked);
   };
 
   return (
     <StyledToggle>
       {form && (
         <FormikInput
+          type='checkbox'
+          name={name}
           theme={theme}
           $selectedTheme={selectedTheme}
           form={form}
-          name={name}
-          type='checkbox'
-          checked={isChecked}
-          onChange={handleChange}
+          checked={checked}
+          onChange={handleFieldStateUpdate}
           {...rest}
         />
       )}
 
       {!form && (
         <ToggleInput
+          type='checkbox'
+          name={name}
           theme={theme}
           selectedTheme={selectedTheme}
-          name={name}
-          type='checkbox'
-          checked={isChecked}
-          onChange={handleChange}
+          checked={checked}
+          onChange={handleFieldStateUpdate}
           {...rest}
         />
       )}
@@ -59,7 +64,7 @@ const Toggle = props => {
       <Track
         theme={theme}
         selectedTheme={selectedTheme}
-        checked={isChecked}
+        checked={checked}
         activeColor={activeColor}
         inactiveColor={inactiveColor}
         iconColor={iconColor}

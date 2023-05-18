@@ -1,14 +1,16 @@
+/* eslint-disable */
 import React, { useState, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
   StyledField,
   Icon,
   Optional,
-  Input,
   Label,
   LabelArea,
   LabelText,
+  InputArea,
 } from './styles';
+import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 
 const Field = props => {
@@ -44,12 +46,21 @@ const Field = props => {
     placeholderColor,
     hideField,
     privacy,
+    callback,
     ...rest
   } = props;
 
   const defaultValue = form?.values[name] || '';
   const [ inputValue, setInputValue ] = useState(defaultValue);
   const labelAreaRef = useRef();
+
+  const handleFieldStateUpdate = e => {
+    const newValue = e.target.value;
+
+    if (form && name) form.setFieldValue(name, newValue);
+    callback?.(newValue);
+    setInputValue(newValue);
+  };
 
   return (
     <StyledField height={height} labelHeight={labelAreaRef.current?.offsetHeight || 0}>
@@ -82,35 +93,45 @@ const Field = props => {
         )}
 
         {!hideField && (
-          <>
-            <Input
-              theme={theme}
-              selectedTheme={selectedTheme}
-              name={name}
-              placeholder={placeholder || ''}
-              placeholderColor={placeholderColor}
-              value={privacy ? 'Private' : inputValue || ''}
-              height={height}
-              fontFamily={fontFamily}
-              fontSize={fontSize}
-              bgColor={bgColor}
-              textColor={textColor}
-              borderRadius={borderRadius}
-              borderSize={borderSize}
-              borderColor={borderColor}
-              activeBorderColor={activeBorderColor}
-              activeBorderSize={activeBorderSize}
-              bottomBorder={bottomBorder}
-              icon={icon}
-              onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
-              onChange={e => {
-                const newValue = e.target.value;
+          <InputArea
+            theme={theme}
+            selectedTheme={selectedTheme}
+            placeholderColor={placeholderColor}
+            height={height}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
+            bgColor={bgColor}
+            textColor={textColor}
+            borderRadius={borderRadius}
+            borderSize={borderSize}
+            borderColor={borderColor}
+            activeBorderColor={activeBorderColor}
+            activeBorderSize={activeBorderSize}
+            bottomBorder={bottomBorder}
+            icon={icon}
+            {...rest}
+          >
+            {form && (
+              <FormikField
+                type={privacy ? 'password' : 'text'}
+                name={name}
+                placeholder={placeholder || ''}
+                value={form?.values[name] || ''}
+                onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
+                onChange={handleFieldStateUpdate}
+              />
+            )}
 
-                if (form && name) form.setFieldValue(name, newValue);
-                setInputValue(newValue);
-              }}
-              {...rest}
-            />
+            {!form && (
+              <input
+                type={privacy ? 'password' : 'text'}
+                name={name}
+                placeholder={placeholder || ''}
+                value={inputValue}
+                onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
+                onChange={handleFieldStateUpdate}
+              />
+            )}
 
             <Icon
               theme={theme}
@@ -125,7 +146,7 @@ const Field = props => {
             >
               {iconValid(icon) ? <i className={icon} /> : icon }
             </Icon>
-          </>
+          </InputArea>
         )}
       </Label>
     </StyledField>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledLabel, Box, Check } from './styles';
-import { Field } from 'formik';
+import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
+import _ from 'lodash';
 
 const Checkbox = props => {
   const {
@@ -16,19 +17,25 @@ const Checkbox = props => {
     disabled,
     solidFill,
     form,
+    callback,
     ...rest
   } = props;
 
-  const defaultState = (name && form?.values[name]) || false;
+  const defaultValue = (name && form?.values[name]) || false;
+  const [ checked, setChecked ] = useState(defaultValue);
 
-  const [ checked, setChecked ] = useState(defaultState);
+  useEffect(() => {
+    if (!_.isEqual(defaultValue, checked)) {
+      setChecked(defaultValue);
+    }
+  }, [ defaultValue, checked ]);
 
   const handleFieldStateUpdate = e => {
-    setChecked(e.target.checked);
+    const newValue = e.target.checked;
 
-    if (form && name) {
-      form.setFieldValue(name, e.target.checked);
-    }
+    if (form && name) form.setFieldValue(name, newValue);
+    callback?.(newValue);
+    setChecked(newValue);
   };
 
   return (
@@ -51,18 +58,18 @@ const Checkbox = props => {
         />
       </Box>
 
-      {!form && (
-        <input
+      {form && (
+        <FormikField
           type='checkbox'
           name={name}
-          checked={checked}
+          checked={form?.values[name] || false}
           disabled={disabled}
           onChange={handleFieldStateUpdate}
         />
       )}
 
-      {form && (
-        <Field
+      {!form && (
+        <input
           type='checkbox'
           name={name}
           checked={checked}

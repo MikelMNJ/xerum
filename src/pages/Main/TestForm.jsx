@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { Button, Checkbox, FieldError, Field, Font, Select, Spacer, Toggle } from 'components';
@@ -30,10 +30,6 @@ const TestForm = withTheme(props => {
     categories: yup.string().required('Categories is required.'),
   });
 
-  useEffect(() => {
-    console.log(defaults);
-  }, [ defaults ]);
-
   const handleSubmit = args => {
     const { values, setSubmitting } = args;
     console.log(values);
@@ -44,7 +40,7 @@ const TestForm = withTheme(props => {
     <Formik
       initialValues={defaults}
       validationSchema={schema}
-      enableReinitialization={true}
+      enableReinitialize={true}
       onSubmit={(values, handlers) => {
         const { setSubmitting } = handlers;
         handleSubmit({ values, setSubmitting });

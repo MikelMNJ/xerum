@@ -39,89 +39,93 @@ export const Optional = styled('span')`
   color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey', neutral.lightGrey)};
 `;
 
-export const Input = styled('input')`
-  position: relative;
-  display: flex;
-  align-items: center;
-  appearance: none;
-  height: ${props => props.height || height}rem;
-  width: 100%;
-  font-size: ${props => props.fontSize || 1}rem;
-  border-radius: ${props => props.borderRadius || borderRadius}rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
+export const InputArea = styled('div')`
+  input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    appearance: none;
+    height: ${props => props.height || height}rem;
+    width: 100%;
+    font-size: ${props => props.fontSize || 1}rem;
+    border-radius: ${props => props.borderRadius || borderRadius}rem;
+    background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
+    color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 
-  ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
+    ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
 
-  ${props => !props.bottomBorder && css`
-    border: ${props => props.borderSize || borderSize}rem solid ${props => {
-      const lightTheme = props.selectedTheme === light;
-      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);
+    ${props => !props.bottomBorder && css`
+      border: ${props => props.borderSize || borderSize}rem solid ${props => {
+        const lightTheme = props.selectedTheme === light;
+        const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);
 
-      return lightTheme ? defaultColor : defaultColor + 50;
+        return lightTheme ? defaultColor : defaultColor + 50;
+      }};
+    `}
+
+    ${props => props.bottomBorder && css`
+      border: none;
+      border-radius: ${props => props.disabled ? props.borderRadius || '0.25rem' : 0};
+      border-bottom: ${props => props.borderSize || borderSize}rem solid ${props => {
+        const lightTheme = props.selectedTheme === light;
+        const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);
+
+        return lightTheme ? defaultColor : defaultColor + 50;
+      }};
+    `}
+
+    padding: ${props => {
+      if (props.icon) return `0.5rem ${(props.height || height) - 0.05}rem 0.5rem 1rem`;
+      return '0.5rem 1rem';
     }};
-  `}
 
-  ${props => props.bottomBorder && css`
-    border: none;
-    border-radius: ${props => props.disabled ? props.borderRadius || '0.25rem' : 0};
-    border-bottom: ${props => props.borderSize || borderSize}rem solid ${props => {
-      const lightTheme = props.selectedTheme === light;
-      const defaultColor = hexValid(props.borderColor) || getColor(props, 'lightGrey', neutral.lightGrey);
+    &:disabled {
+      cursor: not-allowed;
+      color: ${props => getColor(props, 'grey')};
+      border: none;
+      background-color: ${props => {
+        const lightTheme = props.selectedTheme === light;
+        return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', neutral.lightGrey);
+      }};
+    }
 
-      return lightTheme ? defaultColor : defaultColor + 50;
-    }};
-  `}
+    &::placeholder {
+      color: ${props => {
+        const lightTheme = props.selectedTheme === light;
+        const fallback = getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
 
-  padding: ${props => {
-    if (props.icon) return `0.5rem ${(props.height || height) - 0.05}rem 0.5rem 1rem`;
-    return '0.5rem 1rem';
-  }};
+        return hexValid(props.placeholderColor) || fallback;
+      }};
+    }
 
-  &:disabled {
-    cursor: not-allowed;
-    color: ${props => getColor(props, 'grey')};
-    border: none;
-    background-color: ${props => {
-      const lightTheme = props.selectedTheme === light;
-      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', neutral.lightGrey);
-    }};
-  }
+    &:focus {
+      inherits: all;
+      outline: none;
+      border-width: ${props => props.activeBorderSize || borderSize}rem;
+      border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent', accent.carolinaBlue)};
 
-  &::placeholder {
+    }
+  `;
+
+  export const Icon = styled('div')`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: ${borderSize}rem;
+    right: 0;
+    height: ${props => props.height || height}rem;
+    width: ${props => props.height || height}rem;
+    cursor: pointer;
     color: ${props => {
-      const lightTheme = props.selectedTheme === light;
-      return hexValid(props.placeholderColor) || getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
+      const color = hexValid(props.iconColor) || getColor(props, 'onPrimary', shades.black);
+
+      if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
+      return color;
     }};
+
+    ${props => !props.iconCallback && css`pointer-events: none;`}
   }
-
-  &:focus {
-    inherits: all;
-    outline: none;
-    border-width: ${props => props.activeBorderSize || borderSize}rem;
-    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent', accent.carolinaBlue)};
-
-  }
-`;
-
-export const Icon = styled('div')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: ${borderSize}rem;
-  right: 0;
-  height: ${props => props.height || height}rem;
-  width: ${props => props.height || height}rem;
-  cursor: pointer;
-  color: ${props => {
-    const color = hexValid(props.iconColor) || getColor(props, 'onPrimary', shades.black);
-
-    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
-    return color;
-  }};
-
-  ${props => !props.iconCallback && css`pointer-events: none;`}
 
   i {
     font-size: ${props => props.iconSize || fontSize}rem;
