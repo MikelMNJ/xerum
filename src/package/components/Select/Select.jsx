@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
@@ -6,7 +7,7 @@ import {
   StyledOptions,
   OptionsArea,
   Optional,
-  Input,
+  InputArea,
   Label,
   LabelArea,
   LabelText,
@@ -19,6 +20,7 @@ import {
   getOverflowState,
   buildOptions,
 } from './functions';
+import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 import _ from 'lodash';
 
@@ -57,11 +59,15 @@ const Select = props => {
     top,
     placeholderColor,
     privacy,
+    hideField,
     callback,
     ...rest
   } = props;
 
-  const defaultValue = form?.values[name] && data?.find(item => _.toLower(item.label) === _.toLower(form.values[name]));
+  const defaultValue = form?.values[name] && data?.find(item => (
+    _.toLower(item.value.toString()) === _.toLower(form.values[name].toString())
+  ));
+
   const [ selectedOption, setSelectedOption ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
   const [ searchValue, setSearchValue ] = useState('');
@@ -81,18 +87,20 @@ const Select = props => {
   }, [ optionsMenuVisible, setOptionsMenuVisible ]);
 
   useEffect(() => {
-    const updateFormStateArgs = { form, name, selectedOption, newValue: selectedOption?.value };
+    const updateFormStateArgs = { form, name, selectedOption };
     updateFormState(updateFormStateArgs);
     getOverflowState({ optionsRef, setHasOverflow });
     // eslint-disable-next-line
   }, [ optionsMenuVisible, searchValue, selectedOption, name ]);
 
   const options = useMemo(() => {
+    // Bug where preloading expense and opening drop down doesn't show expected expense is here...
     if (!selectedOption) setSelectedOption(data?.[0]);
+
     return data;
   }, [ data, selectedOption ]);
 
-  const optionArgs = { selectedOption, setSelectedOption, setOptionsMenuVisible, filteredData };
+  const optionArgs = { form, name, selectedOption, setSelectedOption, setOptionsMenuVisible, filteredData };
   const changeArgs = { options, setSearchValue, setFilteredData };
   const placeholderArgs = { loading, data, loadingText, selectedOption, noDataText };
   const updateFieldArgs = {
@@ -135,51 +143,79 @@ const Select = props => {
           </LabelArea>
         )}
 
-        <Input
-          ref={inputRef}
-          theme={theme}
-          selectedTheme={selectedTheme}
-          name={name}
-          placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder(placeholderArgs)}
-          value={privacy ? 'Private' : (optionsMenuVisible ? searchValue : selectedOption?.label || '')}
-          height={height}
-          fontFamily={fontFamily}
-          fontSize={fontSize}
-          bgColor={bgColor}
-          textColor={textColor}
-          menuVisible={optionsMenuVisible}
-          borderRadius={borderRadius}
-          borderSize={borderSize}
-          borderColor={borderColor}
-          activeBorderColor={activeBorderColor}
-          activeBorderSize={activeBorderSize}
-          icon={icon}
-          placeholderColor={placeholderColor}
-          readonly={!optionsMenuVisible}
-          onFocus={() => updateField(true, updateFieldArgs)}
-          onBlur={() => {
-            if (name && form) form.setTouched({ ...form.touched, [name]: true });
-            updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
-          }}
-          onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-          onClick={() => updateField(true, updateFieldArgs)}
-          onChange={e => handleChange(e, changeArgs)}
-          {...rest}
-        />
+        {!hideField && (
+          <InputArea
+            theme={theme}
+            selectedTheme={selectedTheme}
+            height={height}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
+            bgColor={bgColor}
+            textColor={textColor}
+            menuVisible={optionsMenuVisible}
+            borderRadius={borderRadius}
+            borderSize={borderSize}
+            borderColor={borderColor}
+            activeBorderColor={activeBorderColor}
+            activeBorderSize={activeBorderSize}
+            icon={icon}
+            placeholderColor={placeholderColor}
+          >
+            {form && (
+              <FormikField
+                innerRef={inputRef}
+                name={name}
+                placeholder={optionsMenuVisible ? defaultValue?.label : buildPlaceholder(placeholderArgs)}
+                type={privacy ? 'password' : 'text'}
+                value={(optionsMenuVisible ? searchValue : defaultValue?.label || '')}
+                readOnly={!optionsMenuVisible}
+                onFocus={() => updateField(true, updateFieldArgs)}
+                onBlur={() => {
+                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
+                  updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
+                }}
+                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
+                onClick={() => updateField(true, updateFieldArgs)}
+                onChange={e => handleChange(e, changeArgs)}
+                {...rest}
+              />
+            )}
 
-        <Icon
-          theme={theme}
-          selectedTheme={selectedTheme}
-          height={height}
-          iconColor={iconColor || textColor}
-          iconSize={iconSize}
-          menuVisible={optionsMenuVisible}
-        >
-          {iconValid(icon)
-            ? <i className={icon} />
-            : icon || <i className='fa-solid fa-chevron-down' />
-          }
-        </Icon>
+            {!form && (
+              <input
+                ref={inputRef}
+                name={name}
+                placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder(placeholderArgs)}
+                type={privacy ? 'password' : 'text'}
+                value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
+                readOnly={!optionsMenuVisible}
+                onFocus={() => updateField(true, updateFieldArgs)}
+                onBlur={() => {
+                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
+                  updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
+                }}
+                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
+                onClick={() => updateField(true, updateFieldArgs)}
+                onChange={e => handleChange(e, changeArgs)}
+                {...rest}
+              />
+            )}
+
+            <Icon
+              theme={theme}
+              selectedTheme={selectedTheme}
+              height={height}
+              iconColor={iconColor || textColor}
+              iconSize={iconSize}
+              menuVisible={optionsMenuVisible}
+            >
+              {iconValid(icon)
+                ? <i className={icon} />
+                : icon || <i className='fa-solid fa-chevron-down' />
+              }
+            </Icon>
+          </InputArea>
+        )}
       </Label>
 
       <OptionsArea

@@ -3,17 +3,19 @@ import { Option, NoResults } from './styles';
 import _ from 'lodash';
 
 export const updateFormState = args => {
-  const { form, name, newValue, selectedOption } = args;
+  const { form, name, selectedOption } = args;
+  const isDifferent = !_.isEqual(form?.values[name], selectedOption?.value);
 
-  if (form && name && !_.isEqual(form.values[name], selectedOption?.value)) {
+  if (form && name && isDifferent) {
+    const newValue = selectedOption?.value;
     form.setFieldValue(name, newValue);
   }
 };
 
 const handleOptionChange = (e, args) => {
-  const { option, callback, selectedOption, setSelectedOption, setOptionsMenuVisible } = args;
+  const { form, name, option, callback, selectedOption, setSelectedOption, setOptionsMenuVisible } = args;
   const newValue = _.toLower(e.target.innerHTML);
-  const different = !_.isEqual(selectedOption?.value, newValue);
+  const different = !_.isEqual(form ? form.values[name] : selectedOption?.value, newValue);
 
   if (different) {
     setSelectedOption(option);
@@ -95,6 +97,8 @@ export const buildOptions = (props, args) => {
     setSelectedOption,
     setOptionsMenuVisible,
     filteredData,
+    form,
+    name,
   } = args;
 
   if (_.isEmpty(filteredData)) {
@@ -108,7 +112,7 @@ export const buildOptions = (props, args) => {
   return filteredData?.map?.((option, index) => {
     const { value, label } = option;
     const active = _.isEqual(selectedOption, option);
-    const optionChangeArgs = { option, callback, selectedOption, setSelectedOption, setOptionsMenuVisible };
+    const optionChangeArgs = { form, name, option, callback, selectedOption, setSelectedOption, setOptionsMenuVisible };
 
     return (
       <Option

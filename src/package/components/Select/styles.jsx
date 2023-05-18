@@ -39,57 +39,59 @@ export const Optional = styled('span')`
   color: ${props => hexValid(props.optionalTextColor) || getColor(props, 'lightGrey', neutral.lightGrey)};
 `;
 
-export const Input = styled('input')`
-  position: relative;
-  display: flex;
-  align-items: center;
-  appearance: none;
-  height: ${props => props.height || height}rem;
-  width: 100%;
-  font-size: ${props => props.fontSize || 1}rem;
-  cursor: pointer;
-  border-radius: ${props => props.borderRadius || borderRadius}rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
+export const InputArea = styled('div')`
+  input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    appearance: none;
+    height: ${props => props.height || height}rem;
+    width: 100%;
+    font-size: ${props => props.fontSize || 1}rem;
+    cursor: pointer;
+    border-radius: ${props => props.borderRadius || borderRadius}rem;
+    background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', shades.white)};
+    color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};
 
-  ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
+    ${props => props.fontFamily && css`font-family: ${props.fontFamily};`}
 
-  border: ${props => props.borderSize || borderSize}rem solid ${props => {
-    const lightTheme = props.selectedTheme === light;
-    const defaultColor = hexValid(props.borderColor)
-      || getColor(props, props.menuVisible ? 'accent' : 'lightGrey', neutral.lightGrey);
-
-    return lightTheme ? defaultColor : defaultColor + 50;
-  }};
-
-  padding: ${props => {
-    if (props.icon) return `0.5rem ${(props.height || height) - 0.05}rem 0.5rem 1rem`;
-    return '0.5rem 1rem';
-  }};
-
-  &:disabled {
-    cursor: not-allowed;
-    color: ${props => getColor(props, 'grey', neutral.grey)};
-    border: none;
-    background-color: ${props => {
+    border: ${props => props.borderSize || borderSize}rem solid ${props => {
       const lightTheme = props.selectedTheme === light;
-      return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', neutral.lightGrey);
+      const defaultColor = hexValid(props.borderColor)
+        || getColor(props, props.menuVisible ? 'accent' : 'lightGrey', neutral.lightGrey);
+
+      return lightTheme ? defaultColor : defaultColor + 50;
     }};
-  }
 
-  &:focus {
-    inherits: all;
-    outline: none;
-    cursor: default;
-    border-width: ${props => props.activeBorderSize || borderSize}rem;
-    border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent', accent.brightNavyBlue)};
+    padding: ${props => {
+      if (props.icon) return `0.5rem ${(props.height || height) - 0.05}rem 0.5rem 1rem`;
+      return '0.5rem 1rem';
+    }};
 
-    &::placeholder {
-      color: ${props => {
+    &:disabled {
+      cursor: not-allowed;
+      color: ${props => getColor(props, 'grey', neutral.grey)};
+      border: none;
+      background-color: ${props => {
         const lightTheme = props.selectedTheme === light;
-        return hexValid(props.placeholderColor)
-          || getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
+        return getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', neutral.lightGrey);
       }};
+    }
+
+    &:focus {
+      inherits: all;
+      outline: none;
+      cursor: default;
+      border-width: ${props => props.activeBorderSize || borderSize}rem;
+      border-color: ${props => hexValid(props.activeBorderColor) || getColor(props, 'accent', accent.brightNavyBlue)};
+
+      &::placeholder {
+        color: ${props => {
+          const lightTheme = props.selectedTheme === light;
+          return hexValid(props.placeholderColor)
+            || getColor(props, lightTheme ? 'lightGrey' : 'grey', neutral.lightGrey);
+        }};
+      }
     }
   }
 `;

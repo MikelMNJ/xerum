@@ -8,7 +8,7 @@ import { TestForm, categories } from './TestForm';
 const { themes } = appConstants;
 const { light, dark } = themes;
 
-const expenses = [
+export const expenses = [
   { category: categories[3], amount: 100, checked: true, toggled: true },
   { category: categories[4], amount: 200, checked: false, toggled: true },
 ];

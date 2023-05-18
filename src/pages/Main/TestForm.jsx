@@ -7,11 +7,12 @@ import * as yup from 'yup';
 import _ from 'lodash';
 
 export const categories = [
-  { value: 0, label: 'Business Clothing' },
-  { value: 1, label: 'Business Services' },
-  { value: 2, label: 'Business Supplies' },
-  { value: 3, label: 'Baby Supplies' },
-  { value: 4, label: 'Kids Clothing' },
+  // TODO: Change this to 0-base indexing and fix bug where first option is not registering correctly.
+  { value: 1, label: 'Business Clothing' },
+  { value: 2, label: 'Business Services' },
+  { value: 3, label: 'Business Supplies' },
+  { value: 4, label: 'Baby Supplies' },
+  { value: 5, label: 'Kids Clothing' },
 ];
 
 const TestForm = withTheme(props => {
