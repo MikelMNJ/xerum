@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
@@ -7,19 +6,13 @@ import {
   StyledOptions,
   OptionsArea,
   Optional,
+  Option,
+  NoResults,
   InputArea,
   Label,
   LabelArea,
   LabelText,
 } from './styles';
-import {
-  updateFormState,
-  buildPlaceholder,
-  updateField,
-  handleChange,
-  getOverflowState,
-  buildOptions,
-} from './functions';
 import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 import _ from 'lodash';
@@ -56,16 +49,21 @@ const Select = props => {
     optionalText,
     optionalTextSize,
     optionalTextColor,
+    optionTextColor,
+    activeOptionTextColor,
+    optionBgHoverColor,
+    activeOptionBgColor,
+    activeOptionBgHoverColor,
+    noResultsText,
     top,
     placeholderColor,
     privacy,
     hideField,
     callback,
-    ...rest
   } = props;
 
   const defaultValue = form?.values[name] && data?.find(item => (
-    _.toLower(item.value.toString()) === _.toLower(form.values[name].toString())
+    _.toLower(item.value?.toString()) === _.toLower(form.values[name].toString())
   ));
 
   const [ selectedOption, setSelectedOption ] = useState(defaultValue);
@@ -80,37 +78,120 @@ const Select = props => {
 
   useEffect(() => {
     if (optionsMenuVisible) {
-      const handleOutsideClick = e => !inputRef.current?.contains(e.target) && setOptionsMenuVisible(false);
+      const handleEscape = e => e.key === 'Escape' && setOptionsMenuVisible(false);
+      const handleOutsideClick = e => {
+        if (!inputRef.current?.contains(e.target)) {
+          setOptionsMenuVisible(false);
+        }
+      };
+
       document.addEventListener('click', handleOutsideClick);
-      return () => document.removeEventListener('click', handleOutsideClick);
+      document.addEventListener('keydown', handleEscape);
+
+      return () => {
+        document.removeEventListener('click', handleOutsideClick);
+        document.removeEventListener('keydown', handleEscape);
+      };
     }
   }, [ optionsMenuVisible, setOptionsMenuVisible ]);
 
   useEffect(() => {
-    const updateFormStateArgs = { form, name, selectedOption };
-    updateFormState(updateFormStateArgs);
-    getOverflowState({ optionsRef, setHasOverflow });
-    // eslint-disable-next-line
-  }, [ optionsMenuVisible, searchValue, selectedOption, name ]);
+    const firstOption = data?.[0];
+    const isDifferent = !_.isEqual(selectedOption, firstOption);
 
-  const options = useMemo(() => {
-    // Bug where preloading expense and opening drop down doesn't show expected expense is here...
-    if (!selectedOption) setSelectedOption(data?.[0]);
+    if (!selectedOption && isDifferent) {
+      setSelectedOption(firstOption);
+      form?.setFieldValue(name, firstOption?.value);
+    }
 
-    return data;
-  }, [ data, selectedOption ]);
+    getOverflowState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ optionsMenuVisible, searchValue, name ]);
 
-  const optionArgs = { form, name, selectedOption, setSelectedOption, setOptionsMenuVisible, filteredData };
-  const changeArgs = { options, setSearchValue, setFilteredData };
-  const placeholderArgs = { loading, data, loadingText, selectedOption, noDataText };
-  const updateFieldArgs = {
-    setSelectedOption,
-    callback,
-    setOptionsMenuVisible,
-    setFilteredData,
-    setSearchValue,
-    inputRef,
-    options,
+  const options = useMemo(() => data, [ data ]);
+
+  const getOverflowState = () => {
+    if (optionsRef.current) {
+      const { clientHeight, scrollHeight } = optionsRef.current;
+      const overflow = scrollHeight > clientHeight;
+
+      setHasOverflow(overflow);
+    }
+  };
+
+  const handleSearchChange = e => {
+    const newValue = e.target.value;
+    const match = option => _.includes(_.toLower(option.label), _.toLower(newValue));
+
+    setSearchValue(newValue);
+    setFilteredData(options?.filter(option => match(option)));
+  };
+
+  const handleOptionChange = (e, option) => {
+    const different = !_.isEqual(selectedOption, option);
+
+    if (different) {
+      setSelectedOption(option);
+      form?.setFieldValue(name, option?.value);
+      callback?.(option?.value);
+    }
+
+    setOptionsMenuVisible(false);
+  };
+
+  const updateField = onlyResult => {
+    if (onlyResult) {
+      setSelectedOption(onlyResult);
+      form?.setFieldValue(name, onlyResult.value);
+      callback?.(onlyResult?.value);
+    }
+
+    setSearchValue('');
+    setFilteredData(options);
+    setOptionsMenuVisible(false);
+  };
+
+  const buildOptions = () => {
+    if (_.isEmpty(filteredData)) {
+      return (
+        <NoResults>
+          {noResultsText || 'No results found'}
+        </NoResults>
+      );
+    }
+
+    return filteredData?.map?.((option, index) => {
+      const { value, label } = option;
+      const active = _.isEqual(selectedOption, option);
+
+      return (
+        <Option
+          key={index}
+          theme={theme}
+          selectedTheme={selectedTheme}
+          value={value}
+          height={height}
+          borderRadius={borderRadius}
+          optionTextColor={optionTextColor}
+          activeOptionTextColor={activeOptionTextColor}
+          bgColor={bgColor}
+          optionBgHoverColor={optionBgHoverColor}
+          activeOptionBgColor={activeOptionBgColor}
+          activeOptionBgHoverColor={activeOptionBgHoverColor}
+          active={active}
+          fontFamily={fontFamily}
+          onClick={e => handleOptionChange(e, option)}
+        >
+          {label}
+        </Option>
+      );
+    });
+  };
+
+  const buildPlaceholder = () => {
+    if (loading && _.isEmpty(data)) return loadingText || 'Loading...';
+    if (!loading && _.isEmpty(data)) return noDataText || 'No options available';
+    return selectedOption?.label || 'Select an option...';
   };
 
   return (
@@ -165,19 +246,19 @@ const Select = props => {
               <FormikField
                 innerRef={inputRef}
                 name={name}
-                placeholder={optionsMenuVisible ? defaultValue?.label : buildPlaceholder(placeholderArgs)}
+                placeholder={optionsMenuVisible ? defaultValue?.label : buildPlaceholder()}
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : defaultValue?.label || '')}
                 readOnly={!optionsMenuVisible}
-                onFocus={() => updateField(true, updateFieldArgs)}
-                onBlur={() => {
-                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
-                  updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
-                }}
+                onFocus={() => inputRef.current?.click()}
                 onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-                onClick={() => updateField(true, updateFieldArgs)}
-                onChange={e => handleChange(e, changeArgs)}
-                {...rest}
+                onClick={() => setOptionsMenuVisible(true)}
+                onChange={handleSearchChange}
+                onBlur={() => {
+                  const onlyResult = filteredData?.length === 1 && filteredData[0];
+                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
+                  updateField(onlyResult);
+                }}
               />
             )}
 
@@ -185,19 +266,18 @@ const Select = props => {
               <input
                 ref={inputRef}
                 name={name}
-                placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder(placeholderArgs)}
+                placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder()}
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
                 readOnly={!optionsMenuVisible}
-                onFocus={() => updateField(true, updateFieldArgs)}
-                onBlur={() => {
-                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
-                  updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
-                }}
+                onFocus={() => inputRef.current?.click()}
                 onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-                onClick={() => updateField(true, updateFieldArgs)}
-                onChange={e => handleChange(e, changeArgs)}
-                {...rest}
+                onClick={() => setOptionsMenuVisible(true)}
+                onChange={handleSearchChange}
+                onBlur={() => {
+                  const onlyResult = filteredData?.length === 1 && filteredData[0];
+                  updateField(onlyResult);
+                }}
               />
             )}
 
@@ -231,7 +311,6 @@ const Select = props => {
         borderRadius={borderRadius}
         borderSize={borderSize}
         borderColor={borderColor}
-        onClick={() => updateField(false, updateFieldArgs)}
         onMouseDown={e => e.preventDefault()}
       >
         <StyledOptions
@@ -241,7 +320,7 @@ const Select = props => {
           maxHeight={maxHeight}
           hasOverflow={hasOverflow}
         >
-          {buildOptions(props, optionArgs)}
+          {buildOptions()}
         </StyledOptions>
       </OptionsArea>
     </StyledSelect>

@@ -59,6 +59,7 @@ const TestForm = withTheme(props => {
               fontFamily='Inter-Medium'
               label='Categories'
               loadingText='Loading categories...'
+              noResultsText={<Font weight='semibold'>No results found</Font>}
               callback={_.noop}
             />
 
