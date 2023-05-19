@@ -102,9 +102,12 @@ const Select = props => {
 
   useEffect(() => {
     const firstOption = data?.[0];
-    const isDifferent = !_.isEqual(selectedOption, firstOption);
+    const different = !_.isEqual(form ? defaultValue : selectedOption, form ? selectedOption : firstOption);
 
-    if (!selectedOption && isDifferent) {
+    if (!selectedOption && different) setSelectedOption(firstOption);
+    if (form && different) setSelectedOption(defaultValue);
+
+    if (form && !selectedOption) {
       setSelectedOption(firstOption);
       form?.setFieldValue(name, _.toString(firstOption?.value));
     }
@@ -271,7 +274,7 @@ const Select = props => {
               <input
                 ref={inputRef}
                 name={name}
-                placeholder={privacy ? 'Private' : (optionsMenuVisible ? selectedOption?.label : buildPlaceholder())}
+                placeholder={privacy ? 'Private' : buildPlaceholder()}
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
                 readOnly={!optionsMenuVisible}

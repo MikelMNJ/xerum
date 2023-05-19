@@ -20,7 +20,7 @@ const TestForm = withTheme(props => {
   const primary = theme.modes[selectedTheme].primary;
 
   const defaults = useMemo(() => ({
-    categories: expense?.category?.value || '',
+    categories: _.toString(expense?.category?.value) || '',
     amount: expense?.amount || '',
     checkbox: expense?.checked || false,
     toggle: expense?.toggled || false,
