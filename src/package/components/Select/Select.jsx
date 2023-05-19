@@ -62,9 +62,13 @@ const Select = props => {
     callback,
   } = props;
 
-  const defaultValue = form?.values[name] && data?.find(item => (
-    _.toLower(item.value?.toString()) === _.toLower(form.values[name].toString())
-  ));
+  const defaultValue = _.toString(form?.values[name]) && data?.find(item => {
+    const thisItem = _.toLower(_.toString(item.value));
+    const fieldValue = _.toLower(_.toString(form.values[name]));
+    const match = thisItem === fieldValue;
+
+    if (match) return item;
+  });
 
   const [ selectedOption, setSelectedOption ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
@@ -101,7 +105,7 @@ const Select = props => {
 
     if (!selectedOption && isDifferent) {
       setSelectedOption(firstOption);
-      form?.setFieldValue(name, firstOption?.value);
+      form?.setFieldValue(name, _.toString(firstOption?.value));
     }
 
     getOverflowState();
@@ -120,7 +124,7 @@ const Select = props => {
   };
 
   const handleSearchChange = e => {
-    const newValue = e.target.value;
+    const newValue = _.toString(e.target.value);
     const match = option => _.includes(_.toLower(option.label), _.toLower(newValue));
 
     setSearchValue(newValue);
@@ -132,8 +136,8 @@ const Select = props => {
 
     if (different) {
       setSelectedOption(option);
-      form?.setFieldValue(name, option?.value);
-      callback?.(option?.value);
+      form?.setFieldValue(name, _.toString(option?.value));
+      callback?.(_.toString(option?.value));
     }
 
     setOptionsMenuVisible(false);
@@ -142,8 +146,8 @@ const Select = props => {
   const updateField = onlyResult => {
     if (onlyResult) {
       setSelectedOption(onlyResult);
-      form?.setFieldValue(name, onlyResult.value);
-      callback?.(onlyResult?.value);
+      form?.setFieldValue(name, _.toString(onlyResult.value));
+      callback?.(_.toString(onlyResult?.value));
     }
 
     setSearchValue('');
@@ -169,7 +173,7 @@ const Select = props => {
           key={index}
           theme={theme}
           selectedTheme={selectedTheme}
-          value={value}
+          value={_.toString(value)}
           height={height}
           borderRadius={borderRadius}
           optionTextColor={optionTextColor}
