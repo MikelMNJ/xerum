@@ -13,6 +13,7 @@ import {
   LabelArea,
   LabelText,
 } from './styles';
+import { PrivacyMask } from '../PrivacyMask/PrivacyMask';
 import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 import _ from 'lodash';
@@ -186,7 +187,7 @@ const Select = props => {
           fontFamily={fontFamily}
           onClick={e => handleOptionChange(e, option)}
         >
-          {label}
+          {privacy ? <PrivacyMask length={label.length} /> : label}
         </Option>
       );
     });
@@ -250,7 +251,7 @@ const Select = props => {
               <FormikField
                 innerRef={inputRef}
                 name={name}
-                placeholder={optionsMenuVisible ? defaultValue?.label : buildPlaceholder()}
+                placeholder={privacy ? 'Private' : (optionsMenuVisible ? defaultValue?.label : buildPlaceholder())}
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : defaultValue?.label || '')}
                 readOnly={!optionsMenuVisible}
@@ -270,7 +271,7 @@ const Select = props => {
               <input
                 ref={inputRef}
                 name={name}
-                placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder()}
+                placeholder={privacy ? 'Private' : (optionsMenuVisible ? selectedOption?.label : buildPlaceholder())}
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
                 readOnly={!optionsMenuVisible}

@@ -32,3 +32,4 @@ export * from './components/Search/Search';
 export * from './components/Accordion/Accordion';
 export * from './components/Select/Select';
 export * from './components/Filter/Filter';
+export * from './components/PrivacyMask/PrivacyMask';
