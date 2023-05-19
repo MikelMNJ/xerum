@@ -19,6 +19,7 @@ const Field = props => {
     selectedTheme,
     form,
     name,
+    type,
     placeholder,
     icon,
     iconColor,
@@ -113,7 +114,7 @@ const Field = props => {
           >
             {form && (
               <FormikField
-                type={privacy ? 'password' : 'text'}
+                type={privacy ? 'password' : type || 'text'}
                 name={name}
                 placeholder={placeholder || ''}
                 value={form?.values[name] || ''}
@@ -124,7 +125,7 @@ const Field = props => {
 
             {!form && (
               <input
-                type={privacy ? 'password' : 'text'}
+                type={privacy ? 'password' : type || 'text'}
                 name={name}
                 placeholder={placeholder || ''}
                 value={inputValue}
