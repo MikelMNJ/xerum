@@ -2,7 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import { StyledDropdown } from './styles';
 
 const Dropdown = props => {
-  const { theme, selectedTheme, visible, setVisible, children } = props;
+  const {
+    theme,
+    selectedTheme,
+    visible,
+    setVisible,
+    width,
+    posX,
+    posY,
+    zIndex,
+    borderSize,
+    borderRadius,
+    borderColor,
+    horizontalPadding,
+    verticalPadding,
+    padding,
+    bgColor,
+    color,
+    shadowColor,
+    children,
+  } = props;
   const [ readyToClose, setReadyToClose ] = useState(false);
   const dropdownRef = useRef();
 
@@ -30,6 +49,19 @@ const Dropdown = props => {
       theme={theme}
       selectedTheme={selectedTheme}
       visible={visible}
+      width={width}
+      posX={posX}
+      posY={posY}
+      zIndex={zIndex}
+      borderSize={borderSize}
+      borderRadius={borderRadius}
+      borderColor={borderColor}
+      padding={padding}
+      horizontalPadding={horizontalPadding}
+      verticalPadding={verticalPadding}
+      bgColor={bgColor}
+      color={color}
+      shadowColor={shadowColor}
     >
       {children}
     </StyledDropdown>
