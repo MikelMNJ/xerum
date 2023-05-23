@@ -20,6 +20,8 @@ const Dropdown = props => {
     bgColor,
     color,
     shadowColor,
+    minHeight,
+    maxHeight,
     children,
   } = props;
   const [ readyToClose, setReadyToClose ] = useState(false);
@@ -62,6 +64,8 @@ const Dropdown = props => {
       bgColor={bgColor}
       color={color}
       shadowColor={shadowColor}
+      minHeight={minHeight}
+      maxHeight={maxHeight}
     >
       {children}
     </StyledDropdown>

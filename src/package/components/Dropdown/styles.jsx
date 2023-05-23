@@ -1,7 +1,7 @@
 import { getColor, hexValid } from '../../helpers';
 import { appConstants } from '../../theme/appConstants';
 import { theme } from '../../theme/theme';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const { light } = appConstants.themes;
 const { colors } = theme;
@@ -11,7 +11,7 @@ export const StyledDropdown = styled('div')`
   z-index: ${props => props.zIndex || 2};
   display: ${props => props.visible ? 'flex' : 'none'};
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   position: absolute;
   width: ${props => props.width || 14}rem;
   top: ${props => props.posY || 2}rem;
@@ -34,4 +34,7 @@ export const StyledDropdown = styled('div')`
     const lightTheme = props.selectedTheme === light;
     return hexValid(props.shadowColor) || getColor(props, lightTheme ? 'lightGrey' : 'black', colors.shades.lightGrey);
   }};
+
+  ${props => props.minHeight && css`min-height: ${props.minHeight}rem;`}
+  ${props => props.maxHeight && css`max-height: ${props.maxHeight}rem;`}
 `;
