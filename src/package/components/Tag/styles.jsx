@@ -7,20 +7,20 @@ const colors = theme.colors;
 export const StyledTag = styled('div')`
   display: inline-flex;
   align-items: center;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'accent', colors.shades.black)};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'white', colors.shades.white)};
-  font-size: ${props => props.textSize || 0.875}rem;
+  background-color: ${props => hexValid(props.$bgColor) || getColor(props, 'accent', colors.shades.black)};
+  color: ${props => hexValid(props.$textColor) || getColor(props, 'white', colors.shades.white)};
+  font-size: ${props => props.$textSize || 0.875}rem;
   user-select: none;
   width: auto;
-  cursor: ${props => props.allClick ? 'pointer' : 'default'};
+  cursor: ${props => props.$allClick ? 'pointer' : 'default'};
   padding: ${props => {
-    const vertical = props.verticalPadding || 0.5;
-    const horizontal = props.horizontalPadding || 1;
-    const iconLeft = props.iconLeft;
+    const vertical = props.$verticalPadding || 0.5;
+    const horizontal = props.$horizontalPadding || 1;
+    const iconLeft = props.$iconLeft;
     const rightVal = !iconLeft ? horizontal / 2 : horizontal;
     const leftVal = !iconLeft ? horizontal : horizontal / 2;
 
-    if (!props.removable) {
+    if (!props.$removable) {
       return `${vertical}rem ${horizontal}rem`;
     }
 
@@ -28,14 +28,14 @@ export const StyledTag = styled('div')`
   }};
 
   border: ${props => {
-    if (!props.borderSize) return 'none';
-    return `${props.borderSize}rem solid ${props.borderColor || getColor(props, 'onPrimary', colors.shades.black)}`;
+    if (!props.$borderSize) return 'none';
+    return `${props.$borderSize}rem solid ${props.$borderColor || getColor(props, 'onPrimary', colors.shades.black)}`;
   }};
 
   border-radius: ${props => {
-    if (props.borderRadius) return `${props.borderRadius}rem`;
-    if (props.pill) return '3rem';
-    if (props.round) return '0.5rem';
+    if (props.$borderRadius) return `${props.$borderRadius}rem`;
+    if (props.$pill) return '3rem';
+    if (props.$round) return '0.5rem';
     return '0.25rem';
   }};
 
@@ -52,8 +52,8 @@ export const Close = styled('div')`
     align-items: center;
     height: 100%;
     margin-top: -0.0625rem;
-    font-size: ${props => props.closeSize || 1}rem;
-    color: ${props => hexValid(props.closeColor) || getColor(props, 'white', colors.shades.white)};
+    font-size: ${props => props.$closeSize || 1}rem;
+    color: ${props => hexValid(props.$closeColor) || getColor(props, 'white', colors.shades.white)};
     cursor: pointer;
   }
 `;

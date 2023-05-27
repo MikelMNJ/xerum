@@ -23,35 +23,35 @@ export const Title = styled('div')`
   cursor: pointer;
   user-select: none;
   border-bottom: 0.0625rem solid ${props => {
-    const lightTheme = props.selectedTheme === 'light';
+    const lightTheme = props.$selectedTheme === 'light';
     const color = getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', colors.neutral.lightGrey);
-    return hexValid(props.borderColor) || color;
+    return hexValid(props.$borderColor) || color;
   }};
 
   @media (hover: hover) {
     &:hover {
-      color: ${props => hexValid(props.hoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+      color: ${props => hexValid(props.$hoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
       background-color: ${props => {
-        const lightTheme = props.selectedTheme === 'light';
+        const lightTheme = props.$selectedTheme === 'light';
         const color = getColor(props, lightTheme ? 'lightGrey' : 'darkGrey', colors.neutral.lightGrey);
 
-        if (hexValid(props.hoverColor)) return props.hoverColor;
-        if (_.isEmpty(props.theme)) return color + 50;
+        if (hexValid(props.$hoverColor)) return props.$hoverColor;
+        if (_.isEmpty(props.$theme)) return color + 50;
         return lightTheme ? color + 35 : color;
       }};
     }
   }
 
-  ${props => props.active && css`
-    color: ${props => hexValid(props.activeTextColor) || getColor(props, 'onAccent', colors.shades.white)};
-    background-color: ${props => hexValid(props.activeBGColor) || getColor(props, 'accent', colors.shades.black)};
+  ${props => props.$active && css`
+    color: ${props => hexValid(props.$activeTextColor) || getColor(props, 'onAccent', colors.shades.white)};
+    background-color: ${props => hexValid(props.$activeBGColor) || getColor(props, 'accent', colors.shades.black)};
     border: none;
 
     @media (hover: hover) {
       &:hover {
-        color: ${props => hexValid(props.activeHoverTextColor) || getColor(props, 'primary', colors.shades.white)};
+        color: ${props => hexValid(props.$activeHoverTextColor) || getColor(props, 'primary', colors.shades.white)};
         background-color: ${props => {
-          if (hexValid(props.activeHoverBGColor)) return props.activeHoverBGColor;
+          if (hexValid(props.$activeHoverBGColor)) return props.$activeHoverBGColor;
           return getColor(props, 'accentHover', colors.neutral.davysGrey);
         }};
       }
@@ -59,11 +59,11 @@ export const Title = styled('div')`
   `}
 
   i {
-    font-size: ${props => props.iconSize || 0.75}rem;
+    font-size: ${props => props.$iconSize || 0.75}rem;
   }
 `;
 
 export const Content = styled('div')`
-  display: ${props => props.active ? 'flex' : 'none'};
+  display: ${props => props.$active ? 'flex' : 'none'};
   padding: 1rem 2rem;
 `;

@@ -15,7 +15,7 @@ export const expenses = [
 
 const Main = props => {
   const { theme, selectedTheme, setTheme } = props;
-  const lightTheme = props.selectedTheme === 'light';
+  const lightTheme = props.$selectedTheme === 'light';
   const dispatch = useDispatch();
   const setExpense = useCallback(payload => dispatch(appActions.setExpense(payload)), [ dispatch ]);
 

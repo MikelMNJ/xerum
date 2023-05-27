@@ -29,32 +29,32 @@ export const StyledNotification = styled('div')`
   height: fit-content;
   min-height: 4.5rem;
   border-radius: 0.35rem;
-  ${props => hexValid(props.textColor) && css`color: ${props.textColor};`}
+  ${props => hexValid(props.$textColor) && css`color: ${props.$textColor};`}
   border-left: 0.5rem solid ${props => (
-    hexValid(props.borderColor) || getColor(props, 'accent', colors.shades.black)
+    hexValid(props.$borderColor) || getColor(props, 'accent', colors.shades.black)
   )};
   background-color: ${props => (
-    hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)
+    hexValid(props.$bgColor) || getColor(props, 'primary', colors.shades.white)
   )};
   box-shadow: 0 0.1rem 0.15rem #00000080;
 
-  ${props => props.noIcons && css`grid-template-columns: 1fr 1rem;`}
+  ${props => props.$noIcons && css`grid-template-columns: 1fr 1rem;`}
 
-  ${props => props.type === 'success' && css`
+  ${props => props.$type === 'success' && css`
     border-left: 0.5rem solid ${
-      hexValid(props.borderColor) || getColor(props, 'success', colors.success.oceanGreen)
+      hexValid(props.$borderColor) || getColor(props, 'success', colors.success.oceanGreen)
     };
   `}
 
-  ${props => props.type === 'warning' && css`
+  ${props => props.$type === 'warning' && css`
     border-left: 0.5rem solid ${
-      hexValid(props.borderColor) || getColor(props, 'warning', colors.warning.orangeYellow)
+      hexValid(props.$borderColor) || getColor(props, 'warning', colors.warning.orangeYellow)
     };
   `}
 
-  ${props => props.type === 'error' && css`
+  ${props => props.$type === 'error' && css`
     border-left: 0.5rem solid ${
-      hexValid(props.borderColor) || getColor(props, 'error', colors.error.persianRed)
+      hexValid(props.$borderColor) || getColor(props, 'error', colors.error.persianRed)
     };
   `}
 `;

@@ -4,7 +4,7 @@ import styled, { withTheme } from 'styled-components';
 
 const StyledH1 = styled('h1')`
   font-weight: unset;
-  font-family: ${props => props.weight ? getFontFamily(props) : fonts?.primary?.bold};
+  font-family: ${props => props.$weight ? getFontFamily(props) : fonts?.primary?.bold};
   font-size: 2rem;
   margin: 0;
 `;

@@ -15,7 +15,7 @@ export const StyledApp = styled('div')`
 
 export const MainContent = styled('main')`
   width: 100%;
-  height: ${props => props.token ? '100%' : 'inherit'};
+  height: ${props => props.$token ? '100%' : 'inherit'};
 `;
 
 export const GlobalStyles = createGlobalStyle`

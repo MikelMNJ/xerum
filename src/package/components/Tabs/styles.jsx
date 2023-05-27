@@ -17,12 +17,12 @@ export const TabSlider = styled('div')`
   border-radius: 0.25rem;
   transition: transform 0.2s ease, opacity 0.2s ease;
   background-color: ${props => {
-    return hexValid(props.activeColor) || getColor(props, 'accent', colors.shades.black, true);
+    return hexValid(props.$activeColor) || getColor(props, 'accent', colors.shades.black, true);
   }};
 
   ${props => {
-    const tabNamesHeight = props.posData?.tabNamesHeight;
-    const margin = props.posData?.margin;
+    const tabNamesHeight = props.$posData?.tabNamesHeight;
+    const margin = props.$posData?.margin;
 
     return css`
       top: -${tabNamesHeight - margin}rem;
@@ -30,18 +30,18 @@ export const TabSlider = styled('div')`
     `;
   }}
 
-  ${props => props.content && css`
-    width: calc(100% / ${props.content.length} - ${props.posData.buffer}rem);
+  ${props => props.$content && css`
+    width: calc(100% / ${props.$content.length} - ${props.$posData.buffer}rem);
   `}
 
-  ${props => props.posData.tabNamesHeight && css`
-    height: calc(${props.posData.tabNamesHeight}rem - ${props.posData.buffer}rem);
+  ${props => props.$posData.tabNamesHeight && css`
+    height: calc(${props.$posData.tabNamesHeight}rem - ${props.$posData.buffer}rem);
   `}
 
   transform: ${props => {
-    const index = props.index;
-    const updatedPosX = props.posData.updatedPosX;
-    const margin = props.posData.margin;
+    const index = props.$index;
+    const updatedPosX = props.$posData.updatedPosX;
+    const margin = props.$posData.margin;
 
     if (!updatedPosX) return `translateX(${margin}rem)`;
     return `translateX(${index === -1 ? margin : updatedPosX}rem)`;
@@ -55,7 +55,7 @@ export const TabNames = styled('div')`
   width: 100%;
   min-height: 3rem;
   text-align: center;
-  background-color: ${props => hexValid(props.inactiveColor) || getColor(props, 'darkGrey', colors.neutral.greyWeb)};
+  background-color: ${props => hexValid(props.$inactiveColor) || getColor(props, 'darkGrey', colors.neutral.greyWeb)};
   border-radius: 0.35rem;
 `;
 
@@ -72,15 +72,15 @@ export const Name = styled('div')`
   transition: filter ease 0.5s;
   user-select: none;
   color: ${props => {
-    if (props.activeTab) {
-      return hexValid(props.activeTextColor) || getColor(props, 'white', colors.shades.white);
+    if (props.$activeTab) {
+      return hexValid(props.$activeTextColor) || getColor(props, 'white', colors.shades.white);
     }
 
-    return hexValid(props.inactiveTextColor) || getColor(props, 'white', colors.shades.white);
+    return hexValid(props.$inactiveTextColor) || getColor(props, 'white', colors.shades.white);
   }};
 
-  ${props => props.fontFamily && css`
-    font-family: ${props.fontFamily};
+  ${props => props.$fontFamily && css`
+    font-family: ${props.$fontFamily};
   `};
 `;
 

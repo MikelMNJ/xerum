@@ -12,31 +12,31 @@ export const StyledSlideOver = styled('div')`
   top: 0;
   right: ${restPosition};
   z-index: 1;
-  height: ${props => props.height ? `${props.height}rem` : '100dvh'};
-  width: ${props => props.width ? `${props.width}rem` : '23rem'};
+  height: ${props => props.$height ? `${props.$height}rem` : '100dvh'};
+  width: ${props => props.$width ? `${props.$width}rem` : '23rem'};
   min-width: ${minWidth}rem;
-  max-width: ${props => props.width > minWidth ? props.width : minWidth}rem;
+  max-width: ${props => props.$width > minWidth ? props.$width : minWidth}rem;
   padding: 1rem 2rem 2rem;
-  background-color: ${props => hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)};
+  background-color: ${props => hexValid(props.$bgColor) || getColor(props, 'primary', colors.shades.white)};
   box-shadow: 0 0.25rem 0.25rem ${props => getColor(props, 'black', colors.shades.black) + 80};
   border-left: 0.0625rem solid ${props => getColor(props, 'lightGrey', colors.neutral.lightGrey) + 80};
   color: ${props => getColor(props, 'onPrimary', colors.shades.black)};
   overflow-y: auto;
 
-  ${props => props.topOffset && css`
-    margin-top: ${props.topOffset}rem;
-    height: calc(100dvh - ${props.topOffset}rem);
+  ${props => props.$topOffset && css`
+    margin-top: ${props.$topOffset}rem;
+    height: calc(100dvh - ${props.$topOffset}rem);
   `}
 
-  ${props => props.bottomOffset && css`
-    margin-bottom: ${props.bottomOffset}rem;
-    height: calc(100dvh - ${props.bottomOffset}rem);
+  ${props => props.$bottomOffset && css`
+    margin-bottom: ${props.$bottomOffset}rem;
+    height: calc(100dvh - ${props.$bottomOffset}rem);
   `}
 
-  ${props => props.topOffset && props.bottomOffset && css`
-    margin-top: ${props.topOffset}rem;
-    margin-bottom: ${props.bottomOffset}rem;
-    height: calc(100dvh - ${props.topOffset + props.bottomOffset}rem);
+  ${props => props.$topOffset && props.$bottomOffset && css`
+    margin-top: ${props.$topOffset}rem;
+    margin-bottom: ${props.$bottomOffset}rem;
+    height: calc(100dvh - ${props.$topOffset + props.$bottomOffset}rem);
   `}
 
   &.slideIn {
@@ -80,7 +80,7 @@ export const Header = styled('div')`
 
 export const H3 = styled('h3')`
   margin: 0;
-  color: ${props => hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.shades.black)};
+  color: ${props => hexValid(props.$titleColor) || getColor(props, 'onPrimary', colors.shades.black)};
   font-weight: bold;
   user-select: none;
 
@@ -93,22 +93,22 @@ export const CloseIcon = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${props => props.width || 3}rem;
-  height: ${props => props.height || 3}rem;
+  width: ${props => props.$width || 3}rem;
+  height: ${props => props.$height || 3}rem;
   cursor: pointer;
   margin-right: -1rem;
   color: ${props => {
-    const color = hexValid(props.closeColor) || getColor(props, 'onPrimary', colors.shades.black);
+    const color = hexValid(props.$closeColor) || getColor(props, 'onPrimary', colors.shades.black);
 
-    if (props.disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
+    if (props.$disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
     return color;
   }};
 
   &:hover {
-    color: ${props => hexValid(props.closeHoverColor) || getColor(props, 'accent', colors.neutral.greyWeb)};
+    color: ${props => hexValid(props.$closeHoverColor) || getColor(props, 'accent', colors.neutral.greyWeb)};
   }
 
   i {
-    font-size: ${props => props.closeIconSize || fontSize}rem;
+    font-size: ${props => props.$closeIconSize || fontSize}rem;
   }
 `;

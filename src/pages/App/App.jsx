@@ -17,12 +17,12 @@ const App = props => {
     setConfirmContent,
     ...rest
   } = props;
-  const lightTheme = props.selectedTheme === appConstants.themes.light;
+  const lightTheme = props.$selectedTheme === appConstants.themes.light;
   const token = userInfo?.token;
 
   const colorOverride = lightTheme
-    ? props.theme.modes[props.selectedTheme].accent
-    : props.theme.modes[props.selectedTheme].onPrimary;
+    ? props.$theme.modes[props.$selectedTheme].accent
+    : props.$theme.modes[props.$selectedTheme].onPrimary;
 
   const renderApp = () => {
     return (

@@ -28,25 +28,25 @@ export const TD = styled('div')`
 
 export const LI = styled('li')`
   display: grid;
-  grid-template-columns: ${props => props.columnLayout || `repeat(${props.headers?.length || 1}, 1fr)`};
+  grid-template-columns: ${props => props.$columnLayout || `repeat(${props.$headers?.length || 1}, 1fr)`};
   gap: 0 1rem;
   align-items: center;
   padding: 0.5rem 1rem;
   min-height: 4rem;
   font-size: 0.875rem;
-  cursor: ${props => props.callback ? 'pointer' : 'default'};
-  color: ${props => hexValid(props.headerTextColor) || getColor(props, 'white', colors.shades.white)};
+  cursor: ${props => props.$callback ? 'pointer' : 'default'};
+  color: ${props => hexValid(props.$headerTextColor) || getColor(props, 'white', colors.shades.white)};
   background-color: ${props => {
-    const lightTheme = props.selectedTheme === 'light';
+    const lightTheme = props.$selectedTheme === 'light';
     const fallback = colors.neutral.davysGrey;
-    return hexValid(props.headerBGColor) || getColor(props, lightTheme ? 'darkGrey' : 'black', fallback);
+    return hexValid(props.$headerBGColor) || getColor(props, lightTheme ? 'darkGrey' : 'black', fallback);
   }};
 
-  ${props => props.hasLabel && css`
-    border-left: 1.5rem solid ${hexValid(props.labelBGColor) || getColor(props, 'black', colors.shades.black)};
+  ${props => props.$hasLabel && css`
+    border-left: 1.5rem solid ${hexValid(props.$labelBGColor) || getColor(props, 'black', colors.shades.black)};
   `}
 
-  ${props => props.header && css`
+  ${props => props.$header && css`
     user-select: none;
     -webkit-touch-callout: none;
   `}
@@ -59,49 +59,52 @@ export const LI = styled('li')`
     border-radius: 0 0 0.25rem 0.25rem;
   }
 
-  ${props => !props.header && css`
+  ${props => !props.$header && css`
     &:nth-child(even) {
-      color: ${props => hexValid(props.evenTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
-      background-color: ${props => hexValid(props.evenBGColor) || getColor(props, 'primary', colors.shades.white) + 50};
+      color: ${props => hexValid(props.$evenTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+      background-color: ${props => {
+        const fallback = getColor(props, 'primary', colors.shades.white) + 50;
+        return hexValid(props.$evenBGColor) || fallback;
+      }};
 
       @media (hover: hover) {
         &:hover {
-          color: ${props => hexValid(props.evenHoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+          color: ${props => hexValid(props.$evenHoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
           background-color: ${props => {
-            const lightTheme = props.selectedTheme === 'light';
-            return hexValid(props.evenHoverBGColor)
+            const lightTheme = props.$selectedTheme === 'light';
+            return hexValid(props.$evenHoverBGColor)
               || getColor(props, 'black', colors.shades.black) + (lightTheme ? 20 : 75);
           }};
       }}
     `}
   }
 
-  ${props => !props.header && css`
+  ${props => !props.$header && css`
     &:nth-child(odd) {
-      color: ${props => hexValid(props.oddTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+      color: ${props => hexValid(props.$oddTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
       background-color: ${props => {
-        const lightTheme = props.selectedTheme === 'light';
+        const lightTheme = props.$selectedTheme === 'light';
         const color = lightTheme ? 'lightGrey' : 'darkGrey';
         const opacityVal = lightTheme ? 50 : 99;
         const fallback = '#e1e1e1';
 
-        return hexValid(props.oddBGColor) || getColor(props, color, fallback) + opacityVal;
+        return hexValid(props.$oddBGColor) || getColor(props, color, fallback) + opacityVal;
       }};
     }
 
     @media (hover: hover) {
       &:hover {
-        color: ${props => hexValid(props.oddHoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
+        color: ${props => hexValid(props.$oddHoverTextColor) || getColor(props, 'onPrimary', colors.shades.black)};
         background-color: ${props => {
-          const lightTheme = props.selectedTheme === 'light';
-          return hexValid(props.oddHoverBGColor)
+          const lightTheme = props.$selectedTheme === 'light';
+          return hexValid(props.$oddHoverBGColor)
             || getColor(props, 'black', colors.neutral.greyWeb) + (lightTheme ? 20 : 75);
         }};
       }
     }
   `}
 
-  ${props => props.isDragging && css`
+  ${props => props.$isDragging && css`
     box-shadow: 0 0.1rem 0.2rem ${getColor(props, 'black', colors.shades.black)};
     backdrop-filter: blur(0.25rem);
   `}
@@ -109,7 +112,7 @@ export const LI = styled('li')`
   @media only screen and (max-width: 640px) {
     grid-template-columns: 1fr;
 
-    ${props => props.header && css`display: none;`}
+    ${props => props.$header && css`display: none;`}
 
     &:nth-child(2) {
       border-radius: 0.35rem 0.35rem 0 0;
@@ -127,8 +130,8 @@ export const Label = styled('div')`
   left: -1.75rem;
   width: 0;
   font-size: 0.8rem;
-  color: ${props => hexValid(props.labelTextColor) || getColor(props, 'white', colors.shades.white)};
-  background-color: ${props => hexValid(props.labelBGColor) || getColor(props, 'black', colors.shades.black)};
+  color: ${props => hexValid(props.$labelTextColor) || getColor(props, 'white', colors.shades.white)};
+  background-color: ${props => hexValid(props.$labelBGColor) || getColor(props, 'black', colors.shades.black)};
   padding: 0;
   transform: rotate(-90deg);
 `;
@@ -145,7 +148,7 @@ export const Grip = styled('div')`
 `;
 
 export const HeaderItem = styled('div')`
-  cursor: ${props => props.sortable ? 'pointer' : 'default'};
+  cursor: ${props => props.$sortable ? 'pointer' : 'default'};
 `;
 
 export const ResponsiveHeader = styled('p')`
