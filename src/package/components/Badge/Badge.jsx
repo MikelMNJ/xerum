@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, forwardRef } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledBadge, CountWrapper, Counter, IconWrapper } from './styles';
 
-const Badge = props => {
+const Badge = forwardRef((props, badgeRef) => {
   const {
     theme,
     selectedTheme,
@@ -37,7 +37,7 @@ const Badge = props => {
 
       setWidths({ countWidth, iconWidth });
     }
-  }, [ countWrapperRef, iconWrapperRef, setWidths ]);
+  }, [ countWrapperRef, iconWrapperRef, count, setWidths ]);
 
   const renderCount = () => {
     if (count > 0) {
@@ -51,7 +51,10 @@ const Badge = props => {
   return (
     <StyledBadge onClick={() => callback?.()}>
       <CountWrapper
-        ref={countWrapperRef}
+        ref={element => {
+          if (badgeRef) badgeRef.current = element;
+          countWrapperRef.current = element;
+        }}
         theme={theme}
         selectedTheme={selectedTheme}
         textSize={textSize}
@@ -63,10 +66,10 @@ const Badge = props => {
         position={position}
         posX={posX}
         posY={posY}
+        visible={count > 0}
         {...rest}
       >
         {renderCount()}
-
       </CountWrapper>
 
       <IconWrapper
@@ -81,6 +84,6 @@ const Badge = props => {
       </IconWrapper>
     </StyledBadge>
   );
-};
+});
 
 export { Badge };

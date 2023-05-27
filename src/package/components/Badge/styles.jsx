@@ -11,6 +11,7 @@ export const StyledBadge = styled('div')`
 `;
 
 export const CountWrapper = styled('div')`
+  display: ${props => props.visible ? 'flex' : 'none'};
   position: absolute;
   bottom: ${props => {
     const strokeOffset = props.strokeWidth || 0.125;

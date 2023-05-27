@@ -6,4 +6,9 @@ export const StyledMain = styled('div')`
 
 export const ContentArea = styled('div')`
   padding: 3rem;
+  max-width: 32rem;
+
+  button {
+    width: 100%;
+  }
 `;

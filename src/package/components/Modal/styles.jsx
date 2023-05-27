@@ -25,7 +25,7 @@ export const StyledModal = styled('div')`
   right: 0;
   left: 0;
   bottom: 0;
-  margin: 4rem auto;
+  margin: 3rem auto;
   z-index: 200;
   max-height: calc(100% - 6rem);
   max-width: calc(100% - 6rem);

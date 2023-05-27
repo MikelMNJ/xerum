@@ -6,19 +6,15 @@ import {
   StyledOptions,
   OptionsArea,
   Optional,
-  Input,
+  Option,
+  NoResults,
+  InputArea,
   Label,
   LabelArea,
   LabelText,
 } from './styles';
-import {
-  updateFormState,
-  buildPlaceholder,
-  updateField,
-  handleChange,
-  getOverflowState,
-  buildOptions,
-} from './functions';
+import { PrivacyMask } from '../PrivacyMask/PrivacyMask';
+import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 import _ from 'lodash';
 
@@ -35,6 +31,7 @@ const Select = props => {
     borderRadius,
     loading,
     label,
+    localDefault,
     fontFamily,
     fontSize,
     loadingText,
@@ -54,14 +51,27 @@ const Select = props => {
     optionalText,
     optionalTextSize,
     optionalTextColor,
+    optionTextColor,
+    activeOptionTextColor,
+    optionBgHoverColor,
+    activeOptionBgColor,
+    activeOptionBgHoverColor,
+    noResultsText,
     top,
     placeholderColor,
     privacy,
+    hideField,
     callback,
-    ...rest
   } = props;
 
-  const defaultValue = form?.values[name] && data?.find(item => _.toLower(item.label) === _.toLower(form.values[name]));
+  const defaultValue = _.toString(form?.values[name]) && data?.find(item => {
+    const thisItem = _.toLower(_.toString(item.value));
+    const fieldValue = _.toLower(_.toString(form.values[name]));
+    const match = thisItem === fieldValue;
+
+    if (match) return item;
+  }) || localDefault;
+
   const [ selectedOption, setSelectedOption ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
   const [ searchValue, setSearchValue ] = useState('');
@@ -74,35 +84,123 @@ const Select = props => {
 
   useEffect(() => {
     if (optionsMenuVisible) {
-      const handleOutsideClick = e => !inputRef.current?.contains(e.target) && setOptionsMenuVisible(false);
+      const handleEscape = e => e.key === 'Escape' && setOptionsMenuVisible(false);
+      const handleOutsideClick = e => {
+        if (!inputRef.current?.contains(e.target)) {
+          setOptionsMenuVisible(false);
+        }
+      };
+
       document.addEventListener('click', handleOutsideClick);
-      return () => document.removeEventListener('click', handleOutsideClick);
+      document.addEventListener('keydown', handleEscape);
+
+      return () => {
+        document.removeEventListener('click', handleOutsideClick);
+        document.removeEventListener('keydown', handleEscape);
+      };
     }
   }, [ optionsMenuVisible, setOptionsMenuVisible ]);
 
   useEffect(() => {
-    const updateFormStateArgs = { form, name, selectedOption, newValue: selectedOption?.value };
-    updateFormState(updateFormStateArgs);
-    getOverflowState({ optionsRef, setHasOverflow });
-    // eslint-disable-next-line
-  }, [ optionsMenuVisible, searchValue, selectedOption, name ]);
+    const firstOption = data?.[0];
+    const different = !_.isEqual(form ? defaultValue : selectedOption, form ? selectedOption : firstOption);
 
-  const options = useMemo(() => {
-    if (!selectedOption) setSelectedOption(data?.[0]);
-    return data;
-  }, [ data, selectedOption ]);
+    if (!selectedOption && different) setSelectedOption(firstOption);
+    if (form && different) setSelectedOption(defaultValue);
 
-  const optionArgs = { selectedOption, setSelectedOption, setOptionsMenuVisible, filteredData };
-  const changeArgs = { options, setSearchValue, setFilteredData };
-  const placeholderArgs = { loading, data, loadingText, selectedOption, noDataText };
-  const updateFieldArgs = {
-    setSelectedOption,
-    callback,
-    setOptionsMenuVisible,
-    setFilteredData,
-    setSearchValue,
-    inputRef,
-    options,
+    if (form && !selectedOption) {
+      setSelectedOption(firstOption);
+      form?.setFieldValue(name, _.toString(firstOption?.value));
+    }
+
+    getOverflowState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ optionsMenuVisible, searchValue, name ]);
+
+  const options = useMemo(() => data, [ data ]);
+
+  const getOverflowState = () => {
+    if (optionsRef.current) {
+      const { clientHeight, scrollHeight } = optionsRef.current;
+      const overflow = scrollHeight > clientHeight;
+
+      setHasOverflow(overflow);
+    }
+  };
+
+  const handleSearchChange = e => {
+    const newValue = _.toString(e.target.value);
+    const match = option => _.includes(_.toLower(option.label), _.toLower(newValue));
+
+    setSearchValue(newValue);
+    setFilteredData(options?.filter(option => match(option)));
+  };
+
+  const handleOptionChange = (e, option) => {
+    const different = !_.isEqual(selectedOption, option);
+
+    if (different) {
+      setSelectedOption(option);
+      form?.setFieldValue(name, _.toString(option?.value));
+      callback?.(_.toString(option?.value));
+    }
+
+    setOptionsMenuVisible(false);
+  };
+
+  const updateField = onlyResult => {
+    if (onlyResult) {
+      setSelectedOption(onlyResult);
+      form?.setFieldValue(name, _.toString(onlyResult.value));
+      callback?.(_.toString(onlyResult?.value));
+    }
+
+    setSearchValue('');
+    setFilteredData(options);
+    setOptionsMenuVisible(false);
+  };
+
+  const buildOptions = () => {
+    if (_.isEmpty(filteredData)) {
+      return (
+        <NoResults>
+          {noResultsText || 'No results found'}
+        </NoResults>
+      );
+    }
+
+    return filteredData?.map?.((option, index) => {
+      const { value, label } = option;
+      const active = _.isEqual(selectedOption, option);
+
+      return (
+        <Option
+          key={index}
+          theme={theme}
+          selectedTheme={selectedTheme}
+          value={_.toString(value)}
+          height={height}
+          borderRadius={borderRadius}
+          optionTextColor={optionTextColor}
+          activeOptionTextColor={activeOptionTextColor}
+          bgColor={bgColor}
+          optionBgHoverColor={optionBgHoverColor}
+          activeOptionBgColor={activeOptionBgColor}
+          activeOptionBgHoverColor={activeOptionBgHoverColor}
+          active={active}
+          fontFamily={fontFamily}
+          onClick={e => handleOptionChange(e, option)}
+        >
+          {privacy ? <PrivacyMask length={label.length} /> : label}
+        </Option>
+      );
+    });
+  };
+
+  const buildPlaceholder = () => {
+    if (loading && _.isEmpty(data)) return loadingText || 'Loading...';
+    if (!loading && _.isEmpty(data)) return noDataText || 'No options available';
+    return selectedOption?.label || 'Select an option...';
   };
 
   return (
@@ -135,51 +233,78 @@ const Select = props => {
           </LabelArea>
         )}
 
-        <Input
-          ref={inputRef}
-          theme={theme}
-          selectedTheme={selectedTheme}
-          name={name}
-          placeholder={optionsMenuVisible ? selectedOption?.label : buildPlaceholder(placeholderArgs)}
-          value={privacy ? 'Private' : (optionsMenuVisible ? searchValue : selectedOption?.label || '')}
-          height={height}
-          fontFamily={fontFamily}
-          fontSize={fontSize}
-          bgColor={bgColor}
-          textColor={textColor}
-          menuVisible={optionsMenuVisible}
-          borderRadius={borderRadius}
-          borderSize={borderSize}
-          borderColor={borderColor}
-          activeBorderColor={activeBorderColor}
-          activeBorderSize={activeBorderSize}
-          icon={icon}
-          placeholderColor={placeholderColor}
-          readonly={!optionsMenuVisible}
-          onFocus={() => updateField(true, updateFieldArgs)}
-          onBlur={() => {
-            if (name && form) form.setTouched({ ...form.touched, [name]: true });
-            updateField(false, updateFieldArgs, filteredData?.length === 1 && filteredData[0]);
-          }}
-          onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-          onClick={() => updateField(true, updateFieldArgs)}
-          onChange={e => handleChange(e, changeArgs)}
-          {...rest}
-        />
+        {!hideField && (
+          <InputArea
+            theme={theme}
+            selectedTheme={selectedTheme}
+            height={height}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
+            bgColor={bgColor}
+            textColor={textColor}
+            menuVisible={optionsMenuVisible}
+            borderRadius={borderRadius}
+            borderSize={borderSize}
+            borderColor={borderColor}
+            activeBorderColor={activeBorderColor}
+            activeBorderSize={activeBorderSize}
+            icon={icon}
+            placeholderColor={placeholderColor}
+          >
+            {form && (
+              <FormikField
+                innerRef={inputRef}
+                name={name}
+                placeholder={privacy ? 'Private' : (optionsMenuVisible ? defaultValue?.label : buildPlaceholder())}
+                type={privacy ? 'password' : 'text'}
+                value={(optionsMenuVisible ? searchValue : defaultValue?.label || '')}
+                readOnly={!optionsMenuVisible}
+                onFocus={() => inputRef.current?.click()}
+                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
+                onClick={() => setOptionsMenuVisible(true)}
+                onChange={handleSearchChange}
+                onBlur={() => {
+                  const onlyResult = filteredData?.length === 1 && filteredData[0];
+                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
+                  updateField(onlyResult);
+                }}
+              />
+            )}
 
-        <Icon
-          theme={theme}
-          selectedTheme={selectedTheme}
-          height={height}
-          iconColor={iconColor || textColor}
-          iconSize={iconSize}
-          menuVisible={optionsMenuVisible}
-        >
-          {iconValid(icon)
-            ? <i className={icon} />
-            : icon || <i className='fa-solid fa-chevron-down' />
-          }
-        </Icon>
+            {!form && (
+              <input
+                ref={inputRef}
+                name={name}
+                placeholder={privacy ? 'Private' : buildPlaceholder()}
+                type={privacy ? 'password' : 'text'}
+                value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
+                readOnly={!optionsMenuVisible}
+                onFocus={() => inputRef.current?.click()}
+                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
+                onClick={() => setOptionsMenuVisible(true)}
+                onChange={handleSearchChange}
+                onBlur={() => {
+                  const onlyResult = filteredData?.length === 1 && filteredData[0];
+                  updateField(onlyResult);
+                }}
+              />
+            )}
+
+            <Icon
+              theme={theme}
+              selectedTheme={selectedTheme}
+              height={height}
+              iconColor={iconColor || textColor}
+              iconSize={iconSize}
+              menuVisible={optionsMenuVisible}
+            >
+              {iconValid(icon)
+                ? <i className={icon} />
+                : icon || <i className='fa-solid fa-chevron-down' />
+              }
+            </Icon>
+          </InputArea>
+        )}
       </Label>
 
       <OptionsArea
@@ -195,7 +320,6 @@ const Select = props => {
         borderRadius={borderRadius}
         borderSize={borderSize}
         borderColor={borderColor}
-        onClick={() => updateField(false, updateFieldArgs)}
         onMouseDown={e => e.preventDefault()}
       >
         <StyledOptions
@@ -205,7 +329,7 @@ const Select = props => {
           maxHeight={maxHeight}
           hasOverflow={hasOverflow}
         >
-          {buildOptions(props, optionArgs)}
+          {buildOptions()}
         </StyledOptions>
       </OptionsArea>
     </StyledSelect>

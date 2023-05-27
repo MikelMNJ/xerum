@@ -10,6 +10,7 @@ const initial = {
   [selectors.STATE_KEY_NOTIFICATIONS]: [],
   [selectors.STATE_KEY_BANNER_CONTENT]: 'Welcome to your new app!',
   [selectors.STATE_KEY_MODAL_CONTENT]: null,
+  [selectors.STATE_KEY_EXPENSE]: null,
 };
 
 const appReducer = (initialState = initial, action = {}) => {
@@ -40,6 +41,9 @@ const appReducer = (initialState = initial, action = {}) => {
 
     case actions.SET_CONFIRM_CONTENT:
       return state.update(selectors.STATE_KEY_CONFIRM_CONTENT, payload);
+
+    case actions.SET_EXPENSE:
+      return state.update(selectors.STATE_KEY_EXPENSE, payload);
 
     default:
       return initialState;
