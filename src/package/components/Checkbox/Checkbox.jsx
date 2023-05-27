@@ -18,10 +18,11 @@ const Checkbox = props => {
     solidFill,
     form,
     callback,
+    localDefault,
     ...rest
   } = props;
 
-  const defaultValue = (name && form?.values[name]) || false;
+  const defaultValue = (name && form?.values[name]) || localDefault || false;
   const [ checked, setChecked ] = useState(defaultValue);
 
   useEffect(() => {

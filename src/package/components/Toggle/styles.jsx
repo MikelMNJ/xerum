@@ -8,7 +8,7 @@ const colors = theme.colors;
 export const StyledToggle = styled('label')`
   display: inline-flex;
   position: relative;
-  width: 3rem;
+  min-width: 3rem;
   height: 1.75rem;
 `;
 

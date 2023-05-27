@@ -31,6 +31,7 @@ const Select = props => {
     borderRadius,
     loading,
     label,
+    localDefault,
     fontFamily,
     fontSize,
     loadingText,
@@ -69,7 +70,7 @@ const Select = props => {
     const match = thisItem === fieldValue;
 
     if (match) return item;
-  });
+  }) || localDefault;
 
   const [ selectedOption, setSelectedOption ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);

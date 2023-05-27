@@ -13,11 +13,12 @@ const Toggle = props => {
     iconColor,
     inactiveColor,
     activeColor,
+    localDefault,
     callback,
     ...rest
   } = props;
 
-  const defaultValue = (name && form?.values[name]) || false;
+  const defaultValue = (name && form?.values[name]) || localDefault || false;
   const [ checked, setChecked ] = useState(defaultValue);
 
   useEffect(() => {
