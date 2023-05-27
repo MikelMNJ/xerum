@@ -26,13 +26,6 @@ export const CountWrapper = styled('div')`
     return `calc(${iconWidth}rem + ${horizontalOffset}rem - ${strokeOffset}rem)`;
   }};
 
-  /* left: ${props => {
-    const width = (props.$widths.countWidth - props.$widths.iconWidth) - ((props.$posX * -1) * 16) - 16;
-    const strokeOffset = (props.$strokeWidth * 16) || 2;
-
-    return `${(width - strokeOffset) / 16}rem`;
-  }}; */
-
   padding: 0.25rem 0.5rem;
   width: fit-content;
   min-width: 1.5rem;

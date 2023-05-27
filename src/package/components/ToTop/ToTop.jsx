@@ -3,7 +3,7 @@ import { iconValid, addEvent, removeEvent, resetPage } from '../../helpers';
 import { StyledToTop } from './styles';
 
 const ToTop = props => {
-  const { theme, selectedTheme, icon, bgColor, iconColor, fixed, ...rest } = props;
+  const { theme, selectedTheme, icon, bgColor, iconColor, fixed } = props;
   const toTop = useRef();
 
   const scrollAction = useCallback(() => {
@@ -37,7 +37,6 @@ const ToTop = props => {
       $iconColor={iconColor}
       $bgColor={bgColor}
       onClick={e => resetPage(e, true)}
-      {...rest}
     >
       <i className={iconValid(icon) || 'fa-solid fa-angle-up'} />
     </StyledToTop>

@@ -110,7 +110,6 @@ const Field = props => {
             $activeBorderSize={activeBorderSize}
             $bottomBorder={bottomBorder}
             $icon={icon}
-            {...rest}
           >
             {form && (
               <FormikField

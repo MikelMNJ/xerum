@@ -9,10 +9,10 @@ const StyledFont = styled('span')`
 `;
 
 const Font = withTheme(props => {
-  const { theme, weight, size, children, ...rest } = props;
+  const { weight, size, color, block, children } = props;
 
   return (
-    <StyledFont theme={theme} weight={weight} size={size} {...rest}>
+    <StyledFont weight={weight} $size={size} $color={color} $block={block}>
       {children}
     </StyledFont>
   );

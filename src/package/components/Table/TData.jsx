@@ -2,10 +2,10 @@ import React from 'react';
 import { TD } from './styles';
 
 const TData = props => {
-  const { children, ...rest } = props;
+  const { children } = props;
 
   return (
-    <TD {...rest}>
+    <TD>
       {children}
     </TD>
   );

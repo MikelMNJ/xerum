@@ -12,8 +12,9 @@ const Banner = props => {
     callback,
     center,
     sharp,
+    textColor,
+    bgColor,
     children,
-    ...rest
   } = props;
 
   return (
@@ -22,7 +23,8 @@ const Banner = props => {
       $selectedTheme={selectedTheme}
       $noClose={noClose}
       $sharp={sharp}
-      {...rest}
+      $textcolor={textColor}
+      $bgcolor={bgColor}
     >
       <Message center={center}>
         {text || children}

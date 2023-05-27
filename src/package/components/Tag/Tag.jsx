@@ -26,7 +26,6 @@ const Tag = props => {
     round,
     allClick,
     children,
-    ...rest
   } = props;
 
   return (
@@ -47,7 +46,6 @@ const Tag = props => {
       $iconLeft={iconLeft}
       $allClick={allClick}
       onClick={() => allClick && callback?.()}
-      {...rest}
     >
       {removable && iconLeft && (
         <Close

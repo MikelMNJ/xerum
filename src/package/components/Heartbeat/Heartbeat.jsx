@@ -3,7 +3,7 @@ import { iconValid } from '../../helpers';
 import { Flatline } from './styles';
 
 const Heartbeat = props => {
-  const { time, icon, text, disabled, children, endpoint, ...rest } = props;
+  const { theme, selectedTheme, time, icon, text, disabled, children, endpoint } = props;
   const [ offline, setOffline ] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Heartbeat = props => {
 
   const offlineContent = () => {
     return (
-      <Flatline {...rest}>
+      <Flatline $theme={theme} $selectedTheme={selectedTheme}>
         <i className={iconValid(icon) || 'fa-solid fa-ethernet'} />
         <p>{text || 'No connection detected.'}</p>
       </Flatline>

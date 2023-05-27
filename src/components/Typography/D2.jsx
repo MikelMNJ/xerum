@@ -10,10 +10,10 @@ const StyledD2 = styled('h1')`
 `;
 
 const D2 = withTheme(props => {
-  const { theme, children, ...rest } = props;
+  const { children, weight } = props;
 
   return (
-    <StyledD2 theme={theme} {...rest}>
+    <StyledD2 $weight={weight}>
       {children}
     </StyledD2>
   );

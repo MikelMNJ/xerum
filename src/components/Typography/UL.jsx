@@ -7,10 +7,10 @@ const StyledUL = styled('ul')`
 `;
 
 const UL = props => {
-  const { children, ...rest } = props;
+  const { children } = props;
 
   return (
-    <StyledUL {...rest}>
+    <StyledUL>
       {children}
     </StyledUL>
   );

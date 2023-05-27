@@ -17,7 +17,6 @@ const Tooltip = props => {
     text,
     position,
     children,
-    ...rest
   } = props;
 
   const [ showTip, setShowTip ] = useState(false);
@@ -107,7 +106,6 @@ const Tooltip = props => {
         updatePos(e);
         setShowTip(true);
       }}
-      {...rest}
     >
       <i className={iconValid(icon) || 'fa-solid fa-info-circle'} />
       {renderTip()}

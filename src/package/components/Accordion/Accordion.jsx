@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { iconValid } from '../../helpers';
 import { Spacer } from '../Spacer/Spacer';
-import {  StyledAccordion, Section, Title, Content } from './styles';
+import { StyledAccordion, Section, Title, Content } from './styles';
 import _ from 'lodash';
 
 const Accordion = props => {
@@ -22,7 +22,6 @@ const Accordion = props => {
     hoverTextColor,
     borderColor,
     iconSize,
-    ...rest
   } = props;
 
   const [ active, setActive ] = useState(openDefault || null);
@@ -92,7 +91,7 @@ const Accordion = props => {
   };
 
   return (
-    <StyledAccordion {...rest}>
+    <StyledAccordion>
       {buildAccordion()}
     </StyledAccordion>
   );

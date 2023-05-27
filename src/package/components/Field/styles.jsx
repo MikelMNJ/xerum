@@ -103,29 +103,28 @@ export const InputArea = styled('div')`
       outline: none;
       border-width: ${props => props.$activeBorderSize || borderSize}rem;
       border-color: ${props => hexValid(props.$activeBorderColor) || getColor(props, 'accent', accent.carolinaBlue)};
-
     }
-  `;
-
-  export const Icon = styled('div')`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: ${borderSize}rem;
-    right: 0;
-    height: ${props => props.$height || height}rem;
-    width: ${props => props.$height || height}rem;
-    cursor: pointer;
-    color: ${props => {
-      const color = hexValid(props.$iconColor) || getColor(props, 'onPrimary', shades.black);
-
-      if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
-      return color;
-    }};
-
-    ${props => !props.$iconCallback && css`pointer-events: none;`}
   }
+`;
+
+export const Icon = styled('div')`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: ${borderSize}rem;
+  right: 0;
+  height: ${props => props.$height || height}rem;
+  width: ${props => props.$height || height}rem;
+  cursor: pointer;
+  color: ${props => {
+    const color = hexValid(props.$iconColor) || getColor(props, 'onPrimary', shades.black);
+
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
+    return color;
+  }};
+
+  ${props => !props.$iconCallback && css`pointer-events: none;`}
 
   i {
     font-size: ${props => props.$iconSize || fontSize}rem;

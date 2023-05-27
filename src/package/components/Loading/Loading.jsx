@@ -22,13 +22,12 @@ const Loading = props => {
     noText,
     onFail,
     renderOnFail,
-    ...rest
   } = props;
 
   const buildContent = () => {
     if (isLoading) {
       return (
-        <Text $theme={theme} $selectedTheme={selectedTheme} $column={column} $textColor={textColor} {...rest}>
+        <Text $theme={theme} $selectedTheme={selectedTheme} $column={column} $textColor={textColor}>
           {!noIcon && (
             <Fragment>
               <Icon

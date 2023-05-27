@@ -46,7 +46,6 @@ const Modal = props => {
     pill,
     round,
     privacy,
-    ...rest
   } = props;
 
   const ref = useRef();
@@ -71,7 +70,6 @@ const Modal = props => {
         $confirm={confirm}
         $textColor={textColor}
         $useOverflow={useOverflow}
-        {...rest}
       >
         <ModalHeader confirm={confirm}>
           <Title $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>

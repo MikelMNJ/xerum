@@ -1,6 +1,5 @@
 import { hexValid, getColor } from '../../helpers';
 import { theme } from '../../theme';
-import { Button } from '../Button/Button';
 import styled, { css } from 'styled-components';
 
 const { neutral, shades, accent } = theme.colors;
@@ -89,6 +88,7 @@ export const Input = styled('input')`
 
   background-color: ${props => {
     const lightTheme = props.$selectedTheme === light;
+    if (props.disabled) return neutral.lightGrey;
     return hexValid(props.$inputBGColor) || getColor(props, lightTheme ? 'white' : 'darkGrey', shades.white);
   }};
 
@@ -96,6 +96,7 @@ export const Input = styled('input')`
     color: ${props => {
       const lightTheme = props.$selectedTheme === light;
       const fallback = neutral.lightGrey;
+      if (props.disabled) return neutral.greyWeb;
       return hexValid(props.$placeholderColor) || getColor(props, lightTheme ? 'lightGrey' : 'grey', fallback);
     }};
   }
@@ -127,22 +128,47 @@ export const Input = styled('input')`
   }
 `;
 
-export const SubmitButton = styled(Button)`
+export const SubmitButton = styled('div')`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 0;
   right: 0;
   margin: 0;
   min-width: 3rem;
+  width: fit-content;
+  padding: 0 1rem;
+  height: 100%;
+  color: ${props => {
+    if (props.disabled) return shades.white;
+    return hexValid(props.$buttonTextColor) || getColor(props, 'primary', shades.white);
+  }};
+  background-color: ${props => {
+    if (props.disabled) return neutral.greyWeb;
+    return hexValid(props.$buttonColor) || getColor(props, 'accent', accent.brightNavyBlue);
+  }};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  user-select: none;
 
   ${props => props.$fontFamily && css`font-family: ${props.$fontFamily};`}
 
   border-radius: ${props => {
     if (props.$pill) return '0 3rem 3rem 0';
     if (props.$round) return '0 0.5rem 0.5rem 0';
-    return'0 0.25rem 0.25rem 0';
+    return `0 ${props.$borderRadius || 0.25}rem ${props.$borderRadius || 0.25}rem 0`;
   }};
 
   i {
     color: inherit;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${props => {
+        if (props.disabled) return neutral.greyWeb;
+        return hexValid(props.$buttonHoverColor) || getColor(props, 'accentHover', accent.carolinaBlue);
+      }};
+    }
   }
 `;

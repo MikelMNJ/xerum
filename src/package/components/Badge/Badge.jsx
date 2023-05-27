@@ -20,7 +20,6 @@ const Badge = forwardRef((props, badgeRef) => {
     posX,
     posY,
     callback,
-    ...rest
   } = props;
 
   const [ widths, setWidths ] = useState({ countWidth: 0, iconWidth: 0 });
@@ -67,7 +66,6 @@ const Badge = forwardRef((props, badgeRef) => {
         $posX={posX}
         $posY={posY}
         $visible={count > 0}
-        {...rest}
       >
         {renderCount()}
       </CountWrapper>

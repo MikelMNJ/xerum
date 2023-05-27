@@ -76,8 +76,8 @@ export const LI = styled('li')`
               || getColor(props, 'black', colors.shades.black) + (lightTheme ? 20 : 75);
           }};
       }}
-    `}
-  }
+    }
+  `}
 
   ${props => !props.$header && css`
     &:nth-child(odd) {
@@ -104,7 +104,7 @@ export const LI = styled('li')`
     }
   `}
 
-  ${props => props.$isDragging && css`
+  ${props => props.isDragging && css`
     box-shadow: 0 0.1rem 0.2rem ${getColor(props, 'black', colors.shades.black)};
     backdrop-filter: blur(0.25rem);
   `}

@@ -19,7 +19,6 @@ const Checkbox = props => {
     form,
     callback,
     localDefault,
-    ...rest
   } = props;
 
   const defaultValue = (name && form?.values[name]) || localDefault || false;
@@ -40,7 +39,7 @@ const Checkbox = props => {
   };
 
   return (
-    <StyledLabel {...rest}>
+    <StyledLabel>
       <Box
         $theme={theme}
         $selectedTheme={selectedTheme}

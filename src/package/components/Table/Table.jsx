@@ -25,7 +25,6 @@ const Table = props => {
     oddBGColor,
     oddHoverTextColor,
     oddHoverBGColor,
-    ...rest
   } = props;
 
   const [ ascending, setAscending ] = useState(!sortable);
@@ -81,7 +80,6 @@ const Table = props => {
             $selectedTheme={selectedTheme}
             ref={provided.innerRef}
             {...provided.droppableProps}
-            {...rest}
           >
             {buildHeaders(args)}
             {content && buildRows(args)}

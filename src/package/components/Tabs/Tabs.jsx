@@ -11,7 +11,6 @@ const Tabs = props => {
     inactiveColor,
     inactiveTextColor,
     fontFamily,
-    ...rest
   } = props;
 
   const [ activeTab, setActiveTab ] = useState(content?.[0]?.name);
@@ -98,7 +97,7 @@ const Tabs = props => {
   );
 
   return (
-    <StyledTabs {...rest}>
+    <StyledTabs>
       {buildTabs()}
       {buildContent()}
     </StyledTabs>
