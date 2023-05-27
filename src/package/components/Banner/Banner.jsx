@@ -26,7 +26,7 @@ const Banner = props => {
       $textcolor={textColor}
       $bgcolor={bgColor}
     >
-      <Message center={center}>
+      <Message $center={center}>
         {text || children}
       </Message>
 

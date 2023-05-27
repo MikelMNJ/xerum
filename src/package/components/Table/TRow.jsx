@@ -21,7 +21,6 @@ const TRow = props => {
     children,
     callback,
     provided,
-    draggable,
     columnLayout,
     headers,
   } = props;
@@ -47,7 +46,6 @@ const TRow = props => {
       $oddHoverBGColor={oddHoverBGColor}
       $callback={callback}
       $columnLayout={columnLayout}
-      draggable={draggable}
       onClick={() => callback?.()}
       {...provided?.draggableProps}
       {...provided?.dragHandleProps}

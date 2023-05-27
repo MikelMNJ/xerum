@@ -45,16 +45,16 @@ const SlideOver = props => {
         className='slideIn'
       >
         <Header>
-          <H3 theme={theme} selectedTheme={selectedTheme} titleColor={titleColor}>
+          <H3 $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
             {title}
           </H3>
 
           <CloseIcon
-            theme={theme}
-            selectedTheme={selectedTheme}
-            closeColor={closeColor}
-            closeHoverColor={closeHoverColor}
-            closeIconSize={closeIconSize}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $closeColor={closeColor}
+            $closeHoverColor={closeHoverColor}
+            $closeIconSize={closeIconSize}
             onClick={handleClose}
           >
             {iconValid(closeIcon)

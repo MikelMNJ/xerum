@@ -6,7 +6,7 @@ const colors = theme.colors;
 const light = 'light';
 
 export const StyledLabel = styled('label')`
-  display: -webkit-inline-box;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;

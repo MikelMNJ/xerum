@@ -75,12 +75,7 @@ const Table = props => {
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId='rows'>
         {provided => (
-          <StyledTable
-            $theme={theme}
-            $selectedTheme={selectedTheme}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
+          <StyledTable ref={provided.innerRef} {...provided.droppableProps}>
             {buildHeaders(args)}
             {content && buildRows(args)}
             {provided.placeholder}

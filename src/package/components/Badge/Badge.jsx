@@ -41,7 +41,7 @@ const Badge = forwardRef((props, badgeRef) => {
   const renderCount = () => {
     if (count > 0) {
       return (
-        <Counter theme={theme} selectedTheme={selectedTheme} count={count}>
+        <Counter $theme={theme} $selectedTheme={selectedTheme} $count={count}>
           {count.toLocaleString()}
         </Counter>
     );}

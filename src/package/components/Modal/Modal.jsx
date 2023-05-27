@@ -71,7 +71,7 @@ const Modal = props => {
         $textColor={textColor}
         $useOverflow={useOverflow}
       >
-        <ModalHeader confirm={confirm}>
+        <ModalHeader $confirm={confirm}>
           <Title $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
             {titleText}
           </Title>

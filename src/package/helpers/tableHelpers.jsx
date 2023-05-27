@@ -51,7 +51,7 @@ export const buildHeaders = args => {
   const headings = content?.headers?.map((header, index) => (
     <HeaderItem
       key={index}
-      sortable={sortable}
+      $sortable={sortable}
       onClick={() => handleSort(header, index)}
     >
       {sortable && header === sortedColumn && (
@@ -120,8 +120,6 @@ export const buildRows = args => {
 
 const buildData = (obj, args) => {
   const {
-    theme,
-    selectedTheme,
     draggable,
     dragIcon,
     labelTextColor,
@@ -131,16 +129,9 @@ const buildData = (obj, args) => {
   const { label, ...rest } = obj;
 
   return Object.values(rest).map((val, index) => (
-    <TDContainer
-      theme={theme}
-      selectedTheme={selectedTheme}
-      key={index}
-    >
+    <TDContainer key={index}>
       {label && index === 0 && (
-        <Label
-          labelTextColor={labelTextColor}
-          labelBGColor={labelBGColor}
-        >
+        <Label labelTextColor={labelTextColor} labelBGColor={labelBGColor}>
           {label}
         </Label>
       )}
