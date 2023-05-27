@@ -9,6 +9,7 @@ export const StyledToggle = styled('label')`
   display: inline-flex;
   position: relative;
   min-width: 3rem;
+  width: 3rem;
   height: 1.75rem;
 `;
 
