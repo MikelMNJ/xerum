@@ -14,7 +14,6 @@ const Price = props => {
     negativeColor,
     privacy,
     color,
-    ...rest
   } = props;
 
   const getColor = () => {
@@ -38,10 +37,9 @@ const Price = props => {
 
   return (
     <StyledPrice
-      theme={theme}
-      selectedTheme={selectedTheme}
-      color={getColor()}
-      {...rest}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $color={getColor()}
     >
       {buildPrice()}
     </StyledPrice>

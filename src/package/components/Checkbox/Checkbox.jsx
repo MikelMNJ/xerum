@@ -42,19 +42,19 @@ const Checkbox = props => {
   return (
     <StyledLabel {...rest}>
       <Box
-        theme={theme}
-        selectedTheme={selectedTheme}
-        boxColor={boxColor}
-        solidFill={solidFill}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $boxColor={boxColor}
+        $solidFill={solidFill}
         disabled={disabled}
       >
         <Check
-          theme={theme}
-          selectedTheme={selectedTheme}
-          visible={checked}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $visible={checked}
           disabled={disabled}
-          checkColor={checkColor}
-          solidFill={solidFill}
+          $checkColor={checkColor}
+          $solidFill={solidFill}
           className={iconValid(icon) || 'fa-solid fa-check'}
         />
       </Box>

@@ -32,10 +32,10 @@ const ToTop = props => {
   return (
     <StyledToTop
       ref={toTop}
-      theme={theme}
-      selectedTheme={selectedTheme}
-      iconColor={iconColor}
-      bgColor={bgColor}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $iconColor={iconColor}
+      $bgColor={bgColor}
       onClick={e => resetPage(e, true)}
       {...rest}
     >

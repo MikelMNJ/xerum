@@ -60,14 +60,14 @@ const Search = props => {
 
   return (
     <StyledSearch {...rest}>
-      <Label theme={theme} selectedTheme={selectedTheme} noButton={noButton} inputIconColor={inputIconColor}>
+      <Label $theme={theme} $selectedTheme={selectedTheme} $noButton={noButton} $inputIconColor={inputIconColor}>
         {!noIcon && (
           <Icon
-            theme={theme}
-            selectedTheme={selectedTheme}
-            height={inputIconHeight}
-            inputIconColor={inputIconColor || inputTextColor}
-            inputIconSize={inputIconSize}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $height={inputIconHeight}
+            $inputIconColor={inputIconColor || inputTextColor}
+            $inputIconSize={inputIconSize}
           >
             {iconValid(inputIcon)
               ? <i className={inputIcon} />
@@ -77,24 +77,24 @@ const Search = props => {
         )}
 
         <Input
-          theme={theme}
-          selectedTheme={selectedTheme}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           ref={inputRef}
           type='text'
-          noIcon={noIcon}
-          pill={pill}
-          round={round}
-          borderColor={borderColor}
-          borderRadius={borderRadius}
-          borderSize={borderSize}
-          bottomBorder={bottomBorder}
-          inputTextColor={inputTextColor}
-          placeholderColor={placeholderColor}
-          inputBGColor={inputBGColor}
+          $noIcon={noIcon}
+          $pill={pill}
+          $round={round}
+          $borderColor={borderColor}
+          $borderRadius={borderRadius}
+          $borderSize={borderSize}
+          $bottomBorder={bottomBorder}
+          $inputTextColor={inputTextColor}
+          $placeholderColor={placeholderColor}
+          $inputBGColor={inputBGColor}
           placeholder={placeholder}
-          focusColor={focusColor}
-          buttonWidth={buttonWidth}
-          fontFamily={fontFamily}
+          $focusColor={focusColor}
+          $buttonWidth={buttonWidth}
+          $fontFamily={fontFamily}
           defaultValue={inputRef.current?.value || ''}
           onChange={updateRef}
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
@@ -103,18 +103,18 @@ const Search = props => {
 
         {!noButton && cloneElement(
           <SubmitButton
-            theme={theme}
-            selectedTheme={selectedTheme}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
             ref={buttonRef}
-            text={buttonText}
-            noText={!buttonText}
-            pill={pill}
-            round={round}
-            icon={buttonIcon}
-            fontFamily={fontFamily}
-            color={buttonColor}
-            textColor={buttonTextColor}
-            hoverColor={buttonHoverColor}
+            $text={buttonText}
+            $noText={!buttonText}
+            $pill={pill}
+            $round={round}
+            $icon={buttonIcon}
+            $fontFamily={fontFamily}
+            $color={buttonColor}
+            $textColor={buttonTextColor}
+            $hoverColor={buttonHoverColor}
             onClick={handleSubmit}
           />,
         )}

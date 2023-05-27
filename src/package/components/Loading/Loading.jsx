@@ -28,15 +28,15 @@ const Loading = props => {
   const buildContent = () => {
     if (isLoading) {
       return (
-        <Text theme={theme} selectedTheme={selectedTheme} column={column} textColor={textColor} {...rest}>
+        <Text $theme={theme} $selectedTheme={selectedTheme} $column={column} $textColor={textColor} {...rest}>
           {!noIcon && (
             <Fragment>
               <Icon
-                theme={theme}
-                selectedTheme={selectedTheme}
+                $theme={theme}
+                $selectedTheme={selectedTheme}
                 className={`${iconValid(icon) || 'fa-solid fa-spinner'} fa-spin`}
-                iconSize={iconSize}
-                iconColor={iconColor}
+                $iconSize={iconSize}
+                $iconColor={iconColor}
               />
               <Spacer across={true} />
             </Fragment>
@@ -52,15 +52,15 @@ const Loading = props => {
 
       if (!renderOnFail) {
         return (
-          <Text theme={theme} selectedTheme={selectedTheme} textColor={textColor}>
+          <Text $theme={theme} $selectedTheme={selectedTheme} $textColor={textColor}>
             {!noIcon && (
               <Fragment>
                 <Icon
-                  theme={theme}
-                  selectedTheme={selectedTheme}
+                  $theme={theme}
+                  $selectedTheme={selectedTheme}
                   className={iconValid(failIcon) || 'fa-solid fa-exclamation-circle'}
-                  iconSize={iconSize}
-                  iconColor={iconColor}
+                  $iconSize={iconSize}
+                  $iconColor={iconColor}
                 />
                 <Spacer across={true} />
               </Fragment>

@@ -39,7 +39,7 @@ export const Icon = styled('div')`
   color: ${props => {
     const color = hexValid(props.$inputIconColor) || getColor(props, 'onPrimary', neutral.raisinBlack);
 
-    if (props.$disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
     return color;
   }};
 
@@ -70,7 +70,7 @@ export const Input = styled('input')`
     border-bottom: ${props => props.$borderSize || 0.0625}rem solid ${props => {
       const color = hexValid(props.$borderColor) || getColor(props, 'grey', shades.black);
 
-      if (props.$disabled) return neutral.lightGrey;
+      if (props.disabled) return neutral.lightGrey;
       return color + 60;
     }};
   `}
@@ -81,7 +81,7 @@ export const Input = styled('input')`
       const fallback = props.$selectedTheme === light ? shades.white : shades.black;
       const color = hexValid(props.$boxColor) || getColor(props, themeColor, fallback);
 
-      if (props.$disabled) return neutral.lightGrey;
+      if (props.disabled) return neutral.lightGrey;
       return color + 60;
     }};
   `}
@@ -105,14 +105,14 @@ export const Input = styled('input')`
       box-shadow: 0 0 0.5rem ${props => {
         const color = hexValid(props.$focusColor) || getColor(props, 'accent', neutral.davysGrey);
 
-        if (props.$disabled) return neutral.lightGrey;
+        if (props.disabled) return neutral.lightGrey;
         return color;
       }};
 
       outline: 0.125rem solid ${props => {
         const color = hexValid(props.$focusColor) || getColor(props, 'accentHover', neutral.greyWeb);
 
-        if (props.$disabled) return neutral.lightGrey;
+        if (props.disabled) return neutral.lightGrey;
         return color;
       }};
     `}

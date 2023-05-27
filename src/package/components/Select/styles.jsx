@@ -110,7 +110,7 @@ export const Icon = styled('div')`
   color: ${props => {
     const color = hexValid(props.$iconColor) || getColor(props, 'onPrimary', neutral.raisinBlack);
 
-    if (props.$disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
     return color;
   }};
 

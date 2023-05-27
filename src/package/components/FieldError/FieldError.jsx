@@ -19,7 +19,7 @@ const FieldError = props => {
 
             if (showError) {
               return (
-                <StyledError indent={indent} {...rest}>
+                <StyledError $indent={indent} {...rest}>
                   <Spacer size={0.5} />
                   {msg}
                 </StyledError>

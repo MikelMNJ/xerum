@@ -36,7 +36,7 @@ export const Box = styled('div')`
     const themeColor = props.$selectedTheme === light ? 'white' : 'darkGrey';
     const color = hexValid(props.$boxColor) || getColor(props, themeColor, colors.shades.white);
 
-    if (props.$disabled) return colors.neutral.lightGrey;
+    if (props.disabled) return colors.neutral.lightGrey;
     return color;
   }};
 
@@ -45,7 +45,7 @@ export const Box = styled('div')`
     const fallback = props.$selectedTheme === light ? colors.shades.white : colors.shades.black;
     const color = hexValid(props.$boxColor) || getColor(props, themeColor, fallback);
 
-    if (props.$disabled) return colors.neutral.lightGrey;
+    if (props.disabled) return colors.neutral.lightGrey;
     return color + 60;
   }};
 
@@ -53,7 +53,7 @@ export const Box = styled('div')`
     background-color: ${props => {
       const color = hexValid(props.$boxColor) || getColor(props, 'accent', colors.shades.black);
 
-      if (props.$disabled) return colors.neutral.lightGrey;
+      if (props.disabled) return colors.neutral.lightGrey;
       return color;
     }};
   `};
@@ -67,7 +67,7 @@ export const Check = styled('i')`
   color: ${props => {
     const color = hexValid(props.$checkColor) || getColor(props, 'accent', colors.shades.black);
 
-    if (props.$disabled) return colors.neutral.lightGrey;
+    if (props.disabled) return colors.neutral.lightGrey;
     return color;
   }};
 
@@ -75,7 +75,7 @@ export const Check = styled('i')`
     color: ${props => {
       const color = hexValid(props.$checkColor) || getColor(props, 'onAccent', colors.shades.white);
 
-      if (props.$disabled) return colors.neutral.greyWeb;
+      if (props.disabled) return colors.neutral.greyWeb;
       return color;
     }};
   `};

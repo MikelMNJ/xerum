@@ -73,7 +73,7 @@ const Accordion = props => {
               } />
             )}
 
-            <Spacer $across={true} />
+            <Spacer across={true} />
 
             {title}
           </Title>

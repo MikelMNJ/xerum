@@ -77,7 +77,7 @@ const TestForm = withTheme(props => {
               borderRadius={0.25}
               bottomBorder={true}
               fontFamily='Inter-Medium'
-              inputBGColor={primary}
+              $inputBGColor={primary}
             />
 
             <FieldError

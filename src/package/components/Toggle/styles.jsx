@@ -23,12 +23,12 @@ export const Track = styled('span')`
   bottom: 0;
   border-radius: 2.125rem;
   transition: background-color 0.1s linear;
-  cursor: ${props => props.$disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
   background-color: ${props => {
-    if (props.$disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
+    if (props.disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
 
-    if (props.$checked) {
+    if (props.checked) {
       return hexValid(props.$activeColor) || getColor(props, 'accent', colors.shades.black);
     }
 
@@ -41,11 +41,11 @@ export const Track = styled('span')`
     font-size: 1.5rem;
     transition: transform 0.1s linear;
     color: ${props => {
-      if (props.$disabled) return getColor(props, 'grey', colors.neutral.greyWeb);
+      if (props.disabled) return getColor(props, 'grey', colors.neutral.greyWeb);
       return hexValid(props.$iconColor) || getColor(props, 'white', colors.shades.white);
     }};
 
-    ${props => props.$checked && css`transform: translateX(1.2rem);`}
+    ${props => props.checked && css`transform: translateX(1.2rem);`}
   }
 `;
 

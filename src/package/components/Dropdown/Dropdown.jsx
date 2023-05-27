@@ -48,24 +48,24 @@ const Dropdown = props => {
   return (
     <StyledDropdown
       ref={dropdownRef}
-      theme={theme}
-      selectedTheme={selectedTheme}
-      visible={visible}
-      width={width}
-      posX={posX}
-      posY={posY}
-      zIndex={zIndex}
-      borderSize={borderSize}
-      borderRadius={borderRadius}
-      borderColor={borderColor}
-      padding={padding}
-      horizontalPadding={horizontalPadding}
-      verticalPadding={verticalPadding}
-      bgColor={bgColor}
-      color={color}
-      shadowColor={shadowColor}
-      minHeight={minHeight}
-      maxHeight={maxHeight}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $visible={visible}
+      $width={width}
+      $posX={posX}
+      $posY={posY}
+      $zIndex={zIndex}
+      $borderSize={borderSize}
+      $borderRadius={borderRadius}
+      $borderColor={borderColor}
+      $padding={padding}
+      $horizontalPadding={horizontalPadding}
+      $verticalPadding={verticalPadding}
+      $bgColor={bgColor}
+      $color={color}
+      $shadowColor={shadowColor}
+      $minHeight={minHeight}
+      $maxHeight={maxHeight}
     >
       {children}
     </StyledDropdown>

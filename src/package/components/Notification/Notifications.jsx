@@ -3,7 +3,7 @@ import { StyledNotifications } from './styles';
 import { Message } from './Message';
 
 const Notifications = props => {
-  const { noIcons, noTime, time, notifications, removeNotification, ...rest } = props;
+  const { noIcons, noTime, time, notifications, removeNotification, textColor, borderColor, bgColor } = props;
   const targets = useRef([]);
 
   const removeMessage = useCallback(i => {
@@ -36,7 +36,9 @@ const Notifications = props => {
           message={msg}
           noIcons={noIcons}
           onClose={() => removeMessage(i)}
-          {...rest}
+          textColor={textColor}
+          borderColor={borderColor}
+          bgColor={bgColor}
         />
       );
     });

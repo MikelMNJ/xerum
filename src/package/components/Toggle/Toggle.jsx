@@ -41,7 +41,7 @@ const Toggle = props => {
         <FormikInput
           type='checkbox'
           name={name}
-          theme={theme}
+          $theme={theme}
           $selectedTheme={selectedTheme}
           form={form}
           checked={checked}
@@ -54,8 +54,8 @@ const Toggle = props => {
         <ToggleInput
           type='checkbox'
           name={name}
-          theme={theme}
-          selectedTheme={selectedTheme}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           checked={checked}
           onChange={handleFieldStateUpdate}
           {...rest}
@@ -63,12 +63,12 @@ const Toggle = props => {
       )}
 
       <Track
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         checked={checked}
-        activeColor={activeColor}
-        inactiveColor={inactiveColor}
-        iconColor={iconColor}
+        $activeColor={activeColor}
+        $inactiveColor={inactiveColor}
+        $iconColor={iconColor}
         disabled={rest.disabled}
       >
         <i className={iconValid(icon) || 'fa-solid fa-circle'} />

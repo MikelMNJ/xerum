@@ -9,6 +9,8 @@ import _ from 'lodash';
 
 const App = props => {
   const {
+    theme,
+    selectedTheme,
     userInfo,
     userInfoLoading,
     modalContent,
@@ -17,12 +19,12 @@ const App = props => {
     setConfirmContent,
     ...rest
   } = props;
-  const lightTheme = props.$selectedTheme === appConstants.themes.light;
+  const lightTheme = props.selectedTheme === appConstants.themes.light;
   const token = userInfo?.token;
 
   const colorOverride = lightTheme
-    ? props.$theme.modes[props.$selectedTheme].accent
-    : props.$theme.modes[props.$selectedTheme].onPrimary;
+    ? props.theme.modes[props.selectedTheme].accent
+    : props.theme.modes[props.selectedTheme].onPrimary;
 
   const renderApp = () => {
     return (
@@ -38,8 +40,8 @@ const App = props => {
 
   return (
     <Fragment>
-      <GlobalStyles {...rest} />
-      <Notifications {...rest} />
+      <GlobalStyles $theme={theme} $selectedTheme={selectedTheme} {...rest} />
+      <Notifications $theme={theme} $selectedTheme={selectedTheme} {...rest} />
 
       <Loading
         isLoading={userInfoLoading}
@@ -52,6 +54,8 @@ const App = props => {
         {renderApp()}
 
         <Modal
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           visible={!_.isEmpty(modalContent)}
           onClose={() => setModalContent(null)}
           {...rest}
@@ -60,6 +64,8 @@ const App = props => {
         </Modal>
 
         <Modal
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           confirm={true}
           confirmText={<Font weight='semibold'>{confirmContent?.confirmText || 'Confirm'}</Font>}
           cancelText={<Font weight='semibold'>Cancel</Font>}

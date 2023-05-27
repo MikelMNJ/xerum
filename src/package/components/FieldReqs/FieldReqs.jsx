@@ -40,14 +40,14 @@ const FieldReqs = props => {
 
     return (
       <Icon
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         className={`fa-solid fa-${exclusion ? 'exclamation-circle' : 'check-circle'}`}
-        exclusion={exclusion}
-        valid={valid}
-        bgColor={bgColor}
-        color={color}
-        exColor={exColor}
+        $exclusion={exclusion}
+        $valid={valid}
+        $bgColor={bgColor}
+        $color={color}
+        $exColor={exColor}
       />
     );
   };

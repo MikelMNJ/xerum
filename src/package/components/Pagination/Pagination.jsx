@@ -49,29 +49,29 @@ const Pagination = props => {
   const pageElement = (i, workingPage) => {
     return (
       <PageNum
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         key={i}
-        active={i === page}
-        numberSize={numberSize}
-        boldActive={boldActive}
-        activeColor={activeColor}
-        inactiveColor={inactiveColor}
-        isSpread={_.isString(i)}
+        $active={i === page}
+        $numberSize={numberSize}
+        $boldActive={boldActive}
+        $activeColor={activeColor}
+        $inactiveColor={inactiveColor}
+        $isSpread={_.isString(i)}
         onClick={() => _.isNumber(i) && changePage(i)}
       >
         {workingPage}
 
         {!noMarker && (
           <Marker
-            theme={theme}
-            selectedTheme={selectedTheme}
-            active={i === page}
-            markerSpacing={markerSpacing}
-            markerWidth={markerWidth}
-            markerHeight={markerHeight}
-            activeColor={activeColor}
-            inactiveColor={inactiveColor}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $active={i === page}
+            $markerSpacing={markerSpacing}
+            $markerWidth={markerWidth}
+            $markerHeight={markerHeight}
+            $activeColor={activeColor}
+            $inactiveColor={inactiveColor}
           />
         )}
       </PageNum>
@@ -113,16 +113,16 @@ const Pagination = props => {
 
   return (
     <StyledPagination
-      theme={theme}
-      selectedTheme={selectedTheme}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
       {...rest}
     >
       {(endButtons || truncateLimit) && (
         <EndButton
-          theme={theme}
-          selectedTheme={selectedTheme}
-          activeColor={activeColor}
-          inactiveColor={inactiveColor}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $activeColor={activeColor}
+          $inactiveColor={inactiveColor}
         >
           <i
             role='none'
@@ -138,10 +138,10 @@ const Pagination = props => {
 
       {(endButtons || truncateLimit) && (
         <EndButton
-          theme={theme}
-          selectedTheme={selectedTheme}
-          activeColor={activeColor}
-          inactiveColor={inactiveColor}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $activeColor={activeColor}
+          $inactiveColor={inactiveColor}
         >
           <Spacer size={0.5} across={true} />
           <i

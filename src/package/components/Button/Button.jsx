@@ -5,6 +5,8 @@ import { StyledButton } from './styles';
 
 const Button = forwardRef((props, ref) => {
   const {
+    theme,
+    selectedTheme,
     text,
     noText,
     color,
@@ -51,15 +53,17 @@ const Button = forwardRef((props, ref) => {
   return (
     <StyledButton
       ref={ref}
-      buttonType={buttonType}
-      noText={noText}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $buttonType={buttonType}
+      $noText={noText}
+      $color={color}
+      $hoverColor={hoverColor}
+      $textColor={textColor}
+      $fontFamily={fontFamily}
+      $round={round}
+      $pill={pill}
       onClick={handleClick}
-      color={color}
-      hoverColor={hoverColor}
-      textColor={textColor}
-      fontFamily={fontFamily}
-      round={round}
-      pill={pill}
       {...rest}
     >
       {buildContent()}

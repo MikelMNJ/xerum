@@ -27,7 +27,6 @@ const Filter = props => {
     borderSize,
     bottomBorder,
     focusColor,
-    ...rest
   } = props;
 
   const [ filterValue, setFilterValue ] = useState('');
@@ -126,15 +125,15 @@ const Filter = props => {
   }, [ filterValue ]);
 
   return (
-    <StyledFilter {...rest}>
-      <Label theme={theme} selectedTheme={selectedTheme} inputIconColor={inputIconColor}>
+    <StyledFilter>
+      <Label $theme={theme} $selectedTheme={selectedTheme} $inputIconColor={inputIconColor}>
         {!noIcon && (
           <Icon
-            theme={theme}
-            selectedTheme={selectedTheme}
-            height={inputIconHeight}
-            inputIconColor={inputIconColor || inputTextColor}
-            inputIconSize={inputIconSize}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $height={inputIconHeight}
+            $inputIconColor={inputIconColor || inputTextColor}
+            $inputIconSize={inputIconSize}
           >
             {iconValid(inputIcon)
               ? <i className={inputIcon} />
@@ -144,22 +143,22 @@ const Filter = props => {
         )}
 
         <Input
-          theme={theme}
-          selectedTheme={selectedTheme}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           type='text'
-          noIcon={noIcon}
-          pill={pill}
-          round={round}
-          borderColor={borderColor}
-          borderRadius={borderRadius}
-          borderSize={borderSize}
-          bottomBorder={bottomBorder}
-          inputTextColor={inputTextColor}
-          placeholderColor={placeholderColor}
-          inputBGColor={inputBGColor}
+          $noIcon={noIcon}
+          $pill={pill}
+          $round={round}
+          $borderColor={borderColor}
+          $borderRadius={borderRadius}
+          $borderSize={borderSize}
+          $bottomBorder={bottomBorder}
+          $inputTextColor={inputTextColor}
+          $placeholderColor={placeholderColor}
+          $inputBGColor={inputBGColor}
           placeholder={placeholder}
-          focusColor={focusColor}
-          fontFamily={fontFamily}
+          $focusColor={focusColor}
+          $fontFamily={fontFamily}
           defaultValue={filterValue || ''}
           onChange={e => setFilterValue(e.currentTarget.value)}
         />

@@ -14,13 +14,12 @@ const NotFound = props => {
     noIcon,
     message,
     noMessage,
-    ...rest
   } = props;
 
   const renderIcon = () => {
     if (!noIcon) {
       return (
-        <Icon theme={theme} selectedTheme={selectedTheme} color={color}>
+        <Icon $theme={theme} $selectedTheme={selectedTheme} $color={color}>
           <i className={`${icon ? iconValid(icon) : 'fa-solid fa-bug'}`} />
         </Icon>
       );
@@ -44,7 +43,7 @@ const NotFound = props => {
   };
 
   return (
-    <StyledNotFound {...rest}>
+    <StyledNotFound>
       {renderIcon()}
 
       <Spacer />

@@ -100,7 +100,7 @@ export const CloseIcon = styled('div')`
   color: ${props => {
     const color = hexValid(props.$closeColor) || getColor(props, 'onPrimary', colors.shades.black);
 
-    if (props.$disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
+    if (props.disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
     return color;
   }};
 

@@ -21,7 +21,6 @@ const SlideOver = props => {
     onClose,
     visible,
     bgColor,
-    ...rest
   } = props;
 
   const slideOverRef = useRef();
@@ -35,16 +34,15 @@ const SlideOver = props => {
   if (visible) {
     return (
       <StyledSlideOver
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         ref={slideOverRef}
-        width={width}
-        height={height}
-        bgColor={bgColor}
-        topOffset={topOffset}
-        bottomOffset={bottomOffset}
+        $width={width}
+        $height={height}
+        $bgColor={bgColor}
+        $topOffset={topOffset}
+        $bottomOffset={bottomOffset}
         className='slideIn'
-        {...rest}
       >
         <Header>
           <H3 theme={theme} selectedTheme={selectedTheme} titleColor={titleColor}>

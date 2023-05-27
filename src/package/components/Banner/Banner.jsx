@@ -18,10 +18,10 @@ const Banner = props => {
 
   return (
     <StyledBanner
-      theme={theme}
-      selectedTheme={selectedTheme}
-      noClose={noClose}
-      sharp={sharp}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $noClose={noClose}
+      $sharp={sharp}
       {...rest}
     >
       <Message center={center}>

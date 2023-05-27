@@ -57,28 +57,28 @@ const Modal = props => {
   return (
     <Fragment>
       <ModalBG
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         ref={bgRef}
         onClick={() => bgClose && onClose?.()}
       />
 
       <StyledModal
         ref={ref}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        bgColor={bgColor}
-        confirm={confirm}
-        textColor={textColor}
-        useOverflow={useOverflow}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $bgColor={bgColor}
+        $confirm={confirm}
+        $textColor={textColor}
+        $useOverflow={useOverflow}
         {...rest}
       >
         <ModalHeader confirm={confirm}>
-          <Title theme={theme} selectedTheme={selectedTheme} titleColor={titleColor}>
+          <Title $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
             {titleText}
           </Title>
 
-          <CloseButton theme={theme} selectedTheme={selectedTheme} titleColor={titleColor}>
+          <CloseButton $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
             <Button
               theme={theme}
               selectedTheme={selectedTheme}
@@ -94,7 +94,7 @@ const Modal = props => {
 
         {text ? <ConfirmText>{text}</ConfirmText> : children}
 
-        <ConfirmButtons visible={confirm && !blank}>
+        <ConfirmButtons $visible={confirm && !blank}>
           <ButtonWrapper>
             <Spacer />
 

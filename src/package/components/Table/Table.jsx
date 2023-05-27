@@ -77,8 +77,8 @@ const Table = props => {
       <Droppable droppableId='rows'>
         {provided => (
           <StyledTable
-            theme={theme}
-            selectedTheme={selectedTheme}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
             ref={provided.innerRef}
             {...provided.droppableProps}
             {...rest}

@@ -6,7 +6,7 @@ const Status = props => {
   const { theme, selectedTheme, color, text, ...rest } = props;
 
   return (
-    <StyledStatus theme={theme} selectedTheme={selectedTheme} color={color}>
+    <StyledStatus $theme={theme} $selectedTheme={selectedTheme} $color={color}>
       <i className='fa-solid fa-circle'  {...rest} />
 
       {text && (

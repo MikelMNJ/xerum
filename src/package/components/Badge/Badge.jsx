@@ -55,18 +55,18 @@ const Badge = forwardRef((props, badgeRef) => {
           if (badgeRef) badgeRef.current = element;
           countWrapperRef.current = element;
         }}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        textSize={textSize}
-        textColor={textColor}
-        bgColor={bgColor}
-        strokeColor={strokeColor}
-        strokeWidth={strokeWidth}
-        widths={widths}
-        position={position}
-        posX={posX}
-        posY={posY}
-        visible={count > 0}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $textSize={textSize}
+        $textColor={textColor}
+        $bgColor={bgColor}
+        $strokeColor={strokeColor}
+        $strokeWidth={strokeWidth}
+        $widths={widths}
+        $position={position}
+        $posX={posX}
+        $posY={posY}
+        $visible={count > 0}
         {...rest}
       >
         {renderCount()}
@@ -74,11 +74,11 @@ const Badge = forwardRef((props, badgeRef) => {
 
       <IconWrapper
         ref={iconWrapperRef}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        iconColor={iconColor}
-        iconHoverColor={iconHoverColor}
-        iconSize={iconSize}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $iconColor={iconColor}
+        $iconHoverColor={iconHoverColor}
+        $iconSize={iconSize}
       >
         <i className={iconValid(icon) || 'fa-solid fa-bell'} />
       </IconWrapper>
