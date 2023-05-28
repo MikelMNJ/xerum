@@ -64,26 +64,26 @@ const Field = props => {
   };
 
   return (
-    <StyledField height={height} labelHeight={labelAreaRef.current?.offsetHeight || 0}>
+    <StyledField $height={height} $labelHeight={labelAreaRef.current?.offsetHeight || 0}>
       <Label
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         htmlFor={name || ''}
-        labelSize={labelSize}
-        labelColor={labelColor}
-        labelSpacing={labelSpacing}
+        $labelSize={labelSize}
+        $labelColor={labelColor}
+        $labelSpacing={labelSpacing}
       >
         {(label || optional) && (
           <LabelArea ref={labelAreaRef}>
-            <LabelText label={label}>
+            <LabelText $label={label}>
               {label}
 
               <Optional
-                theme={theme}
-                selectedTheme={selectedTheme}
-                visible={optional}
-                optionalTextSize={optionalTextSize}
-                optionalTextColor={optionalTextColor}
+                $theme={theme}
+                $selectedTheme={selectedTheme}
+                $visible={optional}
+                $optionalTextSize={optionalTextSize}
+                $optionalTextColor={optionalTextColor}
               >
                 {optionalText || 'optional'}
               </Optional>
@@ -95,22 +95,21 @@ const Field = props => {
 
         {!hideField && (
           <InputArea
-            theme={theme}
-            selectedTheme={selectedTheme}
-            placeholderColor={placeholderColor}
-            height={height}
-            fontFamily={fontFamily}
-            fontSize={fontSize}
-            bgColor={bgColor}
-            textColor={textColor}
-            borderRadius={borderRadius}
-            borderSize={borderSize}
-            borderColor={borderColor}
-            activeBorderColor={activeBorderColor}
-            activeBorderSize={activeBorderSize}
-            bottomBorder={bottomBorder}
-            icon={icon}
-            {...rest}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $placeholderColor={placeholderColor}
+            $height={height}
+            $fontFamily={fontFamily}
+            $fontSize={fontSize}
+            $bgColor={bgColor}
+            $textColor={textColor}
+            $borderRadius={borderRadius}
+            $borderSize={borderSize}
+            $borderColor={borderColor}
+            $activeBorderColor={activeBorderColor}
+            $activeBorderSize={activeBorderSize}
+            $bottomBorder={bottomBorder}
+            $icon={icon}
           >
             {form && (
               <FormikField
@@ -135,12 +134,12 @@ const Field = props => {
             )}
 
             <Icon
-              theme={theme}
-              selectedTheme={selectedTheme}
-              height={height}
-              iconColor={iconColor || textColor}
-              iconSize={iconSize}
-              iconCallback={iconCallback}
+              $theme={theme}
+              $selectedTheme={selectedTheme}
+              $height={height}
+              $iconColor={iconColor || textColor}
+              $iconSize={iconSize}
+              $iconCallback={iconCallback}
               onClick={() => {
                 iconCallback?.();
               }}

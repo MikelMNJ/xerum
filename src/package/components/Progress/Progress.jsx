@@ -16,7 +16,6 @@ const Progress = props => {
     total,
     pctSize,
     height,
-    ...rest
   } = props;
 
   const [ transform, setTransform ] = useState(0);
@@ -46,30 +45,29 @@ const Progress = props => {
 
   return (
     <StyledProgressBar
-      theme={theme}
-      selectedTheme={selectedTheme}
-      bgColor={bgColor}
-      noPct={noPct}
-      height={height}
-      {...rest}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $bgColor={bgColor}
+      $noPct={noPct}
+      $height={height}
     >
       <StyledProgress
         ref={widthRef}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        color={color}
-        progress={progress}
-        >
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $color={color}
+        $progress={progress}
+      >
         {!noPct && (
           <div ref={pctRef}>
             <ProgressPercent
-              theme={theme}
-              selectedTheme={selectedTheme}
-              current={current}
-              total={total}
-              color={pctColor}
-              transform={transform}
-              pctSize={pctSize}
+              $theme={theme}
+              $selectedTheme={selectedTheme}
+              $current={current}
+              $total={total}
+              $color={pctColor}
+              $transform={transform}
+              $pctSize={pctSize}
             />
           </div>
         )}

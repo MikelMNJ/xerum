@@ -5,7 +5,7 @@ import { StyledError } from './styles';
 import _ from 'lodash';
 
 const FieldError = props => {
-  const { name, indent, ...rest } = props;
+  const { theme, selectedTheme, name, indent } = props;
 
   const buildFieldError = () => {
     if (name) {
@@ -19,7 +19,7 @@ const FieldError = props => {
 
             if (showError) {
               return (
-                <StyledError indent={indent} {...rest}>
+                <StyledError $theme={theme} $selectedTheme={selectedTheme} $indent={indent}>
                   <Spacer size={0.5} />
                   {msg}
                 </StyledError>

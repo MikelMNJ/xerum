@@ -12,7 +12,6 @@ const Percent = props => {
     usePlus,
     positiveColor,
     negativeColor,
-    ...rest
   } = props;
 
   const getColor = () => {
@@ -37,10 +36,9 @@ const Percent = props => {
 
   return (
     <StyledPercent
-      theme={theme}
-      selectedTheme={selectedTheme}
-      color={getColor()}
-      {...rest}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $color={getColor()}
     >
       {buildPercent()}%
     </StyledPercent>

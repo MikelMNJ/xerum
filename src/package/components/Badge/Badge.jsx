@@ -20,7 +20,6 @@ const Badge = forwardRef((props, badgeRef) => {
     posX,
     posY,
     callback,
-    ...rest
   } = props;
 
   const [ widths, setWidths ] = useState({ countWidth: 0, iconWidth: 0 });
@@ -42,7 +41,7 @@ const Badge = forwardRef((props, badgeRef) => {
   const renderCount = () => {
     if (count > 0) {
       return (
-        <Counter theme={theme} selectedTheme={selectedTheme} count={count}>
+        <Counter $theme={theme} $selectedTheme={selectedTheme} $count={count}>
           {count.toLocaleString()}
         </Counter>
     );}
@@ -55,30 +54,29 @@ const Badge = forwardRef((props, badgeRef) => {
           if (badgeRef) badgeRef.current = element;
           countWrapperRef.current = element;
         }}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        textSize={textSize}
-        textColor={textColor}
-        bgColor={bgColor}
-        strokeColor={strokeColor}
-        strokeWidth={strokeWidth}
-        widths={widths}
-        position={position}
-        posX={posX}
-        posY={posY}
-        visible={count > 0}
-        {...rest}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $textSize={textSize}
+        $textColor={textColor}
+        $bgColor={bgColor}
+        $strokeColor={strokeColor}
+        $strokeWidth={strokeWidth}
+        $widths={widths}
+        $position={position}
+        $posX={posX}
+        $posY={posY}
+        $visible={count > 0}
       >
         {renderCount()}
       </CountWrapper>
 
       <IconWrapper
         ref={iconWrapperRef}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        iconColor={iconColor}
-        iconHoverColor={iconHoverColor}
-        iconSize={iconSize}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $iconColor={iconColor}
+        $iconHoverColor={iconHoverColor}
+        $iconSize={iconSize}
       >
         <i className={iconValid(icon) || 'fa-solid fa-bell'} />
       </IconWrapper>

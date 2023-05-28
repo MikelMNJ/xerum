@@ -20,13 +20,13 @@ export const StyledToTop = styled('div')`
   transition: all 0.75s cubic-bezier(.75,-0.5,0,1.75);
   transform: translateY(4.25rem);
   background-color: ${props => {
-    return hexValid(props.bgColor) || getColor(props, 'onPrimary', colors.shades.black);
+    return hexValid(props.$bgColor) || getColor(props, 'onPrimary', colors.shades.black);
   }};
 
   i {
     font-size: 2rem;
     color: ${props => {
-      return hexValid(props.iconColor) || getColor(props, 'primary', colors.shades.white);
+      return hexValid(props.$iconColor) || getColor(props, 'primary', colors.shades.white);
     }};
   }
 `;

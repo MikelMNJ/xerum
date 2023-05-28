@@ -11,7 +11,6 @@ const Tabs = props => {
     inactiveColor,
     inactiveTextColor,
     fontFamily,
-    ...rest
   } = props;
 
   const [ activeTab, setActiveTab ] = useState(content?.[0]?.name);
@@ -48,20 +47,20 @@ const Tabs = props => {
     <div>
       <TabNames
         ref={tabNames}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        inactiveColor={inactiveColor}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $inactiveColor={inactiveColor}
       >
         {content?.map((tab, index) => {
           return (
             <Name
               key={index}
-              theme={theme}
-              selectedTheme={selectedTheme}
-              fontFamily={fontFamily}
-              activeTab={activeTab === tab.name}
-              inactiveTextColor={inactiveTextColor}
-              activeTextColor={activeTextColor}
+              $theme={theme}
+              $selectedTheme={selectedTheme}
+              $fontFamily={fontFamily}
+              $activeTab={activeTab === tab.name}
+              $inactiveTextColor={inactiveTextColor}
+              $activeTextColor={activeTextColor}
               onClick={() => activeTab !== tab.name && setActiveTab(tab.name)}
             >
               {tab.name}
@@ -72,13 +71,13 @@ const Tabs = props => {
 
       <TabSlider
         ref={slider}
-        theme={theme}
-        selectedTheme={selectedTheme}
-        index={index}
-        activeTab={activeTab}
-        activeColor={activeColor}
-        content={content}
-        posData={posData}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $index={index}
+        $activeTab={activeTab}
+        $activeColor={activeColor}
+        $content={content}
+        $posData={posData}
       />
     </div>
   );
@@ -98,7 +97,7 @@ const Tabs = props => {
   );
 
   return (
-    <StyledTabs {...rest}>
+    <StyledTabs>
       {buildTabs()}
       {buildContent()}
     </StyledTabs>

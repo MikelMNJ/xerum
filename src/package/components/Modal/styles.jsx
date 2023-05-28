@@ -15,7 +15,7 @@ export const ModalBG = styled('div')`
 `;
 
 export const StyledModal = styled('div')`
-  ${props => props.confirm && css`
+  ${props => props.$confirm && css`
     display: flex;
     flex-direction: column;
   `}
@@ -30,15 +30,15 @@ export const StyledModal = styled('div')`
   max-height: calc(100% - 6rem);
   max-width: calc(100% - 6rem);
   min-width: 29rem;
-  min-height: ${props => props.confirm ? 'fit-content' : '15rem'};
+  min-height: ${props => props.$confirm ? 'fit-content' : '15rem'};
   width: max-content;
   height: max-content;
   padding: 0.5rem 1rem;
   border-radius: 0.35rem;
-  overflow-y: ${props => props.useOverflow === false ? 'unset' : 'auto'};
-  color: ${props => hexValid(props.textColor) || getColor(props, 'onPrimary', colors.shades.black)};
+  overflow-y: ${props => props.$useOverflow === false ? 'unset' : 'auto'};
+  color: ${props => hexValid(props.$textColor) || getColor(props, 'onPrimary', colors.shades.black)};
   background-color: ${props => (
-    hexValid(props.bgColor) || getColor(props, 'primary', colors.shades.white)
+    hexValid(props.$bgColor) || getColor(props, 'primary', colors.shades.white)
   )};
 
   @media only screen and (max-width: 414px) {
@@ -51,7 +51,7 @@ export const StyledModal = styled('div')`
 `;
 
 export const ModalHeader = styled('div')`
-  display: ${props => props.confirm ? 'none' : 'inline-flex'};
+  display: ${props => props.$confirm ? 'none' : 'inline-flex'};
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -60,7 +60,7 @@ export const ModalHeader = styled('div')`
 
 export const Title = styled('div')`
   color: ${props => (
-    hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.shades.black)
+    hexValid(props.$titleColor) || getColor(props, 'onPrimary', colors.shades.black)
   )};
 `;
 
@@ -71,14 +71,14 @@ export const CloseButton = styled('div')`
   i {
     font-size: 1.35rem;
     color: ${props => (
-      hexValid(props.titleColor) || getColor(props, 'onPrimary', colors.shades.black)
+      hexValid(props.$titleColor) || getColor(props, 'onPrimary', colors.shades.black)
     )}
   }
 `;
 
 export const ConfirmButtons = styled('div')`
-  display: ${props => props.visible ? 'inline-flex' : 'none'};
-  ${props => props.visible && css`gap: 1rem;`}
+  display: ${props => props.$visible ? 'inline-flex' : 'none'};
+  ${props => props.$visible && css`gap: 1rem;`}
   width: 100%;
 `;
 

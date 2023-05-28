@@ -9,7 +9,16 @@ const defaultWarning = 'fa-solid fa-triangle-exclamation';
 const defaultError = 'fa-solid fa-circle-exclamation';
 
 const Message = forwardRef((props, ref) => {
-  const { message, noIcons, onClose, ...rest } = props;
+  const {
+    theme,
+    selectedTheme,
+    message,
+    noIcons,
+    onClose,
+    textColor,
+    borderColor,
+    bgColor,
+  } = props;
 
   const buildMessage = () => {
     if (_.isObject(message) && !_.isArray(message)) {
@@ -36,9 +45,13 @@ const Message = forwardRef((props, ref) => {
   return (
     <StyledNotification
       ref={ref}
-      noIcons={noIcons}
-      type={_.lowerCase(message.type)}
-      {...rest}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $noIcons={noIcons}
+      $type={_.lowerCase(message.type)}
+      $textColor={textColor}
+      $borderColor={borderColor}
+      $bgColor={bgColor}
     >
       {!noIcons && (
         <Icon>

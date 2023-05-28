@@ -2,10 +2,10 @@ import { appConstants } from 'modules';
 import _ from 'lodash';
 
 export const getColor = (props, key, fallback) => {
-  const { theme, selectedTheme } = props;
+  const { $theme, $selectedTheme } = props;
 
-  if (theme && selectedTheme) {
-    const colors = theme.modes[selectedTheme];
+  if ($theme && $selectedTheme) {
+    const colors = $theme.modes[$selectedTheme];
     return colors[key];
   }
 

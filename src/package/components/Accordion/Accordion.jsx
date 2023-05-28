@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { iconValid } from '../../helpers';
 import { Spacer } from '../Spacer/Spacer';
-import {  StyledAccordion, Section, Title, Content } from './styles';
+import { StyledAccordion, Section, Title, Content } from './styles';
 import _ from 'lodash';
 
 const Accordion = props => {
@@ -22,7 +22,6 @@ const Accordion = props => {
     hoverTextColor,
     borderColor,
     iconSize,
-    ...rest
   } = props;
 
   const [ active, setActive ] = useState(openDefault || null);
@@ -48,22 +47,22 @@ const Accordion = props => {
       return (
         <Section
           key={index}
-          theme={theme}
-          selectedTheme={selectedTheme}
-          iconSize={iconSize}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $iconSize={iconSize}
         >
           <Title
-            theme={theme}
-            selectedTheme={selectedTheme}
-            activeBGColor={activeBGColor}
-            activeTextColor={activeTextColor}
-            activeHoverBGColor={activeHoverBGColor}
-            activeHoverTextColor={activeHoverTextColor}
-            hoverColor={hoverColor}
-            hoverTextColor={hoverTextColor}
-            borderColor={borderColor}
-            active={isActive}
-            iconSize={iconSize}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $activeBGColor={activeBGColor}
+            $activeTextColor={activeTextColor}
+            $activeHoverBGColor={activeHoverBGColor}
+            $activeHoverTextColor={activeHoverTextColor}
+            $hoverColor={hoverColor}
+            $hoverTextColor={hoverTextColor}
+            $borderColor={borderColor}
+            $active={isActive}
+            $iconSize={iconSize}
             onClick={() => expandCollapse(args)}
           >
             {!noIcon && (
@@ -79,10 +78,10 @@ const Accordion = props => {
           </Title>
 
           <Content
-            theme={theme}
-            selectedTheme={selectedTheme}
-            borderColor={borderColor}
-            active={isActive}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $borderColor={borderColor}
+            $active={isActive}
           >
             {content}
           </Content>
@@ -92,7 +91,7 @@ const Accordion = props => {
   };
 
   return (
-    <StyledAccordion {...rest}>
+    <StyledAccordion>
       {buildAccordion()}
     </StyledAccordion>
   );

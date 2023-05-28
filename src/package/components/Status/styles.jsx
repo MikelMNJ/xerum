@@ -12,7 +12,7 @@ export const StyledStatus = styled('div')`
   i {
     font-size: 0.6rem;
     margin: 0 0.5rem;
-    color: ${props => hexValid(props.color) || colors.neutral.greyWeb};
+    color: ${props => hexValid(props.$color) || colors.neutral.greyWeb};
     transition: color 0.2s ease;
   }
 `;

@@ -176,19 +176,19 @@ const Select = props => {
       return (
         <Option
           key={index}
-          theme={theme}
-          selectedTheme={selectedTheme}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           value={_.toString(value)}
-          height={height}
-          borderRadius={borderRadius}
-          optionTextColor={optionTextColor}
-          activeOptionTextColor={activeOptionTextColor}
-          bgColor={bgColor}
-          optionBgHoverColor={optionBgHoverColor}
-          activeOptionBgColor={activeOptionBgColor}
-          activeOptionBgHoverColor={activeOptionBgHoverColor}
-          active={active}
-          fontFamily={fontFamily}
+          $height={height}
+          $borderRadius={borderRadius}
+          $optionTextColor={optionTextColor}
+          $activeOptionTextColor={activeOptionTextColor}
+          $bgColor={bgColor}
+          $optionBgHoverColor={optionBgHoverColor}
+          $activeOptionBgColor={activeOptionBgColor}
+          $activeOptionBgHoverColor={activeOptionBgHoverColor}
+          $active={active}
+          $fontFamily={fontFamily}
           onClick={e => handleOptionChange(e, option)}
         >
           {privacy ? <PrivacyMask length={label.length} /> : label}
@@ -204,26 +204,26 @@ const Select = props => {
   };
 
   return (
-    <StyledSelect height={height} labelHeight={labelAreaRef.current?.offsetHeight || 0}>
+    <StyledSelect $height={height} $labelHeight={labelAreaRef.current?.offsetHeight || 0}>
       <Label
-        theme={theme}
-        selectedTheme={selectedTheme}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
         htmlFor={name || ''}
-        labelSize={labelSize}
-        labelColor={labelColor}
-        labelSpacing={labelSpacing}
+        $labelSize={labelSize}
+        $labelColor={labelColor}
+        $labelSpacing={labelSpacing}
       >
         {(label || optional) && (
           <LabelArea ref={labelAreaRef}>
-            <LabelText label={label}>
+            <LabelText $label={label}>
               {label}
 
               <Optional
-                theme={theme}
-                selectedTheme={selectedTheme}
-                visible={optional}
-                optionalTextSize={optionalTextSize}
-                optionalTextColor={optionalTextColor}
+                $theme={theme}
+                $selectedTheme={selectedTheme}
+                $visible={optional}
+                $optionalTextSize={optionalTextSize}
+                $optionalTextColor={optionalTextColor}
               >
                 {optionalText || 'optional'}
               </Optional>
@@ -235,21 +235,21 @@ const Select = props => {
 
         {!hideField && (
           <InputArea
-            theme={theme}
-            selectedTheme={selectedTheme}
-            height={height}
-            fontFamily={fontFamily}
-            fontSize={fontSize}
-            bgColor={bgColor}
-            textColor={textColor}
-            menuVisible={optionsMenuVisible}
-            borderRadius={borderRadius}
-            borderSize={borderSize}
-            borderColor={borderColor}
-            activeBorderColor={activeBorderColor}
-            activeBorderSize={activeBorderSize}
-            icon={icon}
-            placeholderColor={placeholderColor}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $height={height}
+            $fontFamily={fontFamily}
+            $fontSize={fontSize}
+            $bgColor={bgColor}
+            $textColor={textColor}
+            $menuVisible={optionsMenuVisible}
+            $borderRadius={borderRadius}
+            $borderSize={borderSize}
+            $borderColor={borderColor}
+            $activeBorderColor={activeBorderColor}
+            $activeBorderSize={activeBorderSize}
+            $icon={icon}
+            $placeholderColor={placeholderColor}
           >
             {form && (
               <FormikField
@@ -291,12 +291,12 @@ const Select = props => {
             )}
 
             <Icon
-              theme={theme}
-              selectedTheme={selectedTheme}
-              height={height}
-              iconColor={iconColor || textColor}
-              iconSize={iconSize}
-              menuVisible={optionsMenuVisible}
+              $theme={theme}
+              $selectedTheme={selectedTheme}
+              $height={height}
+              $iconColor={iconColor || textColor}
+              $iconSize={iconSize}
+              $menuVisible={optionsMenuVisible}
             >
               {iconValid(icon)
                 ? <i className={icon} />
@@ -308,26 +308,26 @@ const Select = props => {
       </Label>
 
       <OptionsArea
-        theme={theme}
-        selectedTheme={selectedTheme}
-        menuVisible={optionsMenuVisible}
-        height={height}
-        top={top}
-        label={label}
-        labelHeight={labelAreaRef.current?.offsetHeight || 0}
-        labelSpacing={labelSpacing || 0}
-        bgColor={bgColor}
-        borderRadius={borderRadius}
-        borderSize={borderSize}
-        borderColor={borderColor}
+        $theme={theme}
+        $selectedTheme={selectedTheme}
+        $menuVisible={optionsMenuVisible}
+        $height={height}
+        $top={top}
+        $label={label}
+        $labelHeight={labelAreaRef.current?.offsetHeight || 0}
+        $labelSpacing={labelSpacing || 0}
+        $bgColor={bgColor}
+        $borderRadius={borderRadius}
+        $borderSize={borderSize}
+        $borderColor={borderColor}
         onMouseDown={e => e.preventDefault()}
       >
         <StyledOptions
           ref={optionsRef}
-          theme={theme}
-          selectedTheme={selectedTheme}
-          maxHeight={maxHeight}
-          hasOverflow={hasOverflow}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $maxHeight={maxHeight}
+          $hasOverflow={hasOverflow}
         >
           {buildOptions()}
         </StyledOptions>

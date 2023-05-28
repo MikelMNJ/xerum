@@ -9,13 +9,14 @@ import _ from 'lodash';
 
 const App = props => {
   const {
+    theme,
+    selectedTheme,
     userInfo,
     userInfoLoading,
     modalContent,
     setModalContent,
     confirmContent,
     setConfirmContent,
-    ...rest
   } = props;
   const lightTheme = props.selectedTheme === appConstants.themes.light;
   const token = userInfo?.token;
@@ -38,8 +39,8 @@ const App = props => {
 
   return (
     <Fragment>
-      <GlobalStyles {...rest} />
-      <Notifications {...rest} />
+      <GlobalStyles $theme={theme} $selectedTheme={selectedTheme} />
+      <Notifications />
 
       <Loading
         isLoading={userInfoLoading}
@@ -52,14 +53,17 @@ const App = props => {
         {renderApp()}
 
         <Modal
+          theme={theme}
+          selectedTheme={selectedTheme}
           visible={!_.isEmpty(modalContent)}
           onClose={() => setModalContent(null)}
-          {...rest}
         >
           {modalContent}
         </Modal>
 
         <Modal
+          theme={theme}
+          selectedTheme={selectedTheme}
           confirm={true}
           confirmText={<Font weight='semibold'>{confirmContent?.confirmText || 'Confirm'}</Font>}
           cancelText={<Font weight='semibold'>Cancel</Font>}
@@ -71,7 +75,6 @@ const App = props => {
           visible={!_.isEmpty(confirmContent)}
           onConfirm={confirmContent?.onConfirm}
           onClose={() => setConfirmContent(null)}
-          {...rest}
         >
           {confirmContent?.content}
         </Modal>

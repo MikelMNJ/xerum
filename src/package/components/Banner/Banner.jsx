@@ -12,19 +12,21 @@ const Banner = props => {
     callback,
     center,
     sharp,
+    textColor,
+    bgColor,
     children,
-    ...rest
   } = props;
 
   return (
     <StyledBanner
-      theme={theme}
-      selectedTheme={selectedTheme}
-      noClose={noClose}
-      sharp={sharp}
-      {...rest}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $noClose={noClose}
+      $sharp={sharp}
+      $textcolor={textColor}
+      $bgcolor={bgColor}
     >
-      <Message center={center}>
+      <Message $center={center}>
         {text || children}
       </Message>
 

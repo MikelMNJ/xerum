@@ -26,36 +26,34 @@ const Tag = props => {
     round,
     allClick,
     children,
-    ...rest
   } = props;
 
   return (
     <StyledTag
-      theme={theme}
-      selectedTheme={selectedTheme}
-      textColor={textColor}
-      bgColor={bgColor}
-      pill={pill}
-      round={round}
-      verticalPadding={verticalPadding}
-      horizontalPadding={horizontalPadding}
-      removable={removable}
-      textSize={textSize}
-      borderSize={borderSize}
-      borderColor={borderColor}
-      borderRadius={borderRadius}
-      iconLeft={iconLeft}
-      allClick={allClick}
-      onClick={() => allClick && callback?.()}
-      {...rest}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $textColor={textColor}
+      $bgColor={bgColor}
+      $pill={pill}
+      $round={round}
+      $verticalPadding={verticalPadding}
+      $horizontalPadding={horizontalPadding}
+      $removable={removable}
+      $textSize={textSize}
+      $borderSize={borderSize}
+      $borderColor={borderColor}
+      $borderRadius={borderRadius}
+      $iconLeft={iconLeft}
+      $allClick={allClick}
+      onClick={e => allClick && callback?.(e)}
     >
       {removable && iconLeft && (
         <Close
-          theme={theme}
-          selectedTheme={selectedTheme}
-          closeSize={closeSize}
-          closeColor={closeColor}
-          onClick={() => !allClick && callback?.()}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $closeSize={closeSize}
+          $closeColor={closeColor}
+          onClick={e => !allClick && callback?.(e)}
         >
           {!iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}
 
@@ -74,10 +72,10 @@ const Tag = props => {
 
       {removable && !iconLeft && (
         <Close
-          theme={theme}
-          selectedTheme={selectedTheme}
-          closeSize={closeSize}
-          closeColor={closeColor}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
+          $closeSize={closeSize}
+          $closeColor={closeColor}
           onClick={() => !allClick && callback?.()}
         >
           {!iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}

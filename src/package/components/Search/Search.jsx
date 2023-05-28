@@ -1,4 +1,4 @@
-import React, { cloneElement, useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledSearch, Label, Input, SubmitButton, Icon } from './styles';
 
@@ -30,7 +30,9 @@ const Search = props => {
     buttonTextColor,
     buttonHoverColor,
     focusColor,
-    ...rest
+    solidFill,
+    boxColor,
+    disabled,
   } = props;
 
   const [ buttonWidth, setButtonWidth ] = useState(3);
@@ -47,7 +49,7 @@ const Search = props => {
     e.preventDefault();
     const inputVal = inputRef.current?.value;
 
-    if (callback && inputVal !== '') {
+    if (callback && inputVal !== '' && !disabled) {
       callback(inputVal);
     }
   };
@@ -59,15 +61,16 @@ const Search = props => {
   };
 
   return (
-    <StyledSearch {...rest}>
-      <Label theme={theme} selectedTheme={selectedTheme} noButton={noButton} inputIconColor={inputIconColor}>
+    <StyledSearch>
+      <Label $theme={theme} $selectedTheme={selectedTheme} $noButton={noButton} $inputIconColor={inputIconColor}>
         {!noIcon && (
           <Icon
-            theme={theme}
-            selectedTheme={selectedTheme}
-            height={inputIconHeight}
-            inputIconColor={inputIconColor || inputTextColor}
-            inputIconSize={inputIconSize}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $height={inputIconHeight}
+            $inputIconColor={inputIconColor || inputTextColor}
+            $inputIconSize={inputIconSize}
+            disabled={disabled}
           >
             {iconValid(inputIcon)
               ? <i className={inputIcon} />
@@ -77,46 +80,53 @@ const Search = props => {
         )}
 
         <Input
-          theme={theme}
-          selectedTheme={selectedTheme}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           ref={inputRef}
           type='text'
-          noIcon={noIcon}
-          pill={pill}
-          round={round}
-          borderColor={borderColor}
-          borderRadius={borderRadius}
-          borderSize={borderSize}
-          bottomBorder={bottomBorder}
-          inputTextColor={inputTextColor}
-          placeholderColor={placeholderColor}
-          inputBGColor={inputBGColor}
+          $noIcon={noIcon}
+          $pill={pill}
+          $round={round}
+          $borderColor={borderColor}
+          $borderRadius={borderRadius}
+          $borderSize={borderSize}
+          $bottomBorder={bottomBorder}
+          $inputTextColor={inputTextColor}
+          $placeholderColor={placeholderColor}
+          $inputBGColor={inputBGColor}
           placeholder={placeholder}
-          focusColor={focusColor}
-          buttonWidth={buttonWidth}
-          fontFamily={fontFamily}
+          $focusColor={focusColor}
+          $buttonWidth={buttonWidth}
+          $fontFamily={fontFamily}
+          $solidFill={solidFill}
+          $boxColor={boxColor}
           defaultValue={inputRef.current?.value || ''}
+          disabled={disabled}
           onChange={updateRef}
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
           onBlur={e => noButton && handleSubmit(e)}
         />
 
-        {!noButton && cloneElement(
+        {!noButton && (
           <SubmitButton
-            theme={theme}
-            selectedTheme={selectedTheme}
+            $theme={theme}
+            $selectedTheme={selectedTheme}
             ref={buttonRef}
-            text={buttonText}
-            noText={!buttonText}
-            pill={pill}
-            round={round}
-            icon={buttonIcon}
-            fontFamily={fontFamily}
-            color={buttonColor}
-            textColor={buttonTextColor}
-            hoverColor={buttonHoverColor}
+            $pill={pill}
+            $round={round}
+            $fontFamily={fontFamily}
+            $borderRadius={borderRadius}
+            $buttonColor={buttonColor}
+            $buttonTextColor={buttonTextColor}
+            $buttonHoverColor={buttonHoverColor}
+            disabled={disabled}
             onClick={handleSubmit}
-          />,
+          >
+            {iconValid(buttonIcon)
+              ? <i className={buttonIcon} />
+              : buttonIcon || buttonText || 'Search'
+            }
+          </SubmitButton>
         )}
       </Label>
     </StyledSearch>

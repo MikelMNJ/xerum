@@ -7,10 +7,10 @@ const StyledP = styled('p')`
 `;
 
 const P = props => {
-  const { children, ...rest } = props;
+  const { children } = props;
 
   return (
-    <StyledP {...rest}>
+    <StyledP>
       {children}
     </StyledP>
   );

@@ -16,7 +16,6 @@ const Social = props => {
     hoverColor,
     textSize,
     iconSize,
-    ...rest
   } = props;
 
   const buildSocial = () => {
@@ -26,17 +25,16 @@ const Social = props => {
           <Fragment key={index}>
             <SocialLink
               key={index}
-              theme={theme}
-              selectedTheme={selectedTheme}
+              $theme={theme}
+              $selectedTheme={selectedTheme}
               href={network.path || '' }
               target='_blank'
               rel='noreferrer'
-              column={column}
-              color={color}
-              hoverColor={hoverColor}
-              textSize={textSize}
-              iconSize={iconSize}
-              {...rest}
+              $column={column}
+              $color={color}
+              $hoverColor={hoverColor}
+              $textSize={textSize}
+              $iconSize={iconSize}
             >
               <SocialTooltip
                 theme={theme}
@@ -53,17 +51,16 @@ const Social = props => {
       return (
         <SocialLink
           key={index}
-          theme={theme}
-          selectedTheme={selectedTheme}
+          $theme={theme}
+          $selectedTheme={selectedTheme}
           href={network.path || '' }
           target='_blank'
           rel='noreferrer'
-          column={column}
-          color={color}
-          hoverColor={hoverColor}
-          textSize={textSize}
-          iconSize={iconSize}
-          {...rest}
+          $column={column}
+          $color={color}
+          $hoverColor={hoverColor}
+          $textSize={textSize}
+          $iconSize={iconSize}
         >
           <i className={iconValid(network.icon) ||  'fa-solid fa-question-circle'} />
           <Spacer size={0.25} across={!column} />

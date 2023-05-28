@@ -29,10 +29,10 @@ export const Track = styled('span')`
     if (props.disabled) return getColor(props, 'lightGrey', colors.neutral.lightGrey);
 
     if (props.checked) {
-      return hexValid(props.activeColor) || getColor(props, 'accent', colors.shades.black);
+      return hexValid(props.$activeColor) || getColor(props, 'accent', colors.shades.black);
     }
 
-    return hexValid(props.inactiveColor) || getColor(props, 'grey', colors.neutral.greyWeb);
+    return hexValid(props.$inactiveColor) || getColor(props, 'grey', colors.neutral.greyWeb);
   }};
 
   i {
@@ -42,7 +42,7 @@ export const Track = styled('span')`
     transition: transform 0.1s linear;
     color: ${props => {
       if (props.disabled) return getColor(props, 'grey', colors.neutral.greyWeb);
-      return hexValid(props.iconColor) || getColor(props, 'white', colors.shades.white);
+      return hexValid(props.$iconColor) || getColor(props, 'white', colors.shades.white);
     }};
 
     ${props => props.checked && css`transform: translateX(1.2rem);`}

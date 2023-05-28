@@ -25,7 +25,6 @@ const Table = props => {
     oddBGColor,
     oddHoverTextColor,
     oddHoverBGColor,
-    ...rest
   } = props;
 
   const [ ascending, setAscending ] = useState(!sortable);
@@ -76,13 +75,7 @@ const Table = props => {
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId='rows'>
         {provided => (
-          <StyledTable
-            theme={theme}
-            selectedTheme={selectedTheme}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            {...rest}
-          >
+          <StyledTable ref={provided.innerRef} {...provided.droppableProps}>
             {buildHeaders(args)}
             {content && buildRows(args)}
             {provided.placeholder}
