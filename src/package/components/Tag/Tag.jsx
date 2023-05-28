@@ -45,7 +45,7 @@ const Tag = props => {
       $borderRadius={borderRadius}
       $iconLeft={iconLeft}
       $allClick={allClick}
-      onClick={() => allClick && callback?.()}
+      onClick={e => allClick && callback?.(e)}
     >
       {removable && iconLeft && (
         <Close
@@ -53,7 +53,7 @@ const Tag = props => {
           $selectedTheme={selectedTheme}
           $closeSize={closeSize}
           $closeColor={closeColor}
-          onClick={() => !allClick && callback?.()}
+          onClick={e => !allClick && callback?.(e)}
         >
           {!iconLeft && <Spacer size={horizontalPadding || 1} across={true} />}
 
