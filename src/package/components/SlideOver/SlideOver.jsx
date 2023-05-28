@@ -26,9 +26,7 @@ const SlideOver = props => {
   const slideOverRef = useRef();
 
   const handleClose = () => {
-    slideOverRef.current?.classList.remove('slideIn');
-    slideOverRef.current?.classList.add('slideOut');
-    setTimeout(() => onClose?.(), 300);
+    onClose?.();
   };
 
   if (visible) {
@@ -42,7 +40,6 @@ const SlideOver = props => {
         $bgColor={bgColor}
         $topOffset={topOffset}
         $bottomOffset={bottomOffset}
-        className='slideIn'
       >
         <Header>
           <H3 $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>

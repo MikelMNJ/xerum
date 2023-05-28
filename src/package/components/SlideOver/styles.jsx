@@ -39,24 +39,6 @@ export const StyledSlideOver = styled('div')`
     height: calc(100dvh - ${props.$topOffset + props.$bottomOffset}rem);
   `}
 
-  &.slideIn {
-    animation: slideOverIn ease 0.35s;
-  }
-
-  &.slideOut {
-    animation: slideOverOut ease 0.35s;
-  }
-
-  @keyframes slideOverIn {
-    0% { right: -25rem; }
-    100% { right: ${restPosition}; }
-  }
-
-  @keyframes slideOverOut {
-    0% { right: ${restPosition}; }
-    100% { right: -25rem; }
-  }
-
   @media only screen and (max-width: 414px) {
     min-width: 21rem;
     max-width: 21rem;
