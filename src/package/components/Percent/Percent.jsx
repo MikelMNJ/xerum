@@ -12,6 +12,7 @@ const Percent = props => {
     usePlus,
     positiveColor,
     negativeColor,
+    size,
   } = props;
 
   const getColor = () => {
@@ -39,6 +40,7 @@ const Percent = props => {
       $theme={theme}
       $selectedTheme={selectedTheme}
       $color={getColor()}
+      $size={size}
     >
       {buildPercent()}%
     </StyledPercent>
