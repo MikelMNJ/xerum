@@ -10,6 +10,8 @@ const defaultError = 'fa-solid fa-circle-exclamation';
 
 const Message = forwardRef((props, ref) => {
   const {
+    theme,
+    selectedTheme,
     message,
     noIcons,
     onClose,
@@ -43,6 +45,8 @@ const Message = forwardRef((props, ref) => {
   return (
     <StyledNotification
       ref={ref}
+      $theme={theme}
+      $selectedTheme={selectedTheme}
       $noIcons={noIcons}
       $type={_.lowerCase(message.type)}
       $textColor={textColor}
