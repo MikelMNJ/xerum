@@ -13,6 +13,8 @@ const Price = props => {
     positiveColor,
     negativeColor,
     privacy,
+    usePlus,
+    useMinus,
     size,
     color,
   } = props;
@@ -27,9 +29,12 @@ const Price = props => {
 
   const buildPrice = () => {
     const val = isNaN(value) ? truncate(0, limit) : truncate(value, limit);
+    const forcedMinus = useMinus && value > 0 ? '-' : '';
+
     const price = (
       <Fragment>
-        {privacy ? '' : symbol || '$'}{privacy ? '***' : val} {currency}
+        {!privacy && (usePlus ? '+' : forcedMinus)}
+        {!privacy && (symbol || '$')}{privacy ? '***' : val} {currency}
       </Fragment>
     );
 
