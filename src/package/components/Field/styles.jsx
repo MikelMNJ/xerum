@@ -40,7 +40,8 @@ export const Optional = styled('span')`
 `;
 
 export const InputArea = styled('div')`
-  input {
+  input,
+  textarea {
     position: relative;
     display: flex;
     align-items: center;
@@ -104,6 +105,10 @@ export const InputArea = styled('div')`
       border-width: ${props => props.$activeBorderSize || borderSize}rem;
       border-color: ${props => hexValid(props.$activeBorderColor) || getColor(props, 'accent', accent.carolinaBlue)};
     }
+  }
+
+  textarea {
+    height: ${props => props.$height ? `${props.$height}rem` : 'auto'};
   }
 `;
 

@@ -20,6 +20,8 @@ const Field = props => {
     form,
     name,
     type,
+    component,
+    rows,
     placeholder,
     icon,
     iconColor,
@@ -115,6 +117,8 @@ const Field = props => {
               <FormikField
                 type={privacy ? 'password' : type || 'text'}
                 name={name}
+                component={component}
+                rows={rows}
                 placeholder={placeholder || ''}
                 value={form?.values[name] || ''}
                 onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
