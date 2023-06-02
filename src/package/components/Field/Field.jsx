@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
@@ -120,18 +119,33 @@ const Field = props => {
                 component={component}
                 rows={rows}
                 placeholder={placeholder || ''}
-                value={form?.values[name] || ''}
+                disabled={privacy || rest.disabled}
+                value={privacy ? 'Private' : form?.values?.[name] || ''}
                 onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
                 onChange={handleFieldStateUpdate}
               />
             )}
 
-            {!form && (
+            {!form && component !== 'textarea' && (
               <input
                 type={privacy ? 'password' : type || 'text'}
                 name={name}
                 placeholder={placeholder || ''}
                 value={inputValue}
+                disabled={rest.disabled}
+                onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
+                onChange={handleFieldStateUpdate}
+              />
+            )}
+
+            {!form && component === 'textarea' && (
+              <textarea
+                type={'text'}
+                name={name}
+                rows={rows}
+                placeholder={placeholder || ''}
+                disabled={privacy || rest.disabled}
+                value={privacy ? 'Private' : inputValue}
                 onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
                 onChange={handleFieldStateUpdate}
               />
@@ -144,6 +158,7 @@ const Field = props => {
               $iconColor={iconColor || textColor}
               $iconSize={iconSize}
               $iconCallback={iconCallback}
+              $visible={icon && !privacy}
               onClick={() => {
                 iconCallback?.();
               }}

@@ -113,7 +113,7 @@ export const InputArea = styled('div')`
 `;
 
 export const Icon = styled('div')`
-  display: flex;
+  display: ${props => props.$visible ? 'flex' : 'none'};
   align-items: center;
   justify-content: center;
   position: absolute;
