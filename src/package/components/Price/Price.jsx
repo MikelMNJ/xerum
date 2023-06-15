@@ -16,6 +16,8 @@ const Price = props => {
     usePlus,
     useMinus,
     size,
+    tabletSize,
+    mobileSize,
     color,
   } = props;
 
@@ -46,7 +48,7 @@ const Price = props => {
       $theme={theme}
       $selectedTheme={selectedTheme}
       $color={getColor()}
-      $size={size}
+      $size={mobileSize || tabletSize || size}
     >
       {buildPrice()}
     </StyledPrice>

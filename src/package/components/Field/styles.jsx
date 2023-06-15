@@ -48,7 +48,7 @@ export const InputArea = styled('div')`
     appearance: none;
     height: ${props => props.$height || height}rem;
     width: 100%;
-    font-size: ${props => props.$fontSize || 1}rem;
+    font-size: ${props => props.$mobileSize || props.$tabletSize || props.$fontSize || 1}rem;
     border-radius: ${props => props.$borderRadius || borderRadius}rem;
     background-color: ${props => hexValid(props.$bgColor) || getColor(props, 'primary', shades.white)};
     color: ${props => hexValid(props.$textColor) || getColor(props, 'onPrimary', neutral.raisinBlack)};

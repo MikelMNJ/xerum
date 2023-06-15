@@ -61,6 +61,8 @@ const Select = props => {
     placeholderColor,
     privacy,
     hideField,
+    tabletSize,
+    mobileSize,
     callback,
   } = props;
 
@@ -249,6 +251,8 @@ const Select = props => {
             $activeBorderColor={activeBorderColor}
             $activeBorderSize={activeBorderSize}
             $icon={icon}
+            $tabletSize={tabletSize}
+            $mobileSize={mobileSize}
             $placeholderColor={placeholderColor}
           >
             {form && (
@@ -320,6 +324,9 @@ const Select = props => {
         $borderRadius={borderRadius}
         $borderSize={borderSize}
         $borderColor={borderColor}
+        $fontSize={fontSize}
+        $tabletSize={tabletSize}
+        $mobileSize={mobileSize}
         onMouseDown={e => e.preventDefault()}
       >
         <StyledOptions

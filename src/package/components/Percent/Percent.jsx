@@ -13,6 +13,8 @@ const Percent = props => {
     positiveColor,
     negativeColor,
     size,
+    tabletSize,
+    mobileSize,
   } = props;
 
   const getColor = () => {
@@ -40,7 +42,7 @@ const Percent = props => {
       $theme={theme}
       $selectedTheme={selectedTheme}
       $color={getColor()}
-      $size={size}
+      $size={mobileSize || tabletSize || size}
     >
       {buildPercent()}%
     </StyledPercent>

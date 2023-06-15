@@ -48,6 +48,8 @@ const Field = props => {
     placeholderColor,
     hideField,
     privacy,
+    tabletSize,
+    mobileSize,
     callback,
     ...rest
   } = props;
@@ -102,6 +104,8 @@ const Field = props => {
             $height={height}
             $fontFamily={fontFamily}
             $fontSize={fontSize}
+            $tabletSize={tabletSize}
+            $mobileSize={mobileSize}
             $bgColor={bgColor}
             $textColor={textColor}
             $borderRadius={borderRadius}
