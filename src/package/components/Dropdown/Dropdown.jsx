@@ -23,6 +23,7 @@ const Dropdown = props => {
     minHeight,
     maxHeight,
     isMobile,
+    leftJustify,
     children,
   } = props;
   const [ readyToClose, setReadyToClose ] = useState(false);
@@ -68,6 +69,7 @@ const Dropdown = props => {
       $minHeight={minHeight}
       $maxHeight={maxHeight}
       $isMobile={isMobile}
+      $leftJustify={leftJustify}
     >
       {children}
     </StyledDropdown>

@@ -18,7 +18,9 @@ export const StyledDropdown = styled('div')`
     return '14rem';
   }};
   top: ${props => props.$posY || 2}rem;
-  right: ${props => props.$posX || -0.7}rem;
+
+  ${props => css`${props.$leftJustify ? 'left' : 'right'}: ${props.$posX || -0.7}rem;`}
+
   border: ${props => props.$borderSize || 0.0625}rem solid ${props => {
     const lightTheme = props.$selectedTheme === light;
     const fallback = getColor(props, lightTheme ? 'lightGrey' : 'black', colors.neutral.lightGrey);
