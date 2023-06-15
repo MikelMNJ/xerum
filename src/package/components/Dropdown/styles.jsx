@@ -7,13 +7,16 @@ const { light } = appConstants.themes;
 const { colors } = theme;
 
 export const StyledDropdown = styled('div')`
-  position: relative;
+  position: ${props => props.$isMobile ? 'fixed' : 'absolute'};
   z-index: ${props => props.$zIndex || 2};
   display: ${props => props.$visible ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: flex-start;
-  position: absolute;
-  width: ${props => props.$width || 14}rem;
+  width: ${props => {
+    if (props.$isMobile) return 'calc(100% - 2rem)';
+    if (props.$width) return `${props.$width}rem`;
+    return '14rem';
+  }};
   top: ${props => props.$posY || 2}rem;
   right: ${props => props.$posX || -0.7}rem;
   border: ${props => props.$borderSize || 0.0625}rem solid ${props => {
