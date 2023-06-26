@@ -27,6 +27,8 @@ const Filter = props => {
     borderSize,
     bottomBorder,
     focusColor,
+    mobileSize,
+    tabletSize,
   } = props;
 
   const [ filterValue, setFilterValue ] = useState('');
@@ -159,6 +161,8 @@ const Filter = props => {
           placeholder={placeholder}
           $focusColor={focusColor}
           $fontFamily={fontFamily}
+          $mobileSize={mobileSize}
+          $tabletSize={tabletSize}
           defaultValue={filterValue || ''}
           onChange={e => setFilterValue(e.currentTarget.value)}
         />

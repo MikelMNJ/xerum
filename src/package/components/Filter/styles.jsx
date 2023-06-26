@@ -53,7 +53,7 @@ export const Input = styled('input')`
   height: 3rem;
   width: 100%;
   padding: 0.5rem 0.5rem 0.5rem ${props => props.$noIcon ? 1 : 3}rem;
-  font-size: 1rem;
+  font-size: ${props => props.$mobileSize || props.$tabletSize || 1}rem;
   color: ${props => hexValid(props.$inputTextColor) || getColor(props, 'onPrimary', shades.black)};
 
   ${props => props.$fontFamily && css`font-family: ${props.$fontFamily};`}
