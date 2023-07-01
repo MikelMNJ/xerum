@@ -17,7 +17,14 @@ export const StyledDropdown = styled('div')`
     if (props.$width) return `${props.$width}rem`;
     return '14rem';
   }};
-  top: ${props => props.$posY || 2}rem;
+
+  ${props => {
+    const fromBottom = props.$bottom;
+    const positionValue = `${props.$posY || 2}rem`;
+
+    if (fromBottom) return css`bottom: ${positionValue};`;
+    return css`top: ${positionValue};`;
+  }}
 
   ${props => css`${props.$leftJustify ? 'left' : 'right'}: ${props.$posX || -0.7}rem;`}
 

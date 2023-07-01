@@ -10,6 +10,7 @@ const Dropdown = props => {
     width,
     posX,
     posY,
+    bottom,
     zIndex,
     borderSize,
     borderRadius,
@@ -56,6 +57,7 @@ const Dropdown = props => {
       $width={width}
       $posX={posX}
       $posY={posY}
+      $bottom={bottom}
       $zIndex={zIndex}
       $borderSize={borderSize}
       $borderRadius={borderRadius}
