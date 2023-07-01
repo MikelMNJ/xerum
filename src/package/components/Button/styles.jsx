@@ -70,6 +70,7 @@ export const StyledButton = styled('button')`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-direction: ${props => props.$column ? 'column' : 'row'};
   position: relative;
   border: none;
   min-width: 3rem;
@@ -79,6 +80,7 @@ export const StyledButton = styled('button')`
   cursor: pointer;
   transition: all 0.2s ease;
 
+  ${props => props.$padding && css`padding: ${props.$padding};`}
   ${props => props.$fontFamily && css`font-family: ${props.$fontFamily};`}
 
   border-radius: ${props => {

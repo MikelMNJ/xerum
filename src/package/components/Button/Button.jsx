@@ -22,6 +22,8 @@ const Button = forwardRef((props, ref) => {
     children,
     round,
     pill,
+    column,
+    padding,
     ...rest
   } = props;
 
@@ -63,6 +65,8 @@ const Button = forwardRef((props, ref) => {
       $fontFamily={fontFamily}
       $round={round}
       $pill={pill}
+      $column={column}
+      $padding={padding}
       onClick={handleClick}
       {...rest}
     >
