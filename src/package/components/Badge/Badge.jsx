@@ -19,6 +19,7 @@ const Badge = forwardRef((props, badgeRef) => {
     position,
     posX,
     posY,
+    counterOnly,
     callback,
   } = props;
 
@@ -65,6 +66,7 @@ const Badge = forwardRef((props, badgeRef) => {
         $position={position}
         $posX={posX}
         $posY={posY}
+        $counterOnly={counterOnly}
         $visible={count > 0}
       >
         {renderCount()}
@@ -73,6 +75,7 @@ const Badge = forwardRef((props, badgeRef) => {
       <IconWrapper
         ref={iconWrapperRef}
         $theme={theme}
+        $visible={counterOnly ? count === 0 : true}
         $selectedTheme={selectedTheme}
         $iconColor={iconColor}
         $iconHoverColor={iconHoverColor}

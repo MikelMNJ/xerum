@@ -1,30 +1,40 @@
-import styled from 'styled-components';
 import { getColor, hexValid } from '../../helpers';
 import { theme } from '../../theme';
+import styled, { css } from 'styled-components';
 
 const colors = theme.colors;
 
 export const StyledBadge = styled('div')`
+  display: flex;
+  align-items: center;
   position: relative;
   width: fit-content;
+  height: 1.5rem;
   cursor: pointer;
 `;
 
 export const CountWrapper = styled('div')`
   display: ${props => props.$visible ? 'flex' : 'none'};
-  position: absolute;
-  bottom: ${props => {
-    const strokeOffset = props.$strokeWidth || 0.125;
-    const verticalOffset = props.$posY || 0.125;
-    return `calc(${verticalOffset}rem - ${strokeOffset}rem)`;
-  }};
+  position: ${props => !props.$counterOnly ? 'absolute' : 'relative'};
 
-  left: ${props => {
-    const iconWidth = props.$widths.iconWidth / 16;
-    const strokeOffset = props.$strokeWidth || 0.125;
-    const horizontalOffset = (props.$posX || 0.125) - 0.25;
-    return `calc(${iconWidth}rem + ${horizontalOffset}rem - ${strokeOffset}rem)`;
-  }};
+  ${props => {
+    if (!props.$counterOnly) {
+      return css`
+        bottom: ${props => {
+          const strokeOffset = props.$strokeWidth || 0.125;
+          const verticalOffset = props.$posY || 0.125;
+          return `calc(${verticalOffset}rem - ${strokeOffset}rem)`;
+        }};
+
+        left: ${props => {
+          const iconWidth = props.$widths.iconWidth / 16;
+          const strokeOffset = props.$strokeWidth || 0.125;
+          const horizontalOffset = (props.$posX || 0.125) - 0.25;
+          return `calc(${iconWidth}rem + ${horizontalOffset}rem - ${strokeOffset}rem)`;
+        }};
+      `;
+    }
+  }}
 
   padding: 0.25rem 0.5rem;
   width: fit-content;
@@ -53,6 +63,8 @@ export const Counter = styled('div')`
 `;
 
 export const IconWrapper = styled('div')`
+  display: ${props => props.$visible ? 'flex' : 'none'};
+
   i {
     color: ${props => hexValid(props.$iconColor) || getColor(props, 'onPrimary', colors.shades.black)};
     font-size: ${props => props.$iconSize || 1.5}rem;
