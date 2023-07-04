@@ -41,12 +41,8 @@ export const StyledModal = styled('div')`
     hexValid(props.$bgColor) || getColor(props, 'primary', colors.shades.white)
   )};
 
-  @media only screen and (max-width: 414px) {
-    min-width: 21rem;
-  }
-
-  @media only screen and (max-width: 360px) {
-    min-width: 20rem;
+  @media only screen and (max-width: 640px) {
+    min-width: calc(100% - 2rem);
   }
 `;
 
