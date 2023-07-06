@@ -24,6 +24,7 @@ export const TDContainer = styled('div')`
 export const TD = styled('div')`
   margin: 0.5rem 0;
   width: 100%;
+  text-align: left;
 `;
 
 export const LI = styled('li')`

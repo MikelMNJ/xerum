@@ -132,7 +132,8 @@ const buildData = (obj, args) => {
   const { label, ...rest } = obj;
 
   return Object.values(rest).map((val, index) => {
-    const headerText = content?.headers?.[index]?.toLowerCase?.();
+    const headerItem = content?.headers?.[index];
+    const headerText = headerItem?.toLowerCase?.();
 
     return (
       <TDContainer key={index}>
@@ -144,7 +145,8 @@ const buildData = (obj, args) => {
 
         <TData>
           <ResponsiveHeader $mobileSize={mobileSize}>
-            {headerText && `${_.startCase(headerText)}: `}
+            {typeof headerItem === 'object' ? headerItem : _.startCase(headerText)}
+            {headerItem ? ':' : ''}
           </ResponsiveHeader>
 
           {typeof val !== 'function' && (val ?? '—')}
