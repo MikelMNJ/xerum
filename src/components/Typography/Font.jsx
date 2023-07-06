@@ -12,7 +12,7 @@ const Font = withTheme(props => {
   const { weight, size, mobileSize, tabletSize, color, block, children } = props;
 
   return (
-    <StyledFont weight={weight} $size={mobileSize || tabletSize || size} $color={color} $block={block}>
+    <StyledFont $weight={weight} $size={mobileSize || tabletSize || size} $color={color} $block={block}>
       {children}
     </StyledFont>
   );
