@@ -109,9 +109,8 @@ export const LI = styled('li')`
     backdrop-filter: blur(0.25rem);
   `}
 
-  @media only screen and (max-width: 640px) {
+  @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
     grid-template-columns: 1fr;
-
     ${props => props.$header && css`display: none;`}
 
     &:nth-child(2) {
@@ -156,7 +155,7 @@ export const ResponsiveHeader = styled('p')`
   margin: 0;
   width: fit-content;
 
-  @media only screen and (max-width: 640px) {
+  @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
     display: block;
   }
 `;

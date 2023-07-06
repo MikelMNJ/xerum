@@ -82,6 +82,7 @@ export const buildRows = args => {
     sortable,
     draggable,
     content,
+    mobileSize,
   } = args;
 
   const index = content?.headers?.indexOf(sortedColumn);
@@ -109,6 +110,7 @@ export const buildRows = args => {
           draggable={draggable && true}
           callback={obj.onClick}
           hasLabel={hasLabel(content?.rows)}
+          mobileSize={mobileSize}
           {...args}
         >
           {buildData(obj, args)}
@@ -125,30 +127,35 @@ const buildData = (obj, args) => {
     labelTextColor,
     labelBGColor,
     content,
+    mobileSize,
   } = args;
   const { label, ...rest } = obj;
 
-  return Object.values(rest).map((val, index) => (
-    <TDContainer key={index}>
-      {label && index === 0 && (
-        <Label labelTextColor={labelTextColor} labelBGColor={labelBGColor}>
-          {label}
-        </Label>
-      )}
+  return Object.values(rest).map((val, index) => {
+    const headerText = content?.headers?.[index]?.toLowerCase?.();
 
-      <TData>
-        <ResponsiveHeader>
-          {_.startCase(content?.headers?.[index]?.toLowerCase?.())}: &nbsp;
-        </ResponsiveHeader>
+    return (
+      <TDContainer key={index}>
+        {label && index === 0 && (
+          <Label labelTextColor={labelTextColor} labelBGColor={labelBGColor}>
+            {label}
+          </Label>
+        )}
 
-        {val ?? '—'}
-      </TData>
+        <TData>
+          <ResponsiveHeader $mobileSize={mobileSize}>
+            {headerText && `${_.startCase(headerText)}: `}
+          </ResponsiveHeader>
 
-      {draggable && index === Object.values(rest).length - 1 && (
-        <Grip>
-          <i className={iconValid(dragIcon) || 'fa-solid fa-grip-vertical'} />&nbsp;
-        </Grip>
-      )}
-    </TDContainer>
-  ));
+          {typeof val !== 'function' && (val ?? '—')}
+        </TData>
+
+        {draggable && index === Object.values(rest).length - 1 && (
+          <Grip>
+            <i className={iconValid(dragIcon) || 'fa-solid fa-grip-vertical'} />&nbsp;
+          </Grip>
+        )}
+      </TDContainer>
+    );
+  });
 };

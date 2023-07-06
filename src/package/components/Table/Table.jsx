@@ -25,6 +25,7 @@ const Table = props => {
     oddBGColor,
     oddHoverTextColor,
     oddHoverBGColor,
+    mobileSize,
   } = props;
 
   const [ ascending, setAscending ] = useState(!sortable);
@@ -50,6 +51,7 @@ const Table = props => {
     oddBGColor,
     oddHoverTextColor,
     oddHoverBGColor,
+    mobileSize,
 
     ascending, setAscending,
     sortedColumn,

@@ -23,6 +23,7 @@ const TRow = props => {
     provided,
     columnLayout,
     headers,
+    mobileSize,
   } = props;
 
   return (
@@ -46,6 +47,7 @@ const TRow = props => {
       $oddHoverBGColor={oddHoverBGColor}
       $callback={callback}
       $columnLayout={columnLayout}
+      $mobileSize={mobileSize}
       onClick={() => callback?.()}
       {...provided?.draggableProps}
       {...provided?.dragHandleProps}
