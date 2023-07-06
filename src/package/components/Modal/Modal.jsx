@@ -43,6 +43,7 @@ const Modal = props => {
     cancelButtonTextColor,
     cancelButtonHoverColor,
     useOverflow,
+    mobileMode,
     pill,
     round,
     privacy,
@@ -92,7 +93,7 @@ const Modal = props => {
 
         {text ? <ConfirmText>{text}</ConfirmText> : children}
 
-        <ConfirmButtons $visible={confirm && !blank}>
+        <ConfirmButtons $visible={confirm && !blank} $mobileMode={mobileMode}>
           <ButtonWrapper>
             <Spacer />
 
@@ -111,11 +112,11 @@ const Modal = props => {
               callback={() => onConfirm?.()}
             />
 
-            <Spacer />
+            {!mobileMode && <Spacer />}
           </ButtonWrapper>
 
           <ButtonWrapper>
-            <Spacer />
+            {!mobileMode && <Spacer />}
 
             <Button
               theme={theme}

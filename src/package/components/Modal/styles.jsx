@@ -74,7 +74,8 @@ export const CloseButton = styled('div')`
 
 export const ConfirmButtons = styled('div')`
   display: ${props => props.$visible ? 'inline-flex' : 'none'};
-  ${props => props.$visible && css`gap: 1rem;`}
+  ${props => props.$visible && css`gap: ${props.$mobileMode ? 0.5 : 1}rem;`}
+  ${props => props.$mobileMode && css`flex-direction: column;`}
   width: 100%;
 `;
 
