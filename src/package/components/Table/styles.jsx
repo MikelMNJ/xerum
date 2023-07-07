@@ -19,12 +19,19 @@ export const TDContainer = styled('div')`
   display: flex;
   position: relative;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
+    min-width: 10.2rem;
+  }
 `;
 
 export const TD = styled('div')`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin: 0.5rem 0;
   width: 100%;
-  text-align: left;
 `;
 
 export const LI = styled('li')`
@@ -111,7 +118,9 @@ export const LI = styled('li')`
   `}
 
   @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
+
     ${props => props.$header && css`display: none;`}
 
     &:nth-child(2) {

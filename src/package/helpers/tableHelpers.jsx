@@ -136,7 +136,7 @@ const buildData = (obj, args) => {
     const headerText = headerItem?.toLowerCase?.();
 
     return (
-      <TDContainer key={index}>
+      <TDContainer key={index} $mobileSize={mobileSize}>
         {label && index === 0 && (
           <Label labelTextColor={labelTextColor} labelBGColor={labelBGColor}>
             {label}
