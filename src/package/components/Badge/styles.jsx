@@ -16,13 +16,14 @@ export const StyledBadge = styled('div')`
 export const CountWrapper = styled('div')`
   display: ${props => props.$visible ? 'flex' : 'none'};
   position: ${props => !props.$counterOnly ? 'absolute' : 'relative'};
+  z-index: 1;
 
   ${props => {
     if (!props.$counterOnly) {
       return css`
         bottom: ${props => {
           const strokeOffset = props.$strokeWidth || 0.125;
-          const verticalOffset = props.$posY || 0.125;
+          const verticalOffset = props.$posY !== undefined ? props.$posY : 0.125;
           return `calc(${verticalOffset}rem - ${strokeOffset}rem)`;
         }};
 
@@ -33,6 +34,10 @@ export const CountWrapper = styled('div')`
           return `calc(${iconWidth}rem + ${horizontalOffset}rem - ${strokeOffset}rem)`;
         }};
       `;
+    }
+
+    if (props.$counterOnly) {
+      return css`bottom: ${props => props.$posY !== undefined ? props.$posY : 0.125}rem;`;
     }
   }}
 
@@ -64,6 +69,8 @@ export const Counter = styled('div')`
 
 export const IconWrapper = styled('div')`
   display: ${props => props.$visible ? 'flex' : 'none'};
+  position: relative;
+  top: ${props => props.$iconPosY !== undefined ? props.$iconPosY : 0}rem;
 
   i {
     color: ${props => hexValid(props.$iconColor) || getColor(props, 'onPrimary', colors.shades.black)};

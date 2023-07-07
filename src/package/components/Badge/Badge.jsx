@@ -19,6 +19,7 @@ const Badge = forwardRef((props, badgeRef) => {
     position,
     posX,
     posY,
+    iconPosY,
     counterOnly,
     callback,
   } = props;
@@ -80,6 +81,7 @@ const Badge = forwardRef((props, badgeRef) => {
         $iconColor={iconColor}
         $iconHoverColor={iconHoverColor}
         $iconSize={iconSize}
+        $iconPosY={iconPosY}
       >
         <i className={iconValid(icon) || 'fa-solid fa-bell'} />
       </IconWrapper>
