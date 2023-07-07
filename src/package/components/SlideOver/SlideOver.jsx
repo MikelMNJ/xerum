@@ -21,6 +21,7 @@ const SlideOver = props => {
     onClose,
     visible,
     bgColor,
+    mobileMode,
   } = props;
 
   const slideOverRef = useRef();
@@ -40,8 +41,9 @@ const SlideOver = props => {
         $bgColor={bgColor}
         $topOffset={topOffset}
         $bottomOffset={bottomOffset}
+        $mobileMode={mobileMode}
       >
-        <Header>
+        <Header onClick={handleClose}>
           <H3 $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
             {title}
           </H3>
@@ -52,11 +54,10 @@ const SlideOver = props => {
             $closeColor={closeColor}
             $closeHoverColor={closeHoverColor}
             $closeIconSize={closeIconSize}
-            onClick={handleClose}
           >
             {iconValid(closeIcon)
               ? <i className={closeIcon} />
-              : closeIcon || <i className='fa-solid fa-chevron-right' />
+              : closeIcon || <i className={`fa-solid fa-chevron-${mobileMode ? 'down' : 'right'}`} />
             }
           </CloseIcon>
         </Header>

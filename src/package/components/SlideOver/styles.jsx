@@ -39,15 +39,16 @@ export const StyledSlideOver = styled('div')`
     height: calc(100dvh - ${props.$topOffset + props.$bottomOffset}rem);
   `}
 
-  @media only screen and (max-width: 414px) {
-    min-width: 21rem;
-    max-width: 21rem;
-  }
-
-  @media only screen and (max-width: 360px) {
-    min-width: 20rem;
-    max-width: 20rem;
-  }
+  ${props => props.$mobileMode && css`
+    max-width: unset;
+    min-width: unset;
+    border-left: none;
+    border-radius: 0.5rem 0.5rem 0 0;
+    width: 100%;
+    height: calc(100dvh - 2rem);
+    top: 2rem;
+    padding: 0.5rem 1rem 1rem;
+  `}
 `;
 
 export const Header = styled('div')`
