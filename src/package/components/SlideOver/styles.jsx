@@ -43,7 +43,7 @@ export const StyledSlideOver = styled('div')`
     max-width: unset;
     min-width: unset;
     border-left: none;
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 2rem 2rem 0 0;
     width: 100%;
     height: calc(100dvh - 2rem);
     top: 2rem;
