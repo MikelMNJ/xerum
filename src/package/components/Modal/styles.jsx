@@ -27,10 +27,10 @@ export const StyledModal = styled('div')`
   bottom: 0;
   margin: 3rem auto;
   z-index: 200;
-  max-height: calc(100% - 6rem);
+  max-height: calc(100dvh - 6rem);
   max-width: calc(100% - 6rem);
   min-width: 29rem;
-  min-height: ${props => props.$confirm ? 'fit-content' : '15rem'};
+  min-height: ${props => props.$confirm ? 'auto' : '15rem'};
   width: max-content;
   height: max-content;
   padding: 1rem;
