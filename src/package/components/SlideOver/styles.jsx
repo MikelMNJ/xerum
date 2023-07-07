@@ -11,7 +11,7 @@ export const StyledSlideOver = styled('div')`
   position: fixed;
   top: 0;
   right: ${restPosition};
-  z-index: 1;
+  z-index: 2;
   height: ${props => props.$height ? `${props.$height}rem` : '100dvh'};
   width: ${props => props.$width ? `${props.$width}rem` : '23rem'};
   min-width: ${minWidth}rem;
@@ -43,7 +43,7 @@ export const StyledSlideOver = styled('div')`
     max-width: unset;
     min-width: unset;
     border-left: none;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 1rem 1rem 0 0;
     width: 100%;
     height: calc(100dvh - 2rem);
     top: 2rem;
