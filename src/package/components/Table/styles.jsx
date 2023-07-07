@@ -19,9 +19,17 @@ export const TDContainer = styled('div')`
   display: flex;
   position: relative;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
+    min-width: 10.2rem;
+  }
 `;
 
 export const TD = styled('div')`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin: 0.5rem 0;
   width: 100%;
 `;
@@ -109,8 +117,9 @@ export const LI = styled('li')`
     backdrop-filter: blur(0.25rem);
   `}
 
-  @media only screen and (max-width: 640px) {
-    grid-template-columns: 1fr;
+  @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
+    display: flex;
+    flex-wrap: wrap;
 
     ${props => props.$header && css`display: none;`}
 
@@ -156,7 +165,7 @@ export const ResponsiveHeader = styled('p')`
   margin: 0;
   width: fit-content;
 
-  @media only screen and (max-width: 640px) {
+  @media screen and (max-width: ${props => props.$mobileSize || 40}rem) {
     display: block;
   }
 `;

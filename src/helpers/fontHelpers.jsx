@@ -1,8 +1,8 @@
 import { fonts } from 'controllers';
 
 export const getFontFamily = props => {
-  const { weight } = props;
-  const fontWeight = weight?.toLowerCase();
+  const { $weight } = props;
+  const fontWeight = $weight?.toLowerCase();
   const normal = fonts?.primary?.normal;
 
   switch (fontWeight) {

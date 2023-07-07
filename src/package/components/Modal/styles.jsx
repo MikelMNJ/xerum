@@ -33,7 +33,7 @@ export const StyledModal = styled('div')`
   min-height: ${props => props.$confirm ? 'fit-content' : '15rem'};
   width: max-content;
   height: max-content;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   border-radius: 0.35rem;
   overflow-y: ${props => props.$useOverflow === false ? 'unset' : 'auto'};
   color: ${props => hexValid(props.$textColor) || getColor(props, 'onPrimary', colors.shades.black)};
@@ -74,7 +74,8 @@ export const CloseButton = styled('div')`
 
 export const ConfirmButtons = styled('div')`
   display: ${props => props.$visible ? 'inline-flex' : 'none'};
-  ${props => props.$visible && css`gap: 1rem;`}
+  ${props => props.$visible && css`gap: ${props.$mobileMode ? 0.5 : 1}rem;`}
+  ${props => props.$mobileMode && css`flex-direction: column;`}
   width: 100%;
 `;
 
