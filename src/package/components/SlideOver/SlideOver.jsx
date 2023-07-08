@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { iconValid } from '../../helpers';
 import { Spacer } from '../Spacer/Spacer';
 import { StyledSlideOver, Header, CloseIcon, H3 } from './styles';
 
-const SlideOver = props => {
+const SlideOver = forwardRef((props, externalRef) => {
   const {
     theme,
     selectedTheme,
@@ -33,9 +33,12 @@ const SlideOver = props => {
   if (visible) {
     return (
       <StyledSlideOver
+        ref={element => {
+          if (externalRef) externalRef.current = element;
+          slideOverRef.current = element;
+        }}
         $theme={theme}
         $selectedTheme={selectedTheme}
-        ref={slideOverRef}
         $width={width}
         $height={height}
         $bgColor={bgColor}
@@ -68,6 +71,6 @@ const SlideOver = props => {
       </StyledSlideOver>
     );
   }
-};
+});
 
 export { SlideOver };

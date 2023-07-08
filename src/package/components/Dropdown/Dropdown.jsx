@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, forwardRef } from 'react';
 import { StyledDropdown } from './styles';
 
-const Dropdown = props => {
+const Dropdown = forwardRef((props, externalRef) => {
   const {
     theme,
     selectedTheme,
@@ -50,7 +50,10 @@ const Dropdown = props => {
 
   return (
     <StyledDropdown
-      ref={dropdownRef}
+      ref={element => {
+        if (externalRef) externalRef.current = element;
+        dropdownRef.current = element;
+      }}
       $theme={theme}
       $selectedTheme={selectedTheme}
       $visible={visible}
@@ -76,6 +79,6 @@ const Dropdown = props => {
       {children}
     </StyledDropdown>
   );
-};
+});
 
 export { Dropdown };

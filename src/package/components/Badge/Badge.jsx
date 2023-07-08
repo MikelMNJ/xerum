@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, forwardRef } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledBadge, CountWrapper, Counter, IconWrapper } from './styles';
 
-const Badge = forwardRef((props, badgeRef) => {
+const Badge = forwardRef((props, externalRef) => {
   const {
     theme,
     selectedTheme,
@@ -53,7 +53,7 @@ const Badge = forwardRef((props, badgeRef) => {
     <StyledBadge onClick={() => callback?.()}>
       <CountWrapper
         ref={element => {
-          if (badgeRef) badgeRef.current = element;
+          if (externalRef) externalRef.current = element;
           countWrapperRef.current = element;
         }}
         $theme={theme}

@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, forwardRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
   StyledModal,
@@ -13,7 +13,7 @@ import {
 import { Button } from '../Button/Button';
 import { Spacer } from '../Spacer/Spacer';
 
-const Modal = props => {
+const Modal = forwardRef((props, externalRef) => {
   const {
     theme,
     selectedTheme,
@@ -49,7 +49,7 @@ const Modal = props => {
     privacy,
   } = props;
 
-  const ref = useRef();
+  const modalRef = useRef();
   const bgRef = useRef();
 
   if (!visible) return null;
@@ -64,7 +64,10 @@ const Modal = props => {
       />
 
       <StyledModal
-        ref={ref}
+        ref={element => {
+          if (externalRef) externalRef.current = element;
+          modalRef.current = element;
+        }}
         $theme={theme}
         $selectedTheme={selectedTheme}
         $bgColor={bgColor}
@@ -140,6 +143,6 @@ const Modal = props => {
       </StyledModal>
     </Fragment>
   );
-};
+});
 
 export { Modal };
