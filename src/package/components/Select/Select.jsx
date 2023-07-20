@@ -210,7 +210,6 @@ const Select = props => {
       <Label
         $theme={theme}
         $selectedTheme={selectedTheme}
-        htmlFor={name || ''}
         $labelSize={labelSize}
         $labelColor={labelColor}
         $labelSpacing={labelSpacing}

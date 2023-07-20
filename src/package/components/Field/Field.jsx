@@ -71,7 +71,6 @@ const Field = props => {
       <Label
         $theme={theme}
         $selectedTheme={selectedTheme}
-        htmlFor={name || ''}
         $labelSize={labelSize}
         $labelColor={labelColor}
         $labelSpacing={labelSpacing}
@@ -126,6 +125,7 @@ const Field = props => {
                 disabled={privacy || rest.disabled}
                 value={privacy ? 'Private' : form?.values?.[name] || ''}
                 onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
+                autoComplete={rest.autoComplete}
                 onChange={handleFieldStateUpdate}
               />
             )}
@@ -137,6 +137,7 @@ const Field = props => {
                 placeholder={placeholder || ''}
                 value={inputValue}
                 disabled={rest.disabled}
+                autoComplete={rest.autoComplete}
                 onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
                 onChange={handleFieldStateUpdate}
               />
