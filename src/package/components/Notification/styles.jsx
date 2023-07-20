@@ -10,7 +10,7 @@ export const StyledNotifications = styled('div')`
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 100;
+  z-index: 201;
   margin: 1rem;
 `;
 
