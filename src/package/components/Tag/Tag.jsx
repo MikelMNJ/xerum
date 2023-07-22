@@ -45,7 +45,7 @@ const Tag = props => {
       $borderRadius={borderRadius}
       $iconLeft={iconLeft}
       $allClick={allClick}
-      onClick={e => allClick && callback?.(e)}
+      onClick={e => allClick && removable && callback?.(e)}
     >
       {removable && iconLeft && (
         <Close
