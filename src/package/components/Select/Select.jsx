@@ -63,6 +63,7 @@ const Select = props => {
     hideField,
     tabletSize,
     mobileSize,
+    disabled,
     callback,
   } = props;
 
@@ -262,6 +263,7 @@ const Select = props => {
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : defaultValue?.label || '')}
                 readOnly={!optionsMenuVisible}
+                disabled={disabled}
                 onFocus={() => inputRef.current?.click()}
                 onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
                 onClick={() => setOptionsMenuVisible(true)}
@@ -282,6 +284,7 @@ const Select = props => {
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
                 readOnly={!optionsMenuVisible}
+                disabled={disabled}
                 onFocus={() => inputRef.current?.click()}
                 onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
                 onClick={() => setOptionsMenuVisible(true)}
