@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { StyledMain, ContentArea } from './styles';
-import { appConstants } from 'modules';
-import { Button, Spacer, Font, Modal } from 'components';
-import { TestForm } from './TestForm';
-import _ from 'lodash';
+import { appConstants, appActions } from 'modules';
+import { Button, Spacer, Font } from 'components';
+import { TestForm, categories } from './TestForm';
 
 const { themes } = appConstants;
 const { light, dark } = themes;
 
+const expenses = [
+  { category: categories[3], amount: 100, checked: true, toggled: true },
+  { category: categories[4], amount: 200, checked: false, toggled: true },
+];
+
 const Main = props => {
   const { theme, selectedTheme, setTheme } = props;
-  const [ confirmContent, setConfirmContent ] = useState(null);
   const lightTheme = props.selectedTheme === 'light';
+  const dispatch = useDispatch();
+  const setExpense = useCallback(payload => dispatch(appActions.setExpense(payload)), [ dispatch ]);
 
   const handleThemeChange = () => {
     setTheme(lightTheme ? dark : light);
@@ -31,23 +37,7 @@ const Main = props => {
 
         <Spacer />
 
-        <Modal
-          theme={theme}
-          selectedTheme={selectedTheme}
-          confirm={true}
-          confirmText={<Font weight='medium' mobileSize={0.875}>Confirm</Font>}
-          cancelText={<Font weight='medium' mobileSize={0.875}>Cancel</Font>}
-          onClose={() => setConfirmContent(null)}
-          onConfirm={_.noop}
-          visible={!_.isEmpty(confirmContent)}
-          useOverflow={true}
-          mobileMode={true}
-          bgClose={true}
-          blank={true}
-          privacy={false}
-        >
-          {confirmContent}
-        </Modal>
+        <TestForm />
 
         <Spacer />
 
@@ -55,8 +45,8 @@ const Main = props => {
           theme={theme}
           selectedTheme={selectedTheme}
           type='button'
-          text={<Font weight='medium'>Normal</Font>}
-          callback={() => setConfirmContent(<TestForm />)}
+          text={<Font weight='medium'>Change to Expense 1</Font>}
+          callback={() => setExpense(expenses[0])}
         />
 
         <Spacer />
@@ -65,8 +55,8 @@ const Main = props => {
           theme={theme}
           selectedTheme={selectedTheme}
           type='button'
-          text={<Font weight='medium'>More Fields</Font>}
-          callback={() => setConfirmContent(<TestForm moreFields={true} />)}
+          text={<Font weight='medium'>Change to Expense 2</Font>}
+          callback={() => setExpense(expenses[1])}
         />
       </ContentArea>
     </StyledMain>
