@@ -193,6 +193,10 @@ export const Option = styled('div')`
   ${props => props.$fontFamily && css`font-family: ${props.$fontFamily};`}
 
   background-color: ${props => {
+    if (props.$disabled) {
+      return hexValid(props.$disabledOptionBgColor) || getColor(props, 'primary', neutral.white);
+    }
+
     if (props.$active) {
       return hexValid(props.$activeOptionBgColor) || getColor(props, 'accent', accent.brightNavyBlue);
     }
@@ -201,6 +205,10 @@ export const Option = styled('div')`
   }};
 
   color: ${props => {
+    if (props.$disabled) {
+      return hexValid(props.$disabledOptionTextColor) || getColor(props, 'grey', neutral.greyWeb) + 75;
+    }
+
     if (props.$active) {
       return hexValid(props.$activeOptionTextColor) || getColor(props, 'onAccent', shades.white);
     }
@@ -210,6 +218,7 @@ export const Option = styled('div')`
 
   @media (hover: hover) {
     &:hover {
+      cursor: ${props => props.$disabled ? 'not-allowed' : 'pointer'};
       background-color: ${props => {
         if (props.$active) {
           return hexValid(props.$activeOptionBgHoverColor) || getColor(props, 'accentHover', accent.carolinaBlue);
@@ -219,6 +228,13 @@ export const Option = styled('div')`
       }};
     }
   }
+`;
+
+export const OptionNote = styled('div')`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 0.875rem;
 `;
 
 export const NoResults = styled('div')`

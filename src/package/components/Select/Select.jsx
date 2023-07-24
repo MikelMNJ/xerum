@@ -12,6 +12,7 @@ import {
   Label,
   LabelArea,
   LabelText,
+  OptionNote,
 } from './styles';
 import { PrivacyMask } from '../PrivacyMask/PrivacyMask';
 import { Field as FormikField } from 'formik';
@@ -56,6 +57,9 @@ const Select = props => {
     optionBgHoverColor,
     activeOptionBgColor,
     activeOptionBgHoverColor,
+    disabledOptionTextColor,
+    disabledOptionBgColor,
+    disabledOptionBgHoverColor,
     noResultsText,
     top,
     placeholderColor,
@@ -140,9 +144,10 @@ const Select = props => {
   };
 
   const handleOptionChange = (e, option) => {
+    const { disabled } = option;
     const different = !_.isEqual(selectedOption, option);
 
-    if (different) {
+    if (different && !disabled) {
       setSelectedOption(option);
       form?.setFieldValue(name, _.toString(option?.value));
       callback?.(_.toString(option?.value));
@@ -152,7 +157,7 @@ const Select = props => {
   };
 
   const updateField = onlyResult => {
-    if (onlyResult) {
+    if (onlyResult && !onlyResult.disabled) {
       setSelectedOption(onlyResult);
       form?.setFieldValue(name, _.toString(onlyResult.value));
       callback?.(_.toString(onlyResult?.value));
@@ -173,7 +178,7 @@ const Select = props => {
     }
 
     return filteredData?.map?.((option, index) => {
-      const { value, label } = option;
+      const { value, label, disabled, note } = option;
       const active = _.isEqual(selectedOption, option);
 
       return (
@@ -186,15 +191,30 @@ const Select = props => {
           $borderRadius={borderRadius}
           $optionTextColor={optionTextColor}
           $activeOptionTextColor={activeOptionTextColor}
+          $disabledOptionTextColor={disabledOptionTextColor}
           $bgColor={bgColor}
           $optionBgHoverColor={optionBgHoverColor}
           $activeOptionBgColor={activeOptionBgColor}
+          $disabledOptionBgColor={disabledOptionBgColor}
           $activeOptionBgHoverColor={activeOptionBgHoverColor}
+          $disabledOptionBgHoverColor={disabledOptionBgHoverColor}
           $active={active}
           $fontFamily={fontFamily}
+          $disabled={disabled}
           onClick={e => handleOptionChange(e, option)}
         >
-          {privacy ? <PrivacyMask length={label.length} /> : label}
+          {privacy
+            ? <PrivacyMask length={label.length} />
+            : <>
+                {label}
+                {note && (
+                  <OptionNote>
+                    <Spacer across={true} />
+                    {note}
+                  </OptionNote>
+                )}
+              </>
+            }
         </Option>
       );
     });
