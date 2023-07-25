@@ -122,7 +122,7 @@ const Select = props => {
 
     getOverflowState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ optionsMenuVisible, searchValue, name ]);
+  }, [ optionsMenuVisible, searchValue, name, data, selectedOption, defaultValue ]);
 
   const options = useMemo(() => data, [ data ]);
 
