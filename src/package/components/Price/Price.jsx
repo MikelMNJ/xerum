@@ -31,12 +31,13 @@ const Price = props => {
 
   const buildPrice = () => {
     const val = isNaN(value) ? truncate(0, limit) : truncate(value, limit);
-    const forcedMinus = useMinus && value > 0 ? '-' : '';
+    const finalValue = val.replace('-', '');
+    const forcedMinus = useMinus && value < 0 ? '-' : '';
 
     const price = (
       <Fragment>
-        {!privacy && (usePlus ? '+' : forcedMinus)}
-        {!privacy && (symbol || '$')}{privacy ? '***' : val} {currency}
+        {!privacy && (usePlus && value >= 0 ? '+' : forcedMinus)}
+        {!privacy && (symbol || '$')}{privacy ? '***' : finalValue} {currency}
       </Fragment>
     );
 

@@ -214,7 +214,7 @@ const Select = props => {
                 {label}
                 {note && (
                   <OptionNote>
-                    <Spacer across={true} />
+                    <Spacer size={0.5} across={true} />
                     {note}
                   </OptionNote>
                 )}
