@@ -88,6 +88,7 @@ const Select = props => {
   const inputRef = useRef();
   const labelAreaRef = useRef();
   const optionsRef = useRef();
+  const options = useMemo(() => data, [ data ]);
 
   useEffect(() => {
     if (optionsMenuVisible) {
@@ -109,6 +110,12 @@ const Select = props => {
   }, [ optionsMenuVisible, setOptionsMenuVisible ]);
 
   useEffect(() => {
+    if (!_.isEqual(filteredData, options)) {
+      setFilteredData(options);
+    }
+  }, [ filteredData, options, setFilteredData, data ]);
+
+  useEffect(() => {
     const firstOption = data?.[0];
     const different = !_.isEqual(form ? defaultValue : selectedOption, form ? selectedOption : firstOption);
 
@@ -123,8 +130,6 @@ const Select = props => {
     getOverflowState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ optionsMenuVisible, searchValue, name, data, selectedOption, defaultValue ]);
-
-  const options = useMemo(() => data, [ data ]);
 
   const getOverflowState = () => {
     if (optionsRef.current) {
