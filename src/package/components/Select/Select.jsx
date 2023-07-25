@@ -281,7 +281,10 @@ const Select = props => {
                 name={name}
                 placeholder={privacy ? 'Private' : (optionsMenuVisible ? defaultValue?.label : buildPlaceholder())}
                 type={privacy ? 'password' : 'text'}
-                value={(optionsMenuVisible ? searchValue : defaultValue?.label || '')}
+                value={(optionsMenuVisible
+                  ? searchValue
+                  : `${defaultValue?.label || ''} ${defaultValue?.note || ''}`
+                )}
                 readOnly={!optionsMenuVisible}
                 disabled={disabled}
                 onFocus={() => inputRef.current?.click()}
@@ -302,7 +305,10 @@ const Select = props => {
                 name={name}
                 placeholder={privacy ? 'Private' : buildPlaceholder()}
                 type={privacy ? 'password' : 'text'}
-                value={(optionsMenuVisible ? searchValue : selectedOption?.label || '')}
+                value={(optionsMenuVisible
+                  ? searchValue
+                  : `${selectedOption?.label || ''} ${selectedOption?.note || ''}`
+                )}
                 readOnly={!optionsMenuVisible}
                 disabled={disabled}
                 onFocus={() => inputRef.current?.click()}
