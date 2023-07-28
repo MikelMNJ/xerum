@@ -68,7 +68,9 @@ const DatePicker = props => {
     callback,
   } = props;
 
-  const [ selectedDate, setSelectedDate ] = useState(defaultDate);
+  const defaultValue = _.toString(form?.values[name]) || defaultDate || '';
+
+  const [ selectedDate, setSelectedDate ] = useState(defaultValue);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
 
   const inputRef = useRef();
@@ -103,7 +105,7 @@ const DatePicker = props => {
   };
 
   const buildPlaceholder = () => {
-    if (_.isEmpty(defaultDate)) return noDateText || 'Select a date...';
+    if (_.isEmpty(defaultValue)) return noDateText || 'Select a date...';
     return selectedDate;
   };
 
