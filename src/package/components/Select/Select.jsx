@@ -110,10 +110,10 @@ const Select = props => {
   }, [ optionsMenuVisible, setOptionsMenuVisible ]);
 
   useEffect(() => {
-    if (!_.isEqual(filteredData, options)) {
+    if (!_.isEqual(filteredData, options) && !searchValue) {
       setFilteredData(options);
     }
-  }, [ filteredData, options, setFilteredData, data ]);
+  }, [ filteredData, options, searchValue, data, setFilteredData ]);
 
   useEffect(() => {
     const firstOption = data?.[0];
