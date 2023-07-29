@@ -46,7 +46,7 @@ const SlideOver = forwardRef((props, externalRef) => {
         $bottomOffset={bottomOffset}
         $mobileMode={mobileMode}
       >
-        <Header onClick={handleClose}>
+        <Header>
           <H3 $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
             {title}
           </H3>
@@ -57,6 +57,7 @@ const SlideOver = forwardRef((props, externalRef) => {
             $closeColor={closeColor}
             $closeHoverColor={closeHoverColor}
             $closeIconSize={closeIconSize}
+            onClick={handleClose}
           >
             {iconValid(closeIcon)
               ? <i className={closeIcon} />
