@@ -71,7 +71,15 @@ export const Day = styled('div')`
       const color = hexValid(props.$disabledTextColor) ||
         lightTheme
           ? getColor(props, 'grey', colors.neutral.greyWeb) + 90
-          : getColor(props, 'grey', colors.neutral.greyWeb);
+          : getColor(props, 'grey', colors.neutral.greyWeb) + 95;
+
+      return color;
+    }
+
+    if (props.$disablePastDates && !props.$inThisMonth && !isActive) {
+      const color = lightTheme
+          ? getColor(props, 'onPrimary', colors.neutral.greyWeb) + 90
+          : getColor(props, 'onPrimary', colors.neutral.greyWeb) + 90;
 
       return color;
     }
@@ -84,41 +92,44 @@ export const Day = styled('div')`
     return hexValid(props.$textColor) || getColor(props, 'onPrimary', colors.shades.black);
   }};
 
-  &:hover {
-    background-color: ${props => {
-      const lightTheme = props.$selectedTheme === light;
-      const hoverColor = hexValid(props.$bgHoverColor)
-        || getColor(props, lightTheme ? 'lightGrey' : 'grey', colors.neutral.lightGrey);
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${props => {
+        const lightTheme = props.$selectedTheme === light;
+        const hoverColor = hexValid(props.$bgHoverColor)
+          || getColor(props, lightTheme ? 'lightGrey' : 'grey', colors.neutral.lightGrey);
 
-      if (props.$disabled) {
-        const color = hexValid(props.$disabledBGHoverColor) || getColor(props, 'grey', colors.neutral.lightGrey) + 50;
+        if (props.$disabled) {
+          const color = hexValid(props.$disabledBGHoverColor) || getColor(props, 'grey', colors.neutral.lightGrey) + 50;
+          return color;
+        }
+
+        if (props.$active) {
+          const color = hexValid(props.$activeBGHoverColor)
+            || getColor(props, 'accentHover', colors.accent.carolinaBlue);
+          return color;
+        }
+
+        return hoverColor;
+      }};
+
+      color: ${props => {
+        const color = hexValid(props.$textHoverColor)
+          || getColor(props, 'onPrimary', colors.shades.black);
+
+        if (props.$disabled) {
+          const color = hexValid(props.$disabledTextHoverColor) || getColor(props, 'grey', colors.neutral.greyWeb);
+          return color;
+        }
+
+        if (props.$active) {
+          const color = hexValid(props.$activeTextHoverColor) || getColor(props, 'white', colors.shades.white);
+          return color;
+        }
+
         return color;
-      }
-
-      if (props.$active) {
-        const color = hexValid(props.$activeBGHoverColor) || getColor(props, 'accentHover', colors.accent.carolinaBlue);
-        return color;
-      }
-
-      return hoverColor;
-    }};
-
-    color: ${props => {
-      const color = hexValid(props.$textHoverColor)
-        || getColor(props, 'onPrimary', colors.shades.black);
-
-      if (props.$disabled) {
-        const color = hexValid(props.$disabledTextHoverColor) || getColor(props, 'grey', colors.neutral.greyWeb);
-        return color;
-      }
-
-      if (props.$active) {
-        const color = hexValid(props.$activeTextHoverColor) || getColor(props, 'white', colors.shades.white);
-        return color;
-      }
-
-      return color;
-    }};
+      }};
+    }
   }
 `;
 
@@ -137,13 +148,15 @@ export const NavIcon = styled('div')`
 
   i {
     font-size: ${props => props.$iconSize || 1}rem;
-    color: ${props => hexValid(props.$iconColor) || getColor(props, 'white', colors.shades.white)};
+    color: ${props => getColor(props, 'white', colors.shades.white)};
   }
 
-  &:hover {
-    background-color: ${props => {
-      const color = hexValid(props.$iconBGHoverColor) || getColor(props, 'accentHover', colors.accent.carolinaBlue);
-      return color;
-    }};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${props => {
+        const color = hexValid(props.$iconBGHoverColor) || getColor(props, 'accentHover', colors.accent.carolinaBlue);
+        return color;
+      }};
+    }
   }
 `;

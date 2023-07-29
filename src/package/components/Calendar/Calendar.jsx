@@ -1,28 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyledCalendar, MonthNav, NavIcon, DayHeaders, HeaderItem, Days, Day } from './styles';
 import { Spacer } from '../Spacer/Spacer';
 import { daysInMonth, iconValid } from '../../helpers';
 import moment from 'moment';
-
-const today = moment();
-const daysThisMonth = moment().daysInMonth();
-const thisMonth = moment().month();
-const lastMonth = moment().subtract(1, 'months').month();
-const nextMonth = moment().add(1, 'months').month();
-const thisYear = moment().year();
-const dayHeaders = moment.weekdaysShort().map(day => day.slice(0, 2));
-const maxDisplayWeeks = 6;
-const maxDisplayDays = dayHeaders.length * maxDisplayWeeks;
-const preMonthFillerDates = moment().date(1).day();
-const postMonthFillerDates = maxDisplayDays - (daysThisMonth + preMonthFillerDates);
-const pastDateDisabled = date => date < today;
 
 const Calendar = props => {
   const {
     theme,
     selectedTheme,
     disablePastDates,
-    icon,
+    prevIcon,
+    nextIcon,
     fontFamily,
     headerFontFamily,
     headerColor,
@@ -41,14 +29,27 @@ const Calendar = props => {
     iconBGHoverColor,
     iconSize,
     selectedDate,
+    optional,
     callback,
   } = props;
 
-  const allDaysLastMonth = daysInMonth({ month: lastMonth, disablePastDates, pastDateDisabled });
-  const allDaysThisMonth = daysInMonth({ month: thisMonth, disablePastDates, pastDateDisabled });
-  const allDaysNextMonth = daysInMonth({ month: nextMonth, disablePastDates, pastDateDisabled });
+  const [ currentMonth, setCurrentMonth ] = useState(moment());
+
+  const totalDays = moment(currentMonth).daysInMonth();
+  const thisMonth = moment(currentMonth);
+  const lastMonth = moment(currentMonth).subtract(1, 'months');
+  const nextMonth = moment(currentMonth).add(1, 'months');
+  const dayHeaders = moment.weekdaysShort().map(day => day.slice(0, 2));
+  const maxDisplayWeeks = 6;
+  const maxDisplayDays = dayHeaders.length * maxDisplayWeeks;
+  const preMonthFillerDates = moment(currentMonth).date(1).day();
+  const postMonthFillerDates = maxDisplayDays - (totalDays + preMonthFillerDates);
+  const allDaysLastMonth = daysInMonth({ providedDate: lastMonth, disablePastDates });
+  const allDaysThisMonth = daysInMonth({ providedDate: thisMonth, disablePastDates, inThisMonth: true });
+  const allDaysNextMonth = daysInMonth({ providedDate: nextMonth, disablePastDates });
+
   const displayDates = [
-    ...allDaysLastMonth.slice(-preMonthFillerDates),
+    ...allDaysLastMonth.slice(allDaysLastMonth.length - preMonthFillerDates),
     ...allDaysThisMonth,
     ...allDaysNextMonth.slice(0, postMonthFillerDates),
   ];
@@ -86,7 +87,8 @@ const Calendar = props => {
         $disablePastDates={disablePastDates}
         onClick={() => {
           const different = selectedDate !== date.format('MMMM Do, YYYY');
-          if (!disabled) callback?.(different ? date : null);
+          const newDate = different || !optional ? date : null;
+          if (!disabled) callback?.(newDate);
         }}
       >
         {date.format('D')}
@@ -104,16 +106,19 @@ const Calendar = props => {
           $iconBGColor={iconBGColor}
           iconBGHoverColor={iconBGHoverColor}
           $iconSize={iconSize}
+          onClick={() => {
+            const previousMonth = moment(currentMonth).subtract(1, 'months');
+            setCurrentMonth(previousMonth);
+          }}
         >
-          {iconValid(icon)
-            ? <i className={icon} />
-            : icon || <i className='fa-solid fa-chevron-left' />
+          {iconValid(prevIcon)
+            ? <i className={prevIcon} />
+            : prevIcon || <i className='fa-solid fa-chevron-left' />
           }
         </NavIcon>
 
         <div>
-          {moment().month(6).format('MMMM')}&nbsp;
-          {thisYear}
+          {currentMonth.format('MMMM YYYY')}
         </div>
 
         <NavIcon
@@ -123,10 +128,14 @@ const Calendar = props => {
           $iconBGColor={iconBGColor}
           iconBGHoverColor={iconBGHoverColor}
           $iconSize={iconSize}
+          onClick={() => {
+            const nextMonth = moment(currentMonth).add(1, 'months');
+            setCurrentMonth(nextMonth);
+          }}
         >
-          {iconValid(icon)
-            ? <i className={icon} />
-            : icon || <i className='fa-solid fa-chevron-right' />
+          {iconValid(nextIcon)
+            ? <i className={nextIcon} />
+            : nextIcon || <i className='fa-solid fa-chevron-right' />
           }
         </NavIcon>
       </MonthNav>

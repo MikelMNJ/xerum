@@ -13,8 +13,8 @@ import {
 import { Field as FormikField } from 'formik';
 import { Spacer } from '../Spacer/Spacer';
 import { Calendar } from '../Calendar/Calendar';
-import _ from 'lodash';
 import moment from 'moment';
+import _ from 'lodash';
 
 const DatePicker = props => {
   const {
@@ -26,6 +26,8 @@ const DatePicker = props => {
     icon,
     iconColor,
     iconSize,
+    prevIcon,
+    nextIcon,
     borderRadius,
     label,
     fontFamily,
@@ -68,9 +70,11 @@ const DatePicker = props => {
     callback,
   } = props;
 
-  const defaultValue = _.toString(form?.values[name]) || defaultDate || '';
+  const formikValue = form?.values[name];
+  const defaultValue = formikValue ? _.toString(formikValue) : defaultDate || '';
+  const dateOnLoad = !optional && _.isEmpty(defaultValue) ? moment().format('MMMM Do, YYYY') : defaultValue;
 
-  const [ selectedDate, setSelectedDate ] = useState(defaultValue);
+  const [ selectedDate, setSelectedDate ] = useState(dateOnLoad);
   const [ optionsMenuVisible, setOptionsMenuVisible ] = useState(false);
 
   const inputRef = useRef();
@@ -229,7 +233,6 @@ const DatePicker = props => {
           selectedTheme={selectedTheme}
           selectedDate={selectedDate}
           disablePastDates={disablePastDates}
-          icon={icon}
           fontFamily={fontFamily}
           headerFontFamily={headerFontFamily}
           headerColor={headerColor}
@@ -247,6 +250,9 @@ const DatePicker = props => {
           iconBGColor={iconBGColor}
           iconBGHoverColor={iconBGHoverColor}
           iconSize={iconSize}
+          prevIcon={prevIcon}
+          nextIcon={nextIcon}
+          optional={optional}
           callback={newVal => updateField(newVal)}
         />
       </CalendarArea>
