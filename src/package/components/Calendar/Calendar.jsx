@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyledCalendar, MonthNav, NavIcon, DayHeaders, HeaderItem, Days, Day } from './styles';
 import { Spacer } from '../Spacer/Spacer';
 import { daysInMonth, iconValid } from '../../helpers';
 import moment from 'moment';
+import _ from 'lodash';
 
 const Calendar = props => {
   const {
@@ -29,10 +30,17 @@ const Calendar = props => {
     iconSize,
     selectedDate,
     optional,
+    optionsMenuVisible,
     callback,
   } = props;
 
-  const [ currentMonth, setCurrentMonth ] = useState(moment());
+  const defaultDate = !_.isEmpty(selectedDate) ? moment(selectedDate, 'MMMM Do, YYYY') : moment();
+  const [ currentMonth, setCurrentMonth ] = useState(defaultDate);
+
+  useEffect(() => {
+      if (!optionsMenuVisible) setCurrentMonth(defaultDate);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ optionsMenuVisible ]);
 
   const totalDays = moment(currentMonth).daysInMonth();
   const thisMonth = moment(currentMonth);

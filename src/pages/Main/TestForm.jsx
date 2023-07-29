@@ -66,8 +66,8 @@ const TestForm = withTheme(props => {
               fontFamily='Inter-Medium'
               headerFontFamily='Inter-Bold'
               label='Due date'
-              optional={true}
-              disablePastDates={true}
+              optional={false}
+              disablePastDates={false}
               callback={_.noop}
             />
 

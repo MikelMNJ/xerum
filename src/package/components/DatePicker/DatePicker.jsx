@@ -251,6 +251,7 @@ const DatePicker = props => {
           prevIcon={prevIcon}
           nextIcon={nextIcon}
           optional={optional}
+          optionsMenuVisible={optionsMenuVisible}
           callback={newVal => updateField(newVal)}
         />
       </CalendarArea>
