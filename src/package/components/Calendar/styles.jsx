@@ -68,10 +68,11 @@ export const Day = styled('div')`
     const isActive = props.$active;
 
     if (props.$disabled || (!props.$disablePastDates && !props.$inThisMonth && !isActive)) {
-      const color = hexValid(props.$disabledTextColor) ||
+      const color = hexValid(props.$disabledTextColor) || (
         lightTheme
           ? getColor(props, 'grey', colors.neutral.greyWeb) + 90
-          : getColor(props, 'grey', colors.neutral.greyWeb) + 95;
+          : getColor(props, 'grey', colors.neutral.greyWeb) + 95
+        );
 
       return color;
     }

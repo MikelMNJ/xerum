@@ -22,7 +22,6 @@ const Calendar = props => {
     activeBGColor,
     activeBGHoverColor,
     disabledTextColor,
-    disabledBgColor,
     disabledBGHoverColor,
     iconColor,
     iconBGColor,
@@ -82,7 +81,6 @@ const Calendar = props => {
         $activeBGColor={activeBGColor}
         $activeBGHoverColor={activeBGHoverColor}
         $disabledTextColor={disabledTextColor}
-        $disabledBGColor={disabledBgColor}
         $disabledBGHoverColor={disabledBGHoverColor}
         $disablePastDates={disablePastDates}
         onClick={() => {

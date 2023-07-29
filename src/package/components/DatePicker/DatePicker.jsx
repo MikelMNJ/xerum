@@ -65,7 +65,6 @@ const DatePicker = props => {
     disabled,
     disablePastDates,
     disabledTextColor,
-    disabledBgColor,
     disabledBGHoverColor,
     callback,
   } = props;
@@ -244,7 +243,6 @@ const DatePicker = props => {
           activeBGColor={activeBGColor}
           activeBGHoverColor={activeBGHoverColor}
           disabledTextColor={disabledTextColor}
-          disabledBgColor={disabledBgColor}
           disabledBGHoverColor={disabledBGHoverColor}
           iconColor={iconColor}
           iconBGColor={iconBGColor}
