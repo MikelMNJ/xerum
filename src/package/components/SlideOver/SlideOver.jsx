@@ -22,6 +22,7 @@ const SlideOver = forwardRef((props, externalRef) => {
     visible,
     bgColor,
     mobileMode,
+    zIndex,
   } = props;
 
   const slideOverRef = useRef();
@@ -45,6 +46,7 @@ const SlideOver = forwardRef((props, externalRef) => {
         $topOffset={topOffset}
         $bottomOffset={bottomOffset}
         $mobileMode={mobileMode}
+        $zIndex={zIndex}
       >
         <Header>
           <H3 $theme={theme} $selectedTheme={selectedTheme} $titleColor={titleColor}>
