@@ -38,9 +38,16 @@ const Calendar = props => {
   const [ currentMonth, setCurrentMonth ] = useState(defaultDate);
 
   useEffect(() => {
-      if (!optionsMenuVisible) setCurrentMonth(defaultDate);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!optionsMenuVisible) setCurrentMonth(defaultDate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ optionsMenuVisible ]);
+
+  useEffect(() => {
+    if (!_.isEmpty(selectedDate)) {
+      const formattedDate = moment(selectedDate, 'MMMM Do, YYYY');
+      setCurrentMonth(formattedDate);
+    }
+  }, [ selectedDate ]);
 
   const totalDays = moment(currentMonth).daysInMonth();
   const thisMonth = moment(currentMonth);

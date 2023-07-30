@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
   StyledDatePicker,
@@ -70,7 +70,11 @@ const DatePicker = props => {
   } = props;
 
   const formikValue = form?.values[name];
-  const defaultValue = formikValue ? _.toString(formikValue) : defaultDate || '';
+
+  const defaultValue = useMemo(() => (
+    formikValue ? _.toString(formikValue) : defaultDate || ''
+  ), [ defaultDate, formikValue ]);
+
   const dateOnLoad = !optional && _.isEmpty(defaultValue) ? moment().format('MMMM Do, YYYY') : defaultValue;
 
   const [ selectedDate, setSelectedDate ] = useState(dateOnLoad);
@@ -97,6 +101,12 @@ const DatePicker = props => {
       };
     }
   }, [ optionsMenuVisible, setOptionsMenuVisible ]);
+
+  useEffect(() => {
+    if (!_.isEmpty(defaultValue)) {
+      setSelectedDate(defaultValue);
+    }
+  }, [ defaultValue ]);
 
   const updateField = newDate => {
     const formattedDate = newDate && moment(newDate).format('MMMM Do, YYYY');
