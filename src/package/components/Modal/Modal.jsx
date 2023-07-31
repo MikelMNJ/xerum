@@ -92,8 +92,6 @@ const Modal = forwardRef((props, externalRef) => {
           </CloseButton>
         </ModalHeader>
 
-        <Spacer />
-
         {text ? <ConfirmText>{text}</ConfirmText> : children}
 
         <ConfirmButtons $visible={confirm && !blank} $mobileMode={mobileMode}>
@@ -114,8 +112,6 @@ const Modal = forwardRef((props, externalRef) => {
               round={round}
               callback={() => onConfirm?.()}
             />
-
-            {!mobileMode && <Spacer />}
           </ButtonWrapper>
 
           <ButtonWrapper>
@@ -134,12 +130,8 @@ const Modal = forwardRef((props, externalRef) => {
               buttonType='ghost'
               callback={() => onClose?.()}
             />
-
-            <Spacer />
           </ButtonWrapper>
         </ConfirmButtons>
-
-        {blank && <Spacer />}
       </StyledModal>
     </Fragment>
   );
