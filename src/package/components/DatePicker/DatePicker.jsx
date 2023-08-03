@@ -180,10 +180,16 @@ const DatePicker = props => {
                 value={selectedDate || ''}
                 readOnly={true}
                 disabled={disabled}
-                onFocus={() => inputRef.current?.click()}
-                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-                onClick={() => setOptionsMenuVisible(true)}
-                onBlur={() => name && form && form.setTouched({ ...form.touched, [name]: true })}
+                onKeyUp={e => {
+                  e.key === 'Enter' && inputRef.current?.blur();
+                  e.code === 'Space' && inputRef.current?.click();
+                }}
+                onFocus={e => e.target.selectionEnd = 0}
+                onClick={() => setOptionsMenuVisible(!optionsMenuVisible)}
+                onBlur={() => {
+                  if (name && form) form.setTouched({ ...form.touched, [name]: true });
+                  setOptionsMenuVisible(false);
+                }}
               />
             )}
 
@@ -196,9 +202,13 @@ const DatePicker = props => {
                 value={selectedDate || ''}
                 readOnly={true}
                 disabled={disabled}
-                onFocus={() => inputRef.current?.click()}
-                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-                onClick={() => setOptionsMenuVisible(true)}
+                onKeyUp={e => {
+                  e.key === 'Enter' && inputRef.current?.blur();
+                  e.code === 'Space' && inputRef.current?.click();
+                }}
+                onFocus={e => e.target.selectionEnd = 0}
+                onClick={() => setOptionsMenuVisible(!optionsMenuVisible)}
+                onBlur={() => setOptionsMenuVisible(false)}
               />
             )}
 

@@ -292,9 +292,12 @@ const Select = props => {
                 )}
                 readOnly={!optionsMenuVisible}
                 disabled={disabled}
-                onFocus={() => inputRef.current?.click()}
-                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-                onClick={() => setOptionsMenuVisible(true)}
+                onKeyUp={e => {
+                  e.key === 'Enter' && inputRef.current?.blur();
+                  e.code === 'Space' && inputRef.current?.click();
+                }}
+                onFocus={e => e.target.selectionEnd = 0}
+                onClick={() => setOptionsMenuVisible(!optionsMenuVisible)}
                 onChange={handleSearchChange}
                 onBlur={() => {
                   const onlyResult = filteredData?.length === 1 && filteredData[0];
@@ -316,9 +319,12 @@ const Select = props => {
                 )}
                 readOnly={!optionsMenuVisible}
                 disabled={disabled}
-                onFocus={() => inputRef.current?.click()}
-                onKeyUp={e => e.key === 'Enter' && inputRef.current?.blur()}
-                onClick={() => setOptionsMenuVisible(true)}
+                onKeyUp={e => {
+                  e.key === 'Enter' && inputRef.current?.blur();
+                  e.code === 'Space' && inputRef.current?.click();
+                }}
+                onFocus={e => e.target.selectionEnd = 0}
+                onClick={() => setOptionsMenuVisible(!optionsMenuVisible)}
                 onChange={handleSearchChange}
                 onBlur={() => {
                   const onlyResult = filteredData?.length === 1 && filteredData[0];
