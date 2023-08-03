@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { iconValid } from '../../helpers';
 import {
   StyledSelect,
@@ -90,6 +90,19 @@ const Select = props => {
   const optionsRef = useRef();
   const options = useMemo(() => data, [ data ]);
 
+  const handleOptionChange = useCallback((e, option, keepVisibleState) => {
+    const { disabled } = option;
+    const different = !_.isEqual(selectedOption, option);
+
+    if (different && !disabled) {
+      setSelectedOption(option);
+      form?.setFieldValue(name, _.toString(option?.value));
+      callback?.(_.toString(option?.value));
+    }
+
+    if (!keepVisibleState) setOptionsMenuVisible(false);
+  }, [  selectedOption, form, name, callback ]);
+
   useEffect(() => {
     if (optionsMenuVisible) {
       const handleEscape = e => e.key === 'Escape' && setOptionsMenuVisible(false);
@@ -98,16 +111,40 @@ const Select = props => {
           setOptionsMenuVisible(false);
         }
       };
+      const handleUpOrDownArrows = e => {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          e.preventDefault();
+
+          const { value } = selectedOption;
+          const index = _.findIndex(filteredData, { value });
+          const newIndex = e.key === 'ArrowUp' ? index - 1 : index + 1;
+          const newOption = filteredData?.[newIndex];
+          const keepOpen = optionsMenuVisible;
+
+          if (newOption) handleOptionChange(null, newOption, keepOpen);
+        }
+      };
+
+      if (optionsRef.current && selectedOption) {
+        const { value } = selectedOption;
+        const target = document.getElementById(`selectOption_${value}`);
+        const { offsetTop } = target || {};
+        const scrollPosition = offsetTop - 16;
+
+        optionsRef.current.scrollTo({ top: scrollPosition });
+      }
 
       document.addEventListener('click', handleOutsideClick);
       document.addEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', handleUpOrDownArrows);
 
       return () => {
         document.removeEventListener('click', handleOutsideClick);
         document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('keydown', handleUpOrDownArrows);
       };
     }
-  }, [ optionsMenuVisible, setOptionsMenuVisible ]);
+  }, [ optionsMenuVisible, setOptionsMenuVisible, selectedOption, filteredData, handleOptionChange ]);
 
   useEffect(() => {
     if (!_.isEqual(filteredData, options) && !searchValue) {
@@ -148,19 +185,6 @@ const Select = props => {
     setFilteredData(options?.filter(option => match(option)));
   };
 
-  const handleOptionChange = (e, option) => {
-    const { disabled } = option;
-    const different = !_.isEqual(selectedOption, option);
-
-    if (different && !disabled) {
-      setSelectedOption(option);
-      form?.setFieldValue(name, _.toString(option?.value));
-      callback?.(_.toString(option?.value));
-    }
-
-    setOptionsMenuVisible(false);
-  };
-
   const updateField = onlyResult => {
     if (onlyResult && !onlyResult.disabled) {
       setSelectedOption(onlyResult);
@@ -189,6 +213,7 @@ const Select = props => {
       return (
         <Option
           key={index}
+          id={`selectOption_${value}`}
           $theme={theme}
           $selectedTheme={selectedTheme}
           value={_.toString(value)}
@@ -294,7 +319,10 @@ const Select = props => {
                 disabled={disabled}
                 onKeyUp={e => {
                   e.key === 'Enter' && inputRef.current?.blur();
-                  e.code === 'Space' && inputRef.current?.click();
+
+                  if (!optionsMenuVisible) {
+                    e.code === 'Space' && inputRef.current?.click();
+                  }
                 }}
                 onFocus={e => e.target.selectionEnd = 0}
                 onClick={() => setOptionsMenuVisible(!optionsMenuVisible)}
@@ -321,7 +349,10 @@ const Select = props => {
                 disabled={disabled}
                 onKeyUp={e => {
                   e.key === 'Enter' && inputRef.current?.blur();
-                  e.code === 'Space' && inputRef.current?.click();
+
+                  if (!optionsMenuVisible) {
+                    e.code === 'Space' && inputRef.current?.click();
+                  }
                 }}
                 onFocus={e => e.target.selectionEnd = 0}
                 onClick={() => setOptionsMenuVisible(!optionsMenuVisible)}

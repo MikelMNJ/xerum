@@ -12,6 +12,21 @@ export const categories = [
   { value: 2, label: 'Business Supplies' },
   { value: 3, label: 'Baby Supplies' },
   { value: 4, label: 'Kids Clothing' },
+  { value: 5, label: 'Business Clothing 1' },
+  { value: 6, label: 'Business Services 1' },
+  { value: 7, label: 'Business Supplies 1' },
+  { value: 8, label: 'Baby Supplies 1' },
+  { value: 9, label: 'Kids Clothing 1' },
+  { value: 10, label: 'Business Clothing 2' },
+  { value: 11, label: 'Business Services 2' },
+  { value: 12, label: 'Business Supplies 2' },
+  { value: 13, label: 'Baby Supplies 2' },
+  { value: 14, label: 'Kids Clothing 2' },
+  { value: 15, label: 'Business Clothing 3' },
+  { value: 16, label: 'Business Services 3' },
+  { value: 17, label: 'Business Supplies 3' },
+  { value: 18, label: 'Baby Supplies 3' },
+  { value: 19, label: 'Kids Clothing 3' },
 ];
 
 const TestForm = withTheme(props => {
