@@ -164,9 +164,14 @@ const Select = props => {
       form?.setFieldValue(name, _.toString(firstOption?.value));
     }
 
+    if (!form && localDefault) {
+      const newOption = data?.find(item => item.value === localDefault);
+      setSelectedOption(newOption);
+    }
+
     getOverflowState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ optionsMenuVisible, searchValue, name, data, selectedOption, defaultValue ]);
+  }, [ optionsMenuVisible, searchValue, name, data, selectedOption, localDefault, defaultValue ]);
 
   const getOverflowState = () => {
     if (optionsRef.current) {
