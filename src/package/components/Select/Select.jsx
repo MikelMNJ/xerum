@@ -89,28 +89,39 @@ const Select = props => {
   const labelAreaRef = useRef();
   const optionsRef = useRef();
   const options = useMemo(() => data, [ data ]);
+  const lastSelection = useRef(defaultValue);
 
-  const handleOptionChange = useCallback((e, option, keepVisibleState) => {
+  const handleOptionChange = useCallback((e, option, keepVisibleState, navigationOnly) => {
     const { disabled } = option;
     const different = !_.isEqual(selectedOption, option);
 
     if (different && !disabled) {
       setSelectedOption(option);
       form?.setFieldValue(name, _.toString(option?.value));
+    }
+
+    if (!navigationOnly && !_.isEqual(selectedOption, option)) {
       callback?.(_.toString(option?.value));
+      lastSelection.current = option;
     }
 
     if (!keepVisibleState) setOptionsMenuVisible(false);
   }, [  selectedOption, form, name, callback ]);
 
   useEffect(() => {
+    if (lastSelection.current === undefined && selectedOption) {
+      lastSelection.current = selectedOption;
+    }
+
     if (optionsMenuVisible) {
       const handleEscape = e => e.key === 'Escape' && setOptionsMenuVisible(false);
+
       const handleOutsideClick = e => {
         if (!inputRef.current?.contains(e.target)) {
           setOptionsMenuVisible(false);
         }
       };
+
       const handleUpOrDownArrows = e => {
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
           e.preventDefault();
@@ -120,8 +131,11 @@ const Select = props => {
           const newIndex = e.key === 'ArrowUp' ? index - 1 : index + 1;
           const newOption = filteredData?.[newIndex];
           const keepOpen = optionsMenuVisible;
+          const navigationOnly = true;
 
-          if (newOption) handleOptionChange(null, newOption, keepOpen);
+          if (newOption) {
+            handleOptionChange(null, newOption, keepOpen, navigationOnly);
+          }
         }
       };
 
@@ -150,7 +164,7 @@ const Select = props => {
     if (!_.isEqual(filteredData, options) && !searchValue) {
       setFilteredData(options);
     }
-  }, [ filteredData, options, searchValue, data, setFilteredData ]);
+  }, [ filteredData, options, searchValue, data, lastSelection, setFilteredData ]);
 
   useEffect(() => {
     const firstOption = data?.[0];
@@ -191,10 +205,16 @@ const Select = props => {
   };
 
   const updateField = onlyResult => {
-    if (onlyResult && !onlyResult.disabled) {
-      setSelectedOption(onlyResult);
-      form?.setFieldValue(name, _.toString(onlyResult.value));
-      callback?.(_.toString(onlyResult?.value));
+    const previousSelection = lastSelection.current;
+    const prevDisabled = previousSelection?.disabled;
+    const selectionsOutOfSync = !_.isEqual(previousSelection, selectedOption) && !prevDisabled;
+    const onlySearchResult = onlyResult && !onlyResult.disabled;
+
+    if (selectionsOutOfSync || onlySearchResult) {
+      onlySearchResult && setSelectedOption(onlyResult);
+      selectionsOutOfSync && (lastSelection.current = selectedOption);
+      form?.setFieldValue(name, _.toString(selectionsOutOfSync ? selectedOption.value : onlyResult.value));
+      callback?.(_.toString(selectionsOutOfSync ? selectedOption.value : onlyResult.value));
     }
 
     setSearchValue('');
@@ -256,7 +276,7 @@ const Select = props => {
   };
 
   const buildPlaceholder = () => {
-    if (loading && _.isEmpty(data)) return loadingText || 'Loading...';
+    if (loading) return loadingText || 'Loading...';
     if (!loading && _.isEmpty(data)) return noDataText || 'No options available';
     return selectedOption?.label || 'Select an option...';
   };
@@ -318,7 +338,7 @@ const Select = props => {
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible
                   ? searchValue
-                  : `${defaultValue?.label || ''} ${defaultValue?.note || ''}`
+                  : (!loading ? `${defaultValue?.label || ''} ${defaultValue?.note || ''}` : '')
                 )}
                 readOnly={!optionsMenuVisible}
                 disabled={disabled}
@@ -348,7 +368,7 @@ const Select = props => {
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible
                   ? searchValue
-                  : `${selectedOption?.label || ''} ${selectedOption?.note || ''}`
+                  : (!loading ? `${selectedOption?.label || ''} ${selectedOption?.note || ''}` : '')
                 )}
                 readOnly={!optionsMenuVisible}
                 disabled={disabled}
