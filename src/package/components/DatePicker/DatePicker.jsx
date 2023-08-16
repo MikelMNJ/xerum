@@ -41,6 +41,7 @@ const DatePicker = props => {
     activeBorderColor,
     activeBorderSize,
     textColor,
+    noLabel,
     labelSize,
     labelColor,
     labelSpacing,
@@ -131,7 +132,7 @@ const DatePicker = props => {
         $labelColor={labelColor}
         $labelSpacing={labelSpacing}
       >
-        {(label || optional) && (
+        {!noLabel && (label || optional) && (
           <LabelArea ref={labelAreaRef}>
             <LabelText $label={label}>
               {label}
