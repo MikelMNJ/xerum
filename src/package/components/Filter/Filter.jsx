@@ -174,7 +174,7 @@ const Filter = props => {
           onChange={e => setFilterValue(e.currentTarget.value)}
         />
 
-        {!noClearIcon && (
+        {!noClearIcon && !_.isEmpty(filterValue) && (
           <ClearIcon
             $theme={theme}
             $selectedTheme={selectedTheme}
