@@ -22,6 +22,9 @@ const SlideOver = forwardRef((props, externalRef) => {
     visible,
     bgColor,
     mobileMode,
+    boxShadow,
+    borderRadius,
+    rightOffset,
     zIndex,
   } = props;
 
@@ -45,7 +48,11 @@ const SlideOver = forwardRef((props, externalRef) => {
         $bgColor={bgColor}
         $topOffset={topOffset}
         $bottomOffset={bottomOffset}
+        $rightOffset={rightOffset}
+        $lefetOffset={rightOffset}
+        $borderRadius={borderRadius}
         $mobileMode={mobileMode}
+        $boxShadow={boxShadow}
         $zIndex={zIndex}
       >
         <Header>
