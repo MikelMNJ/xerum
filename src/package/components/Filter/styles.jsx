@@ -48,6 +48,30 @@ export const Icon = styled('div')`
   }
 `;
 
+export const ClearIcon = styled('div')`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: ${props => props.$height || height}rem;
+  width: ${props => props.$height || height}rem;
+  cursor: pointer;
+  color: ${props => {
+    const color = hexValid(props.$clearIconColor) || getColor(props, 'onPrimary', neutral.raisinBlack);
+
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
+    return color;
+  }};
+
+  i {
+    top: unset;
+    left: unset;
+    font-size: ${props => props.$clearIconSize || 1}rem;
+  }
+`;
+
 export const Input = styled('input')`
   margin: 0;
   height: 3rem;

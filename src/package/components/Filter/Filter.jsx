@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { iconValid, stringToArray, lowercaseArray } from '../../helpers';
-import { StyledFilter, Label, Input, Icon } from './styles';
+import { StyledFilter, Label, Input, Icon, ClearIcon } from './styles';
 import _ from 'lodash';
 
 const Filter = props => {
@@ -21,6 +21,11 @@ const Filter = props => {
     inputTextColor,
     inputBGColor,
     inputIconColor,
+    clearIcon,
+    clearIconHeight,
+    clearIconSize,
+    clearIconColor,
+    noClearIcon,
     fontFamily,
     borderColor,
     borderRadius,
@@ -32,6 +37,7 @@ const Filter = props => {
   } = props;
 
   const [ filterValue, setFilterValue ] = useState('');
+  const inputRef = useRef();
 
   const digDeep = useCallback((path, value) => {
     let workingVal = value;
@@ -145,6 +151,7 @@ const Filter = props => {
         )}
 
         <Input
+          ref={inputRef}
           $theme={theme}
           $selectedTheme={selectedTheme}
           type='text'
@@ -166,6 +173,29 @@ const Filter = props => {
           defaultValue={filterValue || ''}
           onChange={e => setFilterValue(e.currentTarget.value)}
         />
+
+        {!noClearIcon && (
+          <ClearIcon
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $height={clearIconHeight}
+            $clearIconColor={clearIconColor || inputTextColor}
+            $clearIconSize={clearIconSize}
+            onClick={e => {
+              e.preventDefault();
+
+              if (inputRef.current) {
+                setFilterValue('');
+                inputRef.current.value = '';
+              }
+            }}
+          >
+            {iconValid(clearIcon)
+              ? <i className={clearIcon} />
+              : clearIcon || <i className='fa-solid fa-circle-xmark' />
+            }
+          </ClearIcon>
+        )}
       </Label>
     </StyledFilter>
   );

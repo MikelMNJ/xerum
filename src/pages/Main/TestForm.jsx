@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { Button, Checkbox, FieldError, Field, Font, Select, Spacer, Toggle, Search, DatePicker } from 'components';
+import {
+  Button, Checkbox, FieldError, Field, Font, Select, Spacer, Toggle, Search, DatePicker, Filter,
+} from 'components';
 import { withTheme } from 'styled-components';
 import * as yup from 'yup';
 import _ from 'lodash';
@@ -67,6 +69,16 @@ const TestForm = withTheme(props => {
               theme={theme}
               selectedTheme={selectedTheme}
               placeholder='Search for something'
+            />
+
+            <Spacer size={2} />
+
+            <Filter
+              theme={theme}
+              selectedTheme={selectedTheme}
+              placeholder='Filter something...'
+              fontFamily='Inter-Medium'
+              clearIconSize={1.125}
             />
 
             <Spacer size={2} />
