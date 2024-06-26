@@ -48,12 +48,40 @@ export const Icon = styled('div')`
   }
 `;
 
+export const ClearIcon = styled('div')`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: ${props => props.$height || height}rem;
+  width: ${props => props.$height || height}rem;
+  cursor: pointer;
+  color: ${props => {
+    const color = hexValid(props.$clearIconColor) || getColor(props, 'onPrimary', neutral.raisinBlack);
+
+    if (props.disabled) return getColor(props, 'lightGrey', neutral.lightGrey);
+    return color;
+  }};
+
+  i {
+    top: unset;
+    left: unset;
+    font-size: ${props => props.$clearIconSize || 1}rem;
+  }
+`;
+
 export const Input = styled('input')`
   margin: 0;
   height: 3rem;
   width: 100%;
-  padding: 0.5rem ${props => props.$buttonWidth + 1}rem 0.5rem ${props => props.$noIcon ? 1 : 3}rem;
-  font-size: 1rem;
+  ${props => {
+    const rightValue = props.$nobutton ? 0.5 : props.$buttonWidth + 1;
+    return css`padding: 0.5rem ${rightValue}rem 0.5rem ${props => props.$noIcon ? 1 : 3}rem`;
+  }};
+  font-size: ${props => props.$mobileSize || props.$tabletSize || 1}rem;
   color: ${props => hexValid(props.$inputTextColor) || getColor(props, 'onPrimary', shades.black)};
 
   ${props => props.$fontFamily && css`font-family: ${props.$fontFamily};`}

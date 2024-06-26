@@ -16,18 +16,20 @@ const Loading = props => {
     iconSize,
     failIcon,
     noIcon,
+    noFailIcon,
     children,
     text,
     failText,
     noText,
     onFail,
     renderOnFail,
+    height,
   } = props;
 
   const buildContent = () => {
     if (isLoading) {
       return (
-        <Text $theme={theme} $selectedTheme={selectedTheme} $column={column} $textColor={textColor}>
+        <Text $theme={theme} $selectedTheme={selectedTheme} $column={column} $textColor={textColor} $height={height}>
           {!noIcon && (
             <Fragment>
               <Icon
@@ -51,16 +53,25 @@ const Loading = props => {
 
       if (!renderOnFail) {
         return (
-          <Text $theme={theme} $selectedTheme={selectedTheme} $textColor={textColor}>
-            {!noIcon && (
+          <Text $theme={theme} $selectedTheme={selectedTheme} $column={column} $textColor={textColor} $height={height}>
+            {!noFailIcon && (
               <Fragment>
-                <Icon
-                  $theme={theme}
-                  $selectedTheme={selectedTheme}
-                  className={iconValid(failIcon) || 'fa-solid fa-exclamation-circle'}
-                  $iconSize={iconSize}
-                  $iconColor={iconColor}
-                />
+                {iconValid(failIcon)
+                  ? <Icon
+                      $theme={theme}
+                      $selectedTheme={selectedTheme}
+                      className={iconValid(failIcon) || 'fa-solid fa-exclamation-circle'}
+                      $iconSize={iconSize}
+                      $iconColor={iconColor}
+                    />
+                  : failIcon || <Icon
+                      $theme={theme}
+                      $selectedTheme={selectedTheme}
+                      className='fa-solid fa-exclamation-circle'
+                      $iconSize={iconSize}
+                      $iconColor={iconColor}
+                    />
+                }
                 <Spacer across={true} />
               </Fragment>
             )}

@@ -18,7 +18,7 @@ export const Text = styled('div')`
   align-items: center;
   justify-content: center;
   width: fit-content;
-  height: 100%;
+  height: ${props => props.$height || '100%'};
   margin: 0 auto;
   color: ${props => (
     hexValid(props.$textColor) || getColor(props, 'onPrimary', colors.shades.black)

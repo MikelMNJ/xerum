@@ -1,6 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { iconValid } from '../../helpers';
-import { StyledSearch, Label, Input, SubmitButton, Icon } from './styles';
+import { StyledSearch, Label, Input, SubmitButton, Icon, ClearIcon } from './styles';
+import _ from 'lodash';
+
+const debounceCallback = (callback, continuousSearchDelayTime) => {
+  return _.debounce(callback, continuousSearchDelayTime || 1000);
+};
+
+let typingInField = false;
 
 const Search = props => {
   const {
@@ -20,6 +27,11 @@ const Search = props => {
     inputTextColor,
     inputBGColor,
     inputIconColor,
+    clearIcon,
+    clearIconHeight,
+    clearIconSize,
+    clearIconColor,
+    noClearIcon,
     fontFamily,
     borderColor,
     borderRadius,
@@ -32,12 +44,25 @@ const Search = props => {
     focusColor,
     solidFill,
     boxColor,
+    mobileSize,
+    tabletSize,
+    useContinuousSearch,
+    continuousSearchDelayTime,
     disabled,
   } = props;
 
+  const [ filterValue, setFilterValue ] = useState('');
   const [ buttonWidth, setButtonWidth ] = useState(3);
   const inputRef = useRef('');
   const buttonRef = useRef();
+
+  const continuousSearchCallbackRef = useRef(debounceCallback(value => callback(value), continuousSearchDelayTime));
+
+  useEffect(() => {
+    if (useContinuousSearch && noButton && typingInField) {
+      continuousSearchCallbackRef.current(filterValue);
+    }
+  }, [ filterValue, useContinuousSearch, noButton ]);
 
   useEffect(() => {
     if (buttonRef.current && buttonRef.current !== buttonWidth) {
@@ -49,14 +74,9 @@ const Search = props => {
     e.preventDefault();
     const inputVal = inputRef.current?.value;
 
-    if (callback && inputVal !== '' && !disabled) {
-      callback(inputVal);
-    }
-  };
-
-  const updateRef = e => {
-    if (inputRef.current) {
-      inputRef.current.value = e.target.value;
+    if (callback && inputVal !== '' && !disabled && !useContinuousSearch) {
+      callback(filterValue || inputVal);
+      inputRef.current.blur();
     }
   };
 
@@ -98,14 +118,54 @@ const Search = props => {
           $focusColor={focusColor}
           $buttonWidth={buttonWidth}
           $fontFamily={fontFamily}
+          $mobileSize={mobileSize}
+          $tabletSize={tabletSize}
           $solidFill={solidFill}
           $boxColor={boxColor}
-          defaultValue={inputRef.current?.value || ''}
+          $noButton={noButton}
+          defaultValue={filterValue || ''}
           disabled={disabled}
-          onChange={updateRef}
+          onChange={e => {
+            const newValue = e.currentTarget?.value || '';
+            const refValue = inputRef.current.value;
+            setFilterValue(newValue);
+
+            if (!typingInField && !_.isEmpty(newValue)) {
+              typingInField = true;
+            }
+
+            if (noButton && !_.isEmpty(refValue)) {
+              inputRef.current.value = newValue;
+            }
+          }}
+          onBlur={() => typingInField = false}
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
-          onBlur={e => noButton && handleSubmit(e)}
         />
+
+        {!noClearIcon && noButton && !_.isEmpty(filterValue) && (
+          <ClearIcon
+            $theme={theme}
+            $selectedTheme={selectedTheme}
+            $height={clearIconHeight}
+            $clearIconColor={clearIconColor || inputTextColor}
+            $clearIconSize={clearIconSize}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (inputRef.current) {
+                setFilterValue('');
+                inputRef.current.value = '';
+                callback?.('');
+              }
+            }}
+          >
+            {iconValid(clearIcon)
+              ? <i className={clearIcon} />
+              : clearIcon || <i className='fa-solid fa-circle-xmark' />
+            }
+          </ClearIcon>
+        )}
 
         {!noButton && (
           <SubmitButton

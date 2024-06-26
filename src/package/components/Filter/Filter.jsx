@@ -26,6 +26,7 @@ const Filter = props => {
     clearIconSize,
     clearIconColor,
     noClearIcon,
+    disabled,
     fontFamily,
     borderColor,
     borderRadius,
@@ -38,6 +39,7 @@ const Filter = props => {
 
   const [ filterValue, setFilterValue ] = useState('');
   const inputRef = useRef();
+  const dataRef = useRef();
 
   const digDeep = useCallback((path, value) => {
     let workingVal = value;
@@ -95,7 +97,7 @@ const Filter = props => {
     return finalArr || [];
   }, [ data, digDeep ]);
 
-  useEffect(() => {
+  const getFilteredResults = useCallback(filterValue => {
     if (data && !_.isEmpty(include)) {
       const allDataFromLocations = include.map(location => {
         if (location.includes('.')) {
@@ -108,7 +110,7 @@ const Filter = props => {
         return data[location];
       });
 
-      const userValues = lowercaseArray(stringToArray(filterValue).filter((item, index) => {
+      const userValues = lowercaseArray(stringToArray(filterValue || '').filter((item, index) => {
         if (index === 0 && item === '') return ' ';
         return item;
       }));
@@ -126,11 +128,16 @@ const Filter = props => {
         }
       });
 
-      if (callback) callback(filteredResults);
+      callback?.(filteredResults);
     }
+  }, [ data, include, callback, getValues ]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ filterValue ]);
+  useEffect(() => {
+    if (!_.isEqual(dataRef.current, data)) {
+      dataRef.current = data;
+      getFilteredResults();
+    }
+  }, [ data, getFilteredResults ]);
 
   return (
     <StyledFilter>
@@ -170,8 +177,13 @@ const Filter = props => {
           $fontFamily={fontFamily}
           $mobileSize={mobileSize}
           $tabletSize={tabletSize}
+          disabled={disabled}
           defaultValue={filterValue || ''}
-          onChange={e => setFilterValue(e.currentTarget.value)}
+          onChange={e => {
+            const newValue = e.currentTarget?.value || '';
+            setFilterValue(newValue);
+            getFilteredResults(newValue);
+          }}
         />
 
         {!noClearIcon && !_.isEmpty(filterValue) && (
@@ -186,6 +198,7 @@ const Filter = props => {
 
               if (inputRef.current) {
                 setFilterValue('');
+                getFilteredResults();
                 inputRef.current.value = '';
               }
             }}

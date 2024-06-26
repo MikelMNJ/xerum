@@ -80,6 +80,14 @@ export const StyledButton = styled('button')`
   cursor: pointer;
   transition: all 0.2s ease;
 
+  ${props => props.$width && css`
+    width: ${typeof props.$width === 'string' ? props.$width : `${props.$width}rem`};
+  `}
+
+  ${props => props.$height && css`
+    height: ${typeof props.$height === 'string' ? props.$height : `${props.$height}rem`};
+  `}
+
   ${props => props.$padding && css`padding: ${props.$padding};`}
   ${props => props.$fontFamily && css`font-family: ${props.$fontFamily};`}
 

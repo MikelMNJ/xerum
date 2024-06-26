@@ -24,6 +24,8 @@ const Button = forwardRef((props, ref) => {
     pill,
     column,
     padding,
+    width,
+    height,
     ...rest
   } = props;
 
@@ -67,6 +69,8 @@ const Button = forwardRef((props, ref) => {
       $pill={pill}
       $column={column}
       $padding={padding}
+      $width={width}
+      $height={height}
       onClick={handleClick}
       {...rest}
     >

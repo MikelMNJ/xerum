@@ -213,8 +213,8 @@ const Select = props => {
     if (selectionsOutOfSync || onlySearchResult) {
       onlySearchResult && setSelectedOption(onlyResult);
       selectionsOutOfSync && (lastSelection.current = selectedOption);
-      form?.setFieldValue(name, _.toString(selectionsOutOfSync ? selectedOption.value : onlyResult?.value));
-      callback?.(_.toString(selectionsOutOfSync ? selectedOption.value : onlyResult?.value));
+      form?.setFieldValue(name, _.toString(selectionsOutOfSync ? selectedOption?.value : onlyResult?.value));
+      callback?.(_.toString(selectionsOutOfSync ? selectedOption?.value : onlyResult?.value));
     }
 
     setSearchValue('');

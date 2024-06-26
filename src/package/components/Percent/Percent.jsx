@@ -13,6 +13,7 @@ const Percent = props => {
     positiveColor,
     negativeColor,
     size,
+    privacy,
     tabletSize,
     mobileSize,
   } = props;
@@ -34,7 +35,7 @@ const Percent = props => {
       ? `${(is / of * 100) >= 0 ? '+' : ''}${val}`
       : val;
 
-    return final;
+    return privacy ? '***' : final;
   };
 
   return (

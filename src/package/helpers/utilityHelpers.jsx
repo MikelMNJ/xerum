@@ -4,7 +4,7 @@ export const getColor = (props, key, fallback) => {
 
   if ($theme && $selectedTheme) {
     const colors = $theme.modes[$selectedTheme];
-    return colors[key];
+    return colors?.[key] || fallback;
   }
 
   return fallback;

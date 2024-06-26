@@ -14,7 +14,7 @@ const stateColor = (props, themeActive, themeInactive, themeActiveFallback, them
 };
 
 export const StyledPagination = styled('div')`
-  display: inline-flex;
+  display: ${props => props.$visible ? 'inline-flex' : 'none'};
   align-items: center;
   justify-content: center;
   width: fit-content;

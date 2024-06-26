@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import {
@@ -34,7 +34,23 @@ export const categories = [
 const TestForm = withTheme(props => {
   const { theme } = props;
   const { selectedTheme, expense } = useSelector(state => state.app);
+  const [ filteredData, setFilteredData ] = useState([]);
+  const [ selectedPlaidAccountId, setSelectedPlaidAccoutnId ] = useState(1);
   const primary = theme.modes[selectedTheme].primary;
+
+  const data = {
+    stableCoin: 'USDC',
+    currencies: {
+      pairs: [ 'USD', 'GBP', 'EUR' ],
+      crypto: [
+        { rawData: { symbol: 'BTC' } },
+        { rawData: { symbol: 'ETH' } },
+        { rawData: { symbol: 'XRP' } },
+        { rawData: { symbol: 'ADA' } },
+        { rawData: { symbol: 'DOT' } },
+      ],
+    },
+  };
 
   const defaults = useMemo(() => ({
     categories: _.toString(expense?.category?.value) || '',
@@ -49,8 +65,7 @@ const TestForm = withTheme(props => {
   });
 
   const handleSubmit = args => {
-    const { values, setSubmitting } = args;
-    console.log(values);
+    const { setSubmitting } = args;
     setSubmitting(false);
   };
 
@@ -68,7 +83,16 @@ const TestForm = withTheme(props => {
             <Search
               theme={theme}
               selectedTheme={selectedTheme}
-              placeholder='Search for something'
+              borderRadius={0.5}
+              bottomBorder={true}
+              inputBGColor={primary}
+              noButton={true}
+              useContinuousSearch={true}
+              placeholder='Merchant, amount, date, or category...'
+              visible={true}
+              fontFamily='Inter-Regular'
+              clearIcon='fa-solid fa-times'
+              callback={newValue => console.log({ newValue })}
             />
 
             <Spacer size={2} />
@@ -76,9 +100,36 @@ const TestForm = withTheme(props => {
             <Filter
               theme={theme}
               selectedTheme={selectedTheme}
+              data={data}
               placeholder='Filter something...'
               fontFamily='Inter-Medium'
               clearIconSize={1.125}
+              callback={newData => setFilteredData(newData)}
+              include={[
+                'stableCoin',
+                'currencies.pairs',
+                'currencies.crypto.rawData.symbol',
+              ]}
+            />
+
+            <Spacer />
+
+            {filteredData.map(item => {
+              const filterMatch = filteredData?.includes(item);
+
+              if (filterMatch) {
+                return <div key={item}>{item}</div>;
+              }
+            })}
+
+            <Spacer size={2} />
+
+            <Button
+              theme={theme}
+              selectedTheme={selectedTheme}
+              type='button'
+              text={<Font weight='medium'>Use account {selectedPlaidAccountId === 1 ? 2 : 1}</Font>}
+              callback={() => setSelectedPlaidAccoutnId(selectedPlaidAccountId === 1 ? 2 : 1)}
             />
 
             <Spacer size={2} />
