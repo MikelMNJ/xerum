@@ -234,7 +234,7 @@ export const OptionNote = styled('div')`
   display: flex;
   align-items: center;
   height: 100%;
-  font-size: 0.875rem;
+  font-size: ${props => props.$mobileSize || props.$tabletSize || props.$fontSize || 0.875}rem;
 `;
 
 export const NoResults = styled('div')`
@@ -242,5 +242,6 @@ export const NoResults = styled('div')`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: ${props => props.$mobileSize || props.$tabletSize || props.$fontSize || 0.875}rem;
   min-height: inherit;
 `;

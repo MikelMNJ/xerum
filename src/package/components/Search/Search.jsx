@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, forwardRef } from 'react';
 import { iconValid } from '../../helpers';
 import { StyledSearch, Label, Input, SubmitButton, Icon, ClearIcon } from './styles';
 import _ from 'lodash';
@@ -7,9 +7,7 @@ const debounceCallback = (callback, continuousSearchDelayTime) => {
   return _.debounce(callback, continuousSearchDelayTime || 1000);
 };
 
-let typingInField = false;
-
-const Search = props => {
+const Search = forwardRef((props, externalRef) => {
   const {
     theme,
     selectedTheme,
@@ -20,6 +18,7 @@ const Search = props => {
     round,
     buttonText,
     noButton,
+    defaultValue,
     placeholderColor,
     inputIcon,
     inputIconHeight,
@@ -51,8 +50,9 @@ const Search = props => {
     disabled,
   } = props;
 
-  const [ filterValue, setFilterValue ] = useState('');
+  const [ filterValue, setFilterValue ] = useState(defaultValue || '');
   const [ buttonWidth, setButtonWidth ] = useState(3);
+  const [ typingInField, setTypingInField ] = useState(false);
   const inputRef = useRef('');
   const buttonRef = useRef();
 
@@ -62,7 +62,7 @@ const Search = props => {
     if (useContinuousSearch && noButton && typingInField) {
       continuousSearchCallbackRef.current(filterValue);
     }
-  }, [ filterValue, useContinuousSearch, noButton ]);
+  }, [ filterValue, useContinuousSearch, typingInField, noButton ]);
 
   useEffect(() => {
     if (buttonRef.current && buttonRef.current !== buttonWidth) {
@@ -102,7 +102,10 @@ const Search = props => {
         <Input
           $theme={theme}
           $selectedTheme={selectedTheme}
-          ref={inputRef}
+          ref={element => {
+            if (externalRef) externalRef.current = element;
+            inputRef.current = element;
+          }}
           type='text'
           $noIcon={noIcon}
           $pill={pill}
@@ -131,14 +134,14 @@ const Search = props => {
             setFilterValue(newValue);
 
             if (!typingInField && !_.isEmpty(newValue)) {
-              typingInField = true;
+              setTypingInField(true);
             }
 
             if (noButton && !_.isEmpty(refValue)) {
               inputRef.current.value = newValue;
             }
           }}
-          onBlur={() => typingInField = false}
+          onBlur={() => setTypingInField(false)}
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
         />
 
@@ -191,6 +194,6 @@ const Search = props => {
       </Label>
     </StyledSearch>
   );
-};
+});
 
 export { Search };

@@ -225,7 +225,7 @@ const Select = props => {
   const buildOptions = () => {
     if (_.isEmpty(filteredData)) {
       return (
-        <NoResults>
+        <NoResults $fontSize={fontSize} $tabletSize={tabletSize} $mobileSize={mobileSize}>
           {noResultsText || 'No results found'}
         </NoResults>
       );
@@ -263,7 +263,7 @@ const Select = props => {
             : <>
                 {label}
                 {note && (
-                  <OptionNote>
+                  <OptionNote $fontSize={fontSize} $tabletSize={tabletSize} $mobileSize={mobileSize}>
                     <Spacer size={0.5} across={true} />
                     {note}
                   </OptionNote>
