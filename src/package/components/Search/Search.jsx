@@ -63,7 +63,11 @@ const Search = forwardRef((props, externalRef) => {
     if (useContinuousSearch && noButton && typingInField) {
       continuousSearchCallbackRef.current(filterValue);
     }
-  }, [ filterValue, useContinuousSearch, noButton ]);
+
+    if (_.isEmpty(inputRef.current?.value) && !_.isEmpty(filterValue)) {
+      setFilterValue('');
+    }
+  }, [ filterValue, useContinuousSearch, inputRef, noButton ]);
 
   useEffect(() => {
     if (buttonRef.current && buttonRef.current !== buttonWidth) {
@@ -146,7 +150,7 @@ const Search = forwardRef((props, externalRef) => {
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
         />
 
-        {!noClearIcon && noButton && !_.isEmpty(filterValue) && (
+        {!noClearIcon && noButton && !_.isEmpty(inputRef.current.value) && (
           <ClearIcon
             $theme={theme}
             $selectedTheme={selectedTheme}
