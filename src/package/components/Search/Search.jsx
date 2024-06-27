@@ -7,6 +7,8 @@ const debounceCallback = (callback, continuousSearchDelayTime) => {
   return _.debounce(callback, continuousSearchDelayTime || 1000);
 };
 
+let typingInField = false;
+
 const Search = forwardRef((props, externalRef) => {
   const {
     theme,
@@ -52,7 +54,6 @@ const Search = forwardRef((props, externalRef) => {
 
   const [ filterValue, setFilterValue ] = useState(defaultValue || '');
   const [ buttonWidth, setButtonWidth ] = useState(3);
-  const [ typingInField, setTypingInField ] = useState(false);
   const inputRef = useRef('');
   const buttonRef = useRef();
 
@@ -62,7 +63,7 @@ const Search = forwardRef((props, externalRef) => {
     if (useContinuousSearch && noButton && typingInField) {
       continuousSearchCallbackRef.current(filterValue);
     }
-  }, [ filterValue, useContinuousSearch, typingInField, noButton ]);
+  }, [ filterValue, useContinuousSearch, noButton ]);
 
   useEffect(() => {
     if (buttonRef.current && buttonRef.current !== buttonWidth) {
@@ -134,14 +135,14 @@ const Search = forwardRef((props, externalRef) => {
             setFilterValue(newValue);
 
             if (!typingInField && !_.isEmpty(newValue)) {
-              setTypingInField(true);
+              typingInField = true;
             }
 
             if (noButton && !_.isEmpty(refValue)) {
               inputRef.current.value = newValue;
             }
           }}
-          onBlur={() => setTypingInField(false)}
+          onBlur={() => typingInField = false}
           onKeyUp={e => e.key === 'Enter' && handleSubmit(e)}
         />
 
