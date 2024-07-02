@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import moment from 'moment';
 
 export const tokenValid = token => {
@@ -6,7 +6,7 @@ export const tokenValid = token => {
   let expired = true;
 
   try {
-    const inSeconds = jwt_decode(token).exp * milliAsSecond;
+    const inSeconds = jwtDecode(token).exp * milliAsSecond;
     const expires = moment(inSeconds);
     expired = moment() > expires;
     return !expired;
