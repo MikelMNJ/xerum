@@ -112,7 +112,12 @@ const Pagination = props => {
   };
 
   return (
-    <StyledPagination $theme={theme} $selectedTheme={selectedTheme} $inactiveColor={inactiveColor} $visible={visible}>
+    <StyledPagination
+      $theme={theme}
+      $selectedTheme={selectedTheme}
+      $inactiveColor={inactiveColor}
+      $visible={visible !== undefined ? visible : totalPages > 1}
+    >
       {(endButtons || truncateLimit) && (
         <EndButton
           $theme={theme}
