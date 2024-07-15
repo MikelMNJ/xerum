@@ -17,6 +17,11 @@ const FieldReqs = props => {
     color,
     exColor,
     bgColor,
+    upperText,
+    lowerText,
+    numberText,
+    minText,
+    specialText,
   } = props;
 
   const length = Number.isInteger(min) ? min : 8;
@@ -66,11 +71,11 @@ const FieldReqs = props => {
       );
     };
 
-    if (upper) addContent('uppercase', 'Uppercase');
-    if (lower) addContent('lowercase', 'Lowercase');
-    if (number) addContent('number', 'Number');
-    if (min) addContent('min', `${length} Minimum`);
-    if (special) addContent('special', `Special: ${specialChars.split('').join(' ')}`);
+    if (upper) addContent('uppercase', `${upperText || 'Upper'}`);
+    if (lower) addContent('lowercase', `${lowerText || 'Lower'}`);
+    if (number) addContent('number', `${numberText || 'Number'}`);
+    if (min) addContent('min', `${length} ${minText || 'Min'}`);
+    if (special) addContent('special', `${specialText || 'Special:'} ${specialChars.split('').join(' ')}`);
 
     if (!_.isEmpty(exclude)) {
       exclude.forEach(exclusion => {
