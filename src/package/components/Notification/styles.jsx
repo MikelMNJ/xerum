@@ -8,10 +8,20 @@ export const StyledNotifications = styled('div')`
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0;
-  right: 0;
+  top: ${props => props.$top ?? 0}rem;
+  right: ${props => props.$right ?? 0}rem;
   z-index: 201;
   margin: 1rem;
+
+  ${props => props.$bottom && css`
+    top: unset;
+    bottom: ${props.$bottom ?? 0}rem;
+  `}
+
+  ${props => props.$left && css`
+    right: unset;
+    left: ${props.$left ?? 0}rem;
+  `}
 `;
 
 export const StyledNotification = styled('div')`

@@ -7,6 +7,7 @@ const Banner = props => {
     theme,
     selectedTheme,
     text,
+    visible,
     noClose,
     closeIcon,
     callback,
@@ -25,6 +26,7 @@ const Banner = props => {
       $sharp={sharp}
       $textcolor={textColor}
       $bgcolor={bgColor}
+      $visible={visible}
     >
       <Message $center={center}>
         {text || children}

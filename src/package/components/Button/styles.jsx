@@ -5,14 +5,16 @@ import { theme } from '../../theme';
 
 const colors = theme.colors;
 
-const setButtonStyle = type => {
+const setButtonStyle = props => {
+  const { $buttonType: type, ...rest } = props || {};
+
   if (type === 'ghost') {
     return css`
       color: ${props => (
         hexValid(props.$color) || getColor(props, 'accent', colors.shades.black)
       )};
       background-color: transparent;
-      border: 0.0625rem solid ${props => (
+      border: ${rest.$borderSize ?? 0.0625}rem solid ${props => (
         hexValid(props.$color) || getColor(props, 'accent', colors.shades.black)
       )};
 
@@ -76,7 +78,7 @@ export const StyledButton = styled('button')`
   min-width: 3rem;
   min-height: 3rem;
   padding: 0.5rem ${props => props.$noText ? 1 : 2}rem;
-  font-size: 1rem;
+  font-size: ${props => props.$textSize ? `${props.$textSize}rem` : '1rem'};
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -123,5 +125,5 @@ export const StyledButton = styled('button')`
     cursor: not-allowed;
   }
 
-  ${props => setButtonStyle(props.$buttonType)}
+  ${props => setButtonStyle(props)}
 `;

@@ -5,7 +5,7 @@ import { getColor, hexValid } from '../../helpers';
 const colors = theme.colors;
 
 export const StyledBanner = styled('div')`
-  display: grid;
+  display: ${props => (props.$visible ? 'grid' : 'none')};
   gap: 1rem;
   grid-template-columns: 1fr auto;
   border-radius: 0.35rem;

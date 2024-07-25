@@ -8,7 +8,9 @@ const Button = forwardRef((props, ref) => {
     theme,
     selectedTheme,
     text,
+    textSize,
     noText,
+    borderSize,
     color,
     hoverColor,
     textColor,
@@ -60,6 +62,7 @@ const Button = forwardRef((props, ref) => {
       $theme={theme}
       $selectedTheme={selectedTheme}
       $buttonType={buttonType}
+      $textSize={textSize}
       $noText={noText}
       $color={color}
       $hoverColor={hoverColor}
@@ -68,6 +71,7 @@ const Button = forwardRef((props, ref) => {
       $round={round}
       $pill={pill}
       $column={column}
+      $borderSize={borderSize}
       $padding={padding}
       $width={width}
       $height={height}

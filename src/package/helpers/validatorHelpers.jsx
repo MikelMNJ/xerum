@@ -11,7 +11,6 @@ export const tokenValid = token => {
     expired = moment() > expires;
     return !expired;
   } catch (error) {
-    console.log(error.message);
     return !expired;
   }
 };

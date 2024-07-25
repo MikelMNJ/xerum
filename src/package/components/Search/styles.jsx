@@ -78,7 +78,7 @@ export const Input = styled('input')`
   height: 3rem;
   width: 100%;
   ${props => {
-    const rightValue = props.$nobutton ? 0.5 : props.$buttonWidth + 1;
+    const rightValue = props.$noButton ? 3 : props.$buttonWidth + 1;
     return css`padding: 0.5rem ${rightValue}rem 0.5rem ${props => props.$noIcon ? 1 : 3}rem`;
   }};
   font-size: ${props => props.$mobileSize || props.$tabletSize || 1}rem;

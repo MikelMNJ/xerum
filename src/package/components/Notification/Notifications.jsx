@@ -14,6 +14,10 @@ const Notifications = props => {
     textColor,
     borderColor,
     bgColor,
+    top,
+    right,
+    bottom,
+    left,
   } = props;
   const targets = useRef([]);
 
@@ -58,7 +62,7 @@ const Notifications = props => {
   };
 
   return (
-    <StyledNotifications>
+    <StyledNotifications $top={top} $right={right} $bottom={bottom} $left={left}>
       {buildNotifications()}
     </StyledNotifications>
   );
