@@ -15,6 +15,7 @@ const Banner = props => {
     sharp,
     textColor,
     bgColor,
+    padding,
     children,
   } = props;
 
@@ -26,6 +27,7 @@ const Banner = props => {
       $sharp={sharp}
       $textcolor={textColor}
       $bgcolor={bgColor}
+      $padding={padding}
       $visible={visible}
     >
       <Message $center={center}>

@@ -84,10 +84,12 @@ export const StyledButton = styled('button')`
 
   ${props => props.$width && css`
     width: ${typeof props.$width === 'string' ? props.$width : `${props.$width}rem`};
+    min-width: ${typeof props.$width === 'string' ? props.$width : `${props.$width}rem`};
   `}
 
   ${props => props.$height && css`
     height: ${typeof props.$height === 'string' ? props.$height : `${props.$height}rem`};
+    min-height: ${typeof props.$height === 'string' ? props.$height : `${props.$height}rem`};
   `}
 
   ${props => props.$padding && css`padding: ${props.$padding};`}

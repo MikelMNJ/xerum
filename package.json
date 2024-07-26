@@ -1,6 +1,6 @@
 {
   "name": "xerum",
-  "version": "0.37.37",
+  "version": "0.37.43",
   "description": "React component library.",
   "main": "dist/index.js",
   "module": "dist/index.js",

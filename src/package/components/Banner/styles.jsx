@@ -15,13 +15,17 @@ export const StyledBanner = styled('div')`
 
   width: 100%;
   min-height: 2rem;
+  padding: 1rem;
   color: ${props => (
     hexValid(props.$textColor) || getColor(props, 'onAccent', colors.shades.white)
   )};
   background-color: ${props => (
     hexValid(props.$bgColor) || getColor(props, 'accent', colors.shades.black)
   )};
-  padding: 1rem;
+
+  ${props => props.$padding && css`
+    padding: ${typeof props.$padding === 'string' ? props.$padding : `${props.$padding}rem`};
+  `}
 `;
 
 export const Message = styled('div')`
