@@ -45,6 +45,7 @@ const Search = forwardRef((props, externalRef) => {
     focusColor,
     solidFill,
     boxColor,
+    textSize,
     mobileSize,
     tabletSize,
     useContinuousSearch,
@@ -126,6 +127,7 @@ const Search = forwardRef((props, externalRef) => {
           $focusColor={focusColor}
           $buttonWidth={buttonWidth}
           $fontFamily={fontFamily}
+          $textSize={textSize}
           $mobileSize={mobileSize}
           $tabletSize={tabletSize}
           $solidFill={solidFill}

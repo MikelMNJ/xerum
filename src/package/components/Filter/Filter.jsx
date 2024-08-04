@@ -33,6 +33,7 @@ const Filter = props => {
     borderSize,
     bottomBorder,
     focusColor,
+    textSize,
     mobileSize,
     tabletSize,
   } = props;
@@ -175,6 +176,7 @@ const Filter = props => {
           placeholder={placeholder}
           $focusColor={focusColor}
           $fontFamily={fontFamily}
+          $textSize={textSize}
           $mobileSize={mobileSize}
           $tabletSize={tabletSize}
           disabled={disabled}

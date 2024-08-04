@@ -16,6 +16,11 @@ const Banner = props => {
     textColor,
     bgColor,
     padding,
+    position,
+    height,
+    top,
+    bottom,
+    zIndex,
     children,
   } = props;
 
@@ -28,6 +33,11 @@ const Banner = props => {
       $textcolor={textColor}
       $bgcolor={bgColor}
       $padding={padding}
+      $position={position}
+      $height={height}
+      $top={top}
+      $bottom={bottom}
+      $zindex={zIndex}
       $visible={visible}
     >
       <Message $center={center}>
