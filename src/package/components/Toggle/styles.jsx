@@ -38,6 +38,7 @@ export const Track = styled('span')`
   i {
     position: absolute;
     left: 0.15rem;
+    top: 0.15rem;
     font-size: 1.5rem;
     transition: transform 0.1s linear;
     color: ${props => {

@@ -14,9 +14,17 @@ export const StyledDropdown = styled('div')`
   justify-content: flex-start;
   width: ${props => {
     if (props.$isMobile) return 'calc(100% - 2rem)';
-    if (props.$width) return `${props.$width}rem`;
+
+    if (props.$width) {
+      return typeof props.$width === 'string'
+        ? props.$width
+        : `${props.$width}rem`;
+    }
+
     return '14rem';
   }};
+
+  ${props => props.$maxWidth && css`max-width: ${props.$maxWidth}rem;`}
 
   ${props => {
     const fromBottom = props.$bottom;

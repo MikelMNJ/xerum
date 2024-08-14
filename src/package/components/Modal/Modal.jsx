@@ -47,6 +47,7 @@ const Modal = forwardRef((props, externalRef) => {
     pill,
     round,
     privacy,
+    fullHeight,
   } = props;
 
   const modalRef = useRef();
@@ -72,6 +73,7 @@ const Modal = forwardRef((props, externalRef) => {
         $selectedTheme={selectedTheme}
         $bgColor={bgColor}
         $confirm={confirm}
+        $fullHeight={fullHeight}
         $textColor={textColor}
         $useOverflow={useOverflow}
       >

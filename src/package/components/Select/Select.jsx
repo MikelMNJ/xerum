@@ -334,6 +334,7 @@ const Select = props => {
               <FormikField
                 innerRef={inputRef}
                 name={name}
+                autoComplete='off'
                 placeholder={privacy ? 'Private' : (optionsMenuVisible ? defaultValue?.label : buildPlaceholder())}
                 type={privacy ? 'password' : 'text'}
                 value={(optionsMenuVisible
@@ -371,6 +372,7 @@ const Select = props => {
                   : (!loading ? `${selectedOption?.label || ''} ${selectedOption?.note || ''}` : '')
                 )}
                 readOnly={!optionsMenuVisible}
+                autoComplete='off'
                 disabled={disabled}
                 onKeyUp={e => {
                   e.key === 'Enter' && inputRef.current?.blur();

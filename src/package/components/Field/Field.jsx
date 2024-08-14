@@ -138,6 +138,7 @@ const Field = props => {
                 value={inputValue}
                 disabled={rest.disabled}
                 autoComplete={rest.autoComplete}
+                defaultValue={rest.defaultValue}
                 onBlur={() => name && form?.setTouched({ ...form.touched, [name]: true })}
                 onChange={handleFieldStateUpdate}
               />

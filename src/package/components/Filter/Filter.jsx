@@ -180,6 +180,7 @@ const Filter = props => {
           $mobileSize={mobileSize}
           $tabletSize={tabletSize}
           disabled={disabled}
+          autoComplete='off'
           defaultValue={filterValue || ''}
           onChange={e => {
             const newValue = e.currentTarget?.value || '';

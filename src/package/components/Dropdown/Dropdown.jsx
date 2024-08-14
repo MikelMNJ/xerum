@@ -8,6 +8,7 @@ const Dropdown = forwardRef((props, externalRef) => {
     visible,
     setVisible,
     width,
+    maxWidth,
     posX,
     posY,
     bottom,
@@ -58,6 +59,7 @@ const Dropdown = forwardRef((props, externalRef) => {
       $selectedTheme={selectedTheme}
       $visible={visible}
       $width={width}
+      $maxWidth={maxWidth}
       $posX={posX}
       $posY={posY}
       $bottom={bottom}
