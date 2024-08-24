@@ -36,7 +36,7 @@ const Price = props => {
 
     const price = (
       <Fragment>
-        {!privacy && (usePlus && value >= 0 ? '+' : forcedMinus)}
+        {!privacy && (usePlus && value > 0 ? '+' : forcedMinus)}
         {!privacy && (symbol || '$')}{privacy ? '***' : finalValue} {currency}
       </Fragment>
     );
