@@ -65,6 +65,7 @@ const DatePicker = props => {
     iconBGHoverColor,
     disabled,
     disablePastDates,
+    disableFutureDates,
     disabledTextColor,
     disabledBGHoverColor,
     callback,
@@ -253,6 +254,7 @@ const DatePicker = props => {
           selectedTheme={selectedTheme}
           selectedDate={selectedDate}
           disablePastDates={disablePastDates}
+          disableFutureDates={disableFutureDates}
           fontFamily={fontFamily}
           headerFontFamily={headerFontFamily}
           headerColor={headerColor}

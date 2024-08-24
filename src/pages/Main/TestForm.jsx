@@ -146,6 +146,7 @@ const TestForm = withTheme(props => {
               label='Due date'
               optional={false}
               disablePastDates={false}
+              disableFutureDates={false}
               callback={_.noop}
             />
 

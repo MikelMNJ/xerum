@@ -66,8 +66,9 @@ export const Day = styled('div')`
   color: ${props => {
     const lightTheme = props.$selectedTheme === light;
     const isActive = props.$active;
+    const rangeAllowed = !props.$disablePastDates || !props.$disableFutureDates;
 
-    if (props.$disabled || (!props.$disablePastDates && !props.$inThisMonth && !isActive)) {
+    if (props.$disabled || (rangeAllowed && !props.$inThisMonth && !isActive)) {
       const color = hexValid(props.$disabledTextColor) || (
         lightTheme
           ? getColor(props, 'grey', colors.neutral.greyWeb) + 90
@@ -77,7 +78,7 @@ export const Day = styled('div')`
       return color;
     }
 
-    if (props.$disablePastDates && !props.$inThisMonth && !isActive) {
+    if (!rangeAllowed && !props.$inThisMonth && !isActive) {
       const color = lightTheme
           ? getColor(props, 'onPrimary', colors.neutral.greyWeb) + 90
           : getColor(props, 'onPrimary', colors.neutral.greyWeb) + 90;

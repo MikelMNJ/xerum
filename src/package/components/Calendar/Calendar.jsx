@@ -10,6 +10,7 @@ const Calendar = props => {
     theme,
     selectedTheme,
     disablePastDates,
+    disableFutureDates,
     prevIcon,
     nextIcon,
     fontFamily,
@@ -58,9 +59,16 @@ const Calendar = props => {
   const maxDisplayDays = dayHeaders.length * maxDisplayWeeks;
   const preMonthFillerDates = moment(currentMonth).date(1).day();
   const postMonthFillerDates = maxDisplayDays - (totalDays + preMonthFillerDates);
-  const allDaysLastMonth = daysInMonth({ providedDate: lastMonth, disablePastDates });
-  const allDaysThisMonth = daysInMonth({ providedDate: thisMonth, disablePastDates, inThisMonth: true });
-  const allDaysNextMonth = daysInMonth({ providedDate: nextMonth, disablePastDates });
+  const allDaysLastMonth = daysInMonth({ providedDate: lastMonth, disablePastDates, disableFutureDates });
+
+  const allDaysThisMonth = daysInMonth({
+    providedDate: thisMonth,
+    disablePastDates,
+    disableFutureDates,
+    inThisMonth: true,
+  });
+
+  const allDaysNextMonth = daysInMonth({ providedDate: nextMonth, disablePastDates, disableFutureDates });
 
   const displayDates = [
     ...allDaysLastMonth.slice(allDaysLastMonth.length - preMonthFillerDates),
@@ -98,6 +106,7 @@ const Calendar = props => {
         $disabledTextColor={disabledTextColor}
         $disabledBGHoverColor={disabledBGHoverColor}
         $disablePastDates={disablePastDates}
+        $disableFutureDates={disableFutureDates}
         onClick={() => {
           const different = selectedDate !== date.format('MMMM Do, YYYY');
           const newDate = different || !optional ? date : null;
