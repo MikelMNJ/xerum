@@ -136,9 +136,9 @@ const Filter = props => {
   useEffect(() => {
     if (!_.isEqual(dataRef.current, data)) {
       dataRef.current = data;
-      getFilteredResults();
+      getFilteredResults(filterValue);   // pass current query
     }
-  }, [ data, getFilteredResults ]);
+  }, [ data, filterValue, getFilteredResults ]);
 
   return (
     <StyledFilter>
